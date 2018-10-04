@@ -31,7 +31,7 @@ class BlogShow extends Component {
         <button 
         className="btn btn-danger pull-xs-right"
         onClick={this.onDeleteClick.bind(this)}>
-        Delete Posts
+        Delete Post
         </button>
         <h3>{blog.title}</h3>
         <h6>Categories: {blog.categories}</h6>
