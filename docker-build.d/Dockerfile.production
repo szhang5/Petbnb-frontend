@@ -6,6 +6,7 @@ EXPOSE $SERVER_PORT
 
 WORKDIR /service
 COPY package.json yarn.lock webpack.config.js ./
+RUN yarn install --pure-lockfile
 COPY src/ src/
 COPY public/ public/
 

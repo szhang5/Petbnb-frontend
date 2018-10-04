@@ -7,20 +7,21 @@ SVC_TAG = latest
 SOURCE_CONTAINTER = nodejs-backend
 
 # Set the port to expose the frontend
-SERVER_PORT = 8007
+SERVER_PORT_DEV = 8007
+SERVER_PORT_PROD = 3007
 
 all:
 	$(MAKE) local
 local:
 	$(MAKE) bridge
 	$(MAKE) build-develop
-	$(MAKE) run cmd="yarn dev"
+	$(MAKE) run_dev cmd="yarn dev"
 
 
 prod:
 	$(MAKE) bridge
 	$(MAKE) build-production
-	$(MAKE) run cmd="yarn start"
+	$(MAKE) run_prod cmd="yarn start"
 
 build-develop:
 	docker build --rm \
@@ -34,13 +35,25 @@ build-production:
 		-t $(SVC_NAME):$(SVC_TAG) \
 		.
 
-run:
+run_dev:
 	$(MAKE) stop
 	docker run \
 	-it \
 	--network=petbnb \
 	--name $(SVC_NAME) \
-	-p $(SERVER_PORT):$(SERVER_PORT) \
+	-p $(SERVER_PORT_DEV):$(SERVER_PORT_DEV) \
+	-v ${PWD}/src:/service/src \
+	--rm \
+	$(SVC_NAME):$(SVC_TAG) \
+	$(cmd)
+
+run_prod:
+	$(MAKE) stop
+	docker run \
+	-it \
+	--network=petbnb \
+	--name $(SVC_NAME) \
+	-p$(SERVER_PORT_PROD):$(SERVER_PORT_PROD) \
 	-v ${PWD}/src:/service/src \
 	--rm \
 	$(SVC_NAME):$(SVC_TAG) \
