@@ -7,19 +7,30 @@ SVC_TAG = latest
 SOURCE_CONTAINTER = nodejs-backend
 
 # Set the port to expose the frontend
-SERVER_PORT = 3000
+SERVER_PORT = 8007
 
 all:
 	$(MAKE) local
-
 local:
 	$(MAKE) bridge
-	$(MAKE) build
-	$(MAKE) run
+	$(MAKE) build-develop
+	$(MAKE) run cmd="yarn dev"
 
-build:
+
+prod:
+	$(MAKE) bridge
+	$(MAKE) build-production
+	$(MAKE) run cmd="yarn start"
+
+build-develop:
 	docker build --rm \
-		-f docker-build.d/Dockerfile \
+		-f docker-build.d/Dockerfile.develop \
+		-t $(SVC_NAME):$(SVC_TAG) \
+		.
+
+build-production:
+	docker build --rm \
+		-f docker-build.d/Dockerfile.production \
 		-t $(SVC_NAME):$(SVC_TAG) \
 		.
 
@@ -32,7 +43,8 @@ run:
 	-p $(SERVER_PORT):$(SERVER_PORT) \
 	-v ${PWD}/src:/service/src \
 	--rm \
-	$(SVC_NAME):$(SVC_TAG)
+	$(SVC_NAME):$(SVC_TAG) \
+	$(cmd)
 
 exec:
 	docker exec \

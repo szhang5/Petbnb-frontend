@@ -19,4 +19,4 @@ app.get('/api/getUsername', (req, res) => res.send({ username: os.userInfo().use
 //   next() // pass control to the next handler
 // })
 
-app.listen(3000, () => console.log('Listening on port 3000!'));
+app.listen(3007, () => console.log('Listening on port 3007!'));
