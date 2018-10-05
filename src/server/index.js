@@ -22,16 +22,11 @@ app.use('/service', petbnb);
 
 app.get('/api/getUsername', (req, res) => res.send({ username: os.userInfo().username }));
 
+
+
+// put this at the end
 app.get('*', function(req, res) {
   res.render('index.html');
 })
-
-// app.get('*', (req, res) => res.render('index.html'));
-
-// router.all('/service/user/:endpoint', authenticateToken, getGRPCAdminUserInfo, userServiceCall);
-// app.all('/service/petbnbservice/:endpoint', function (req, res, next) {
-//   console.log('Accessing the secret section ...')
-//   next() // pass control to the next handler
-// })
 
 app.listen(3007, () => console.log('Listening on port 3007!'));

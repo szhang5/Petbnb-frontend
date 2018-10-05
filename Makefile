@@ -12,11 +12,11 @@ SERVER_PORT_PROD = 3007
 
 all:
 	$(MAKE) local
+
 local:
 	$(MAKE) bridge
 	$(MAKE) build-develop
 	$(MAKE) run_dev cmd="yarn dev"
-
 
 prod:
 	$(MAKE) bridge

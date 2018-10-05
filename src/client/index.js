@@ -7,6 +7,7 @@ import BlogIndex from './containers/blog-index';
 import BlogNew from './containers/blog-new';
 import BlogShow from './containers/blog-show';
 import SayHello from './containers/say-hello';
+import SayHelloAgain from './containers/say-hello-again'
 import reducers from './redux/reducers';
 import configureStore from './app/store/configure-store';
 
@@ -23,6 +24,7 @@ ReactDOM.render(
           <Route path="/blog/new" component={BlogNew} />
           <Route path="/blog/:id" component={BlogShow} />
           <Route path="/sayhello" component={SayHello} />
+          <Route path="/sayhelloagain" component={SayHelloAgain} />
           <Route path="/" component={ BlogIndex }/>
         </Switch>
       </div>
