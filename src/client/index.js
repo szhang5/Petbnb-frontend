@@ -1,5 +1,33 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import App from './App';
+import { Provider } from 'react-redux';
+import { BrowserRouter, Route, Switch } from 'react-router-dom';
 
-ReactDOM.render(<App />, document.getElementById('root'));
+import BlogIndex from './containers/blog-index';
+import BlogNew from './containers/blog-new';
+import BlogShow from './containers/blog-show';
+import SayHello from './containers/say-hello';
+import SayHelloAgain from './containers/say-hello-again'
+import reducers from './redux/reducers';
+import configureStore from './app/store/configure-store';
+
+
+const initialState = window.__INITIAL_STATE__;
+const store = configureStore(reducers, initialState);
+
+
+ReactDOM.render(
+  <Provider store={store}>
+    <BrowserRouter>
+      <div>
+        <Switch>
+          <Route path="/blog/new" component={BlogNew} />
+          <Route path="/blog/:id" component={BlogShow} />
+          <Route path="/sayhello" component={SayHello} />
+          <Route path="/sayhelloagain" component={SayHelloAgain} />
+          <Route path="/" component={ BlogIndex }/>
+        </Switch>
+      </div>
+    </BrowserRouter>
+  </Provider>
+  , document.getElementById('root'));
