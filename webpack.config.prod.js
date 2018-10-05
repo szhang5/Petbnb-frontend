@@ -8,7 +8,7 @@ const outputDirectory = 'dist';
 const plugins = [
   new webpack.DefinePlugin({
     'process.env': {
-      NODE_ENV: JSON.stringify('development'),
+      NODE_ENV: JSON.stringify('production'),
     }
   }),
 ];
@@ -52,7 +52,7 @@ module.exports = {
     new CleanWebpackPlugin([outputDirectory]),
     new HtmlWebpackPlugin({
       template: './public/index.html',
-      favicon: './public/logo.svg'
+      favicon: './public/favicon.ico'
     })
   ]
 };
