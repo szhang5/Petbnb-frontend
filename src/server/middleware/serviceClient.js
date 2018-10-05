@@ -29,7 +29,7 @@ const create = (serviceName, options = {}) => {
           console.log(err);
           reject(err);
         } else {
-          console.log(response);
+          console.log('response: ', response);
           resolve(response);
         }
       });
