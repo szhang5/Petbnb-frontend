@@ -4,10 +4,10 @@
   "description": "Boilerplate to build a full stack web application using React, Node.js, Express and Webpack.",
   "main": "src/server/index.js",
   "scripts": {
-    "build": "webpack --mode production",
+    "build": "webpack --mode production --config ./webpack.config.prod.js",
     "start": "npm run build && node src/server/index.js",
-    "bundle": "webpack --watch --mode development",
-    "client": "webpack-dev-server --mode development --devtool inline-source-map --hot",
+    "bundle": "webpack --watch --mode development --config ./webpack.config.js",
+    "client": "webpack-dev-server --mode development --devtool inline-source-map --hot --config ./webpack.config.js",
     "server": "nodemon src/server/index.js",
     "dev": "concurrently 'npm run server' 'npm run client' 'npm run bundle'"
   },
@@ -59,6 +59,7 @@
     "@grpc/proto-loader": "^0.1.0",
     "google-protobuf": "^3.0.0",
     "grpc": "^1.11.0",
-    "ejs": "^2.5.1"
+    "ejs": "^2.5.1",
+    "redux-logger": "^2.5.0"
   }
 }
