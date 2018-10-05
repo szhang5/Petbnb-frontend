@@ -5,6 +5,7 @@ export const DELETE_POST = 'DELETE_POST';
 export const FETCH_POSTS = 'FETCH_POSTS';
 export const FETCH_POST = 'FETCH_POST';
 export const SAY_HELLO = 'SAY_HELLO';
+export const SAY_HELLO_AGAIN = 'SAY_HELLO_AGAIN';
 
 const BASE_URL = 'http://reduxblog.herokuapp.com/api';
 const API_KEY = '?key=gaotang1234';
@@ -51,10 +52,20 @@ export function deletePost(id, callBack) {
 
 export function sayHello() {
   const request = axios
-    .post('/service/petbnbservice/sayHelloAgain', {name: 'gt'});
+    .post('/service/petbnbservice/SayHello', {name: 'shiyun'});
 
   return {
     type: SAY_HELLO,
+    payload: request,
+  };
+}
+
+export function sayHelloAgain() {
+  const request = axios
+    .post('/service/petbnbservice/SayHelloAgain', {name: 'shiyun Zhang'});
+
+  return {
+    type: SAY_HELLO_AGAIN,
     payload: request,
   };
 }

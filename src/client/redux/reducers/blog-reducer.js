@@ -11,7 +11,7 @@ export default function(state = {}, action) {
     case FETCH_POSTS:
       return mapKeys(action.payload.data, 'id');
     case SAY_HELLO:
-      console.log(action.payload);
+
       return state;
     default:
       return state;

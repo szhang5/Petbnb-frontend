@@ -11,8 +11,7 @@
     "server": "nodemon src/server/index.js",
     "dev": "concurrently 'npm run server' 'npm run client' 'npm run bundle'"
   },
-  "author": "Sandeep Raveesh",
-  "license": "ISC",
+  "author": "Shiyun Zhang",
   "dependencies": {
     "@grpc/proto-loader": "^0.1.0",
     "axios": "^0.17.1",
