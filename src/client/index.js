@@ -1,21 +1,22 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import { Provider } from 'react-redux';
-import { createStore, applyMiddleware } from 'redux';
 import { BrowserRouter, Route, Switch } from 'react-router-dom';
-import promise from 'redux-promise';
 
 import BlogIndex from './containers/blog-index';
 import BlogNew from './containers/blog-new';
 import BlogShow from './containers/blog-show';
 import SayHello from './containers/say-hello';
 import reducers from './redux/reducers';
-import App from './App';
+import configureStore from './app/store/configure-store';
 
-const createStoreWithMiddleware = applyMiddleware(promise)(createStore);
+
+const initialState = window.__INITIAL_STATE__;
+const store = configureStore(reducers, initialState);
+
 
 ReactDOM.render(
-  <Provider store={createStoreWithMiddleware(reducers)}>
+  <Provider store={store}>
     <BrowserRouter>
       <div>
         <Switch>

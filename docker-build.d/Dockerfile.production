@@ -5,7 +5,7 @@ ARG SERVER_PORT
 EXPOSE $SERVER_PORT
 
 WORKDIR /service
-COPY package.json yarn.lock webpack.config.js ./
+COPY package.json yarn.lock webpack.config.prod.js ./
 RUN yarn install --pure-lockfile
 COPY src/ src/
 COPY public/ public/

@@ -12,7 +12,7 @@ class SayHello extends Component {
   render() {
     return (
       <div>
-        {this.props}
+        111
       </div>
     );
   }
