@@ -9,16 +9,29 @@ class SayHelloAgain extends Component {
   }
 
   render() {
+    console.log(this.props.hello);
+    const { message } = this.props.hello;
+    console.log(message)
+    if(message) {
+        return (
+          <div>
+          {message}
+          </div>
+      );
+    } 
     return (
-      <div>
-        Hello again Shiyun!
-      </div>
-    );
+        <div>
+        loading...
+        </div>
+      );
+    
   }
 }
 
 function mapStateToProps({ hello }) {
-  return { hello };
+  return {
+    hello
+  };
 }
 
 export default connect(mapStateToProps, { sayHelloAgain })(SayHelloAgain);
