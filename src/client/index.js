@@ -3,11 +3,11 @@ import ReactDOM from 'react-dom';
 import { Provider } from 'react-redux';
 import { BrowserRouter, Route, Switch } from 'react-router-dom';
 
-import BlogIndex from './containers/blog-index';
-import BlogNew from './containers/blog-new';
-import BlogShow from './containers/blog-show';
+import "bootstrap/dist/css/bootstrap.css";
+import Navbar from "./containers/navbar";
 import SayHello from './containers/say-hello';
-import SayHelloAgain from './containers/say-hello-again'
+import SayHelloAgain from './containers/say-hello-again';
+import Hello from './containers/hello';
 import reducers from './redux/reducers';
 import configureStore from './app/store/configure-store';
 
@@ -20,12 +20,11 @@ ReactDOM.render(
   <Provider store={store}>
     <BrowserRouter>
       <div>
+        <Navbar />
         <Switch>
-          <Route path="/blog/new" component={BlogNew} />
-          <Route path="/blog/:id" component={BlogShow} />
+          <Route path="/" component={Hello} />
           <Route path="/sayhello" component={SayHello} />
           <Route path="/sayhelloagain" component={SayHelloAgain} />
-          <Route path="/" component={ BlogIndex }/>
         </Switch>
       </div>
     </BrowserRouter>
