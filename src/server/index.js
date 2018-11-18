@@ -1,5 +1,4 @@
 const express = require('express');
-const os = require('os');
 const path = require('path');
 const bodyParser = require("body-parser").json();
 const engines = require('consolidate');
@@ -20,7 +19,7 @@ app.set('view engine', 'html');
 // router
 app.use('/service', petbnb);
 
-app.get('/api/getUsername', (req, res) => res.send({ username: os.userInfo().username }));
+app.get('/api/getUsername', (req, res) => res.send({ username: 'shi' }));
 
 
 
