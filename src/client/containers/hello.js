@@ -2,7 +2,13 @@ import React from "react";
 
 class HelloWorld extends React.Component {
   render() {
-    return <p>Hello, world!test12345</p>;
+    return (
+      <div
+        style={{ textAlign: "center", marginTop: "10px", marginBottom: "10px" }}
+      >
+        <h3>Welcome to Petbnb</h3>
+      </div>
+    );
   }
 }
 
