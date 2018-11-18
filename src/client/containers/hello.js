@@ -1,8 +1,14 @@
-import React from 'react';
+import React from "react";
 
 class HelloWorld extends React.Component {
   render() {
-    return <p>Hello, world!</p>;
+    return (
+      <div
+        style={{ textAlign: "center", marginTop: "10px", marginBottom: "10px" }}
+      >
+        <h3>Welcome to Petbnb</h3>
+      </div>
+    );
   }
 }
 
