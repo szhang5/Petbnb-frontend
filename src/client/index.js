@@ -22,9 +22,9 @@ ReactDOM.render(
       <div>
         <Navbar />
         <Switch>
-          <Route path="/" component={Hello} />
           <Route path="/sayhello" component={SayHello} />
           <Route path="/sayhelloagain" component={SayHelloAgain} />
+          <Route path="/" component={Hello} />
         </Switch>
       </div>
     </BrowserRouter>
