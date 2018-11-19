@@ -25,6 +25,7 @@ const styles = {
 };
 
 class ButtonAppBar extends Component {
+  
   handleOnClick() {
     const { name } = this.props;
     if (name) {
