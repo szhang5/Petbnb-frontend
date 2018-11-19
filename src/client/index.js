@@ -1,32 +1,41 @@
-import React from 'react';
-import ReactDOM from 'react-dom';
-import { Provider } from 'react-redux';
-import { BrowserRouter, Route, Switch } from 'react-router-dom';
+import React from "react";
+import ReactDOM from "react-dom";
+import { Provider } from "react-redux";
+import { BrowserRouter, Route, Switch } from "react-router-dom";
 
-import "bootstrap/dist/css/bootstrap.css";
-import Navbar from "./containers/navbar";
-import SayHello from './containers/say-hello';
-import SayHelloAgain from './containers/say-hello-again';
-import Hello from './containers/hello';
-import reducers from './redux/reducers';
-import configureStore from './app/store/configure-store';
+import { MuiThemeProvider, createMuiTheme } from '@material-ui/core/styles';
+import CssBaseline from "@material-ui/core/CssBaseline";
+import Button from "@material-ui/core/Button";
 
+import AppHeader from "./containers/appheader";
+import Hello from "./containers/hello";
+import SignIn from "./containers/signin";
+import Register from "./containers/register";
+import reducers from "./redux/reducers";
+import configureStore from "./app/store/configure-store";
+import ExclusiveRouteContainer from "./app/ExclusiveRouteContainer";
+import theme from "./app/petbnbTheme";
 
 const initialState = window.__INITIAL_STATE__;
 const store = configureStore(reducers, initialState);
 
-
 ReactDOM.render(
-  <Provider store={store}>
-    <BrowserRouter>
-      <div>
-        <Navbar />
-        <Switch>
-          <Route path="/" component={Hello} />
-          <Route path="/sayhello" component={SayHello} />
-          <Route path="/sayhelloagain" component={SayHelloAgain} />
-        </Switch>
-      </div>
-    </BrowserRouter>
-  </Provider>
-  , document.getElementById('root'));
+  <MuiThemeProvider theme={theme}>
+    <Provider store={store}>
+      <BrowserRouter>
+        <div>
+          <CssBaseline />
+          <AppHeader />
+          <Switch>
+              <Route path="/register" component={Register} />
+            <ExclusiveRouteContainer>
+              <Route path="/signin" component={SignIn} />
+              <Route exact path="/" component={Hello} />
+            </ExclusiveRouteContainer>
+          </Switch>
+        </div>
+      </BrowserRouter>
+    </Provider>
+  </MuiThemeProvider>,
+  document.getElementById("root")
+);

@@ -1,8 +1,13 @@
-import React from 'react';
+import React, { Component } from "react";
 
-class HelloWorld extends React.Component {
+class HelloWorld extends Component {
+
   render() {
-    return <p>Hello, world!</p>;
+    return (
+      <div>
+        Hello
+      </div>
+    );
   }
 }
 
