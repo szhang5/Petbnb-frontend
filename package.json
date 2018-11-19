@@ -32,7 +32,8 @@
     "react-router-dom": "^4.0.0",
     "redux": "^3.0.4",
     "redux-form": "^7.4.2",
-    "redux-promise": "^0.5.3"
+    "redux-promise": "^0.5.3",
+    "cookie-parser": "1.4.3"
   },
   "devDependencies": {
     "@babel/core": "^7.0.0",

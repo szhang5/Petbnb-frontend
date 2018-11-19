@@ -1,5 +1,6 @@
 const petbnbServiceClient = require('./pet-bnb-service-client');
 
+
 function lowercaseFirstLetter(string) {
   return string.charAt(0).toLowerCase() + string.slice(1);
 }
@@ -7,10 +8,12 @@ function lowercaseFirstLetter(string) {
 module.exports = function petbnbServiceCall(req, res) {
   const body = req.body;
   const endpoint = lowercaseFirstLetter(req.params.endpoint);
-  console.log('body', body);
-  // console.log('req', req);
+  console.log(endpoint)
   petbnbServiceClient.call(endpoint, body, req.session)
   .then((response) => {
+    if (endpoint === 'signIn') {
+      res.cookie('email', response.user.email, { maxAge: 900000 * 4, httpOnly: false });
+    }
     res.status(200).json(response);
   })
   .catch((err) => {

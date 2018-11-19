@@ -14,25 +14,24 @@ import Pets from "@material-ui/icons/Pets";
 import Paper from "@material-ui/core/Paper";
 import Typography from "@material-ui/core/Typography";
 import withStyles from "@material-ui/core/styles/withStyles";
-
-import { signInAction } from '../redux/actions'; 
+import { registerAction } from '../redux/actions'; 
 
 import styles from "./styles/signInStyle";
 
 
-class SignIn extends Component {
+class Register extends Component {
   constructor(props) {
     super(props);
   }
 
-  handleSubmit(e) {
+  handleRegister(e) {
     e.preventDefault();
     const data = new FormData(e.target);
     const payload = {}
     for (const [key, value] of data.entries()) { 
       payload[key] = value;
     }
-    this.props.signInAction(payload).then(() => {
+    this.props.registerAction(payload).then(() => {
       this.props.history.push('/');
     });
   }
@@ -46,9 +45,9 @@ class SignIn extends Component {
             <Pets />
           </Avatar>
           <Typography component="h1" variant="h5">
-            Sign In
+            Register
           </Typography>
-          <form className={classes.form} onSubmit={(e) => this.handleSubmit(e)}>
+          <form className={classes.form} onSubmit={(e) => this.handleRegister(e)}>
             <FormControl margin="normal" required fullWidth>
               <InputLabel htmlFor="email">Email Address</InputLabel>
               <Input id="email" name="email" autoComplete="email" autoFocus/>
@@ -73,7 +72,7 @@ class SignIn extends Component {
               color="primary"
               className={classes.submit}
             >
-              Sign In
+              Register
             </Button>
             <Button
               type="submit"
@@ -83,7 +82,7 @@ class SignIn extends Component {
               className={classes.submit}
               href="#"
             >
-              First Time? Let's Sign Up
+              Cancel
             </Button>
           </form>
         </Paper>
@@ -92,8 +91,8 @@ class SignIn extends Component {
   }
 }
 
-SignIn.propTypes = {
+Register.propTypes = {
   classes: PropTypes.object.isRequired
 };
 
-export default withStyles(styles)(withRouter(connect(null, { signInAction })(SignIn)));
+export default withStyles(styles)(withRouter(connect(null, { registerAction })(Register)));
