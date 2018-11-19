@@ -30,7 +30,7 @@ ReactDOM.render(
               <Route path="/register" component={Register} />
             <ExclusiveRouteContainer>
               <Route path="/signin" component={SignIn} />
-              <Route path="/" component={Hello} />
+              <Route exact path="/" component={Hello} />
             </ExclusiveRouteContainer>
           </Switch>
         </div>
