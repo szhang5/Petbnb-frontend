@@ -80,7 +80,7 @@ class SignIn extends Component {
               variant="contained"
               color="primary"
               className={classes.submit}
-              href="#"
+              href="/register"
             >
               First Time? Let's Sign Up
             </Button>
