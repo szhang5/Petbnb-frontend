@@ -1,25 +1,51 @@
 import axios from 'axios';
 
 export const SAY_HELLO = 'SAY_HELLO';
-export const SAY_HELLO_AGAIN = 'SAY_HELLO_AGAIN';
+export const SIGN_IN_ACTION = 'SIGN_IN_ACTION';
+export const REGISTER_ACTION = 'REGISTER_ACTION';
+export const GET_USER_INFO = 'GET_USER_INFO';
+export const SIGNOUT = 'SIGNOUT';
 
 
-export function sayHello() {
+export function signInAction(payload) {
   const request = axios
-    .post('/service/petbnbservice/SayHello', {name: 'shiyun'});
+    .post('/service/petbnbservice/signIn', payload);
 
   return {
-    type: SAY_HELLO,
+    type: SIGN_IN_ACTION,
     payload: request,
   };
 }
 
-export function sayHelloAgain() {
-  const request = axios
-    .post('/service/petbnbservice/SayHelloAgain', {name: 'shiyun Zhang'});
+export function registerAction(payload) {
+  const response = axios
+    .post('/service/petbnbservice/register', payload);
 
   return {
-    type: SAY_HELLO_AGAIN,
+    type: REGISTER_ACTION,
+    payload: response,
+  };
+}
+
+export function isLogin() {
+  return axios.post('/isLogin');
+}
+
+export function getUserInfo(email) {
+  const request = axios
+    .post('/service/petbnbservice/getUserInfo', { email });
+
+  return {
+    type: GET_USER_INFO,
     payload: request,
+  };
+}
+
+export function signOut() {
+  const request = axios
+    .post('/signOut');
+
+  return {
+    type: SIGNOUT,
   };
 }

@@ -1,15 +1,15 @@
 const express = require('express');
-const os = require('os');
 const path = require('path');
 const bodyParser = require("body-parser").json();
 const engines = require('consolidate');
+const cookieParser = require('cookie-parser');
 
 // include router start here
 const petbnb = require('./router/petbnb');
 const app = express();
 
 app.use(bodyParser);
-
+app.use(cookieParser());
 app.use(express.static('dist'));
 // set view engine
 app.set('views', '/service/dist');
@@ -18,9 +18,23 @@ app.set('view engine', 'html');
 
 
 // router
+app.use('/isLogin', (req, res) => {
+  if (req.cookies.email) {
+  	res.status(200).send({ 'success': true, 'email': req.cookies.email });
+  }
+  res.status(200).send({ 'success': false });
+})
+
+app.use('/signOut', (req, res) => {
+  if (req.cookies.email) {
+  	res.clearCookie('email', {path:'/'});
+  }
+  return res.status(200).redirect('/signIn');
+})
+
 app.use('/service', petbnb);
 
-app.get('/api/getUsername', (req, res) => res.send({ username: os.userInfo().username }));
+app.get('/api/getUsername', (req, res) => res.send({ username: 'shi' }));
 
 
 
