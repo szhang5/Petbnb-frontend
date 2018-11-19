@@ -33,7 +33,7 @@ class SignIn extends Component {
       payload[key] = value;
     }
     this.props.signInAction(payload).then(() => {
-      this.props.history.push('/');
+      window.location.href = '/';
     });
   }
 
