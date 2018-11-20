@@ -1,6 +1,5 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
-import { withRouter } from "react-router-dom";
 import { map } from 'lodash';
 import PropTypes from "prop-types";
 import Avatar from "@material-ui/core/Avatar";
@@ -81,7 +80,7 @@ class SignIn extends Component {
               variant="contained"
               color="primary"
               className={classes.submit}
-              href="#"
+              href="/register"
             >
               First Time? Let's Sign Up
             </Button>
@@ -93,7 +92,7 @@ class SignIn extends Component {
 }
 
 SignIn.propTypes = {
-  classes: PropTypes.object.isRequired
+  classes: PropTypes.object.isRequired  //make sure SignIn is an object
 };
 
-export default withStyles(styles)(withRouter(connect(null, { signInAction })(SignIn)));
+export default withStyles(styles)(connect(null, { signInAction })(SignIn));
