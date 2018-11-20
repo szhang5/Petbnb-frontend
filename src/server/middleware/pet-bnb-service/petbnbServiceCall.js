@@ -22,8 +22,6 @@ module.exports = function petbnbServiceCall(req, res) {
 };
 
 
-
-
 // var PROTO_PATH = __dirname + '/protos/pet_bnb_service.proto';
 
 // var grpc = require('grpc');
