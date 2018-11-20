@@ -1,7 +1,6 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
-import { withRouter } from "react-router-dom";
-import { map } from "lodash";
+import { map } from 'lodash';
 import PropTypes from "prop-types";
 import Avatar from "@material-ui/core/Avatar";
 import Button from "@material-ui/core/Button";
@@ -10,7 +9,7 @@ import FormControlLabel from "@material-ui/core/FormControlLabel";
 import Checkbox from "@material-ui/core/Checkbox";
 import Input from "@material-ui/core/Input";
 import InputLabel from "@material-ui/core/InputLabel";
-import Icon from "@material-ui/core/Icon";
+import Pets from "@material-ui/core/pets";
 import Paper from "@material-ui/core/Paper";
 import Typography from "@material-ui/core/Typography";
 import withStyles from "@material-ui/core/styles/withStyles";
@@ -42,7 +41,7 @@ class SignIn extends Component {
       <main className={classes.main}>
         <Paper className={classes.paper}>
           <Avatar className={classes.avatar}>
-            <Icon>pets</Icon>
+            <Pets />
           </Avatar>
           <Typography component="h1" variant="h5">
             Sign In
@@ -80,7 +79,7 @@ class SignIn extends Component {
               variant="contained"
               color="primary"
               className={classes.submit}
-              href="#"
+              href="/register"
             >
               First Time? Let's Sign Up
             </Button>
@@ -92,14 +91,8 @@ class SignIn extends Component {
 }
 
 SignIn.propTypes = {
-  classes: PropTypes.object.isRequired
+  classes: PropTypes.object.isRequired  //make sure SignIn is an object
 };
 
-export default withStyles(styles)(
-  withRouter(
-    connect(
-      null,
-      { signInAction }
-    )(SignIn)
-  )
-);
+export default withStyles(styles)(connect(null, { signInAction })(SignIn));
+
