@@ -1,6 +1,5 @@
 import axios from 'axios';
 
-export const SAY_HELLO = 'SAY_HELLO';
 export const SIGN_IN_ACTION = 'SIGN_IN_ACTION';
 export const REGISTER_ACTION = 'REGISTER_ACTION';
 export const GET_USER_INFO = 'GET_USER_INFO';

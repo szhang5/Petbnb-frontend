@@ -25,10 +25,12 @@ const styles = {
 };
 
 class ButtonAppBar extends Component {
+  
   handleOnClick() {
     const { name } = this.props;
     if (name) {
-      this.props.signOut();
+      // this.props.signOut();
+      return this.props.history.push('/profile');
     }
     return this.props.history.push('/signin');
   }
@@ -49,17 +51,8 @@ class ButtonAppBar extends Component {
             <Typography variant="h6" color="inherit" className={classes.grow}>
               HOME
             </Typography>
-            <Typography variant="h6" color="inherit" className={classes.grow}>
-              2
-            </Typography>
-            <Typography variant="h6" color="inherit" className={classes.grow}>
-              3
-            </Typography>
-            <Typography variant="h6" color="inherit" className={classes.grow}>
-              4
-            </Typography>
-            <Button color="inherit" href="#" onClick={() => this.handleOnClick()}>
-              {name ? 'Sign out' : 'Sign In'}
+            <Button color="inherit" onClick={() => this.handleOnClick()}>
+              {name ? 'Profile' : 'Sign In'}
             </Button>
           </Toolbar>
         </AppBar>
