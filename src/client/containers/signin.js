@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
 import { withRouter } from "react-router-dom";
-import { map } from 'lodash';
+import { map } from "lodash";
 import PropTypes from "prop-types";
 import Avatar from "@material-ui/core/Avatar";
 import Button from "@material-ui/core/Button";
@@ -10,15 +10,14 @@ import FormControlLabel from "@material-ui/core/FormControlLabel";
 import Checkbox from "@material-ui/core/Checkbox";
 import Input from "@material-ui/core/Input";
 import InputLabel from "@material-ui/core/InputLabel";
-import Pets from "@material-ui/icons/Pets";
+import Icon from "@material-ui/core/Icon";
 import Paper from "@material-ui/core/Paper";
 import Typography from "@material-ui/core/Typography";
 import withStyles from "@material-ui/core/styles/withStyles";
 
-import { signInAction } from '../redux/actions'; 
+import { signInAction } from "../redux/actions";
 
 import styles from "./styles/signInStyle";
-
 
 class SignIn extends Component {
   constructor(props) {
@@ -28,12 +27,12 @@ class SignIn extends Component {
   handleSubmit(e) {
     e.preventDefault();
     const data = new FormData(e.target);
-    const payload = {}
-    for (const [key, value] of data.entries()) { 
+    const payload = {};
+    for (const [key, value] of data.entries()) {
       payload[key] = value;
     }
     this.props.signInAction(payload).then(() => {
-      window.location.href = '/';
+      window.location.href = "/";
     });
   }
 
@@ -43,15 +42,15 @@ class SignIn extends Component {
       <main className={classes.main}>
         <Paper className={classes.paper}>
           <Avatar className={classes.avatar}>
-            <Pets />
+            <Icon>pets</Icon>
           </Avatar>
           <Typography component="h1" variant="h5">
             Sign In
           </Typography>
-          <form className={classes.form} onSubmit={(e) => this.handleSubmit(e)}>
+          <form className={classes.form} onSubmit={e => this.handleSubmit(e)}>
             <FormControl margin="normal" required fullWidth>
               <InputLabel htmlFor="email">Email Address</InputLabel>
-              <Input id="email" name="email" autoComplete="email" autoFocus/>
+              <Input id="email" name="email" autoComplete="email" autoFocus />
             </FormControl>
             <FormControl margin="normal" required fullWidth>
               <InputLabel htmlFor="password">Password</InputLabel>
@@ -96,4 +95,11 @@ SignIn.propTypes = {
   classes: PropTypes.object.isRequired
 };
 
-export default withStyles(styles)(withRouter(connect(null, { signInAction })(SignIn)));
+export default withStyles(styles)(
+  withRouter(
+    connect(
+      null,
+      { signInAction }
+    )(SignIn)
+  )
+);
