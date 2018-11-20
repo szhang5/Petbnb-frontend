@@ -7,9 +7,10 @@ import Toolbar from "@material-ui/core/Toolbar";
 import Typography from "@material-ui/core/Typography";
 import Button from "@material-ui/core/Button";
 import IconButton from "@material-ui/core/IconButton";
-import MenuIcon from "@material-ui/icons/Menu";
+
 import { withRouter } from "react-router-dom";
 import { signOut } from "../redux/actions";
+import SideBar from "./sidebar";
 
 const styles = {
   root: {
@@ -25,12 +26,14 @@ const styles = {
 };
 
 class ButtonAppBar extends Component {
+  
   handleOnClick() {
     const { name } = this.props;
     if (name) {
-      this.props.signOut();
+      // this.props.signOut();
+      return this.props.history.push('/profile');
     }
-    return this.props.history.push('/signin');
+    return this.props.history.push("/signin");
   }
 
   render() {
@@ -39,27 +42,12 @@ class ButtonAppBar extends Component {
       <div className={classes.root}>
         <AppBar position="static">
           <Toolbar>
-            <IconButton
-              className={classes.menuButton}
-              color="inherit"
-              aria-label="Menu"
-            >
-              <MenuIcon />
-            </IconButton>
             <Typography variant="h6" color="inherit" className={classes.grow}>
-              HOME
+              <SideBar />
             </Typography>
-            <Typography variant="h6" color="inherit" className={classes.grow}>
-              2
-            </Typography>
-            <Typography variant="h6" color="inherit" className={classes.grow}>
-              3
-            </Typography>
-            <Typography variant="h6" color="inherit" className={classes.grow}>
-              4
-            </Typography>
-            <Button color="inherit" href="#" onClick={() => this.handleOnClick()}>
-              {name ? 'Sign out' : 'Sign In'}
+      
+            <Button color="inherit" onClick={() => this.handleOnClick()}>
+              {name ? 'Profile' : 'Sign In'}
             </Button>
           </Toolbar>
         </AppBar>
@@ -70,16 +58,23 @@ class ButtonAppBar extends Component {
 
 ButtonAppBar.propTypes = {
   classes: PropTypes.object.isRequired,
-  name: PropTypes.string,
+  name: PropTypes.string
 };
 
 ButtonAppBar.defaultProps = {
-  name: '',
-}
+  name: ""
+};
 
 function mapStateToProps({ user }) {
   return {
-    'name': user.name,
-  }
+    name: user.name
+  };
 }
-export default withRouter(withStyles(styles)(connect(mapStateToProps, { signOut })(ButtonAppBar)));
+export default withRouter(
+  withStyles(styles)(
+    connect(
+      mapStateToProps,
+      { signOut }
+    )(ButtonAppBar)
+  )
+);
