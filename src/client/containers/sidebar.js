@@ -45,19 +45,19 @@ class TemporaryDrawer extends React.Component {
       </div>
     );
 
-    const fullList = (
-      <div className={classes.fullList}>
-        <List>
-          {["Home", "Search", "Our Service", "Contact Us"].map(
-            (text, index) => (
-              <ListItem button key={text}>
-                <ListItemText primary={text} />
-              </ListItem>
-            )
-          )}
-        </List>
-      </div>
-    );
+    // const fullList = (
+    //   <div className={classes.fullList}>
+    //     <List>
+    //       {["Home", "Search", "Our Service", "Contact Us"].map(
+    //         (text, index) => (
+    //           <ListItem button key={text}>
+    //             <ListItemText primary={text} />
+    //           </ListItem>
+    //         )
+    //       )}
+    //     </List>
+    //   </div>
+    // );
 
     return (
       <div>

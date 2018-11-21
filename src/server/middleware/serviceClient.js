@@ -24,6 +24,7 @@ const create = (serviceName, options = {}) => {
   service.call = (endpoint, parameters) => {
     return new Promise((resolve, reject) => {
       const client = new serviceProto[serviceClass]('nodejs-backend:50051', grpc.credentials.createInsecure());
+      // const client = new serviceProto[serviceClass]('localhost:50051', grpc.credentials.createInsecure());
       client[endpoint](parameters, (err, response) => {
         if (err) {
           console.log(err);
