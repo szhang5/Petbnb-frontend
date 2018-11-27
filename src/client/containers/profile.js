@@ -12,7 +12,7 @@ import { signOut } from "../redux/actions";
 import styles from "./styles/profileStyle";
 
 
-class OutlinedTextFields extends Component {
+class Profile extends Component {
   handleOnClick() {
       const { name } = this.props;
       console.log(name);
@@ -28,93 +28,76 @@ class OutlinedTextFields extends Component {
 
     return (
       <div>
+        <h1>Profile</h1>
         <form className={classes.container} noValidate autoComplete="off">
           <TextField
+            disabled
             id="outlined-firstname-input"
             label="First Name"
+            defaultValue="Pika"
             className={classes.textField}
-            type="name"
-            name="firstname"
-            autoComplete="firstname"
             margin="normal"
-            fullWidth
-            variant="outlined"
           />
           <TextField
+            disabled
             id="outlined-lastname-input"
             label="Last Name"
+            defaultValue="Zhang"
             className={classes.textField}
-            type="name"
-            name="lastname"
-            autoComplete="lastname"
             margin="normal"
-            fullWidth
-            variant="outlined"
           />
           <TextField
+            disabled
             id="outlined-email-input"
             label="Email"
+            defaultValue="test@gmail.com"
             className={classes.textField}
-            type="email"
-            name="email"
-            autoComplete="email"
             margin="normal"
-            fullWidth
-            variant="outlined"
           />
           <TextField
+            disabled
             id="outlined-phone-input"
             label="Phone"
+            defaultValue="(347)123-4567"
             className={classes.textField}
-            type="phone"
-            autoComplete="phone"
             margin="normal"
-            fullWidth
-            variant="outlined"
           />
           <TextField
+            disabled
             id="outlined-street-input"
             label="Street"
             className={classes.textField}
-            type="street"
-            autoComplete="street"
-            margin="normal"
+            defaultValue="9 Regent Street APT 303"
             fullWidth
-            variant="outlined"
+            margin="normal"
           />
           <TextField
+            disabled
             id="outlined-city-input"
             label="City"
             className={classes.textField}
-            type="city"
-            autoComplete="city"
+            defaultValue="Jersey City"
             margin="normal"
-            fullWidth
-            variant="outlined"
           />
           <TextField
+            disabled
             id="outlined-state-input"
             label="State"
             className={classes.textField}
-            type="state"
-            autoComplete="state"
+            defaultValue="NJ"
             margin="normal"
-            fullWidth
-            variant="outlined"
           />
           <TextField
+            disabled
             id="outlined-zipcode-input"
             label="ZipCode"
             className={classes.textField}
-            type="zipcode"
-            autoComplete="zipcode"
+            defaultValue="07302"
             margin="normal"
-            fullWidth
-            variant="outlined"
           />
         </form>
 
-        <Button variant="outlined" fullWidth color="primary" className={classes.button}  onClick={() => this.handleOnClick()}>
+        <Button variant="outlined" fullWidth color="primary" className={classes.button}  href="/editProfile">
           Edit
         </Button>
         <Button variant="contained" fullWidth color="primary" className={classes.button}  onClick={() => this.handleOnClick()}>
@@ -125,12 +108,12 @@ class OutlinedTextFields extends Component {
   }
 }
 
-OutlinedTextFields.propTypes = {
+Profile.propTypes = {
   classes: PropTypes.object.isRequired,
   name: PropTypes.string,
 };
 
-OutlinedTextFields.defaultProps = {
+Profile.defaultProps = {
   name: '',
 }
 
@@ -140,5 +123,5 @@ function mapStateToProps({ user }) {
   }
 }
 
-export default withRouter(withStyles(styles)(connect(mapStateToProps, { signOut })(OutlinedTextFields)));
+export default withRouter(withStyles(styles)(connect(mapStateToProps, { signOut })(Profile)));
 

@@ -12,6 +12,7 @@ import Hello from "./containers/hello";
 import SignIn from "./containers/signin";
 import Register from "./containers/register";
 import Profile from "./containers/profile";
+import ProfileEdit from "./containers/profileEdit";
 import reducers from "./redux/reducers";
 import configureStore from "./app/store/configure-store";
 import ExclusiveRouteContainer from "./app/ExclusiveRouteContainer";
@@ -31,6 +32,7 @@ ReactDOM.render(
               <Route path="/register" component={Register} />
             <ExclusiveRouteContainer>
               <Route path="/signin" component={SignIn} />
+              <Route path="/editProfile" component={ProfileEdit} />
               <Route path="/profile" component={Profile} />
               <Route exact path="/" component={Hello} />
             </ExclusiveRouteContainer>
