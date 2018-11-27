@@ -20,9 +20,9 @@ app.set('view engine', 'html');
 // router
 app.use('/isLogin', (req, res) => {
   if (req.cookies.email) {
-  	res.status(200).send({ 'success': true, 'email': req.cookies.email });
+  	return res.status(200).send({ 'success': true, 'email': req.cookies.email });
   }
-  res.status(200).send({ 'success': false });
+  return res.status(200).send({ 'success': false });
 })
 
 app.use('/signOut', (req, res) => {
