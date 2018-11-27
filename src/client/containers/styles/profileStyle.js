@@ -19,6 +19,9 @@ const styles = theme => ({
   input: {
     display: 'none',
   },
+  submit: {
+    marginTop: theme.spacing.unit * 3
+  }
 });
 
 export default styles;
