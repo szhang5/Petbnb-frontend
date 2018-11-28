@@ -14,9 +14,9 @@ import styles from "./styles/profileStyle";
 
 class Profile extends Component {
   handleOnClick() {
-      const { name } = this.props;
-      console.log(name);
-      if (name) {
+      const { email } = this.props;
+      console.log(email);
+      if (email) {
         this.props.signOut();
       }
       return this.props.history.push('/signin');
@@ -24,7 +24,7 @@ class Profile extends Component {
 
 
   render() {
-    const { name, classes } = this.props;
+    const { email, classes } = this.props;
 
     return (
       <div>
@@ -50,7 +50,7 @@ class Profile extends Component {
             disabled
             id="outlined-email-input"
             label="Email"
-            defaultValue="test@gmail.com"
+            defaultValue={ email }
             className={classes.textField}
             margin="normal"
           />
@@ -97,7 +97,7 @@ class Profile extends Component {
           />
         </form>
 
-        <Button variant="outlined" fullWidth color="primary" className={classes.button}  href="/editProfile">
+        <Button variant="outlined" fullWidth color="primary" className={classes.button}  onClick={() => {this.props.history.push('/profile/edit');}}>
           Edit
         </Button>
         <Button variant="contained" fullWidth color="primary" className={classes.button}  onClick={() => this.handleOnClick()}>
@@ -110,16 +110,16 @@ class Profile extends Component {
 
 Profile.propTypes = {
   classes: PropTypes.object.isRequired,
-  name: PropTypes.string,
+  email: PropTypes.string,
 };
 
 Profile.defaultProps = {
-  name: '',
+  email: '',
 }
 
 function mapStateToProps({ user }) {
   return {
-    'name': user.name,
+    'email': user.email,
   }
 }
 
