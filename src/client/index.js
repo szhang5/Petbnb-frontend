@@ -3,7 +3,7 @@ import ReactDOM from "react-dom";
 import { Provider } from "react-redux";
 import { BrowserRouter, Route, Switch } from "react-router-dom";
 
-import { MuiThemeProvider, createMuiTheme } from '@material-ui/core/styles';
+import { MuiThemeProvider, createMuiTheme } from "@material-ui/core/styles";
 import CssBaseline from "@material-ui/core/CssBaseline";
 import Button from "@material-ui/core/Button";
 
@@ -12,6 +12,9 @@ import Hello from "./containers/hello";
 import SignIn from "./containers/signin";
 import Register from "./containers/register";
 import Profile from "./containers/profile";
+import Search from "./containers/search";
+import OurService from "./containers/our_service";
+import ContactUs from "./containers/contact_us";
 import ProfileEdit from "./containers/profileEdit";
 import reducers from "./redux/reducers";
 import configureStore from "./app/store/configure-store";
@@ -29,12 +32,15 @@ ReactDOM.render(
           <CssBaseline />
           <AppHeader />
           <Switch>
-              <Route path="/register" component={Register} />
+            <Route path="/register" component={Register} />
             <ExclusiveRouteContainer>
               <Route path="/signin" component={SignIn} />
               <Route path="/profile/edit" component={ProfileEdit} />
               <Route exact path="/profile" component={Profile} />
-              <Route exact path="/" component={Hello} />
+              <Route exact path="/home" component={Hello} />
+              <Route exact path="/search" component={Search} />
+              <Route exact path="/our_service" component={OurService} />
+              <Route exact path="/contact_us" component={ContactUs} />
             </ExclusiveRouteContainer>
           </Switch>
         </div>
