@@ -1,29 +1,63 @@
 import * as ACTIONS from "../actions/index";
 
 const initialState = {
-  	'name': '',
+  	'uid': '',
+    'personId': '',
+    'firstname': '',
+    'lastname': '',
   	'email': '',
-  	'userid': 0,
+  	'phone': '',
+    'street': '',
+    'city': '',
+    'state': '',
+    'zipcode': '',
 }
 
 export default function(state = initialState, action) {
   switch(action.type) {
     case ACTIONS.SIGN_IN_ACTION:
 	    return {
-	    	'name': action.payload.data.user.name,
-	    	'email': action.payload.data.user.email,
-	    	'userid': action.payload.data.user.userid,
+        'uid': action.payload.data.user.uid,
+        'personId': action.payload.data.user.personid,
+        'firstname': action.payload.data.user.firstname,
+        'lastname': action.payload.data.user.lastname,
+        'email': action.payload.data.user.email,
+        'phone': action.payload.data.user.phone,
+        'street': action.payload.data.user.street,
+        'city': action.payload.data.user.city,
+        'state': action.payload.data.user.state,
+        'zipcode': action.payload.data.user.zip,
 	    };
     case ACTIONS.REGISTER_ACTION:
       return initialState;
     case ACTIONS.GET_USER_INFO:
       return {
-      	'name': action.payload.data.user.name,
-      	'email': action.payload.data.user.email,
-      	'userid': action.payload.data.user.userid,
+      	'uid': action.payload.data.user.uid,
+        'personId': action.payload.data.user.personid,
+        'firstname': action.payload.data.user.firstname,
+        'lastname': action.payload.data.user.lastname,
+        'email': action.payload.data.user.email,
+        'phone': action.payload.data.user.phone,
+        'street': action.payload.data.user.street,
+        'city': action.payload.data.user.city,
+        'state': action.payload.data.user.state,
+        'zipcode': action.payload.data.user.zip,      
       };
 	  case ACTIONS.SIGNOUT:
 	  	return initialState;
+    case ACTIONS.EDIT_PROFILE_ACTION:
+       return {
+        'uid': action.payload.data.user.uid,
+        'personId': action.payload.data.user.personid,
+        'firstname': action.payload.data.user.firstname,
+        'lastname': action.payload.data.user.lastname,
+        'email': action.payload.data.user.email,
+        'phone': action.payload.data.user.phone,
+        'street': action.payload.data.user.street,
+        'city': action.payload.data.user.city,
+        'state': action.payload.data.user.state,
+        'zipcode': action.payload.data.user.zip,           
+      };
     default:
       return state;
   }

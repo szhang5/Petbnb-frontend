@@ -32,8 +32,8 @@ ReactDOM.render(
               <Route path="/register" component={Register} />
             <ExclusiveRouteContainer>
               <Route path="/signin" component={SignIn} />
-              <Route path="/editProfile" component={ProfileEdit} />
-              <Route path="/profile" component={Profile} />
+              <Route path="/profile/edit" component={ProfileEdit} />
+              <Route exact path="/profile" component={Profile} />
               <Route exact path="/" component={Hello} />
             </ExclusiveRouteContainer>
           </Switch>
