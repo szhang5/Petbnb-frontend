@@ -25,7 +25,7 @@ class ProfileEdit extends Component {
     for (const [key, value] of data.entries()) {
       payload[key] = value;
     }
-    console.log(payload);
+    // console.log(payload);
     this.props.EditProfileAction(payload).then(() => {
       this.props.history.push('/profile');
     });
