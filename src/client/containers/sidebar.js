@@ -1,6 +1,7 @@
 import React from "react";
 import PropTypes from "prop-types";
 import { withStyles } from "@material-ui/core/styles";
+import { withRouter } from "react-router-dom";
 import Drawer from "@material-ui/core/Drawer";
 import Button from "@material-ui/core/Button";
 import List from "@material-ui/core/List";
@@ -34,35 +35,22 @@ class TemporaryDrawer extends React.Component {
     const sideList = (
       <div className={classes.list}>
         <List>
-          <ListItem button component="a" href="/home">
+          <ListItem button component="a" onClick={() => {this.props.history.push('/home');}}>  
             <ListItemText primary="Home" />
           </ListItem>
-          <ListItem button component="a" href="/search">
+          <ListItem button component="a" onClick={() => {this.props.history.push('/search');}}>
             <ListItemText primary="Search" />
           </ListItem>
-          <ListItem button component="a" href="/our_service">
+          <ListItem button component="a" onClick={() => {this.props.history.push('/our_service');}}>
             <ListItemText primary="Our Service" />
           </ListItem>
-          <ListItem button component="a" href="/contact_us">
+          <ListItem button component="a" onClick={() => {this.props.history.push('/contact_us');}}>
             <ListItemText primary="Contact Us" />
           </ListItem>
         </List>
       </div>
     );
 
-    // const fullList = (
-    //   <div className={classes.fullList}>
-    //     <List>
-    //       {["Home", "Search", "Our Service", "Contact Us"].map(
-    //         (text, index) => (
-    //           <ListItem button key={text}>
-    //             <ListItemText primary={text} />
-    //           </ListItem>
-    //         )
-    //       )}
-    //     </List>
-    //   </div>
-    // );
 
     return (
       <div>
@@ -92,4 +80,4 @@ TemporaryDrawer.propTypes = {
   classes: PropTypes.object.isRequired
 };
 
-export default withStyles(styles)(TemporaryDrawer);
+export default withRouter(withStyles(styles)(TemporaryDrawer));
