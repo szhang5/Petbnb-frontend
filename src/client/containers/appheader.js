@@ -67,7 +67,7 @@ ButtonAppBar.defaultProps = {
 
 function mapStateToProps({ user }) {
   return {
-    name: user.name
+    name: user.email
   };
 }
 export default withRouter(
