@@ -15,7 +15,7 @@ import styles from "./styles/profileStyle";
 class Profile extends Component {
   handleOnClick() {
       const { email } = this.props;
-      console.log(email);
+      // console.log(email);
       if (email) {
         this.props.signOut();
       }
