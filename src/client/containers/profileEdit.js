@@ -25,14 +25,14 @@ class ProfileEdit extends Component {
     for (const [key, value] of data.entries()) {
       payload[key] = value;
     }
-    console.log(payload);
+    // console.log(payload);
     this.props.EditProfileAction(payload).then(() => {
-      // window.location.href = "/profile";
+      this.props.history.push('/profile');
     });
   }
 
   render() {
-    const classes = this.props;
+    const { firstname, lastname, email, phone, street, city, state, zipcode, classes } = this.props;
 
     return (
       <div>
@@ -44,6 +44,7 @@ class ProfileEdit extends Component {
             className={classes.textField}
             type="name"
             name="firstname"
+            defaultValue={ firstname }
             autoComplete="firstname"
             margin="normal"
             fullWidth
@@ -55,6 +56,7 @@ class ProfileEdit extends Component {
             className={classes.textField}
             type="name"
             name="lastname"
+            defaultValue={ lastname }
             autoComplete="lastname"
             margin="normal"
             fullWidth
@@ -66,6 +68,7 @@ class ProfileEdit extends Component {
             className={classes.textField}
             type="email"
             name="email"
+            defaultValue={ email }
             autoComplete="email"
             margin="normal"
             fullWidth
@@ -77,6 +80,7 @@ class ProfileEdit extends Component {
             className={classes.textField}
             type="phone"
             name="phone"
+            defaultValue={ phone }
             autoComplete="phone"
             margin="normal"
             fullWidth
@@ -88,6 +92,7 @@ class ProfileEdit extends Component {
             className={classes.textField}
             type="street"
             name="street"
+            defaultValue={ street }
             autoComplete="street"
             margin="normal"
             fullWidth
@@ -99,6 +104,7 @@ class ProfileEdit extends Component {
             className={classes.textField}
             type="city"
             name="city"
+            defaultValue={ city }
             autoComplete="city"
             margin="normal"
             fullWidth
@@ -110,6 +116,7 @@ class ProfileEdit extends Component {
             className={classes.textField}
             type="state"
             name="state"
+            defaultValue={ state }
             autoComplete="state"
             margin="normal"
             fullWidth
@@ -121,6 +128,7 @@ class ProfileEdit extends Component {
             className={classes.textField}
             type="zipcode"
             name="zip"
+            defaultValue={ zipcode }
             autoComplete="zipcode"
             margin="normal"
             fullWidth
@@ -145,8 +153,40 @@ class ProfileEdit extends Component {
 
 ProfileEdit.propTypes = {
   classes: PropTypes.object.isRequired,
+  firstname: PropTypes.string,
+  lastname: PropTypes.string,
+  email: PropTypes.string,
+  phone: PropTypes.string,
+  street: PropTypes.string,
+  city: PropTypes.string,
+  state: PropTypes.string,
+  zipcode: PropTypes.string,
 };
 
-export default  withRouter(withStyles(styles)(connect(null, { EditProfileAction })(ProfileEdit)));
+ProfileEdit.defaultProps = {
+  firstname: '',
+  lastname: '',
+  email: '',
+  phone: '',
+  street: '',
+  city: '',
+  state: '',
+  zipcode: '',
+}
+
+function mapStateToProps({ user }) {
+  return {
+    'firstname': user.firstname,
+    'lastname': user.lastname,
+    'email': user.email,
+    'phone': user.phone,
+    'street': user.street,
+    'city': user.city,
+    'state': user.state,
+    'zipcode': user.zip,
+  }
+}
+
+export default  withRouter(withStyles(styles)(connect(mapStateToProps, { EditProfileAction })(ProfileEdit)));
 
 
