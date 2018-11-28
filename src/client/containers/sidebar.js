@@ -35,22 +35,45 @@ class TemporaryDrawer extends React.Component {
     const sideList = (
       <div className={classes.list}>
         <List>
-          <ListItem button component="a" onClick={() => {this.props.history.push('/home');}}>  
+          <ListItem
+            button
+            component="a"
+            onClick={() => {
+              this.props.history.push("/home");
+            }}
+          >
             <ListItemText primary="Home" />
           </ListItem>
-          <ListItem button component="a" onClick={() => {this.props.history.push('/search');}}>
+          <ListItem
+            button
+            component="a"
+            onClick={() => {
+              this.props.history.push("/search");
+            }}
+          >
             <ListItemText primary="Search" />
           </ListItem>
-          <ListItem button component="a" onClick={() => {this.props.history.push('/our_service');}}>
+          <ListItem
+            button
+            component="a"
+            onClick={() => {
+              this.props.history.push("/our_service");
+            }}
+          >
             <ListItemText primary="Our Service" />
           </ListItem>
-          <ListItem button component="a" onClick={() => {this.props.history.push('/contact_us');}}>
+          <ListItem
+            button
+            component="a"
+            onClick={() => {
+              this.props.history.push("/contact_us");
+            }}
+          >
             <ListItemText primary="Contact Us" />
           </ListItem>
         </List>
       </div>
     );
-
 
     return (
       <div>
