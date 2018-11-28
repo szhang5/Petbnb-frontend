@@ -24,7 +24,7 @@ class Profile extends Component {
 
 
   render() {
-    const { email, classes } = this.props;
+    const { firstname, lastname, email, phone, street, city, state, zipcode, classes } = this.props;
 
     return (
       <div>
@@ -34,7 +34,7 @@ class Profile extends Component {
             disabled
             id="outlined-firstname-input"
             label="First Name"
-            defaultValue="Pika"
+            defaultValue={ firstname }
             className={classes.textField}
             margin="normal"
           />
@@ -42,7 +42,7 @@ class Profile extends Component {
             disabled
             id="outlined-lastname-input"
             label="Last Name"
-            defaultValue="Zhang"
+            defaultValue={ lastname }
             className={classes.textField}
             margin="normal"
           />
@@ -58,7 +58,7 @@ class Profile extends Component {
             disabled
             id="outlined-phone-input"
             label="Phone"
-            defaultValue="(347)123-4567"
+            defaultValue={ phone }
             className={classes.textField}
             margin="normal"
           />
@@ -67,7 +67,7 @@ class Profile extends Component {
             id="outlined-street-input"
             label="Street"
             className={classes.textField}
-            defaultValue="9 Regent Street APT 303"
+            defaultValue={ street }
             fullWidth
             margin="normal"
           />
@@ -76,7 +76,7 @@ class Profile extends Component {
             id="outlined-city-input"
             label="City"
             className={classes.textField}
-            defaultValue="Jersey City"
+            defaultValue={ city }
             margin="normal"
           />
           <TextField
@@ -84,7 +84,7 @@ class Profile extends Component {
             id="outlined-state-input"
             label="State"
             className={classes.textField}
-            defaultValue="NJ"
+            defaultValue={ state }
             margin="normal"
           />
           <TextField
@@ -92,7 +92,7 @@ class Profile extends Component {
             id="outlined-zipcode-input"
             label="ZipCode"
             className={classes.textField}
-            defaultValue="07302"
+            defaultValue={ zipcode }
             margin="normal"
           />
         </form>
@@ -110,16 +110,37 @@ class Profile extends Component {
 
 Profile.propTypes = {
   classes: PropTypes.object.isRequired,
+  firstname: PropTypes.string,
+  lastname: PropTypes.string,
   email: PropTypes.string,
+  phone: PropTypes.string,
+  street: PropTypes.string,
+  city: PropTypes.string,
+  state: PropTypes.string,
+  zipcode: PropTypes.string,
 };
 
 Profile.defaultProps = {
+  firstname: '',
+  lastname: '',
   email: '',
+  phone: '',
+  street: '',
+  city: '',
+  state: '',
+  zipcode: '',
 }
 
 function mapStateToProps({ user }) {
   return {
+    'firstname': user.firstname,
+    'lastname': user.lastname,
     'email': user.email,
+    'phone': user.phone,
+    'street': user.street,
+    'city': user.city,
+    'state': user.state,
+    'zipcode': user.zip,
   }
 }
 

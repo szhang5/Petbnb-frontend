@@ -10,7 +10,7 @@ const initialState = {
     'street': '',
     'city': '',
     'state': '',
-    'zipcode': '',
+    'zip': '',
 }
 
 export default function(state = initialState, action) {
@@ -26,7 +26,7 @@ export default function(state = initialState, action) {
         'street': action.payload.data.user.street,
         'city': action.payload.data.user.city,
         'state': action.payload.data.user.state,
-        'zipcode': action.payload.data.user.zip,
+        'zip': action.payload.data.user.zip,
 	    };
     case ACTIONS.REGISTER_ACTION:
       return initialState;
@@ -41,7 +41,7 @@ export default function(state = initialState, action) {
         'street': action.payload.data.user.street,
         'city': action.payload.data.user.city,
         'state': action.payload.data.user.state,
-        'zipcode': action.payload.data.user.zip,      
+        'zip': action.payload.data.user.zip,      
       };
 	  case ACTIONS.SIGNOUT:
 	  	return initialState;
@@ -56,7 +56,7 @@ export default function(state = initialState, action) {
         'street': action.payload.data.user.street,
         'city': action.payload.data.user.city,
         'state': action.payload.data.user.state,
-        'zipcode': action.payload.data.user.zip,           
+        'zip': action.payload.data.user.zip,           
       };
     default:
       return state;
