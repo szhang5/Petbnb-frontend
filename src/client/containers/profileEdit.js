@@ -5,7 +5,9 @@ import classNames from 'classnames';
 import { withStyles } from '@material-ui/core/styles';
 import MenuItem from '@material-ui/core/MenuItem';
 import TextField from '@material-ui/core/TextField';
+import { withRouter } from "react-router-dom";
 import Button from '@material-ui/core/Button';
+import { EditProfileAction } from "../redux/actions";
 
 import styles from "./styles/profileStyle";
 
@@ -18,21 +20,19 @@ class ProfileEdit extends Component {
 
   handleSubmit(e) {
     e.preventDefault();
-    console.log(e.target);
     const data = new FormData(e.target);
     const payload = {};
     for (const [key, value] of data.entries()) {
       payload[key] = value;
     }
     console.log(payload);
-    // this.props.EditProfileAction(payload).then(() => {
-    //   window.location.href = "/profile";
-    // });
+    this.props.EditProfileAction(payload).then(() => {
+      // window.location.href = "/profile";
+    });
   }
 
   render() {
     const classes = this.props;
-
 
     return (
       <div>
@@ -76,6 +76,7 @@ class ProfileEdit extends Component {
             label="Phone"
             className={classes.textField}
             type="phone"
+            name="phone"
             autoComplete="phone"
             margin="normal"
             fullWidth
@@ -86,6 +87,7 @@ class ProfileEdit extends Component {
             label="Street"
             className={classes.textField}
             type="street"
+            name="street"
             autoComplete="street"
             margin="normal"
             fullWidth
@@ -96,6 +98,7 @@ class ProfileEdit extends Component {
             label="City"
             className={classes.textField}
             type="city"
+            name="city"
             autoComplete="city"
             margin="normal"
             fullWidth
@@ -106,6 +109,7 @@ class ProfileEdit extends Component {
             label="State"
             className={classes.textField}
             type="state"
+            name="state"
             autoComplete="state"
             margin="normal"
             fullWidth
@@ -116,6 +120,7 @@ class ProfileEdit extends Component {
             label="ZipCode"
             className={classes.textField}
             type="zipcode"
+            name="zip"
             autoComplete="zipcode"
             margin="normal"
             fullWidth
@@ -129,7 +134,7 @@ class ProfileEdit extends Component {
             className={classes.submit}>
             Save
           </Button>
-          <Button variant="outlined" fullWidth color="primary" className={classes.button}  href="/profile">
+          <Button variant="outlined" fullWidth color="primary" className={classes.button}  onClick={() => {this.props.history.push('/profile');}}>
             Cancel
           </Button>
         </form>
@@ -142,7 +147,6 @@ ProfileEdit.propTypes = {
   classes: PropTypes.object.isRequired,
 };
 
-// export default withStyles(styles)(connect(null, { EditProfileAction })(ProfileEdit));
-export default withStyles(styles)(ProfileEdit);
+export default  withRouter(withStyles(styles)(connect(null, { EditProfileAction })(ProfileEdit)));
 
 

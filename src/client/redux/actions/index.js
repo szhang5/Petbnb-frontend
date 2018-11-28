@@ -4,7 +4,18 @@ export const SIGN_IN_ACTION = 'SIGN_IN_ACTION';
 export const REGISTER_ACTION = 'REGISTER_ACTION';
 export const GET_USER_INFO = 'GET_USER_INFO';
 export const SIGNOUT = 'SIGNOUT';
+export const EDIT_PROFILE_ACTION = 'EDIT_PROFILE_ACTION';
 
+
+export function EditProfileAction(payload) {
+  const request = axios
+    .post('/service/petbnbservice/editProfile', payload);
+
+  return {
+    type: EDIT_PROFILE_ACTION,
+    payload: request,
+  };
+}
 
 export function signInAction(payload) {
   const request = axios
