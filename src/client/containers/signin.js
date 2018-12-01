@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
-import { map } from 'lodash';
+import { map } from "lodash";
 import PropTypes from "prop-types";
 import Avatar from "@material-ui/core/Avatar";
 import Button from "@material-ui/core/Button";
@@ -9,7 +9,7 @@ import FormControlLabel from "@material-ui/core/FormControlLabel";
 import Checkbox from "@material-ui/core/Checkbox";
 import Input from "@material-ui/core/Input";
 import InputLabel from "@material-ui/core/InputLabel";
-import Pets from "@material-ui/icons/Pets";;
+import Pets from "@material-ui/icons/Pets";
 import Paper from "@material-ui/core/Paper";
 import Typography from "@material-ui/core/Typography";
 import withStyles from "@material-ui/core/styles/withStyles";
@@ -31,7 +31,7 @@ class SignIn extends Component {
       payload[key] = value;
     }
     this.props.signInAction(payload).then(() => {
-      window.location.href = "/";
+      window.location.href = "/home";
     });
   }
 
@@ -91,8 +91,12 @@ class SignIn extends Component {
 }
 
 SignIn.propTypes = {
-  classes: PropTypes.object.isRequired  //make sure SignIn is an object
+  classes: PropTypes.object.isRequired //make sure SignIn is an object
 };
 
-export default withStyles(styles)(connect(null, { signInAction })(SignIn));
-
+export default withStyles(styles)(
+  connect(
+    null,
+    { signInAction }
+  )(SignIn)
+);
