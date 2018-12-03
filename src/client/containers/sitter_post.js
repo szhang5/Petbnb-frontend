@@ -1,5 +1,6 @@
 import React from "react";
 import PropTypes from "prop-types";
+import { connect } from "react-redux";
 import { withStyles } from "@material-ui/core/styles";
 import classnames from "classnames";
 import Button from "@material-ui/core/Button";
@@ -17,6 +18,7 @@ import FavoriteIcon from "@material-ui/icons/Favorite";
 import ShareIcon from "@material-ui/icons/Share";
 import ExpandMoreIcon from "@material-ui/icons/ExpandMore";
 import MoreVertIcon from "@material-ui/icons/MoreVert";
+import { getPost } from '../redux/actions'; 
 
 const styles = theme => ({
   card: {
@@ -50,12 +52,18 @@ const styles = theme => ({
 class SitterPost extends React.Component {
   state = { expanded: false };
 
+  constructor(props) {
+    super(props);
+    this.props.getPost();
+  }
+
   handleExpandClick = () => {
     this.setState(state => ({ expanded: !state.expanded }));
   };
 
   render() {
     const { classes } = this.props;
+    
 
     return (
       <Card className={classes.card}>
@@ -111,7 +119,19 @@ class SitterPost extends React.Component {
 }
 
 SitterPost.propTypes = {
-  classes: PropTypes.object.isRequired
+  classes: PropTypes.object.isRequired,
+  posts: PropTypes.array.isRequired,
 };
 
-export default withStyles(styles)(SitterPost);
+SitterPost.defaultProps = {
+  posts : [],
+}
+
+function mapStateToProps({ post }) {
+  console.log(post);
+  return {
+    'posts': post.posts,
+  }
+}
+
+export default withStyles(styles)(connect(mapStateToProps, { getPost })(SitterPost));
