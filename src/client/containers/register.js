@@ -32,7 +32,7 @@ class Register extends Component {
       payload[key] = value;
     }
     this.props.registerAction(payload).then(() => {
-      this.props.history.push('/'); 
+      this.props.history.push('/home'); 
     });
   }
 
