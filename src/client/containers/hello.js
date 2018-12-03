@@ -8,9 +8,6 @@ class HelloWorld extends Component {
     return (
         <Grid container spacing={8}>
             <SitterPost />
-            <SitterPost />
-            <SitterPost />
-            <SitterPost />
         </Grid>
     );
   }
