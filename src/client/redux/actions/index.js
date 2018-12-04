@@ -6,6 +6,40 @@ export const GET_USER_INFO = 'GET_USER_INFO';
 export const SIGNOUT = 'SIGNOUT';
 export const EDIT_PROFILE_ACTION = 'EDIT_PROFILE_ACTION';
 export const GET_POST_ACTION = 'GET_POST_ACTION';
+export const GET_USER_POST_ACTION = 'GET_USER_POST_ACTION';
+export const CREATE_POST_ACTION = 'CREATE_POST_ACTION';
+export const SEARCH_POST_ACTION = 'SEARCH_POST_ACTION';
+
+
+export function GetUserPost(payload) {
+  const request = axios
+    .post('/service/petbnbservice/getUserPost', payload);
+  return {
+    type: GET_USER_POST_ACTION,
+    payload: request,
+  }
+}
+
+
+export function CreatPost(payload) {
+  const request = axios
+    .post('/service/petbnbservice/createPost', payload);
+  return {
+    type: CREATE_POST_ACTION,
+    payload: request,
+  }
+}
+
+
+export function SearchPost(payload) {
+  const request = axios
+    .post('/service/petbnbservice/searchPost', payload);
+  return {
+    type: SEARCH_POST_ACTION,
+    payload: request,
+  }
+}
+
 
 export function getPost() {
   const request = axios

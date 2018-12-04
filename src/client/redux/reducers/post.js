@@ -10,7 +10,6 @@ export default function(state = initialState, action) {
     case ACTIONS.GET_POST_ACTION:
 	    return {
         'posts': action.payload.data.post,
-        
 	    };
     default:
       return state;
