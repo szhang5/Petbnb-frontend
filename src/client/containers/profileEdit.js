@@ -1,19 +1,17 @@
-import React,{ Component } from 'react';
+import React, { Component } from "react";
 import { connect } from "react-redux";
-import PropTypes from 'prop-types';
-import classNames from 'classnames';
-import { withStyles } from '@material-ui/core/styles';
-import MenuItem from '@material-ui/core/MenuItem';
-import TextField from '@material-ui/core/TextField';
+import PropTypes from "prop-types";
+import classNames from "classnames";
+import { withStyles } from "@material-ui/core/styles";
+import MenuItem from "@material-ui/core/MenuItem";
+import TextField from "@material-ui/core/TextField";
 import { withRouter } from "react-router-dom";
-import Button from '@material-ui/core/Button';
+import Button from "@material-ui/core/Button";
 import { EditProfileAction } from "../redux/actions";
 
 import styles from "./styles/profileStyle";
 
-
 class ProfileEdit extends Component {
-
   constructor(props) {
     super(props);
   }
@@ -27,24 +25,39 @@ class ProfileEdit extends Component {
     }
     // console.log(payload);
     this.props.EditProfileAction(payload).then(() => {
-      this.props.history.push('/profile');
+      this.props.history.push("/profile");
     });
   }
 
   render() {
-    const { firstname, lastname, email, phone, street, city, state, zipcode, classes } = this.props;
+    const {
+      firstname,
+      lastname,
+      email,
+      phone,
+      street,
+      city,
+      state,
+      zipcode,
+      classes
+    } = this.props;
 
     return (
       <div>
         <h1>Edit Profile</h1>
-        <form className={classes.container} noValidate autoComplete="off" onSubmit={e => this.handleSubmit(e)}>
+        <form
+          className={classes.container}
+          noValidate
+          autoComplete="off"
+          onSubmit={e => this.handleSubmit(e)}
+        >
           <TextField
             id="outlined-firstname-input"
             label="First Name"
             className={classes.textField}
             type="name"
             name="firstname"
-            defaultValue={ firstname }
+            defaultValue={firstname}
             autoComplete="firstname"
             margin="normal"
             fullWidth
@@ -56,7 +69,7 @@ class ProfileEdit extends Component {
             className={classes.textField}
             type="name"
             name="lastname"
-            defaultValue={ lastname }
+            defaultValue={lastname}
             autoComplete="lastname"
             margin="normal"
             fullWidth
@@ -68,7 +81,7 @@ class ProfileEdit extends Component {
             className={classes.textField}
             type="email"
             name="email"
-            defaultValue={ email }
+            defaultValue={email}
             autoComplete="email"
             margin="normal"
             fullWidth
@@ -80,7 +93,7 @@ class ProfileEdit extends Component {
             className={classes.textField}
             type="phone"
             name="phone"
-            defaultValue={ phone }
+            defaultValue={phone}
             autoComplete="phone"
             margin="normal"
             fullWidth
@@ -92,7 +105,7 @@ class ProfileEdit extends Component {
             className={classes.textField}
             type="street"
             name="street"
-            defaultValue={ street }
+            defaultValue={street}
             autoComplete="street"
             margin="normal"
             fullWidth
@@ -104,7 +117,7 @@ class ProfileEdit extends Component {
             className={classes.textField}
             type="city"
             name="city"
-            defaultValue={ city }
+            defaultValue={city}
             autoComplete="city"
             margin="normal"
             fullWidth
@@ -116,7 +129,7 @@ class ProfileEdit extends Component {
             className={classes.textField}
             type="state"
             name="state"
-            defaultValue={ state }
+            defaultValue={state}
             autoComplete="state"
             margin="normal"
             fullWidth
@@ -128,7 +141,7 @@ class ProfileEdit extends Component {
             className={classes.textField}
             type="zipcode"
             name="zip"
-            defaultValue={ zipcode }
+            defaultValue={zipcode}
             autoComplete="zipcode"
             margin="normal"
             fullWidth
@@ -139,10 +152,19 @@ class ProfileEdit extends Component {
             fullWidth
             variant="contained"
             color="primary"
-            className={classes.submit}>
+            className={classes.submit}
+          >
             Save
           </Button>
-          <Button variant="outlined" fullWidth color="primary" className={classes.button}  onClick={() => {this.props.history.push('/profile');}}>
+          <Button
+            variant="outlined"
+            fullWidth
+            color="primary"
+            className={classes.button}
+            onClick={() => {
+              this.props.history.push("/profile");
+            }}
+          >
             Cancel
           </Button>
         </form>
@@ -160,33 +182,38 @@ ProfileEdit.propTypes = {
   street: PropTypes.string,
   city: PropTypes.string,
   state: PropTypes.string,
-  zipcode: PropTypes.string,
+  zipcode: PropTypes.string
 };
 
 ProfileEdit.defaultProps = {
-  firstname: '',
-  lastname: '',
-  email: '',
-  phone: '',
-  street: '',
-  city: '',
-  state: '',
-  zipcode: '',
-}
+  firstname: "",
+  lastname: "",
+  email: "",
+  phone: "",
+  street: "",
+  city: "",
+  state: "",
+  zipcode: ""
+};
 
 function mapStateToProps({ user }) {
   return {
-    'firstname': user.firstname,
-    'lastname': user.lastname,
-    'email': user.email,
-    'phone': user.phone,
-    'street': user.street,
-    'city': user.city,
-    'state': user.state,
-    'zipcode': user.zip,
-  }
+    firstname: user.firstname,
+    lastname: user.lastname,
+    email: user.email,
+    phone: user.phone,
+    street: user.street,
+    city: user.city,
+    state: user.state,
+    zipcode: user.zip
+  };
 }
 
-export default  withRouter(withStyles(styles)(connect(mapStateToProps, { EditProfileAction })(ProfileEdit)));
-
-
+export default withRouter(
+  withStyles(styles)(
+    connect(
+      mapStateToProps,
+      { EditProfileAction }
+    )(ProfileEdit)
+  )
+);
