@@ -1,30 +1,38 @@
-import React,{ Component } from 'react';
-import PropTypes from 'prop-types';
+import React, { Component } from "react";
+import PropTypes from "prop-types";
 import { connect } from "react-redux";
-import classNames from 'classnames';
-import { withStyles } from '@material-ui/core/styles';
-import MenuItem from '@material-ui/core/MenuItem';
-import TextField from '@material-ui/core/TextField';
-import Button from '@material-ui/core/Button';
+import classNames from "classnames";
+import { withStyles } from "@material-ui/core/styles";
+import MenuItem from "@material-ui/core/MenuItem";
+import TextField from "@material-ui/core/TextField";
+import Button from "@material-ui/core/Button";
 import { withRouter } from "react-router-dom";
 import { signOut } from "../redux/actions";
 
 import styles from "./styles/profileStyle";
 
-
 class Profile extends Component {
   handleOnClick() {
-      const { email } = this.props;
-      // console.log(email);
-      if (email) {
-        this.props.signOut();
-      }
-      return this.props.history.push('/signin');
+    const { email } = this.props;
+    // console.log(email);
+    if (email) {
+      this.props.signOut();
     }
-
+    return this.props.history.push("/signin");
+  }
 
   render() {
-    const { firstname, lastname, email, phone, street, city, state, zipcode, classes } = this.props;
+    const {
+      firstname,
+      lastname,
+      email,
+      phone,
+      street,
+      city,
+      state,
+      zipcode,
+      classes
+    } = this.props;
 
     return (
       <div>
@@ -34,7 +42,7 @@ class Profile extends Component {
             disabled
             id="outlined-firstname-input"
             label="First Name"
-            defaultValue={ firstname }
+            defaultValue={firstname}
             className={classes.textField}
             margin="normal"
           />
@@ -42,7 +50,7 @@ class Profile extends Component {
             disabled
             id="outlined-lastname-input"
             label="Last Name"
-            defaultValue={ lastname }
+            defaultValue={lastname}
             className={classes.textField}
             margin="normal"
           />
@@ -50,7 +58,7 @@ class Profile extends Component {
             disabled
             id="outlined-email-input"
             label="Email"
-            defaultValue={ email }
+            defaultValue={email}
             className={classes.textField}
             margin="normal"
           />
@@ -58,7 +66,7 @@ class Profile extends Component {
             disabled
             id="outlined-phone-input"
             label="Phone"
-            defaultValue={ phone }
+            defaultValue={phone}
             className={classes.textField}
             margin="normal"
           />
@@ -67,7 +75,7 @@ class Profile extends Component {
             id="outlined-street-input"
             label="Street"
             className={classes.textField}
-            defaultValue={ street }
+            defaultValue={street}
             fullWidth
             margin="normal"
           />
@@ -76,7 +84,7 @@ class Profile extends Component {
             id="outlined-city-input"
             label="City"
             className={classes.textField}
-            defaultValue={ city }
+            defaultValue={city}
             margin="normal"
           />
           <TextField
@@ -84,7 +92,7 @@ class Profile extends Component {
             id="outlined-state-input"
             label="State"
             className={classes.textField}
-            defaultValue={ state }
+            defaultValue={state}
             margin="normal"
           />
           <TextField
@@ -92,15 +100,29 @@ class Profile extends Component {
             id="outlined-zipcode-input"
             label="ZipCode"
             className={classes.textField}
-            defaultValue={ zipcode }
+            defaultValue={zipcode}
             margin="normal"
           />
         </form>
 
-        <Button variant="outlined" fullWidth color="primary" className={classes.button}  onClick={() => {this.props.history.push('/profile/edit');}}>
+        <Button
+          variant="outlined"
+          fullWidth
+          color="primary"
+          className={classes.button}
+          onClick={() => {
+            this.props.history.push("/profile/edit");
+          }}
+        >
           Edit
         </Button>
-        <Button variant="contained" fullWidth color="primary" className={classes.button}  onClick={() => this.handleOnClick()}>
+        <Button
+          variant="contained"
+          fullWidth
+          color="primary"
+          className={classes.button}
+          onClick={() => this.handleOnClick()}
+        >
           Sign Out
         </Button>
       </div>
@@ -117,32 +139,38 @@ Profile.propTypes = {
   street: PropTypes.string,
   city: PropTypes.string,
   state: PropTypes.string,
-  zipcode: PropTypes.string,
+  zipcode: PropTypes.string
 };
 
 Profile.defaultProps = {
-  firstname: '',
-  lastname: '',
-  email: '',
-  phone: '',
-  street: '',
-  city: '',
-  state: '',
-  zipcode: '',
-}
+  firstname: "",
+  lastname: "",
+  email: "",
+  phone: "",
+  street: "",
+  city: "",
+  state: "",
+  zipcode: ""
+};
 
 function mapStateToProps({ user }) {
   return {
-    'firstname': user.firstname,
-    'lastname': user.lastname,
-    'email': user.email,
-    'phone': user.phone,
-    'street': user.street,
-    'city': user.city,
-    'state': user.state,
-    'zipcode': user.zip,
-  }
+    firstname: user.firstname,
+    lastname: user.lastname,
+    email: user.email,
+    phone: user.phone,
+    street: user.street,
+    city: user.city,
+    state: user.state,
+    zipcode: user.zip
+  };
 }
 
-export default withRouter(withStyles(styles)(connect(mapStateToProps, { signOut })(Profile)));
-
+export default withRouter(
+  withStyles(styles)(
+    connect(
+      mapStateToProps,
+      { signOut }
+    )(Profile)
+  )
+);
