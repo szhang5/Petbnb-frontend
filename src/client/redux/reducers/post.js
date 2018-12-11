@@ -2,6 +2,7 @@ import * as ACTIONS from "../actions/index";
 
 const initialState = {
   posts: [],
+  sitterid: "",
   avai_end_date: "",
   avai_start_date: "",
   description: "",
@@ -26,6 +27,7 @@ export default function(state = initialState, action) {
     case ACTIONS.GET_USER_POST_ACTION:
       // console.log('action: ', action);
       return {
+        sitterid: action.payload.data.post.sitterid,
         avai_end_date: action.payload.data.post.avai_end_date,
         avai_start_date: action.payload.data.post.avai_start_date,
         description: action.payload.data.post.description,
