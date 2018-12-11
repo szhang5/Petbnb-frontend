@@ -8,7 +8,7 @@ import { connect } from "react-redux";
 import classNames from "classnames";
 import TextField from "@material-ui/core/TextField";
 import Button from "@material-ui/core/Button";
-import { GetUserPost } from "../redux/actions";
+import { SearchPost } from "../redux/actions";
 
 const styles = theme => ({
   container: {
@@ -38,7 +38,7 @@ class GetPost extends Component {
       avai_end_date,
       classes
     } = this.props;
-    console.log(this.props);
+    console.log(pet_type);
     return (
       <div>
         <h1>Get Post</h1>
@@ -91,7 +91,7 @@ class GetPost extends Component {
             id="outlined-date_from"
             label="Start From"
             //   type="date"
-            name="avai_start_date"
+            name={avai_start_date}
             // defaultValue={avai_start_date}
             className={classes.textField}
             margin="normal"
@@ -103,7 +103,7 @@ class GetPost extends Component {
             id="outlined-date_to"
             label="To"
             //    type="date"
-            name="avai_end_date"
+            name={avai_end_date}
             //defaultValue={avai_end_date}
             className={classes.textField}
             margin="normal"
@@ -148,11 +148,12 @@ GetPost.defaultProps = {
 
 function mapStateToProps({ post }) {
   return {
-    avai_start_date: post.avai_start_date,
-    avai_end_date: post.avai_end_date,
-    hour_rate: post.hour_rate,
-    pet_type: post.pet_type,
-    pets_num: post.pets_num
+    // avai_start_date: post.avai_start_date,
+    //  avai_end_date: post.avai_end_date,
+    //  hour_rate: post.hour_rate,
+    pet_type: post.pet_type
+    //  pets_num: post.pets_num
+    // posts: post[0]
   };
 }
 
@@ -161,7 +162,7 @@ export default withRouter(
     connect(
       mapStateToProps,
 
-      { GetUserPost }
+      { SearchPost }
     )(GetPost)
   )
 );
