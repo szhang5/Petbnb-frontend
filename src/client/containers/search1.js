@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
 import PropTypes from "prop-types";
+import { map } from "lodash";
 import classNames from "classnames";
 import { withStyles } from "@material-ui/core/styles";
 import MenuItem from "@material-ui/core/MenuItem";
@@ -8,6 +9,16 @@ import TextField from "@material-ui/core/TextField";
 import { withRouter } from "react-router-dom";
 import Button from "@material-ui/core/Button";
 import { SearchPost } from "../redux/actions";
+import Card from "@material-ui/core/Card";
+import CardHeader from "@material-ui/core/CardHeader";
+import CardContent from "@material-ui/core/CardContent";
+import CardActions from "@material-ui/core/CardActions";
+import Collapse from "@material-ui/core/Collapse";
+import Avatar from "@material-ui/core/Avatar";
+import IconButton from "@material-ui/core/IconButton";
+import Typography from "@material-ui/core/Typography";
+import FavoriteIcon from "@material-ui/icons/Favorite";
+import ExpandMoreIcon from "@material-ui/icons/ExpandMore";
 
 const styles = theme => ({
   container: {
@@ -21,8 +32,15 @@ const styles = theme => ({
   textField: {
     marginLeft: theme.spacing.unit,
     marginRight: theme.spacing.unit
+  },
+  button: {
+    margin: theme.spacing.unit
+  },
+  submit: {
+    margin: theme.spacing.unit
   }
 });
+
 const types = [
   {
     value: "cat",
@@ -70,12 +88,16 @@ class Search1 extends Component {
   constructor(props) {
     super(props);
   }
+  handleExpandClick = () => {
+    this.setState(state => ({ expanded: !state.expanded }));
+  };
   state = {
     pet_type: "",
     hour_rate: "",
     pets_num: "",
     avai_start_date: "",
-    avai_end_date: ""
+    avai_end_date: "",
+    expanded: false
   };
   handleSubmit(e) {
     e.preventDefault();
@@ -86,7 +108,8 @@ class Search1 extends Component {
     }
     console.log(payload);
     this.props.SearchPost(payload).then(() => {
-      this.props.history.push("/get_post");
+      //  this.props.history.push("/get_post");
+      this.props.SearchPost();
     });
   }
   handleChange = name => event => {
@@ -96,14 +119,7 @@ class Search1 extends Component {
   };
 
   render() {
-    const {
-      pet_type,
-      hour_rate,
-      pets_num,
-      avai_start_date,
-      avai_end_date,
-      classes
-    } = this.props;
+    const { posts, classes } = this.props;
 
     return (
       <div>
@@ -223,7 +239,7 @@ class Search1 extends Component {
             color="primary"
             className={classes.submit}
           >
-            Save
+            Submit
           </Button>
           <Button
             variant="outlined"
@@ -237,6 +253,54 @@ class Search1 extends Component {
             Cancel
           </Button>
         </form>
+
+        {map(posts, (post, key) => {
+          return (
+            <Card className={classes.card} key={post.sitterid}>
+              <CardHeader
+                avatar={
+                  <Avatar aria-label="Recipe" className={classes.avatar}>
+                    R
+                  </Avatar>
+                }
+                action={
+                  <IconButton aria-label="Add to favorites">
+                    <FavoriteIcon />
+                  </IconButton>
+                }
+                sitter_name="Emma" //need to join the user table to get name!!!
+                pet_types={post.pet_types}
+              />
+
+              <CardActions className={classes.actions} disableActionSpacing>
+                <IconButton
+                  className={classnames(classes.expand, {
+                    [classes.expandOpen]: this.state.expanded
+                  })}
+                  onClick={this.handleExpandClick}
+                  aria-expanded={this.state.expanded}
+                  aria-label="Show more"
+                >
+                  <ExpandMoreIcon />
+                </IconButton>
+              </CardActions>
+              <Collapse in={this.state.expanded} timeout="auto" unmountOnExit>
+                <CardContent>
+                  <Typography paragraph>{post.description}</Typography>
+                </CardContent>
+                <CardActions>
+                  <Button
+                    variant="outlined"
+                    color="secondary"
+                    className={classes.button}
+                  >
+                    Contact
+                  </Button>
+                </CardActions>
+              </Collapse>
+            </Card>
+          );
+        })}
       </div>
     );
   }
@@ -263,13 +327,13 @@ Search1.defaultProps = {
 
 function mapStateToProps({ post }) {
   return {
-    pet_type: post.pet_type,
-    hour_rate: post.hour_rate,
-    pets_num: post.pets_num,
-    avai_start_date: post.avai_start_date,
-    avai_end_date: post.avai_end_date
+    // pet_type: post.pet_type,
+    // hour_rate: post.hour_rate,
+    // pets_num: post.pets_num,
+    // avai_start_date: post.avai_start_date,
+    //  avai_end_date: post.avai_end_date
 
-    // posts: post
+    posts: post.posts
   };
 }
 
@@ -277,7 +341,6 @@ export default withRouter(
   withStyles(styles)(
     connect(
       mapStateToProps,
-
       { SearchPost }
     )(Search1)
   )
