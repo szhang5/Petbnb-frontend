@@ -1,5 +1,6 @@
 import React from "react";
 import PropTypes from "prop-types";
+import { map } from "lodash";
 import { connect } from "react-redux";
 import { withStyles } from "@material-ui/core/styles";
 import classnames from "classnames";
@@ -63,58 +64,61 @@ class SitterPost extends React.Component {
   };
 
   render() {
-    const { classes } = this.props;
-    
+    const { classes, posts } = this.props;
+    // console.log(posts);
 
     return (
-      <Card className={classes.card}>
-        <CardHeader
-          avatar={
-            <Avatar aria-label="Recipe" className={classes.avatar}>
-              R
-            </Avatar>
-          }
-          action={
-            <IconButton aria-label="Add to favorites">
-              <FavoriteIcon />
-            </IconButton>
-          }
-          sitter_name="Emma"
-          pet_types="dog, cat, turtle"
-        />
+      <div>
+        {map(posts, (post, key) => {
+          return (
+            <Card className={classes.card} key={post.sitterid}>
+              <CardHeader
+                avatar={
+                  <Avatar aria-label="Recipe" className={classes.avatar}>
+                    R
+                  </Avatar>
+                }
+                action={
+                  <IconButton aria-label="Add to favorites">
+                    <FavoriteIcon />
+                  </IconButton>
+                }
+                sitter_name="Emma" //need to join the user table to get name!!!
+                pet_types={post.pet_types}
+              />
 
-        <CardActions className={classes.actions} disableActionSpacing>
-          <IconButton
-            className={classnames(classes.expand, {
-              [classes.expandOpen]: this.state.expanded
-            })}
-            onClick={this.handleExpandClick}
-            aria-expanded={this.state.expanded}
-            aria-label="Show more"
-          >
-            <ExpandMoreIcon />
-          </IconButton>
-        </CardActions>
-        <Collapse in={this.state.expanded} timeout="auto" unmountOnExit>
-          <CardContent>
-            <Typography paragraph>
-              I love animals! I love animals! I love animals! I love animals! I
-              love animals! I love animals! I love animals! I love animals! I
-              love animals! I love animals! I love animals! I love animals! I
-              love animals! I love animals! I love animals! I love animals!
-            </Typography>
-          </CardContent>
-          <CardActions>
-            <Button
-              variant="outlined"
-              color="secondary"
-              className={classes.button}
-            >
-              Contact
-            </Button>
-          </CardActions>
-        </Collapse>
-      </Card>
+              <CardActions className={classes.actions} disableActionSpacing>
+                <IconButton
+                  className={classnames(classes.expand, {
+                    [classes.expandOpen]: this.state.expanded
+                  })}
+                  onClick={this.handleExpandClick}
+                  aria-expanded={this.state.expanded}
+                  aria-label="Show more"
+                >
+                  <ExpandMoreIcon />
+                </IconButton>
+              </CardActions>
+              <Collapse in={this.state.expanded} timeout="auto" unmountOnExit>
+                <CardContent>
+                  <Typography paragraph>
+                    {post.description}
+                  </Typography>
+                </CardContent>
+                <CardActions>
+                  <Button
+                    variant="outlined"
+                    color="secondary"
+                    className={classes.button}
+                  >
+                    Contact
+                  </Button>
+                </CardActions>
+              </Collapse>
+            </Card>
+            )
+        })}
+      </div>
     );
   }
 }
@@ -129,7 +133,6 @@ SitterPost.defaultProps = {
 }
 
 function mapStateToProps({ post }) {
-  console.log(post);
   return {
     'posts': post.posts,
   }
