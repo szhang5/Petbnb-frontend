@@ -19,8 +19,7 @@ import FavoriteIcon from "@material-ui/icons/Favorite";
 import ShareIcon from "@material-ui/icons/Share";
 import ExpandMoreIcon from "@material-ui/icons/ExpandMore";
 import MoreVertIcon from "@material-ui/icons/MoreVert";
-import { getPost } from '../redux/actions';  
-
+import { getPost } from "../redux/actions";
 
 const styles = theme => ({
   card: {
@@ -101,9 +100,7 @@ class SitterPost extends React.Component {
               </CardActions>
               <Collapse in={this.state.expanded} timeout="auto" unmountOnExit>
                 <CardContent>
-                  <Typography paragraph>
-                    {post.description}
-                  </Typography>
+                  <Typography paragraph>{post.description}</Typography>
                 </CardContent>
                 <CardActions>
                   <Button
@@ -116,7 +113,7 @@ class SitterPost extends React.Component {
                 </CardActions>
               </Collapse>
             </Card>
-            )
+          );
         })}
       </div>
     );
@@ -125,17 +122,22 @@ class SitterPost extends React.Component {
 
 SitterPost.propTypes = {
   classes: PropTypes.object.isRequired,
-  posts: PropTypes.array.isRequired,
+  posts: PropTypes.array.isRequired
 };
 
 SitterPost.defaultProps = {
-  posts : [],
-}
+  posts: []
+};
 
 function mapStateToProps({ post }) {
   return {
-    'posts': post.posts,
-  }
+    posts: post.posts
+  };
 }
 
-export default withStyles(styles)(connect(mapStateToProps, { getPost })(SitterPost));
+export default withStyles(styles)(
+  connect(
+    mapStateToProps,
+    { getPost }
+  )(SitterPost)
+);
