@@ -1,7 +1,6 @@
 import React from "react";
 import PropTypes from "prop-types";
 import { map } from "lodash";
-import { connect } from "react-redux";
 import { withStyles } from "@material-ui/core/styles";
 import classnames from "classnames";
 import Button from "@material-ui/core/Button";
@@ -19,7 +18,6 @@ import FavoriteIcon from "@material-ui/icons/Favorite";
 import ShareIcon from "@material-ui/icons/Share";
 import ExpandMoreIcon from "@material-ui/icons/ExpandMore";
 import MoreVertIcon from "@material-ui/icons/MoreVert";
-import { getPost } from '../redux/actions';  
 
 
 const styles = theme => ({
@@ -56,7 +54,6 @@ class SitterPost extends React.Component {
 
   constructor(props) {
     super(props);
-    this.props.getPost();
   }
 
   handleExpandClick = () => {
@@ -65,8 +62,6 @@ class SitterPost extends React.Component {
 
   render() {
     const { classes, posts } = this.props;
-    // console.log(posts);
-
     return (
       <div>
         {map(posts, (post, key) => {
@@ -102,7 +97,11 @@ class SitterPost extends React.Component {
               <Collapse in={this.state.expanded} timeout="auto" unmountOnExit>
                 <CardContent>
                   <Typography paragraph>
-                    {post.description}
+                    Available: From {post.avai_start_date} To {post.avai_end_date}<br/>
+                    Sitter Id: {post.sitterid} <br/> 
+                    Pet types: {post.pet_type} <br/>
+                    Price: {post.hour_rate}<br/>
+                    Description: {post.description}<br/>
                   </Typography>
                 </CardContent>
                 <CardActions>
@@ -125,17 +124,7 @@ class SitterPost extends React.Component {
 
 SitterPost.propTypes = {
   classes: PropTypes.object.isRequired,
-  posts: PropTypes.array.isRequired,
 };
 
-SitterPost.defaultProps = {
-  posts : [],
-}
 
-function mapStateToProps({ post }) {
-  return {
-    'posts': post.posts,
-  }
-}
-
-export default withStyles(styles)(connect(mapStateToProps, { getPost })(SitterPost));
+export default withStyles(styles)(SitterPost);
