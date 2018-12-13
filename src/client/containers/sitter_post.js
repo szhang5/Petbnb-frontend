@@ -1,6 +1,7 @@
 import React from "react";
 import PropTypes from "prop-types";
 import { map } from "lodash";
+import moment from "moment";
 import { withStyles } from "@material-ui/core/styles";
 import classnames from "classnames";
 import Button from "@material-ui/core/Button";
@@ -18,6 +19,7 @@ import FavoriteIcon from "@material-ui/icons/Favorite";
 import ShareIcon from "@material-ui/icons/Share";
 import ExpandMoreIcon from "@material-ui/icons/ExpandMore";
 import MoreVertIcon from "@material-ui/icons/MoreVert";
+
 
 
 const styles = theme => ({
@@ -81,6 +83,21 @@ class SitterPost extends React.Component {
                 sitter_name="Emma" //need to join the user table to get name!!!
                 pet_types={post.pet_types}
               />
+                <CardContent>
+                  <Typography paragraph>
+                    Sitter Id: {post.sitterid}
+                  </Typography>
+                  <Typography paragraph>
+                    Pet types: {post.pet_type}
+                  </Typography>
+                  <Typography paragraph>
+                    Price: {post.hour_rate}
+                  </Typography>
+                  <Typography paragraph>
+                    Availablity: <br/> 
+                    {moment(post.avai_start_date).format('LL')} - {moment(post.avai_end_date).format('LL')}
+                  </Typography>
+                </CardContent>
 
               <CardActions className={classes.actions} disableActionSpacing>
                 <IconButton
@@ -97,11 +114,8 @@ class SitterPost extends React.Component {
               <Collapse in={this.state.expanded} timeout="auto" unmountOnExit>
                 <CardContent>
                   <Typography paragraph>
-                    Available: From {post.avai_start_date} To {post.avai_end_date}<br/>
-                    Sitter Id: {post.sitterid} <br/> 
-                    Pet types: {post.pet_type} <br/>
-                    Price: {post.hour_rate}<br/>
-                    Description: {post.description}<br/>
+                    
+                    Description: {post.description}
                   </Typography>
                 </CardContent>
                 <CardActions>
