@@ -48,7 +48,7 @@ class TemporaryDrawer extends React.Component {
             button
             component="a"
             onClick={() => {
-              this.props.history.push("/search1");
+              this.props.history.push("/search");
             }}
           >
             <ListItemText primary="Search" />

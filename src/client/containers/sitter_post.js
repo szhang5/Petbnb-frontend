@@ -7,7 +7,6 @@ import classnames from "classnames";
 import Button from "@material-ui/core/Button";
 import Card from "@material-ui/core/Card";
 import CardHeader from "@material-ui/core/CardHeader";
-import CardMedia from "@material-ui/core/CardMedia";
 import CardContent from "@material-ui/core/CardContent";
 import CardActions from "@material-ui/core/CardActions";
 import Collapse from "@material-ui/core/Collapse";
@@ -69,9 +68,11 @@ class SitterPost extends React.Component {
             <Card className={classes.card} key={post.sitterid}>
               <CardHeader
                 avatar={
-                  <Avatar aria-label="Recipe" className={classes.avatar}>
-                    R
-                  </Avatar>
+                  <Avatar
+                    //  aria-label="Recipe"
+                    className={classes.avatar}
+                    src="https://gbgrr.org/wp-content/uploads/Home-page-donate.jpg"
+                  />
                 }
                 action={
                   <IconButton aria-label="Add to favorites">
@@ -81,21 +82,16 @@ class SitterPost extends React.Component {
                 sitter_name="Emma" //need to join the user table to get name!!!
                 pet_types={post.pet_types}
               />
-                <CardContent>
-                  <Typography paragraph>
-                    Sitter Id: {post.sitterid}
-                  </Typography>
-                  <Typography paragraph>
-                    Pet types: {post.pet_type}
-                  </Typography>
-                  <Typography paragraph>
-                    Price: {post.hour_rate}
-                  </Typography>
-                  <Typography paragraph>
-                    Availablity: <br/> 
-                    {moment(post.avai_start_date).format('LL')} - {moment(post.avai_end_date).format('LL')}
-                  </Typography>
-                </CardContent>
+              <CardContent>
+                <Typography paragraph>Sitter Id: {post.sitterid}</Typography>
+                <Typography paragraph>Pet types: {post.pet_type}</Typography>
+                <Typography paragraph>Price: {post.hour_rate}</Typography>
+                <Typography paragraph>
+                  Availablity: <br />
+                  {moment(post.avai_start_date).format("LL")} -{" "}
+                  {moment(post.avai_end_date).format("LL")}
+                </Typography>
+              </CardContent>
 
               <CardActions className={classes.actions} disableActionSpacing>
                 <IconButton
@@ -134,8 +130,7 @@ class SitterPost extends React.Component {
 }
 
 SitterPost.propTypes = {
-  classes: PropTypes.object.isRequired,
+  classes: PropTypes.object.isRequired
 };
-
 
 export default withStyles(styles)(SitterPost);

@@ -1,182 +1,276 @@
 import React, { Component } from "react";
-import styles from "./styles/profileStyle";
-import { withRouter } from "react-router-dom";
+import { connect } from "react-redux";
+import PropTypes from "prop-types";
+import { map } from "lodash";
+import classNames from "classnames";
 import { withStyles } from "@material-ui/core/styles";
+import MenuItem from "@material-ui/core/MenuItem";
+import TextField from "@material-ui/core/TextField";
+import { withRouter } from "react-router-dom";
 import Button from "@material-ui/core/Button";
+import { SearchPost } from "../redux/actions";
+import SitterPost from "./sitter_post";
 
-import "./styles/searchStyle.css";
-import {
-  ReactiveBase,
-  SingleDropdownList,
-  NumberBox,
-  DateRange,
-  RangeSlider,
-  ResultCard
-} from "@appbaseio/reactivesearch";
+const styles = theme => ({
+  container: {
+    display: "flex",
+    flexWrap: "wrap"
+  },
+  formControl: {
+    margin: theme.spacing.unit,
+    minWidth: 120
+  },
+  textField: {
+    marginLeft: theme.spacing.unit,
+    marginRight: theme.spacing.unit
+  },
+  button: {
+    margin: theme.spacing.unit
+  },
+  submit: {
+    margin: theme.spacing.unit
+  }
+});
+
+const types = [
+  {
+    value: "cat",
+    label: "cat"
+  },
+  {
+    value: "dog",
+    label: "dog"
+  }
+];
+const ranges_obj = {
+  "20": "20",
+  "50": "50",
+  "100": "100"
+};
+
+const ranges = map(ranges_obj, (value, key) => {
+  return {
+    value,
+    label: key
+  };
+});
+// const ranges = [
+//   {
+//     value: "20",
+//     label: "20"
+//   },
+//   {
+//     value: "50",
+//     label: "50"
+//   },
+//   {
+//     value: "100",
+//     label: "100"
+//   }
+// ];
+const number = [
+  {
+    value: "1",
+    label: "1"
+  },
+  {
+    value: "2",
+    label: "2"
+  },
+  {
+    value: "3",
+    label: "3"
+  }
+];
 
 class Search extends Component {
-  showprice() {
-    document.getElementById("myDropdownprice").classList.toggle("show");
+  constructor(props) {
+    super(props);
   }
-  showpets() {
-    document.getElementById("myDropdownpets").classList.toggle("show");
+  handleExpandClick = () => {
+    this.setState(state => ({ expanded: !state.expanded }));
+  };
+  state = {
+    pet_type: "",
+    hour_rate: "",
+    pets_num: "",
+    avai_start_date: "",
+    avai_end_date: "",
+    expanded: false
+  };
+
+  handleSubmit(e) {
+    e.preventDefault();
+    console.log(this.state);
+    this.props.SearchPost(this.state);
   }
-  showwhen() {
-    document.getElementById("myDropdownwhen").classList.toggle("show");
-  }
-  showtype() {
-    document.getElementById("myDropdowntype").classList.toggle("show");
-  }
+  handleChange = name => event => {
+    this.setState({
+      [name]: event.target.value
+    });
+  };
 
   render() {
+    const { classes, posts } = this.props;
+    // console.log('posts', posts)
     return (
-      <div className="main-container">
-        <ReactiveBase
-          app="housing"
-          credentials="0aL1X5Vts:1ee67be1-9195-4f4b-bd4f-a91cd1b5e4b5"
+      <div>
+        <h1>Search</h1>
+        <form
+          className={classes.container}
+          noValidate
+          autoComplete="off"
+          onSubmit={e => this.handleSubmit(e)}
         >
-          <div className="filters-search-container">
-            <div className="dropdown">
-              <Button
-                fullWidth
-                variant="contained"
-                color="primary"
-                onClick={this.showtype}
-                className="button"
-              >
-                Pet Type
-              </Button>
-              <div className="dropdown-content" id="myDropdowntype">
-                <SingleDropdownList
-                  componentId="PetSensor"
-                  dataField="property_type"
-                  size={100}
-                />
-              </div>
-            </div>
-            <div className="dropdown">
-              <Button
-                fullWidth
-                variant="contained"
-                color="primary"
-                onClick={this.showprice}
-                className="button"
-              >
-                Price
-              </Button>
+          <TextField
+            id="outlined-select-pet_type"
+            select
+            label="Pet Type"
+            className={classes.textField}
+            type="type"
+            name="pet_type"
+            margin="normal"
+            fullWidth
+            variant="outlined"
+            value={this.state.pet_type}
+            onChange={this.handleChange("pet_type")}
+            SelectProps={{
+              MenuProps: {
+                className: classes.menu
+              }
+            }}
+          >
+            {types.map(option => (
+              <MenuItem key={option.value} value={option.value}>
+                {option.label}
+              </MenuItem>
+            ))}
+          </TextField>
 
-              <div className="dropdown-content" id="myDropdownprice">
-                <RangeSlider
-                  componentId="PriceSensor"
-                  dataField="price"
-                  title="Price Range"
-                  range={{
-                    start: 10,
-                    end: 250
-                  }}
-                  rangeLabels={{
-                    start: "$10",
-                    end: "$250"
-                  }}
-                  defaultSelected={{
-                    start: 10,
-                    end: 50
-                  }}
-                  stepValue={10}
-                  interval={20}
-                  //react={{
-                  //  and: ["DateRangeSensor", "GuestSensor"]
-                  // }}
-                  className="rangeFilter"
-                />
-              </div>
-            </div>
-            <div className="dropdown">
-              <Button
-                fullWidth
-                variant="contained"
-                color="primary"
-                className="button"
-                onClick={this.showpets}
-              >
-                Pets Number
-              </Button>
-              <div className="dropdown-content" id="myDropdownpets">
-                <NumberBox
-                  componentId="NumberSensor"
-                  dataField="accommodates"
-                  // title="Pets"
-                  defaultSelected={2}
-                  labelPosition="right"
-                  data={{
-                    start: 1,
-                    end: 16
-                  }}
-                  className="numberFilter"
-                />
-              </div>
-            </div>
-            <div className="dropdown">
-              <Button
-                fullWidth
-                variant="contained"
-                color="primary"
-                className="button "
-                onClick={this.showwhen}
-              >
-                When
-              </Button>
-              <div className="dropdown-content" id="myDropdownwhen">
-                <DateRange
-                  dataField={["date_from", "date_to"]}
-                  componentId="DateRangeSensor"
-                  //  title="When"
-                  numberOfMonths={1}
-                  queryFormat="basic_date"
-                  extra={{
-                    initialVisibleMonth: () => moment("2017-04-01")
-                  }}
-                />
-              </div>
-            </div>
-            <ResultCard
-              className="card-container"
-              componentId="SearchResult"
-              dataField="name"
-              // showResultStats={false}
-              from={0}
-              size={20}
-              onData={this.onData}
-              pagination={true}
-              react={{
-                and: [
-                  "PetSensor",
-                  "PriceSensor",
-                  "NumberSensor",
-                  "DateRangeSensor"
-                ]
-              }}
-            />
-            <div />
-          </div>
-        </ReactiveBase>
+          <TextField
+            id="outlined-select-hour_rate"
+            select
+            label="Hour rate"
+            className={classes.textField}
+            type="rate"
+            name="hour_rate"
+            margin="normal"
+            fullWidth
+            variant="outlined"
+            value={this.state.hour_rate}
+            onChange={this.handleChange("hour_rate")}
+            SelectProps={{
+              MenuProps: {
+                className: classes.menu
+              }
+            }}
+          >
+            {ranges.map(option => (
+              <MenuItem key={option.value} value={option.value}>
+                {option.label}
+              </MenuItem>
+            ))}
+          </TextField>
+
+          <TextField
+            id="outlined-number"
+            select
+            label="Pet Number"
+            className={classes.textField}
+            type="number"
+            name="pets_num"
+            value={this.state.pets_num}
+            onChange={this.handleChange("pets_num")}
+            margin="normal"
+            fullWidth
+            variant="outlined"
+          >
+            {number.map(option => (
+              <MenuItem key={option.value} value={option.value}>
+                {option.label}
+              </MenuItem>
+            ))}
+          </TextField>
+
+          <TextField
+            id="outlined-date_from"
+            label="Start From"
+            type="date"
+            name="avai_start_date"
+            className={classes.textField}
+            InputLabelProps={{
+              shrink: true
+            }}
+            fullWidth
+            variant="outlined"
+            value={this.state.avai_start_date}
+            onChange={this.handleChange("avai_start_date")}
+            margin="normal"
+          />
+
+          <TextField
+            id="outlined-date_to"
+            label="To"
+            type="date"
+            name="avai_end_date"
+            className={classes.textField}
+            InputLabelProps={{
+              shrink: true
+            }}
+            fullWidth
+            variant="outlined"
+            value={this.state.avai_end_date}
+            onChange={this.handleChange("avai_end_date")}
+            margin="normal"
+          />
+
+          <Button
+            type="submit"
+            fullWidth
+            variant="contained"
+            color="primary"
+            className={classes.submit}
+          >
+            Submit
+          </Button>
+          <Button
+            variant="outlined"
+            fullWidth
+            color="primary"
+            className={classes.button}
+            onClick={() => {
+              this.props.history.push("/home");
+            }}
+          >
+            Cancel
+          </Button>
+        </form>
+        <SitterPost posts={posts} />
       </div>
     );
   }
-  onData(data) {
-    return {
-      image: data.image,
-      title: data.name,
-      description: (
-        <div className="flex book-content">
-          <div>
-            <div className="price">${data.price}</div>
-            <p>{data.room_type}</p>
-            <p>{data.accommodates} pets</p>
-          </div>
-        </div>
-      )
-    };
-  }
 }
-export default withRouter(withStyles(styles)(Search));
+
+Search.propTypes = {
+  classes: PropTypes.object.isRequired,
+  posts: PropTypes.array.isRequired
+};
+
+Search.defaultProps = {
+  posts: []
+};
+
+function mapStateToProps({ post }) {
+  return {
+    posts: post.posts
+  };
+}
+
+export default withRouter(
+  withStyles(styles)(
+    connect(
+      mapStateToProps,
+      { SearchPost }
+    )(Search)
+  )
+);
