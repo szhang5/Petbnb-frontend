@@ -99,6 +99,7 @@ class Search1 extends Component {
     avai_end_date: "",
     expanded: false
   };
+  
   handleSubmit(e) {
     e.preventDefault();
     const data = new FormData(e.target);
@@ -109,7 +110,7 @@ class Search1 extends Component {
     console.log(payload);
     this.props.SearchPost(payload).then(() => {
       //  this.props.history.push("/get_post");
-      this.props.SearchPost();
+      // this.props.SearchPost();
     });
   }
   handleChange = name => event => {
