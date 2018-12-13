@@ -9,11 +9,11 @@ import Hello from "./containers/hello";
 import SignIn from "./containers/signin";
 import Register from "./containers/register";
 import Profile from "./containers/profile";
-import Search from "./containers/search";
+
 import OurService from "./containers/our_service";
 import ContactUs from "./containers/contact_us";
 import ProfileEdit from "./containers/profileEdit";
-import Search1 from "./containers/search1";
+import Search from "./containers/search";
 import reducers from "./redux/reducers";
 import GetPost from "./containers/get_post";
 import configureStore from "./app/store/configure-store";
@@ -41,7 +41,6 @@ class App extends Component {
                     <Route exact path="/profile" component={Profile} />
                     <Route exact path="/home" component={Hello} />
                     <Route exact path="/search" component={Search} />
-                    <Route exact path="/search1" component={Search1} />
                     <Route exact path="/get_post" component={GetPost} />
                     <Route exact path="/our_service" component={OurService} />
                     <Route exact path="/contact_us" component={ContactUs} />
