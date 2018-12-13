@@ -1,7 +1,7 @@
 import React from "react";
 import PropTypes from "prop-types";
 import { map } from "lodash";
-import { connect } from "react-redux";
+import moment from "moment";
 import { withStyles } from "@material-ui/core/styles";
 import classnames from "classnames";
 import Button from "@material-ui/core/Button";
@@ -19,7 +19,6 @@ import FavoriteIcon from "@material-ui/icons/Favorite";
 import ShareIcon from "@material-ui/icons/Share";
 import ExpandMoreIcon from "@material-ui/icons/ExpandMore";
 import MoreVertIcon from "@material-ui/icons/MoreVert";
-import { getPost } from "../redux/actions";
 
 const styles = theme => ({
   card: {
@@ -55,7 +54,6 @@ class SitterPost extends React.Component {
 
   constructor(props) {
     super(props);
-    this.props.getPost();
   }
 
   handleExpandClick = () => {
@@ -64,8 +62,6 @@ class SitterPost extends React.Component {
 
   render() {
     const { classes, posts } = this.props;
-    // console.log(posts);
-
     return (
       <div>
         {map(posts, (post, key) => {
@@ -85,6 +81,21 @@ class SitterPost extends React.Component {
                 sitter_name="Emma" //need to join the user table to get name!!!
                 pet_types={post.pet_types}
               />
+                <CardContent>
+                  <Typography paragraph>
+                    Sitter Id: {post.sitterid}
+                  </Typography>
+                  <Typography paragraph>
+                    Pet types: {post.pet_type}
+                  </Typography>
+                  <Typography paragraph>
+                    Price: {post.hour_rate}
+                  </Typography>
+                  <Typography paragraph>
+                    Availablity: <br/> 
+                    {moment(post.avai_start_date).format('LL')} - {moment(post.avai_end_date).format('LL')}
+                  </Typography>
+                </CardContent>
 
               <CardActions className={classes.actions} disableActionSpacing>
                 <IconButton
@@ -100,7 +111,9 @@ class SitterPost extends React.Component {
               </CardActions>
               <Collapse in={this.state.expanded} timeout="auto" unmountOnExit>
                 <CardContent>
-                  <Typography paragraph>{post.description}</Typography>
+                  <Typography paragraph>
+                    Description: {post.description}
+                  </Typography>
                 </CardContent>
                 <CardActions>
                   <Button
@@ -122,22 +135,7 @@ class SitterPost extends React.Component {
 
 SitterPost.propTypes = {
   classes: PropTypes.object.isRequired,
-  posts: PropTypes.array.isRequired
 };
 
-SitterPost.defaultProps = {
-  posts: []
-};
 
-function mapStateToProps({ post }) {
-  return {
-    posts: post.posts
-  };
-}
-
-export default withStyles(styles)(
-  connect(
-    mapStateToProps,
-    { getPost }
-  )(SitterPost)
-);
+export default withStyles(styles)(SitterPost);

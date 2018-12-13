@@ -33,7 +33,11 @@ export function CreatPost(payload) {
 
 export function SearchPost(payload) {
   const request = axios
-    .post('/service/petbnbservice/searchPost', payload);
+    .post('/service/petbnbservice/searchPost', {
+      ...payload,
+      hour_rate: parseFloat(payload.hour_rate),
+      pets_num: parseInt(payload.pets_num, 10),
+    });
   return {
     type: SEARCH_POST_ACTION,
     payload: request,
