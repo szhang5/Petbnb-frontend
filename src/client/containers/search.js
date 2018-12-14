@@ -10,27 +10,7 @@ import { withRouter } from "react-router-dom";
 import Button from "@material-ui/core/Button";
 import { SearchPost } from "../redux/actions";
 import SitterPost from "./sitter_post";
-
-const styles = theme => ({
-  container: {
-    display: "flex",
-    flexWrap: "wrap"
-  },
-  formControl: {
-    margin: theme.spacing.unit,
-    minWidth: 120
-  },
-  textField: {
-    marginLeft: theme.spacing.unit,
-    marginRight: theme.spacing.unit
-  },
-  button: {
-    margin: theme.spacing.unit
-  },
-  submit: {
-    margin: theme.spacing.unit
-  }
-});
+import styles from "./styles/searchStyle";
 
 const types = [
   {
@@ -54,20 +34,7 @@ const ranges = map(ranges_obj, (value, key) => {
     label: key
   };
 });
-// const ranges = [
-//   {
-//     value: "20",
-//     label: "20"
-//   },
-//   {
-//     value: "50",
-//     label: "50"
-//   },
-//   {
-//     value: "100",
-//     label: "100"
-//   }
-// ];
+
 const number = [
   {
     value: "1",

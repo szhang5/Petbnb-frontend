@@ -3,19 +3,17 @@ import { Provider } from "react-redux";
 import { BrowserRouter, Route, Switch } from "react-router-dom";
 import { MuiThemeProvider, createMuiTheme } from "@material-ui/core/styles";
 import CssBaseline from "@material-ui/core/CssBaseline";
-
+import "../client/app.css";
 import AppHeader from "./containers/appheader";
 import Hello from "./containers/hello";
 import SignIn from "./containers/signin";
 import Register from "./containers/register";
 import Profile from "./containers/profile";
-
 import OurService from "./containers/our_service";
 import ContactUs from "./containers/contact_us";
 import ProfileEdit from "./containers/profileEdit";
 import Search from "./containers/search";
 import reducers from "./redux/reducers";
-import GetPost from "./containers/get_post";
 import configureStore from "./app/store/configure-store";
 import ExclusiveRouteContainer from "./app/ExclusiveRouteContainer";
 import theme from "./app/petbnbTheme";
@@ -41,7 +39,7 @@ class App extends Component {
                     <Route exact path="/profile" component={Profile} />
                     <Route exact path="/home" component={Hello} />
                     <Route exact path="/search" component={Search} />
-                    <Route exact path="/get_post" component={GetPost} />
+
                     <Route exact path="/our_service" component={OurService} />
                     <Route exact path="/contact_us" component={ContactUs} />
                   </ExclusiveRouteContainer>
