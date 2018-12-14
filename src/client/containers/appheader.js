@@ -11,12 +11,7 @@ import Grid from "@material-ui/core/Grid";
 import { withRouter } from "react-router-dom";
 import { signOut } from "../redux/actions";
 import SideBar from "./sidebar";
-
-const styles = {
-  menuButton: {
-    marginRight: 20
-  }
-};
+import styles from "./styles/appheaderStyle";
 
 class ButtonAppBar extends Component {
   handleOnClick() {
