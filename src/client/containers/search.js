@@ -54,16 +54,13 @@ class Search extends Component {
   constructor(props) {
     super(props);
   }
-  handleExpandClick = () => {
-    this.setState(state => ({ expanded: !state.expanded }));
-  };
+
   state = {
     pet_type: "",
     hour_rate: "",
     pets_num: "",
     avai_start_date: "",
-    avai_end_date: "",
-    expanded: false
+    avai_end_date: ""
   };
 
   handleSubmit(e) {
@@ -201,7 +198,9 @@ class Search extends Component {
             className={classes.submit}
           >
             Submit
+            <a href="#cardpost" />
           </Button>
+
           <Button
             variant="outlined"
             fullWidth
