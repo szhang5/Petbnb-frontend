@@ -55,8 +55,9 @@ class SitterPost extends React.Component {
               <CardContent>
                 <h3>Sitter Id: {post.sitterid}</h3>
                 <h3>Pet types: {post.pet_type}</h3>
-                <h3>Price: {post.hour_rate}</h3>
+                <h3>Price: ${post.hour_rate}</h3>
                 <h3>Availablity: </h3>
+                <h3>Number of Pets: {post.pets_num}</h3>
                 <h3> {moment(post.avai_start_date).format("LL")} - </h3>
                 <h3> {moment(post.avai_end_date).format("LL")}</h3>
               </CardContent>
