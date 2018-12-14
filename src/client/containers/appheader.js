@@ -32,7 +32,7 @@ class ButtonAppBar extends Component {
     const { name, classes } = this.props;
     return (
       <div className={classes.root}>
-        <AppBar position="static">
+        <AppBar position="fixed">
           <Toolbar>
             <Grid
               justify="space-between" // Add it here :)
