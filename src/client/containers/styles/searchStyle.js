@@ -16,6 +16,13 @@ const styles = theme => ({
   },
   submit: {
     margin: theme.spacing.unit
+  },
+  postanchor: {
+    height: 100
+  },
+  alert: {
+    marginTop: 200,
+    marginBottom: 400
   }
 });
 export default styles;
