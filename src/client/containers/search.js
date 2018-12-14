@@ -214,7 +214,7 @@ class Search extends Component {
           </Button>
         </form>
         <div id="anchorId"></div>
-        <SitterPost posts={posts} />
+        {posts.length != 0 ? <SitterPost posts={posts} /> : <h1>Sorry, no match</h1>}
       </div>
     );
   }
