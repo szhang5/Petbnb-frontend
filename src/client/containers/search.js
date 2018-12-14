@@ -66,7 +66,9 @@ class Search extends Component {
   handleSubmit(e) {
     e.preventDefault();
     console.log(this.state);
-    this.props.SearchPost(this.state);
+    this.props.SearchPost(this.state).then(() => {
+      window.location.hash = 'anchorId';
+    });
   }
   handleChange = name => event => {
     this.setState({
@@ -211,10 +213,8 @@ class Search extends Component {
             Cancel
           </Button>
         </form>
-        <a name="cardpost" />
-        <div>
-          <SitterPost posts={posts} />
-        </div>
+        <div id="anchorId"></div>
+        {posts.length != 0 ? <SitterPost posts={posts} /> : <h1>Sorry, no match</h1>}
       </div>
     );
   }
