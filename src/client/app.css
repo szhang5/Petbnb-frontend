@@ -1,8 +1,25 @@
-h1 {
-  color: green;
-}
-
+@import url("https://fonts.googleapis.com/css?family=Dancing+Script");
+@import url("https://fonts.googleapis.com/css?family=Noto+Serif+TC");
 body {
+  /*text-align: center;
+  margin: auto;*/
+  font-family: "Dancing Script", cursive;
+
+  align-items: center;
+}
+div {
+  font-family: "Dancing Script", cursive;
+}
+button {
   text-align: center;
   margin: auto;
+}
+h1 {
+  text-align: center;
+  margin: auto;
+}
+h3 {
+  font-family: "Noto Serif TC", serif;
+  margin-block-start: 0.5em;
+  margin-block-end: 0.5em;
 }

@@ -7,31 +7,23 @@ import Toolbar from "@material-ui/core/Toolbar";
 import Typography from "@material-ui/core/Typography";
 import Button from "@material-ui/core/Button";
 import IconButton from "@material-ui/core/IconButton";
-
+import Grid from "@material-ui/core/Grid";
 import { withRouter } from "react-router-dom";
 import { signOut } from "../redux/actions";
 import SideBar from "./sidebar";
 
 const styles = {
-  root: {
-    flexGrow: 1
-  },
-  grow: {
-    flexGrow: 1
-  },
   menuButton: {
-    marginLeft: -12,
     marginRight: 20
   }
 };
 
 class ButtonAppBar extends Component {
-  
   handleOnClick() {
     const { name } = this.props;
     if (name) {
       // this.props.signOut();
-      return this.props.history.push('/profile');
+      return this.props.history.push("/profile");
     }
     return this.props.history.push("/signin");
   }
@@ -42,13 +34,33 @@ class ButtonAppBar extends Component {
       <div className={classes.root}>
         <AppBar position="static">
           <Toolbar>
-            <Typography variant="h6" color="inherit" className={classes.grow}>
-              <SideBar />
-            </Typography>
-      
-            <Button color="inherit" onClick={() => this.handleOnClick()}>
-              {name ? 'Profile' : 'Sign In'}
-            </Button>
+            <Grid
+              justify="space-between" // Add it here :)
+              container
+              spacing={24}
+            >
+              <Grid item>
+                <Typography
+                  variant="h6"
+                  color="inherit"
+                  className={classes.grow}
+                >
+                  <SideBar />
+                </Typography>
+              </Grid>
+
+              <Grid item>
+                <div>
+                  <Button
+                    color="inherit"
+                    onClick={() => this.handleOnClick()}
+                    className={classes.profile}
+                  >
+                    {name ? "Profile" : "Sign In"}
+                  </Button>
+                </div>
+              </Grid>
+            </Grid>
           </Toolbar>
         </AppBar>
       </div>
