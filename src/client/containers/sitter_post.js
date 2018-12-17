@@ -22,6 +22,8 @@ import ExpansionPanel from "@material-ui/core/ExpansionPanel";
 import ExpansionPanelSummary from "@material-ui/core/ExpansionPanelSummary";
 import ExpansionPanelDetails from "@material-ui/core/ExpansionPanelDetails";
 import styles from "./styles/sitter_postStyle";
+import TextField from "@material-ui/core/TextField";
+
 
 class SitterPost extends React.Component {
   state = { expanded: false };
@@ -41,24 +43,28 @@ class SitterPost extends React.Component {
         {map(posts, (post, key) => {
           return (
             <Card className={classes.card} key={post.sitterid}>
-              <CardHeader
-                avatar={
-                  <Avatar
-                    className={classes.bigAvatar}
-                    src="https://gbgrr.org/wp-content/uploads/Home-page-donate.jpg"
-                  />
-                }
-                sitter_name="Emma" //need to join the user table to get name!!!
-                pet_types={post.pet_types}
-                className={classes.cardHeader}
-              />
+            
               <CardContent>
-                <h3>Sitter Id: {post.sitterid}</h3>
-                <h3>Pet types: {post.pet_type}</h3>
-                <h3>Price: {post.hour_rate}</h3>
-                <h3>Availablity: </h3>
-                <h3> {moment(post.avai_start_date).format("LL")} - </h3>
-                <h3> {moment(post.avai_end_date).format("LL")}</h3>
+            <Grid container spacing={24}>
+              <Grid item xs={3}>
+                  <img className={classes.bigAvatar}
+                    src="https://gbgrr.org/wp-content/uploads/Home-page-donate.jpg"></img>
+                     </Grid>
+                      <Grid item xs={5}>
+                      <TextField
+            disabled
+            id="outlined-firstname-input"
+            label="Pet types:"
+            defaultValue={post.pet_type}
+            className={classes.textField}
+            margin="normal"
+          />
+              
+                 </Grid>
+                 <Grid item xs={4}>
+                <h3  className={classes.content}>$ {post.hour_rate}/day</h3>
+                </Grid>
+                </Grid>
               </CardContent>
               <ExpansionPanel className={classes.expansionPanel}>
                 <ExpansionPanelSummary
@@ -70,7 +76,11 @@ class SitterPost extends React.Component {
                 <ExpansionPanelDetails
                   className={classes.expansionPanelDetails}
                 >
+                  <h3>Sitter Id: {post.sitterid}</h3>
                   <h3>Description: {post.description}</h3>
+                  <h3>Availablity: </h3>
+                  <h3> {moment(post.avai_start_date).format("LL")} - </h3>
+                  <h3> {moment(post.avai_end_date).format("LL")}</h3>
                   <Button
                     variant="outlined"
                     color="secondary"
