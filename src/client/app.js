@@ -39,7 +39,6 @@ class App extends Component {
                     <Route exact path="/profile" component={Profile} />
                     <Route exact path="/home" component={Hello} />
                     <Route exact path="/search" component={Search} />
-
                     <Route exact path="/our_service" component={OurService} />
                     <Route exact path="/contact_us" component={ContactUs} />
                   </ExclusiveRouteContainer>

@@ -80,7 +80,7 @@ class Search extends Component {
     const { classes, posts } = this.props;
     // console.log('posts', posts)
     return (
-      <div>
+      <div id="top">
         <h1>Search</h1>
         <form
           className={classes.container}
