@@ -5,9 +5,9 @@ import { withRouter } from "react-router-dom";
 import Drawer from "@material-ui/core/Drawer";
 import Button from "@material-ui/core/Button";
 import List from "@material-ui/core/List";
-import MenuIcon from "@material-ui/icons/Menu";
 import ListItem from "@material-ui/core/ListItem";
 import ListItemText from "@material-ui/core/ListItemText";
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 
 const styles = {
   list: {
@@ -48,7 +48,7 @@ class TemporaryDrawer extends React.Component {
             button
             component="a"
             onClick={() => {
-              this.props.history.push("/search");
+              window.location.replace((window.location.hash = "/search#top"));
             }}
           >
             <ListItemText primary="Search" />
@@ -78,7 +78,7 @@ class TemporaryDrawer extends React.Component {
     return (
       <div>
         <Button onClick={this.toggleDrawer("left", true)}>
-          <MenuIcon />
+        <FontAwesomeIcon size="3x" icon="bars" color="white" />
         </Button>
 
         <Drawer
