@@ -3,8 +3,12 @@ const styles = theme => ({
     maxWidth: 400,
     margin: 15
   },
+  content:{
+    display:"inline-block"
+  },
   cardHeader: {
-    display: "block"
+   // width:"30%"
+    display: "inline-block"
   },
   avatar: {
     marginRight: 0
