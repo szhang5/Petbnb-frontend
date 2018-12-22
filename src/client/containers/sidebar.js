@@ -4,10 +4,10 @@ import { withStyles } from "@material-ui/core/styles";
 import { withRouter } from "react-router-dom";
 import Drawer from "@material-ui/core/Drawer";
 import Button from "@material-ui/core/Button";
+import MenuIcon from "@material-ui/icons/Menu";
 import List from "@material-ui/core/List";
 import ListItem from "@material-ui/core/ListItem";
 import ListItemText from "@material-ui/core/ListItemText";
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 
 const styles = {
   list: {
@@ -78,7 +78,7 @@ class TemporaryDrawer extends React.Component {
     return (
       <div>
         <Button onClick={this.toggleDrawer("left", true)}>
-        <FontAwesomeIcon size="3x" icon="bars" color="white" />
+        <MenuIcon />
         </Button>
 
         <Drawer
