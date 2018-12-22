@@ -3,10 +3,6 @@ import { Provider } from "react-redux";
 import { BrowserRouter, Route, Switch } from "react-router-dom";
 import { MuiThemeProvider, createMuiTheme } from "@material-ui/core/styles";
 import CssBaseline from "@material-ui/core/CssBaseline";
-import { library } from '@fortawesome/fontawesome-svg-core'
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faUserCircle } from '@fortawesome/free-solid-svg-icons'
-import { faBars } from '@fortawesome/free-solid-svg-icons'
 import "../client/app.css";
 import AppHeader from "./containers/appheader";
 import Hello from "./containers/hello";
@@ -24,9 +20,6 @@ import theme from "./app/petbnbTheme";
 
 const initialState = window.__INITIAL_STATE__;
 const store = configureStore(reducers, initialState);
-
-library.add(faUserCircle);
-library.add(faBars);
 
 class App extends Component {
   render() {
