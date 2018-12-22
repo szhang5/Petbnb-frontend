@@ -45,7 +45,7 @@ module.exports = {
     port: 8007,
     host: '0.0.0.0',
     proxy: {
-      '*': 'http://localhost:3007'
+      '*': 'http://localhost:8080'
     }
   },
   plugins: [
