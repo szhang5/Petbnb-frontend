@@ -12,6 +12,7 @@ import { withRouter } from "react-router-dom";
 import { signOut } from "../redux/actions";
 import SideBar from "./sidebar";
 import styles from "./styles/appheaderStyle";
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 
 class ButtonAppBar extends Component {
   handleOnClick() {
@@ -51,7 +52,7 @@ class ButtonAppBar extends Component {
                     onClick={() => this.handleOnClick()}
                     className={classes.profile}
                   >
-                    {name ? "Profile" : "Sign In"}
+                    {name ? <FontAwesomeIcon size="3x" icon="user-circle" /> : "Sign In"}
                   </Button>
                 </div>
               </Grid>
