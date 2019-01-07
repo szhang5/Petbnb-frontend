@@ -25,9 +25,11 @@ prod:
 
 build-develop:
 	docker build --rm \
-		-f docker-build.d/Dockerfile.develop \
+		-f ./docker-build.d/Dockerfile.develop \
 		-t $(SVC_NAME):$(SVC_TAG) \
-		.
+		.\
+		--build-arg SERVER_PORT=$(SERVER_PORT_DEV)
+
 
 build-production:
 	docker build --rm \
