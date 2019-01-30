@@ -35,7 +35,8 @@ build-production:
 	docker build --rm \
 		-f docker-build.d/Dockerfile.production \
 		-t $(SVC_NAME):$(SVC_TAG) \
-		.
+		.\
+		--build-arg SERVER_PORT=$(SERVER_PORT_PROD)
 
 run_dev:
 	$(MAKE) stop
@@ -55,7 +56,7 @@ run_prod:
 	-it \
 	--network=petbnb \
 	--name $(SVC_NAME) \
-	-p$(SERVER_PORT_PROD):$(SERVER_PORT_PROD) \
+	-p $(SERVER_PORT_PROD):$(SERVER_PORT_PROD) \
 	-v ${PWD}/src:/service/src \
 	--rm \
 	$(SVC_NAME):$(SVC_TAG) \
