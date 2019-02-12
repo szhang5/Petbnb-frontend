@@ -9,7 +9,7 @@ class FileupLoad extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      image: " "
+      image: ""
     };
   }
   onChange(e) {
@@ -25,7 +25,6 @@ class FileupLoad extends Component {
   render() {
     return (
       <div onSubmit={this.onFormSubmit}>
-        <h2>Choose file you want</h2>
         <input type="file" name="file" onChange={e => this.onChange(e)} />;
       </div>
     );

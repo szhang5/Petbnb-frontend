@@ -3,6 +3,8 @@ import PropTypes from "prop-types";
 import { connect } from "react-redux";
 import classNames from "classnames";
 import { withStyles } from "@material-ui/core/styles";
+import Avatar from '@material-ui/core/Avatar';
+import Grid from '@material-ui/core/Grid';
 import MenuItem from "@material-ui/core/MenuItem";
 import TextField from "@material-ui/core/TextField";
 import Button from "@material-ui/core/Button";
@@ -36,7 +38,9 @@ class Profile extends Component {
 
     return (
       <div>
-        <h1>Profile</h1>
+        <Grid container justify="center" alignItems="center">
+          <Avatar alt="Zoey" src="https://res.cloudinary.com/zoey1111/image/upload/v1536970787/silence2.png" className={classes.bigAvatar} />
+        </Grid>
         <form className={classes.container} noValidate autoComplete="off">
           <TextField
             disabled
