@@ -1,7 +1,9 @@
 import React, { Component } from "react";
 import styles from "./styles/profileStyle";
+import { connect } from "react-redux";
 import { withRouter } from "react-router-dom";
 import { withStyles } from "@material-ui/core/styles";
+import { GetImageInfo } from "../redux/actions";
 
 class FileupLoad extends Component {
   constructor(props) {
@@ -16,7 +18,8 @@ class FileupLoad extends Component {
     reader.readAsDataURL(files[0]);
 
     reader.onload = e => {
-      console.log("data is:" + e.target.result);
+      console.log(e.target.result); //get image_base64_data
+      this.props.GetImageInfo(e.target.result);
     };
   }
   render() {
@@ -28,4 +31,10 @@ class FileupLoad extends Component {
     );
   }
 }
-export default withRouter(withStyles(styles)(FileupLoad));
+export default withRouter(
+  withStyles(styles)(
+    connect( null,
+      { GetImageInfo }
+    )(FileupLoad)
+  )
+);
