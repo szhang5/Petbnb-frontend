@@ -9,7 +9,17 @@ export const GET_POST_ACTION = 'GET_POST_ACTION';
 export const GET_USER_POST_ACTION = 'GET_USER_POST_ACTION';
 export const CREATE_POST_ACTION = 'CREATE_POST_ACTION';
 export const SEARCH_POST_ACTION = 'SEARCH_POST_ACTION';
+export const GET_IMAGE_INFO_ACTION = 'GET_IMAGE_INFO_ACTION';
 
+
+export function GetImageInfo(image_base_64) {
+  const request = axios
+    .post('/service/petbnbservice/imageUpload', { image_base_64 });
+  return {
+    type: GET_IMAGE_INFO_ACTION,
+    payload: request,
+  }
+}
 
 export function GetUserPost(payload) {
   const request = axios
