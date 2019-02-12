@@ -3,12 +3,13 @@ import { connect } from "react-redux";
 import PropTypes from "prop-types";
 import classNames from "classnames";
 import { withStyles } from "@material-ui/core/styles";
+import Avatar from '@material-ui/core/Avatar';
+import Grid from '@material-ui/core/Grid';
 import MenuItem from "@material-ui/core/MenuItem";
 import TextField from "@material-ui/core/TextField";
 import { withRouter } from "react-router-dom";
 import Button from "@material-ui/core/Button";
 import { EditProfileAction } from "../redux/actions";
-
 import styles from "./styles/profileStyle";
 
 class ProfileEdit extends Component {
@@ -45,6 +46,9 @@ class ProfileEdit extends Component {
     return (
       <div>
         <h1>Edit Profile</h1>
+        <Grid container justify="center" alignItems="center">
+          <Avatar alt="Zoey" src="https://res.cloudinary.com/zoey1111/image/upload/v1536970787/silence2.png" className={classes.bigAvatar} />
+        </Grid>
         <form
           className={classes.container}
           noValidate
