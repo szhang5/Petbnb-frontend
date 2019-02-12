@@ -4,13 +4,17 @@ import PropTypes from "prop-types";
 import classNames from "classnames";
 import { withStyles } from "@material-ui/core/styles";
 import Avatar from '@material-ui/core/Avatar';
+import Icon from '@material-ui/core/Icon';
+import IconButton from '@material-ui/core/IconButton';
 import Grid from '@material-ui/core/Grid';
 import MenuItem from "@material-ui/core/MenuItem";
 import TextField from "@material-ui/core/TextField";
 import { withRouter } from "react-router-dom";
 import Button from "@material-ui/core/Button";
+import PhotoCamera from '@material-ui/icons/PhotoCamera';
 import { EditProfileAction } from "../redux/actions";
 import styles from "./styles/profileStyle";
+import { GetImageInfo } from "../redux/actions";
 
 class ProfileEdit extends Component {
   constructor(props) {
@@ -28,6 +32,17 @@ class ProfileEdit extends Component {
     this.props.EditProfileAction(payload).then(() => {
       this.props.history.push("/profile");
     });
+  }
+
+   onChange(e) {
+    let files = e.target.files;
+    let reader = new FileReader();
+    reader.readAsDataURL(files[0]);
+
+    reader.onload = e => {
+      console.log(e.target.result); //get image_base64_data
+      this.props.GetImageInfo(e.target.result);
+    };
   }
 
   render() {
@@ -48,6 +63,12 @@ class ProfileEdit extends Component {
         <h1>Edit Profile</h1>
         <Grid container justify="center" alignItems="center">
           <Avatar alt="Zoey" src="https://res.cloudinary.com/zoey1111/image/upload/v1536970787/silence2.png" className={classes.bigAvatar} />
+          <input accept="image/*" className={classes.input} id="icon-button-file" type="file" onChange={e => this.onChange(e)}/>
+          <label htmlFor="icon-button-file">
+            <IconButton color="primary" className={classes.button} component="span">
+              <PhotoCamera />
+            </IconButton>
+          </label>
         </Grid>
         <form
           className={classes.container}
@@ -218,7 +239,7 @@ export default withRouter(
   withStyles(styles)(
     connect(
       mapStateToProps,
-      { EditProfileAction }
+      { EditProfileAction, GetImageInfo }
     )(ProfileEdit)
   )
 );
