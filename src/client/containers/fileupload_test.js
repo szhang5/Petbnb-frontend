@@ -3,7 +3,7 @@ import styles from "./styles/profileStyle";
 import { connect } from "react-redux";
 import { withRouter } from "react-router-dom";
 import { withStyles } from "@material-ui/core/styles";
-import { GetImageInfo } from "../redux/actions";
+import { UploadImage } from "../redux/actions";
 
 class FileupLoad extends Component {
   constructor(props) {
@@ -19,7 +19,7 @@ class FileupLoad extends Component {
 
     reader.onload = e => {
       console.log(e.target.result); //get image_base64_data
-      this.props.GetImageInfo(e.target.result);
+      this.props.UploadImage(e.target.result);
     };
   }
   render() {
@@ -33,7 +33,7 @@ class FileupLoad extends Component {
 export default withRouter(
   withStyles(styles)(
     connect( null,
-      { GetImageInfo }
+      { UploadImage }
     )(FileupLoad)
   )
 );

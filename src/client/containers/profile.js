@@ -14,6 +14,7 @@ import { signOut } from "../redux/actions";
 import styles from "./styles/profileStyle";
 
 class Profile extends Component {
+
   handleOnClick() {
     const { email } = this.props;
     // console.log(email);
@@ -34,20 +35,21 @@ class Profile extends Component {
       city,
       state,
       zipcode,
+      image,
       classes
     } = this.props;
-
+ 
     return (
       <div>
         <Grid container justify="center" alignItems="center">
-          <Avatar alt="Zoey" src="https://res.cloudinary.com/zoey1111/image/upload/v1536970787/silence2.png" className={classes.bigAvatar} />
+          <Avatar alt="Zoey" src={image} className={classes.bigAvatar} />
         </Grid>
         <form className={classes.container} noValidate autoComplete="off">
           <TextField
             disabled
             id="outlined-firstname-input"
             label="First Name"
-            defaultValue={firstname}
+            value={firstname}
             className={classes.textField}
             margin="normal"
           />
@@ -55,7 +57,7 @@ class Profile extends Component {
             disabled
             id="outlined-lastname-input"
             label="Last Name"
-            defaultValue={lastname}
+            value={lastname}
             className={classes.textField}
             margin="normal"
           />
@@ -63,7 +65,7 @@ class Profile extends Component {
             disabled
             id="outlined-email-input"
             label="Email"
-            defaultValue={email}
+            value={email}
             className={classes.textField}
             margin="normal"
           />
@@ -71,7 +73,7 @@ class Profile extends Component {
             disabled
             id="outlined-phone-input"
             label="Phone"
-            defaultValue={phone}
+            value={phone}
             className={classes.textField}
             margin="normal"
           />
@@ -81,7 +83,7 @@ class Profile extends Component {
             label="Country"
             className={classes.textField}
             name="country"
-            defaultValue={country}
+            value={country}
             margin="normal"
             fullWidth
           />
@@ -90,7 +92,7 @@ class Profile extends Component {
             id="outlined-street-input"
             label="Street"
             className={classes.textField}
-            defaultValue={street}
+            value={street}
             margin="normal"
             fullWidth
           />
@@ -99,7 +101,7 @@ class Profile extends Component {
             id="outlined-city-input"
             label="City"
             className={classes.textField}
-            defaultValue={city}
+            value={city}
             margin="normal"
           />
           <TextField
@@ -107,7 +109,7 @@ class Profile extends Component {
             id="outlined-state-input"
             label="State"
             className={classes.textField}
-            defaultValue={state}
+            value={state}
             margin="normal"
           />
           <TextField
@@ -115,7 +117,7 @@ class Profile extends Component {
             id="outlined-zipcode-input"
             label="ZipCode"
             className={classes.textField}
-            defaultValue={zipcode}
+            value={zipcode}
             margin="normal"
           />
         </form>
@@ -155,7 +157,8 @@ Profile.propTypes = {
   street: PropTypes.string,
   city: PropTypes.string,
   state: PropTypes.string,
-  zipcode: PropTypes.string
+  zipcode: PropTypes.string,
+  image: PropTypes.string,
 };
 
 Profile.defaultProps = {
@@ -167,7 +170,8 @@ Profile.defaultProps = {
   street: "",
   city: "",
   state: "",
-  zipcode: ""
+  zipcode: "",
+  image: "https://res.cloudinary.com/zoey1111/image/upload/v1550020987/profile.png",
 };
 
 function mapStateToProps({ user }) {
@@ -180,7 +184,8 @@ function mapStateToProps({ user }) {
     street: user.street,
     city: user.city,
     state: user.state,
-    zipcode: user.zip
+    zipcode: user.zip,
+    image: user.image,
   };
 }
 
