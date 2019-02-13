@@ -14,16 +14,9 @@ import Button from "@material-ui/core/Button";
 import PhotoCamera from '@material-ui/icons/PhotoCamera';
 import { EditProfileAction } from "../redux/actions";
 import styles from "./styles/profileStyle";
-import { GetImageInfo } from "../redux/actions";
+import { UploadImage, UpdateUserInfo } from "../redux/actions";
 
 class ProfileEdit extends Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      image: ""
-    };
-  }
-
   handleSubmit(e) {
     e.preventDefault();
     const data = new FormData(e.target);
@@ -44,8 +37,12 @@ class ProfileEdit extends Component {
 
     reader.onload = e => {
       console.log(e.target.result); //get image_base64_data
-      this.props.GetImageInfo(this.props.email, e.target.result);
+      this.props.UploadImage(this.props.email, e.target.result);
     };
+  }
+
+  handleInputChange(e) {
+    this.props.UpdateUserInfo(e.target.name, e.target.value)
   }
 
   render() {
@@ -59,14 +56,15 @@ class ProfileEdit extends Component {
       city,
       state,
       zipcode,
+      image,
       classes
     } = this.props;
-
+    const defaultImage = "https://res.cloudinary.com/zoey1111/image/upload/v1550020987/profile.png";
     return (
       <div>
         <h1>Edit Profile</h1>
         <Grid container justify="center" alignItems="center">
-          <Avatar alt="Zoey" src="https://res.cloudinary.com/zoey1111/image/upload/v1536970787/silence2.png" className={classes.bigAvatar} />
+          <Avatar alt="Zoey" src={image ? image : defaultImage} className={classes.bigAvatar} />
           <input accept="image/*" className={classes.input} id="icon-button-file" type="file" onChange={e => this.onChange(e)}/>
           <label htmlFor="icon-button-file">
             <IconButton color="primary" className={classes.button} component="span">
@@ -79,6 +77,7 @@ class ProfileEdit extends Component {
           noValidate
           autoComplete="off"
           onSubmit={e => this.handleSubmit(e)}
+          onChange={e => this.handleInputChange(e)}
         >
           <TextField
             id="outlined-firstname-input"
@@ -86,7 +85,7 @@ class ProfileEdit extends Component {
             className={classes.textField}
             type="name"
             name="firstname"
-            defaultValue={firstname}
+            value={firstname}
             autoComplete="firstname"
             margin="normal"
             fullWidth
@@ -98,7 +97,7 @@ class ProfileEdit extends Component {
             className={classes.textField}
             type="name"
             name="lastname"
-            defaultValue={lastname}
+            value={lastname}
             autoComplete="lastname"
             margin="normal"
             fullWidth
@@ -110,7 +109,7 @@ class ProfileEdit extends Component {
             className={classes.textField}
             type="email"
             name="email"
-            defaultValue={email}
+            value={email}
             autoComplete="email"
             margin="normal"
             fullWidth
@@ -122,7 +121,7 @@ class ProfileEdit extends Component {
             className={classes.textField}
             type="phone"
             name="phone"
-            defaultValue={phone}
+            value={phone}
             autoComplete="phone"
             margin="normal"
             fullWidth
@@ -134,7 +133,7 @@ class ProfileEdit extends Component {
             className={classes.textField}
             type="country"
             name="country"
-            defaultValue={country}
+            value={country}
             autoComplete="country"
             margin="normal"
             fullWidth
@@ -146,7 +145,7 @@ class ProfileEdit extends Component {
             className={classes.textField}
             type="street"
             name="street"
-            defaultValue={street}
+            value={street}
             autoComplete="street"
             margin="normal"
             fullWidth
@@ -158,7 +157,7 @@ class ProfileEdit extends Component {
             className={classes.textField}
             type="city"
             name="city"
-            defaultValue={city}
+            value={city}
             autoComplete="city"
             margin="normal"
             fullWidth
@@ -170,7 +169,7 @@ class ProfileEdit extends Component {
             className={classes.textField}
             type="state"
             name="state"
-            defaultValue={state}
+            value={state}
             autoComplete="state"
             margin="normal"
             fullWidth
@@ -182,7 +181,7 @@ class ProfileEdit extends Component {
             className={classes.textField}
             type="zipcode"
             name="zip"
-            defaultValue={zipcode}
+            value={zipcode}
             autoComplete="zipcode"
             margin="normal"
             fullWidth
@@ -224,7 +223,8 @@ ProfileEdit.propTypes = {
   street: PropTypes.string,
   city: PropTypes.string,
   state: PropTypes.string,
-  zipcode: PropTypes.string
+  zipcode: PropTypes.string,
+  image: PropTypes.string,
 };
 
 ProfileEdit.defaultProps = {
@@ -236,11 +236,11 @@ ProfileEdit.defaultProps = {
   street: "",
   city: "",
   state: "",
-  zipcode: ""
+  zipcode: "",
+  image:"",
 };
 
 function mapStateToProps({ user }) {
-  // console.log(user);
   return {
     firstname: user.firstname,
     lastname: user.lastname,
@@ -250,7 +250,8 @@ function mapStateToProps({ user }) {
     street: user.street,
     city: user.city,
     state: user.state,
-    zipcode: user.zip
+    zipcode: user.zip,
+    image: user.image
   };
 }
 
@@ -258,7 +259,7 @@ export default withRouter(
   withStyles(styles)(
     connect(
       mapStateToProps,
-      { EditProfileAction, GetImageInfo }
+      { EditProfileAction, UploadImage, UpdateUserInfo }
     )(ProfileEdit)
   )
 );
