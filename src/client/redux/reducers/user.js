@@ -53,6 +53,7 @@ export default function(state = initialState, action) {
         'lastname': action.payload.data.user.lastname,
         'email': action.payload.data.user.email,
         'phone': action.payload.data.user.phone,
+        'country': action.payload.data.user.country,
         'street': action.payload.data.user.street,
         'city': action.payload.data.user.city,
         'state': action.payload.data.user.state,

@@ -29,6 +29,7 @@ class Profile extends Component {
       lastname,
       email,
       phone,
+      country,
       street,
       city,
       state,
@@ -76,12 +77,22 @@ class Profile extends Component {
           />
           <TextField
             disabled
+            id="outlined-country-input"
+            label="Country"
+            className={classes.textField}
+            name="country"
+            defaultValue={country}
+            margin="normal"
+            fullWidth
+          />
+          <TextField
+            disabled
             id="outlined-street-input"
             label="Street"
             className={classes.textField}
             defaultValue={street}
-            fullWidth
             margin="normal"
+            fullWidth
           />
           <TextField
             disabled
@@ -140,6 +151,7 @@ Profile.propTypes = {
   lastname: PropTypes.string,
   email: PropTypes.string,
   phone: PropTypes.string,
+  country: PropTypes.string,
   street: PropTypes.string,
   city: PropTypes.string,
   state: PropTypes.string,
@@ -151,6 +163,7 @@ Profile.defaultProps = {
   lastname: "",
   email: "",
   phone: "",
+  country: "",
   street: "",
   city: "",
   state: "",
@@ -163,6 +176,7 @@ function mapStateToProps({ user }) {
     lastname: user.lastname,
     email: user.email,
     phone: user.phone,
+    country: user.country,
     street: user.street,
     city: user.city,
     state: user.state,

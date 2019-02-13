@@ -19,6 +19,9 @@ import { GetImageInfo } from "../redux/actions";
 class ProfileEdit extends Component {
   constructor(props) {
     super(props);
+    this.state = {
+      image: ""
+    };
   }
 
   handleSubmit(e) {
@@ -41,7 +44,7 @@ class ProfileEdit extends Component {
 
     reader.onload = e => {
       console.log(e.target.result); //get image_base64_data
-      this.props.GetImageInfo(e.target.result);
+      this.props.GetImageInfo(this.props.email, e.target.result);
     };
   }
 
@@ -51,6 +54,7 @@ class ProfileEdit extends Component {
       lastname,
       email,
       phone,
+      country,
       street,
       city,
       state,
@@ -120,6 +124,18 @@ class ProfileEdit extends Component {
             name="phone"
             defaultValue={phone}
             autoComplete="phone"
+            margin="normal"
+            fullWidth
+            variant="outlined"
+          />
+          <TextField
+            id="outlined-country-input"
+            label="Country"
+            className={classes.textField}
+            type="country"
+            name="country"
+            defaultValue={country}
+            autoComplete="country"
             margin="normal"
             fullWidth
             variant="outlined"
@@ -204,6 +220,7 @@ ProfileEdit.propTypes = {
   lastname: PropTypes.string,
   email: PropTypes.string,
   phone: PropTypes.string,
+  country: PropTypes.string,
   street: PropTypes.string,
   city: PropTypes.string,
   state: PropTypes.string,
@@ -215,6 +232,7 @@ ProfileEdit.defaultProps = {
   lastname: "",
   email: "",
   phone: "",
+  country: "",
   street: "",
   city: "",
   state: "",
@@ -228,6 +246,7 @@ function mapStateToProps({ user }) {
     lastname: user.lastname,
     email: user.email,
     phone: user.phone,
+    country: user.country,
     street: user.street,
     city: user.city,
     state: user.state,
