@@ -9,7 +9,18 @@ export const GET_POST_ACTION = 'GET_POST_ACTION';
 export const GET_USER_POST_ACTION = 'GET_USER_POST_ACTION';
 export const CREATE_POST_ACTION = 'CREATE_POST_ACTION';
 export const SEARCH_POST_ACTION = 'SEARCH_POST_ACTION';
+export const UPLOAD_IMAGE_ACTION = 'UPLOAD_IMAGE_ACTION';
+export const UPDATE_USER_INFO = 'UPDATE_USER_INFO';
 
+
+export function UploadImage(email, image_base_64) {
+  const request = axios
+    .post('/service/petbnbservice/imageUpload', { email, image_base_64 });
+  return {
+    type: UPLOAD_IMAGE_ACTION,
+    payload: request,
+  }
+}
 
 export function GetUserPost(payload) {
   const request = axios
@@ -106,4 +117,12 @@ export function signOut() {
   return {
     type: SIGNOUT,
   };
+}
+
+export function UpdateUserInfo(field, value){
+  return {
+    type: UPDATE_USER_INFO,
+    field,
+    value,
+  }
 }
