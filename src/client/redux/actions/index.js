@@ -12,9 +12,9 @@ export const SEARCH_POST_ACTION = 'SEARCH_POST_ACTION';
 export const GET_IMAGE_INFO_ACTION = 'GET_IMAGE_INFO_ACTION';
 
 
-export function GetImageInfo(image_base_64) {
+export function GetImageInfo(email, image_base_64) {
   const request = axios
-    .post('/service/petbnbservice/imageUpload', { image_base_64 });
+    .post('/service/petbnbservice/imageUpload', { email, image_base_64 });
   return {
     type: GET_IMAGE_INFO_ACTION,
     payload: request,
