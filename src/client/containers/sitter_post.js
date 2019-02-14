@@ -23,6 +23,7 @@ import ExpansionPanelSummary from "@material-ui/core/ExpansionPanelSummary";
 import ExpansionPanelDetails from "@material-ui/core/ExpansionPanelDetails";
 import styles from "./styles/sitter_postStyle";
 import TextField from "@material-ui/core/TextField";
+import Map from "./map";
 
 
 class SitterPost extends React.Component {
@@ -35,19 +36,36 @@ class SitterPost extends React.Component {
   handleExpandClick = () => {
     this.setState(state => ({ expanded: !state.expanded }));
   };
+  handleMarkerClick = () => {
+    this.setState({ isMarkerShown: false });
+    this.delayedShowMarker();
+  };
 
   render() {
     const { classes, posts } = this.props;
     return (
       <div>
+       <Map
+          onMarkerClick={this.handleMarkerClick}
+          isMarkerShown
+          center={{ lat: 40.728199, lng: -73.9894738 }}
+          zoom={14}
+          googleMapURL="https://maps.googleapis.com/maps/api/js?key=AIzaSyCUQjqXLGPcvOkrxO_0MNh_HouBRwlxqwA"
+          loadingElement={<div style={{ height: `100%` }} />}
+          containerElement={<div style={{ height: `400px` }} />}
+          mapElement={<div style={{ height: `100%` }} />}
+        />
+
         {map(posts, (post, key) => {
           return (
             <Card className={classes.card} key={post.sitterid}>
               <CardContent>
                 <Grid container spacing={24}>
                   <Grid item xs={3}>
-                    <img className={classes.bigAvatar}
-                    src="https://gbgrr.org/wp-content/uploads/Home-page-donate.jpg"></img>
+                    <img
+                      className={classes.bigAvatar}
+                      src="https://gbgrr.org/wp-content/uploads/Home-page-donate.jpg"
+                    />
                   </Grid>
                   <Grid item xs={5}>
                     <TextField
@@ -58,38 +76,38 @@ class SitterPost extends React.Component {
                       className={classes.textField}
                       margin="normal"
                     />
+                  </Grid>
+                  <Grid item xs={4}>
+                    <h3 className={classes.content}>$ {post.hour_rate}/day</h3>
+                  </Grid>
                 </Grid>
-                <Grid item xs={4}>
-                  <h3  className={classes.content}>$ {post.hour_rate}/day</h3>
-                </Grid>
-              </Grid>
-            </CardContent>
-            <ExpansionPanel className={classes.expansionPanel}>
-              <ExpansionPanelSummary
-                className={classes.expansionPanelSummary}
-                expandIcon={<ExpandMoreIcon />}
-              >
-                <h3>Show more</h3>
-              </ExpansionPanelSummary>
-              <ExpansionPanelDetails
-                className={classes.expansionPanelDetails}
-              >
-                <h3>Sitter Id: {post.sitterid}</h3>
-                <h3>Description: {post.description}</h3>
-                <h3>Availablity: </h3>
-                <h3> {moment(post.avai_start_date).format("LL")} - </h3>
-                <h3> {moment(post.avai_end_date).format("LL")}</h3>
-                <Button
-                  variant="outlined"
-                  color="secondary"
-                  fullWidth
-                  className={classes.button}
+              </CardContent>
+              <ExpansionPanel className={classes.expansionPanel}>
+                <ExpansionPanelSummary
+                  className={classes.expansionPanelSummary}
+                  expandIcon={<ExpandMoreIcon />}
                 >
-                  Contact
-                </Button>
-              </ExpansionPanelDetails>
-            </ExpansionPanel>
-          </Card>
+                  <h3>Show more</h3>
+                </ExpansionPanelSummary>
+                <ExpansionPanelDetails
+                  className={classes.expansionPanelDetails}
+                >
+                  <h3>Sitter Id: {post.sitterid}</h3>
+                  <h3>Description: {post.description}</h3>
+                  <h3>Availablity: </h3>
+                  <h3> {moment(post.avai_start_date).format("LL")} - </h3>
+                  <h3> {moment(post.avai_end_date).format("LL")}</h3>
+                  <Button
+                    variant="outlined"
+                    color="secondary"
+                    fullWidth
+                    className={classes.button}
+                  >
+                    Contact
+                  </Button>
+                </ExpansionPanelDetails>
+              </ExpansionPanel>
+            </Card>
           );
         })}
       </div>

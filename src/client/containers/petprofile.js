@@ -9,9 +9,11 @@ import Button from "@material-ui/core/Button";
 import { withRouter } from "react-router-dom";
 import { signOut } from "../redux/actions";
 import Avatar from "@material-ui/core/Avatar";
-import styles from "./styles/profileStyle";
 import AvatarUpload from "./avatarupload";
-class Profile extends Component {
+
+import styles from "./styles/profileStyle";
+
+class PetProfile extends Component {
   handleOnClick() {
     const { email } = this.props;
     // console.log(email);
@@ -21,7 +23,7 @@ class Profile extends Component {
     return this.props.history.push("/signin");
   }
   onChange(e) {
-    let file = e.target.file;
+    let files = e.target.files;
     let reader = new FileReader();
     reader.readAsDataURL(files[0]);
 
@@ -31,90 +33,60 @@ class Profile extends Component {
   }
 
   render() {
-    const {
-      firstname,
-      lastname,
-      email,
-      phone,
-      street,
-      city,
-      state,
-      zipcode,
-      file,
-      classes
-    } = this.props;
+    const { name, Breed, type, color, weights, classes } = this.props;
 
     return (
       <div>
-        <h1>Profile</h1>
-
+        <h1>Pet Profile</h1>
+       
         <Avatar className={classes.bigAvatar} src="" />
-
+      
         <form className={classes.container} noValidate autoComplete="off">
           <TextField
             disabled
-            id="outlined-firstname-input"
-            label="First Name"
-            defaultValue={firstname}
+            id="outlined-name-input"
+            label="Name"
+            defaultValue={name}
             className={classes.textField}
             margin="normal"
-          />
-          <TextField
-            disabled
-            id="outlined-lastname-input"
-            label="Last Name"
-            defaultValue={lastname}
-            className={classes.textField}
-            margin="normal"
-          />
-          <TextField
-            disabled
-            id="outlined-email-input"
-            label="Email"
-            defaultValue={email}
-            className={classes.textField}
-            margin="normal"
-          />
-          <TextField
-            disabled
-            id="outlined-phone-input"
-            label="Phone"
-            defaultValue={phone}
-            className={classes.textField}
-            margin="normal"
-          />
-          <TextField
-            disabled
-            id="outlined-street-input"
-            label="Street"
-            className={classes.textField}
-            defaultValue={street}
             fullWidth
+          />
+          <TextField
+            id="outlined-select-pet_type"
+            disabled
+            label="Pet Type"
+            defaultValue={type}
+            className={classes.textField}
             margin="normal"
+            fullWidth
+          />
+          <TextField
+            id="outlined-select-Weight"
+            disabled
+            label="Weight"
+            defaultValue={weights}
+            className={classes.textField}
+            margin="normal"
+            fullWidth
+          />
+
+          <TextField
+            disabled
+            id="outlined-Breed-input"
+            label="Breed"
+            defaultValue={Breed}
+            className={classes.textField}
+            margin="normal"
+            fullWidth
           />
           <TextField
             disabled
-            id="outlined-city-input"
-            label="City"
+            id="outlined-color-input"
+            label="color"
+            defaultValue={color}
             className={classes.textField}
-            defaultValue={city}
             margin="normal"
-          />
-          <TextField
-            disabled
-            id="outlined-state-input"
-            label="State"
-            className={classes.textField}
-            defaultValue={state}
-            margin="normal"
-          />
-          <TextField
-            disabled
-            id="outlined-zipcode-input"
-            label="ZipCode"
-            className={classes.textField}
-            defaultValue={zipcode}
-            margin="normal"
+            fullWidth
           />
         </form>
         <Button
@@ -123,7 +95,7 @@ class Profile extends Component {
           color="primary"
           className={classes.button}
           onClick={() => {
-            this.props.history.push("/profile/edit");
+            this.props.history.push("/profile/petprofile/edit");
           }}
         >
           Edit
@@ -134,10 +106,10 @@ class Profile extends Component {
           color="primary"
           className={classes.button}
           onClick={() => {
-            this.props.history.push("/profile/petprofile");
+            this.props.history.push("/profile");
           }}
         >
-          Pet Profile
+          Owner Profile
         </Button>
         <Button
           variant="contained"
@@ -153,41 +125,31 @@ class Profile extends Component {
   }
 }
 
-Profile.propTypes = {
+PetProfile.propTypes = {
   classes: PropTypes.object.isRequired,
-  firstname: PropTypes.string,
-  lastname: PropTypes.string,
-  email: PropTypes.string,
-  phone: PropTypes.string,
-  street: PropTypes.string,
-  city: PropTypes.string,
-  state: PropTypes.string,
-  zipcode: PropTypes.string,
-  file: PropTypes.string
+  name: PropTypes.string,
+  type: PropTypes.string,
+  breed: PropTypes.string,
+  color: PropTypes.string,
+  weight: PropTypes.string
 };
 
-Profile.defaultProps = {
-  firstname: "",
-  lastname: "",
-  email: "",
-  phone: "",
-  street: "",
-  city: "",
-  state: "",
-  zipcode: "",
-  file: ""
+PetProfile.defaultProps = {
+  name: "",
+  type: "",
+  breed: "",
+  color: "",
+  weight: ""
 };
 
 function mapStateToProps({ user }) {
   return {
-    firstname: user.firstname,
-    lastname: user.lastname,
-    email: user.email,
-    phone: user.phone,
-    street: user.street,
-    city: user.city,
-    state: user.state,
-    zipcode: user.zip
+    name: user.name,
+
+    type: user.type,
+    breed: user.breed,
+    color: user.color,
+    weight: user.weight
   };
 }
 
@@ -196,6 +158,6 @@ export default withRouter(
     connect(
       mapStateToProps,
       { signOut }
-    )(Profile)
+    )(PetProfile)
   )
 );

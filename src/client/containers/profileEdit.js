@@ -4,16 +4,29 @@ import PropTypes from "prop-types";
 import classNames from "classnames";
 import { withStyles } from "@material-ui/core/styles";
 import MenuItem from "@material-ui/core/MenuItem";
+import Avatar from "@material-ui/core/Avatar";
+import TestAvatar from "./testavatar";
 import TextField from "@material-ui/core/TextField";
 import { withRouter } from "react-router-dom";
 import Button from "@material-ui/core/Button";
 import { EditProfileAction } from "../redux/actions";
-
+import AvatarUpload from "./avatarupload";
 import styles from "./styles/profileStyle";
-
+import FileupLoad from "./fileupload_test";
 class ProfileEdit extends Component {
   constructor(props) {
     super(props);
+    this.state = {
+      file: null
+    };
+    this.handleChange = this.handleChange.bind(this);
+  }
+
+  handleChange(event) {
+    this.setState({
+      file: URL.createObjectURL(event.target.files[0])
+    });
+    //document.getElementById("avatarUploader").style.display = "none";
   }
 
   handleSubmit(e) {
@@ -23,7 +36,7 @@ class ProfileEdit extends Component {
     for (const [key, value] of data.entries()) {
       payload[key] = value;
     }
-    // console.log(payload);
+
     this.props.EditProfileAction(payload).then(() => {
       this.props.history.push("/profile");
     });
@@ -39,12 +52,19 @@ class ProfileEdit extends Component {
       city,
       state,
       zipcode,
-      classes
+      classes,
+      file
     } = this.props;
 
     return (
       <div>
         <h1>Edit Profile</h1>
+        <div /*id="avatarUploader"*/>
+          <input type="file" onChange={this.handleChange} />
+        </div>
+
+        <Avatar className={classes.bigAvatar} src={this.state.file} />
+        <TestAvatar />
         <form
           className={classes.container}
           noValidate
@@ -182,7 +202,8 @@ ProfileEdit.propTypes = {
   street: PropTypes.string,
   city: PropTypes.string,
   state: PropTypes.string,
-  zipcode: PropTypes.string
+  zipcode: PropTypes.string,
+  file: PropTypes.string
 };
 
 ProfileEdit.defaultProps = {
@@ -193,7 +214,8 @@ ProfileEdit.defaultProps = {
   street: "",
   city: "",
   state: "",
-  zipcode: ""
+  zipcode: "",
+  file: ""
 };
 
 function mapStateToProps({ user }) {

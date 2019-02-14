@@ -1,16 +1,15 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
 import PropTypes from "prop-types";
-import { map } from "lodash";
 import classNames from "classnames";
 import { withStyles } from "@material-ui/core/styles";
 import MenuItem from "@material-ui/core/MenuItem";
 import TextField from "@material-ui/core/TextField";
 import { withRouter } from "react-router-dom";
 import Button from "@material-ui/core/Button";
-import { SearchPost } from "../redux/actions";
-import SitterPost from "./sitter_post";
-import styles from "./styles/searchStyle";
+import { EditProfileAction } from "../redux/actions";
+
+import styles from "./styles/profileStyle";
 
 const types = [
   {
@@ -22,54 +21,46 @@ const types = [
     label: "dog"
   }
 ];
-const ranges_obj = {
-  "20": "20",
-  "50": "50",
-  "100": "100"
-};
-
-const ranges = map(ranges_obj, (value, key) => {
-  return {
-    value,
-    label: key
-  };
-});
-
-const number = [
+const weights = [
   {
-    value: "1",
-    label: "1"
+    value: "25",
+    label: "0~25"
   },
   {
-    value: "2",
-    label: "2"
+    value: "50",
+    label: "25~50"
   },
   {
-    value: "3",
-    label: "3"
+    value: "100",
+    label: "50~100"
+  },
+  {
+    value: "200",
+    label: "100~200"
   }
 ];
 
-class Search extends Component {
+class PetProfileEdit extends Component {
   constructor(props) {
     super(props);
   }
-
   state = {
-    pet_type: "",
-    hour_rate: "",
-    pets_num: "",
-    avai_start_date: "",
-    avai_end_date: ""
+    pet_type: ""
   };
 
   handleSubmit(e) {
     e.preventDefault();
-    console.log(this.state);
-    this.props.SearchPost(this.state).then(() => {
-      window.location.replace((window.location.hash = "/search#anchorId"));
+    const data = new FormData(e.target);
+    const payload = {};
+    for (const [key, value] of data.entries()) {
+      payload[key] = value;
+    }
+    // console.log(payload);
+    this.props.EditProfileAction(payload).then(() => {
+      this.props.history.push("/petprofile");
     });
   }
+
   handleChange = name => event => {
     this.setState({
       [name]: event.target.value
@@ -77,18 +68,29 @@ class Search extends Component {
   };
 
   render() {
-    const { classes, posts } = this.props;
-    // console.log('posts', posts)
+    const { name, Breed, color, weight, classes } = this.props;
+
     return (
-      <div id="top">
-        <h1>Search</h1>
-       
+      <div>
+        <h1>Edit Pet Profile</h1>
         <form
           className={classes.container}
           noValidate
           autoComplete="off"
           onSubmit={e => this.handleSubmit(e)}
         >
+          <TextField
+            id="outlined-name-input"
+            label="Name"
+            className={classes.textField}
+            type="name"
+            name="name"
+            defaultValue={name}
+            autoComplete="name"
+            margin="normal"
+            fullWidth
+          />
+
           <TextField
             id="outlined-select-pet_type"
             select
@@ -98,7 +100,6 @@ class Search extends Component {
             name="pet_type"
             margin="normal"
             fullWidth
-            variant="outlined"
             value={this.state.pet_type}
             onChange={this.handleChange("pet_type")}
             SelectProps={{
@@ -115,80 +116,49 @@ class Search extends Component {
           </TextField>
 
           <TextField
-            id="outlined-select-hour_rate"
+            id="outlined-select-Weight"
             select
-            label="Hour rate"
+            label="Weight"
             className={classes.textField}
-            type="rate"
-            name="hour_rate"
+            type="weight"
+            name="pet_weight"
             margin="normal"
             fullWidth
-            variant="outlined"
-            value={this.state.hour_rate}
-            onChange={this.handleChange("hour_rate")}
+            value={this.state.weights}
+            onChange={this.handleChange("weights")}
             SelectProps={{
               MenuProps: {
                 className: classes.menu
               }
             }}
           >
-            {ranges.map(option => (
+            {weights.map(option => (
               <MenuItem key={option.value} value={option.value}>
                 {option.label}
               </MenuItem>
             ))}
+            >
           </TextField>
 
           <TextField
-            id="outlined-number"
-            select
-            label="Pet Number"
+            id="outlined-Breed-input"
+            label="Breed"
+            defaultValue={Breed}
             className={classes.textField}
-            type="number"
-            name="pets_num"
-            value={this.state.pets_num}
-            onChange={this.handleChange("pets_num")}
             margin="normal"
+            type="Breed"
+            name="Breed"
+            autoComplete="Breed"
             fullWidth
-            variant="outlined"
-          >
-            {number.map(option => (
-              <MenuItem key={option.value} value={option.value}>
-                {option.label}
-              </MenuItem>
-            ))}
-          </TextField>
-
-          <TextField
-            id="outlined-date_from"
-            label="Start From"
-            type="date"
-            name="avai_start_date"
-            className={classes.textField}
-            InputLabelProps={{
-              shrink: true
-            }}
-            fullWidth
-            variant="outlined"
-            value={this.state.avai_start_date}
-            onChange={this.handleChange("avai_start_date")}
-            margin="normal"
           />
-
           <TextField
-            id="outlined-date_to"
-            label="To"
-            type="date"
-            name="avai_end_date"
+            id="outlined-color-input"
+            label="color"
+            defaultValue={color}
             className={classes.textField}
-            InputLabelProps={{
-              shrink: true
-            }}
+            margin="normal"
             fullWidth
             variant="outlined"
-            value={this.state.avai_end_date}
-            onChange={this.handleChange("avai_end_date")}
-            margin="normal"
           />
 
           <Button
@@ -198,45 +168,51 @@ class Search extends Component {
             color="primary"
             className={classes.submit}
           >
-            Submit
-            <a href="#cardpost" />
+            Save
           </Button>
-
           <Button
             variant="outlined"
             fullWidth
             color="primary"
             className={classes.button}
             onClick={() => {
-              this.props.history.push("/home");
+              this.props.history.push("/profile/petprofile/");
             }}
           >
             Cancel
           </Button>
         </form>
-        <div id="anchorId" className={classes.postanchor} />
-        {posts.length != 0 ? (
-          <SitterPost posts={posts} />
-        ) : (
-          <h1 className={classes.alert}>Sorry, no match</h1>
-        )}
       </div>
     );
   }
 }
 
-Search.propTypes = {
+PetProfileEdit.propTypes = {
   classes: PropTypes.object.isRequired,
-  posts: PropTypes.array.isRequired
+  name: PropTypes.string,
+  type: PropTypes.string,
+  breed: PropTypes.string,
+  color: PropTypes.string,
+  weight: PropTypes.string
 };
 
-Search.defaultProps = {
-  posts: []
+PetProfileEdit.defaultProps = {
+  name: "",
+  type: "",
+  breed: "",
+  color: "",
+  weight: ""
 };
 
-function mapStateToProps({ post }) {
+function mapStateToProps({ user }) {
+  // console.log(user);
   return {
-    posts: post.posts
+    name: user.name,
+
+    type: user.type,
+    breed: user.breed,
+    color: user.color,
+    weight: user.weight
   };
 }
 
@@ -244,7 +220,7 @@ export default withRouter(
   withStyles(styles)(
     connect(
       mapStateToProps,
-      { SearchPost }
-    )(Search)
+      { EditProfileAction }
+    )(PetProfileEdit)
   )
 );

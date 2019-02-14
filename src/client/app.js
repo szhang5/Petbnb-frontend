@@ -12,7 +12,9 @@ import Profile from "./containers/profile";
 import OurService from "./containers/our_service";
 import ContactUs from "./containers/contact_us";
 import ProfileEdit from "./containers/profileEdit";
+import PetProfile from "./containers/petprofile";
 import Search from "./containers/search";
+import PetProfileEdit from "./containers/petprofileEdit";
 import FileupLoad from "./containers/fileupload_test";
 import reducers from "./redux/reducers";
 import configureStore from "./app/store/configure-store";
@@ -38,6 +40,16 @@ class App extends Component {
                     <Route path="/signin" component={SignIn} />
                     <Route path="/profile/edit" component={ProfileEdit} />
                     <Route exact path="/profile" component={Profile} />
+                    <Route
+                      exact
+                      path="/profile/petprofile"
+                      component={PetProfile}
+                    />
+                    <Route
+                      path="/profile/petprofile/edit"
+                      component={PetProfileEdit}
+                    />
+
                     <Route exact path="/home" component={Hello} />
                     <Route exact path="/search" component={Search} />
                     <Route exact path="/our_service" component={OurService} />
