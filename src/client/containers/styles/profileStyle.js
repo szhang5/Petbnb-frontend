@@ -13,6 +13,13 @@ const styles = theme => ({
   menu: {
     width: 200
   },
+  bigAvatar: {
+    margin: "auto",
+    marginTop: 20,
+
+    width: 80,
+    height: 80
+  },
   button: {
     margin: theme.spacing.unit
   },
