@@ -48,7 +48,7 @@ class SitterPost extends React.Component {
        <Map
           onMarkerClick={this.handleMarkerClick}
           isMarkerShown
-          center={{ lat: 40.728199, lng: -73.9894738 }}
+          center={{ lat: 40.728199, lng: -73.9894738 }} //put user's location --> endpoint getUserLocation();
           zoom={14}
           googleMapURL="https://maps.googleapis.com/maps/api/js?key=AIzaSyCUQjqXLGPcvOkrxO_0MNh_HouBRwlxqwA"
           loadingElement={<div style={{ height: `100%` }} />}
@@ -56,7 +56,7 @@ class SitterPost extends React.Component {
           mapElement={<div style={{ height: `100%` }} />}
         />
 
-        {map(posts, (post, key) => {
+        {map(posts, (post, key) => {  
           return (
             <Card className={classes.card} key={post.sitterid}>
               <CardContent>
