@@ -28,7 +28,12 @@ const styles = theme => ({
   },
   submit: {
     marginTop: theme.spacing.unit * 3
-  }
+  },
+   bigAvatar: {
+    margin: 20,
+    width: 100,
+    height: 100,
+  },
 });
 
 export default styles;

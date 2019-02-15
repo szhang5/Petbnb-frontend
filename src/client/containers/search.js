@@ -65,7 +65,7 @@ class Search extends Component {
 
   handleSubmit(e) {
     e.preventDefault();
-    console.log(this.state);
+    // console.log(this.state);
     this.props.SearchPost(this.state).then(() => {
       window.location.replace((window.location.hash = "/search#anchorId"));
     });
