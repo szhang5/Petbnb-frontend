@@ -10,9 +10,8 @@ import TextField from "@material-ui/core/TextField";
 import Button from "@material-ui/core/Button";
 import { withRouter } from "react-router-dom";
 import { signOut } from "../redux/actions";
-import Avatar from "@material-ui/core/Avatar";
 import styles from "./styles/profileStyle";
-import AvatarUpload from "./avatarupload";
+
 class Profile extends Component {
 
   handleOnClick() {
