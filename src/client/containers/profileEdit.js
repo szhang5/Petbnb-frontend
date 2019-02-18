@@ -12,9 +12,8 @@ import TextField from "@material-ui/core/TextField";
 import { withRouter } from "react-router-dom";
 import Button from "@material-ui/core/Button";
 import PhotoCamera from '@material-ui/icons/PhotoCamera';
-import { EditProfileAction } from "../redux/actions";
 import styles from "./styles/profileStyle";
-import { UploadImage, UpdateUserInfo } from "../redux/actions";
+import { EditProfileAction, UploadImage, UpdateUserInfo } from "../redux/actions";
 
 class ProfileEdit extends Component {
   handleSubmit(e) {

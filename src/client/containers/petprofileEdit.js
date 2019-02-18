@@ -1,4 +1,4 @@
-import React, { Component } from "react";
+ import React, { Component } from "react";
 import { connect } from "react-redux";
 import PropTypes from "prop-types";
 import classNames from "classnames";
@@ -34,7 +34,7 @@ class PetProfileEdit extends Component {
     for (const [key, value] of data.entries()) {
       payload[key] = value;
     }
-    payload[uid] = this.props.uid;
+    payload["uid"] = this.props.uid;
     console.log(payload);
     // this.props.EditPetProfileAction(payload).then(() => {
     //   this.props.history.push("/petprofile");
@@ -42,7 +42,7 @@ class PetProfileEdit extends Component {
   }
 
    handleInputChange(e) {
-    console.log(e.target);
+    // console.log(e.target);
     this.props.UpdatePetInfo(e.target.name, e.target.value);
   }
 
