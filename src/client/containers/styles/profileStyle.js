@@ -16,7 +16,6 @@ const styles = theme => ({
   bigAvatar: {
     margin: "auto",
     marginTop: 20,
-
     width: 80,
     height: 80
   },
@@ -33,6 +32,10 @@ const styles = theme => ({
     margin: 20,
     width: 100,
     height: 100,
+  },
+  img: {
+    height: 300,
+    marginTop: 20
   },
 });
 
