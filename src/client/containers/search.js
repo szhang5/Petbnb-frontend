@@ -11,7 +11,7 @@ import Button from "@material-ui/core/Button";
 import { SearchPost } from "../redux/actions";
 import SitterPost from "./sitter_post";
 import styles from "./styles/searchStyle";
-
+import Map from "./map";
 const types = [
   {
     value: "cat",
@@ -82,7 +82,16 @@ class Search extends Component {
     return (
       <div id="top">
         <h1>Search</h1>
-       
+        <Map
+          onMarkerClick={this.handleMarkerClick}
+          isMarkerShown
+          center={{ lat: 40.7111197, lng: -74.005951 }} //put user's location --> endpoint getUserLocation();
+          zoom={16}
+          googleMapURL="https://maps.googleapis.com/maps/api/js?key=AIzaSyCUQjqXLGPcvOkrxO_0MNh_HouBRwlxqwA"
+          loadingElement={<div style={{ height: `100%` }} />}
+          containerElement={<div style={{ height: `400px` }} />}
+          mapElement={<div style={{ height: `100%` }} />}
+        />
         <form
           className={classes.container}
           noValidate

@@ -61,11 +61,21 @@ class PetProfileEdit extends Component {
     });
   }
 
+
   handleChange = name => event => {
     this.setState({
       [name]: event.target.value
     });
   };
+  onChange(e) {
+    let files = e.target.files;
+    let reader = new FileReader();
+    reader.readAsDataURL(files[0]);
+
+    reader.onload = e => {
+      console.log("data is:" + e.target.result);
+    };
+  }
 
   render() {
     const { name, Breed, color, weight, classes } = this.props;
@@ -137,7 +147,7 @@ class PetProfileEdit extends Component {
                 {option.label}
               </MenuItem>
             ))}
-            >
+            
           </TextField>
 
           <TextField
