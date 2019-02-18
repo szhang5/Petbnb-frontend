@@ -22,15 +22,7 @@ class PetProfile extends Component {
     }
     return this.props.history.push("/signin");
   }
-  onChange(e) {
-    let files = e.target.files;
-    let reader = new FileReader();
-    reader.readAsDataURL(files[0]);
-
-    reader.onload = e => {
-      console.log("data is:" + e.target.result);
-    };
-  }
+ 
 
   render() {
     const { name, Breed, type, color, weights, classes } = this.props;

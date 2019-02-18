@@ -23,7 +23,7 @@ import ExpansionPanelSummary from "@material-ui/core/ExpansionPanelSummary";
 import ExpansionPanelDetails from "@material-ui/core/ExpansionPanelDetails";
 import styles from "./styles/sitter_postStyle";
 import TextField from "@material-ui/core/TextField";
-import Map from "./map";
+//import Map from "./map";
 
 
 class SitterPost extends React.Component {
@@ -45,16 +45,7 @@ class SitterPost extends React.Component {
     const { classes, posts } = this.props;
     return (
       <div>
-       <Map
-          onMarkerClick={this.handleMarkerClick}
-          isMarkerShown
-          center={{ lat: 40.728199, lng: -73.9894738 }} //put user's location --> endpoint getUserLocation();
-          zoom={14}
-          googleMapURL="https://maps.googleapis.com/maps/api/js?key=AIzaSyCUQjqXLGPcvOkrxO_0MNh_HouBRwlxqwA"
-          loadingElement={<div style={{ height: `100%` }} />}
-          containerElement={<div style={{ height: `400px` }} />}
-          mapElement={<div style={{ height: `100%` }} />}
-        />
+       
 
         {map(posts, (post, key) => {  
           return (

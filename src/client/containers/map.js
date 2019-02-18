@@ -41,12 +41,12 @@ class Map extends Component {
       >
         {this.props.isMarkerShown && (
           <Marker
-            position={{ lat: 40.728199, lng: -73.9894738 }}
+            position={{ lat: 40.710198, lng: -74.0073001 }}
             onClick={this.props.onMarkerClick}
           />
          
        
-      
+         
         )}
        
          <Marker
