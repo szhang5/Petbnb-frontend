@@ -141,7 +141,6 @@ export default withRouter(
   withStyles(styles)(
     connect(
       mapStateToProps,
-      { signOut }
     )(PetProfile)
   )
 );
