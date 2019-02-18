@@ -10,18 +10,10 @@ import { withRouter } from "react-router-dom";
 import { signOut } from "../redux/actions";
 import Avatar from "@material-ui/core/Avatar";
 import AvatarUpload from "./avatarupload";
-
 import styles from "./styles/profileStyle";
 
 class PetProfile extends Component {
-  handleOnClick() {
-    const { email } = this.props;
-    // console.log(email);
-    if (email) {
-      this.props.signOut();
-    }
-    return this.props.history.push("/signin");
-  }
+
   onChange(e) {
     let files = e.target.files;
     let reader = new FileReader();
@@ -33,20 +25,18 @@ class PetProfile extends Component {
   }
 
   render() {
-    const { name, Breed, type, color, weights, classes } = this.props;
+    const { name, breed, type, color, weight, image, classes } = this.props;
 
     return (
       <div>
         <h1>Pet Profile</h1>
-       
-        <Avatar className={classes.bigAvatar} src="" />
-      
+        <img src ={ image } className={classes.img}/>
         <form className={classes.container} noValidate autoComplete="off">
           <TextField
             disabled
             id="outlined-name-input"
-            label="Name"
-            defaultValue={name}
+            label="name"
+            value={name}
             className={classes.textField}
             margin="normal"
             fullWidth
@@ -54,8 +44,8 @@ class PetProfile extends Component {
           <TextField
             id="outlined-select-pet_type"
             disabled
-            label="Pet Type"
-            defaultValue={type}
+            label="type"
+            value={type}
             className={classes.textField}
             margin="normal"
             fullWidth
@@ -63,8 +53,8 @@ class PetProfile extends Component {
           <TextField
             id="outlined-select-Weight"
             disabled
-            label="Weight"
-            defaultValue={weights}
+            label="weight"
+            value={weight}
             className={classes.textField}
             margin="normal"
             fullWidth
@@ -72,18 +62,19 @@ class PetProfile extends Component {
 
           <TextField
             disabled
-            id="outlined-Breed-input"
-            label="Breed"
-            defaultValue={Breed}
+            id="outlined-breed-input"
+            label="breed"
+            value={breed}
             className={classes.textField}
             margin="normal"
             fullWidth
           />
+
           <TextField
             disabled
             id="outlined-color-input"
             label="color"
-            defaultValue={color}
+            value={color}
             className={classes.textField}
             margin="normal"
             fullWidth
@@ -111,15 +102,6 @@ class PetProfile extends Component {
         >
           Owner Profile
         </Button>
-        <Button
-          variant="contained"
-          fullWidth
-          color="primary"
-          className={classes.button}
-          onClick={() => this.handleOnClick()}
-        >
-          Sign Out
-        </Button>
       </div>
     );
   }
@@ -129,27 +111,29 @@ PetProfile.propTypes = {
   classes: PropTypes.object.isRequired,
   name: PropTypes.string,
   type: PropTypes.string,
+  weight: PropTypes.string,
   breed: PropTypes.string,
   color: PropTypes.string,
-  weight: PropTypes.string
+  image: PropTypes.string,
 };
 
 PetProfile.defaultProps = {
   name: "",
   type: "",
+  weight: "",
   breed: "",
   color: "",
-  weight: ""
+  image: "",
 };
 
-function mapStateToProps({ user }) {
+function mapStateToProps({ pet }) {
   return {
-    name: user.name,
-
-    type: user.type,
-    breed: user.breed,
-    color: user.color,
-    weight: user.weight
+    name: pet.name,
+    type: pet.type,
+    weight: pet.weight,
+    breed: pet.breed,
+    color: pet.color,
+    image: pet.image,
   };
 }
 

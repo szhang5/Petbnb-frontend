@@ -44,9 +44,6 @@ class Map extends Component {
             position={{ lat: 40.728199, lng: -73.9894738 }}
             onClick={this.props.onMarkerClick}
           />
-         
-       
-      
         )}
        
          <Marker

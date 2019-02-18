@@ -36,6 +36,7 @@ class SitterPost extends React.Component {
   handleExpandClick = () => {
     this.setState(state => ({ expanded: !state.expanded }));
   };
+
   handleMarkerClick = () => {
     this.setState({ isMarkerShown: false });
     this.delayedShowMarker();
@@ -48,7 +49,7 @@ class SitterPost extends React.Component {
        <Map
           onMarkerClick={this.handleMarkerClick}
           isMarkerShown
-          center={{ lat: 40.728199, lng: -73.9894738 }} //put user's location --> endpoint getUserLocation();
+          center={{ lat: 40.728199, lng: -73.9894738 }} 
           zoom={14}
           googleMapURL="https://maps.googleapis.com/maps/api/js?key=AIzaSyCUQjqXLGPcvOkrxO_0MNh_HouBRwlxqwA"
           loadingElement={<div style={{ height: `100%` }} />}
