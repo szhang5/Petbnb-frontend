@@ -7,7 +7,8 @@ import MenuItem from "@material-ui/core/MenuItem";
 import TextField from "@material-ui/core/TextField";
 import { withRouter } from "react-router-dom";
 import Button from "@material-ui/core/Button";
-import { EditProfileAction } from "../redux/actions";
+import { EditPetProfileAction } from "../redux/actions";
+import {UpdatePetInfo} from "../redux/actions";
 
 import styles from "./styles/profileStyle";
 
@@ -23,30 +24,50 @@ const types = [
 ];
 const weights = [
   {
-    value: "25",
+    value: "Small",
     label: "0~25"
   },
   {
-    value: "50",
+    value: "Medium",
     label: "25~50"
   },
   {
-    value: "100",
+    value: "Large",
     label: "50~100"
   },
   {
-    value: "200",
+    value: "Giant",
     label: "100~200"
   }
 ];
+const colors = [
+  {
+    value:"Gold",
+    label:"Gold"
+
+  },
+  {
+    value:"White",
+    label:"White"
+
+  },
+  {
+    value:"Black",
+    label:"Black"
+
+  }
+
+];
+
 
 class PetProfileEdit extends Component {
   constructor(props) {
     super(props);
   }
-  state = {
-    pet_type: ""
-  };
+ /* state = {
+    pet_type: "",
+    weights:""
+  };*/
 
   handleSubmit(e) {
     e.preventDefault();
@@ -54,19 +75,22 @@ class PetProfileEdit extends Component {
     const payload = {};
     for (const [key, value] of data.entries()) {
       payload[key] = value;
+      console.log(payload);
     }
-    // console.log(payload);
-    this.props.EditProfileAction(payload).then(() => {
+    payload["petid"]=this.props.id;
+   
+   /*this.props.EditPetProfileAction(payload).then(() => {
       this.props.history.push("/petprofile");
-    });
+    });*/
   }
 
 
-  handleChange = name => event => {
+ /* handleChange = name => event => {
     this.setState({
       [name]: event.target.value
     });
-  };
+  };*/
+ 
   onChange(e) {
     let files = e.target.files;
     let reader = new FileReader();
@@ -76,29 +100,39 @@ class PetProfileEdit extends Component {
       console.log("data is:" + e.target.result);
     };
   }
+  handleInputChange(e) {
+    // console.log(e.target);
+    this.props.UpdatePetInfo(e.target.name, e.target.value);
+  }
 
   render() {
-    const { name, Breed, color, weight, classes } = this.props;
+    const {classes,birth,petname,type,breed,furcolor,weight,image} = this.props;
+    const defaultImage = "https://res.cloudinary.com/zoey1111/image/upload/v1550439003/berkay-gumustekin-402114-unsplash.jpg";
 
     return (
       <div>
         <h1>Edit Pet Profile</h1>
+        <img src = { image? image: defaultImage } className={classes.img}/>
+        <input type="file" name="file" onChange={e => this.onChange(e)} />;
+
         <form
           className={classes.container}
           noValidate
           autoComplete="off"
           onSubmit={e => this.handleSubmit(e)}
+          onChange={e=> this.handleInputChange(e)}
         >
           <TextField
             id="outlined-name-input"
             label="Name"
             className={classes.textField}
-            type="name"
-            name="name"
-            defaultValue={name}
-            autoComplete="name"
+            type="petname"
+            name="petname"
+            value={petname}
+            autoComplete="petname"
             margin="normal"
             fullWidth
+            variant="outlined"
           />
 
           <TextField
@@ -106,12 +140,13 @@ class PetProfileEdit extends Component {
             select
             label="Pet Type"
             className={classes.textField}
-            type="type"
-            name="pet_type"
+            //type="type"
+            name="type"
             margin="normal"
             fullWidth
-            value={this.state.pet_type}
-            onChange={this.handleChange("pet_type")}
+            variant="outlined"
+            value={type}
+            onChange={e => this.handleInputChange(e)}
             SelectProps={{
               MenuProps: {
                 className: classes.menu
@@ -124,18 +159,18 @@ class PetProfileEdit extends Component {
               </MenuItem>
             ))}
           </TextField>
-
           <TextField
-            id="outlined-select-Weight"
+            id="outlined-select-pet_type"
             select
             label="Weight"
             className={classes.textField}
-            type="weight"
-            name="pet_weight"
+            type="text"
+            name="weight"
             margin="normal"
             fullWidth
-            value={this.state.weights}
-            onChange={this.handleChange("weights")}
+            variant="outlined"
+            value={weight}
+            onChange={e => this.handleInputChange(e)}
             SelectProps={{
               MenuProps: {
                 className: classes.menu
@@ -147,31 +182,62 @@ class PetProfileEdit extends Component {
                 {option.label}
               </MenuItem>
             ))}
-            
           </TextField>
 
           <TextField
             id="outlined-Breed-input"
+            select
             label="Breed"
-            defaultValue={Breed}
+            value={breed}
             className={classes.textField}
             margin="normal"
-            type="Breed"
-            name="Breed"
-            autoComplete="Breed"
+            type="breed"
+            name="breed"
             fullWidth
+            variant="outlined"
           />
           <TextField
             id="outlined-color-input"
-            label="color"
-            defaultValue={color}
+            select
+            label="Pet Color"
+            type="furcolor"
+            name="furcolor"
+            value={furcolor}
             className={classes.textField}
             margin="normal"
             fullWidth
             variant="outlined"
+            onChange={e => this.handleInputChange(e)}
+            SelectProps={{
+              MenuProps: {
+                className: classes.menu
+              }
+            }}
+          >
+            {colors.map(option => (
+              <MenuItem key={option.value} value={option.value}>
+                {option.label}
+              </MenuItem>
+            ))}
+            </TextField>
+
+         <TextField
+            id="outlined-date_from"
+            label="Birth"
+            type="date"
+            name="birth"
+            className={classes.textField}
+            InputLabelProps={{
+              shrink: true
+            }}
+            fullWidth
+            variant="outlined"
+            value={birth}
+            margin="normal"
           />
 
           <Button
+          variant="outlined"
             type="submit"
             fullWidth
             variant="contained"
@@ -199,30 +265,45 @@ class PetProfileEdit extends Component {
 
 PetProfileEdit.propTypes = {
   classes: PropTypes.object.isRequired,
-  name: PropTypes.string,
+  
+  id:PropTypes.number,
+  uid:PropTypes.number.isRequired,
+  birth:PropTypes.string,
+  petname:PropTypes.string,
   type: PropTypes.string,
   breed: PropTypes.string,
-  color: PropTypes.string,
-  weight: PropTypes.string
+  furcolor: PropTypes.string,
+  weight: PropTypes.string,
+  image:PropTypes.string
+
+ 
 };
 
 PetProfileEdit.defaultProps = {
-  name: "",
-  type: "",
-  breed: "",
-  color: "",
-  weight: ""
+    
+    id:"",
+    birth:"",
+    petname:"",
+    type: "",
+    breed: "",
+    furcolor: "",
+    weight: "",
+    image:""
 };
 
-function mapStateToProps({ user }) {
-  // console.log(user);
+function mapStateToProps({ pet,user }) {
+   //console.log("???"+pet.birth);
   return {
-    name: user.name,
-
-    type: user.type,
-    breed: user.breed,
-    color: user.color,
-    weight: user.weight
+    
+   
+    id:pet.id,
+    birth: pet.birth,
+    petname:pet.petname,
+    type: pet.type,
+    breed: pet.breed,
+    furcolor: pet.color,
+    weight: pet.weight,
+    image:pet.image
   };
 }
 
@@ -230,7 +311,7 @@ export default withRouter(
   withStyles(styles)(
     connect(
       mapStateToProps,
-      { EditProfileAction }
+      { EditPetProfileAction,UpdatePetInfo}
     )(PetProfileEdit)
   )
 );

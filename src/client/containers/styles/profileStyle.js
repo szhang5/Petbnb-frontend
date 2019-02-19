@@ -34,6 +34,10 @@ const styles = theme => ({
     width: 100,
     height: 100,
   },
+  img: {
+    height: 300,
+    marginTop: 20
+  },
 });
 
 export default styles;

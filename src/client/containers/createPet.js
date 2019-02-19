@@ -8,36 +8,18 @@ import TextField from "@material-ui/core/TextField";
 import Button from "@material-ui/core/Button";
 import { withRouter } from "react-router-dom";
 import { signOut } from "../redux/actions";
-import {CreatePetProfileAction} from "../redux/actions"
+
 import styles from "./styles/profileStyle";
 
 class CreatPet extends Component {
-
-  
+ 
 
   render() {
-   const {classes,uid  } = this.props;
+  // const {  } = this.props;
 
     return (
-      <div>
-         
+      
         <h1>Pet Page</h1>
-            <Button
-          variant="outlined"
-            type="submit"
-            fullWidth
-            variant="contained"
-            color="primary"
-           onClick={()=>{
-             console.log(this.props.uid);
-             CreatePetProfileAction(this.props.uid)}}
-          >
-            Add
-        </Button>
-       
-            
-      </div>
-       
       
     );
   }
@@ -45,18 +27,28 @@ class CreatPet extends Component {
 
 CreatPet.propTypes = {
   classes: PropTypes.object.isRequired,
- uid:PropTypes.number.isRequired,
+  name: PropTypes.string,
+  type: PropTypes.string,
+  breed: PropTypes.string,
+  color: PropTypes.string,
+  weight: PropTypes.string
 };
 
 CreatPet.defaultProps = {
-
+  name: "",
+  type: "",
+  breed: "",
+  color: "",
+  weight: ""
 };
 
 function mapStateToProps({ user }) {
   return {
-    uid: user.uid,
-
-   
+    name: user.name,
+    type: user.type,
+    breed: user.breed,
+    color: user.color,
+    weight: user.weight
   };
 }
 
@@ -64,7 +56,7 @@ export default withRouter(
   withStyles(styles)(
     connect(
       mapStateToProps,
-      { CreatePetProfileAction }
+      { signOut }
     )(CreatPet)
   )
 );
