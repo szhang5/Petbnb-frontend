@@ -15,6 +15,7 @@ import ProfileEdit from "./containers/profileEdit";
 import PetProfile from "./containers/petprofile";
 import Search from "./containers/search";
 import PetProfileEdit from "./containers/petprofileEdit";
+import PetPage from "./containers/petpage";
 import FileupLoad from "./containers/fileupload_test";
 import reducers from "./redux/reducers";
 import configureStore from "./app/store/configure-store";
@@ -48,6 +49,10 @@ class App extends Component {
                     <Route
                       path="/profile/petprofile/edit"
                       component={PetProfileEdit}
+                    />
+                    <Route
+                      path="/profile/petpage"
+                      component={PetPage}
                     />
 
                     <Route exact path="/home" component={Hello} />
