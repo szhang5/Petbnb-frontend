@@ -22,15 +22,6 @@ class Profile extends Component {
     }
     return this.props.history.push("/signin");
   }
-  onChange(e) {
-    let file = e.target.file;
-    let reader = new FileReader();
-    reader.readAsDataURL(files[0]);
-
-    reader.onload = e => {
-      console.log("data is:" + e.target.result);
-    };
-  }
 
   render() {
     const {
