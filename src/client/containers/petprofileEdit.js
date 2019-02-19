@@ -9,9 +9,7 @@ import { withRouter } from "react-router-dom";
 import Button from "@material-ui/core/Button";
 import { EditPetProfileAction } from "../redux/actions";
 import {UpdatePetInfo} from "../redux/actions";
-
 import styles from "./styles/profileStyle";
-import { UpdatePetInfo } from "../redux/actions";
 
 
 const types = [
@@ -248,6 +246,9 @@ class PetProfileEdit extends Component {
             variant="contained"
             color="primary"
             className={classes.submit}
+            onClick={() => {
+              this.props.history.push("/profile/petprofile");
+            }}
           >
             Save
           </Button>
@@ -257,7 +258,7 @@ class PetProfileEdit extends Component {
             color="primary"
             className={classes.button}
             onClick={() => {
-              this.props.history.push("/profile/petprofile/");
+              this.props.history.push("/profile/petprofile");
             }}
           >
             Cancel
