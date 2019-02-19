@@ -92,6 +92,7 @@ class PetProfile extends Component {
             fullWidth
             variant="outlined"
           />
+
           <TextField
           disabled
             id="outlined-color-input"
@@ -157,6 +158,7 @@ PetProfile.propTypes = {
   birth:PropTypes.string,
   petname:PropTypes.string,
   type: PropTypes.string,
+  weight: PropTypes.string,
   breed: PropTypes.string,
   furcolor: PropTypes.string,
   weight: PropTypes.string,

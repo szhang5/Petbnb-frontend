@@ -8,7 +8,8 @@ const rootReducer = combineReducers({
   // form: formReducer,
   user: UserReducer,
   post: PostReducer,
-  pet:  PetReducer,
+
+  pet: PetReducer,
 });
 
 export default rootReducer;
