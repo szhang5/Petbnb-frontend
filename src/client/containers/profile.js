@@ -137,10 +137,10 @@ class Profile extends Component {
           color="primary"
           className={classes.button}
           onClick={() => {
-            this.props.history.push("/profile/petprofile");
+            this.props.history.push("/profile/petpage");
           }}
         >
-          Pet Profile
+          Pet Page
         </Button>
         <Button
           variant="contained"

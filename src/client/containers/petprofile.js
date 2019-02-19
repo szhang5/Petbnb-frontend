@@ -129,7 +129,7 @@ class PetProfile extends Component {
           color="primary"
           className={classes.button}
           onClick={() => {
-            this.props.history.push("/profile/petprofile/edit");
+            this.props.history.push("/petprofile/edit");
           }}
         >
           Edit
@@ -140,7 +140,7 @@ class PetProfile extends Component {
           color="primary"
           className={classes.button}
           onClick={() => {
-            this.props.history.push("/profile");
+            this.props.history.push("/profile/petpage");
           }}
         >
           Pet Page
