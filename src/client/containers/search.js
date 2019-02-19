@@ -82,6 +82,7 @@ class Search extends Component {
     return (
       <div id="top">
         <h1>Search</h1>
+       
         <form
           className={classes.container}
           noValidate

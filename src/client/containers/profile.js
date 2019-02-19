@@ -10,7 +10,6 @@ import TextField from "@material-ui/core/TextField";
 import Button from "@material-ui/core/Button";
 import { withRouter } from "react-router-dom";
 import { signOut } from "../redux/actions";
-
 import styles from "./styles/profileStyle";
 
 class Profile extends Component {
@@ -121,7 +120,6 @@ class Profile extends Component {
             margin="normal"
           />
         </form>
-
         <Button
           variant="outlined"
           fullWidth
@@ -132,6 +130,17 @@ class Profile extends Component {
           }}
         >
           Edit
+        </Button>
+        <Button
+          variant="outlined"
+          fullWidth
+          color="primary"
+          className={classes.button}
+          onClick={() => {
+            this.props.history.push("/profile/petprofile");
+          }}
+        >
+          Pet Profile
         </Button>
         <Button
           variant="contained"
