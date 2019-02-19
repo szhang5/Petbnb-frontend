@@ -11,9 +11,14 @@ export const CREATE_POST_ACTION = 'CREATE_POST_ACTION';
 export const SEARCH_POST_ACTION = 'SEARCH_POST_ACTION';
 export const UPLOAD_IMAGE_ACTION = 'UPLOAD_IMAGE_ACTION';
 export const UPDATE_USER_INFO = 'UPDATE_USER_INFO';
+<<<<<<< HEAD
 export const EDIT_PET_PROFILE_ACTION = 'EDIT_PET_PROFILE_ACTION';
 export const CREATE_PET_PROFILE_ACTION = 'CREATE_PET_PROFILE_ACTION';
 export const UPDATE_PET_INFO = "UPDATE_PET_INFO";
+=======
+export const UPDATE_PET_INFO = 'UPDATE_PET_INFO';
+
+>>>>>>> e21b79ff435819097c94058948b09868ecfe431d
 
 export function UploadImage(email, image_base_64) {
   const request = axios
@@ -151,6 +156,14 @@ export function signOut() {
 export function UpdateUserInfo(field, value){
   return {
     type: UPDATE_USER_INFO,
+    field,
+    value,
+  }
+}
+
+export function UpdatePetInfo(field, value){
+  return {
+    type: UPDATE_PET_INFO,
     field,
     value,
   }

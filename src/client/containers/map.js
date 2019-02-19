@@ -45,8 +45,6 @@ class Map extends Component {
             onClick={this.props.onMarkerClick}
           />
          
-       
-         
         )}
        
          <Marker

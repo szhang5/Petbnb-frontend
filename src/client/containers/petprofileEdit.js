@@ -1,4 +1,4 @@
-import React, { Component } from "react";
+ import React, { Component } from "react";
 import { connect } from "react-redux";
 import PropTypes from "prop-types";
 import classNames from "classnames";
@@ -11,6 +11,8 @@ import { EditPetProfileAction } from "../redux/actions";
 import {UpdatePetInfo} from "../redux/actions";
 
 import styles from "./styles/profileStyle";
+import { UpdatePetInfo } from "../redux/actions";
+
 
 const types = [
   {
@@ -114,7 +116,6 @@ class PetProfileEdit extends Component {
         <h1>Edit Pet Profile</h1>
         <img src = { image? image: defaultImage } className={classes.img}/>
         <input type="file" name="file" onChange={e => this.onChange(e)} />;
-
         <form
           className={classes.container}
           noValidate
@@ -138,7 +139,7 @@ class PetProfileEdit extends Component {
           <TextField
             id="outlined-select-pet_type"
             select
-            label="Pet Type"
+            label="type"
             className={classes.textField}
             //type="type"
             name="type"
@@ -167,6 +168,8 @@ class PetProfileEdit extends Component {
             type="text"
             name="weight"
             margin="normal"
+            type="text"
+            name="weight"
             fullWidth
             variant="outlined"
             value={weight}
@@ -205,6 +208,8 @@ class PetProfileEdit extends Component {
             value={furcolor}
             className={classes.textField}
             margin="normal"
+            type="text"
+            name="color"
             fullWidth
             variant="outlined"
             onChange={e => this.handleInputChange(e)}
@@ -271,6 +276,7 @@ PetProfileEdit.propTypes = {
   birth:PropTypes.string,
   petname:PropTypes.string,
   type: PropTypes.string,
+  weight: PropTypes.string,
   breed: PropTypes.string,
   furcolor: PropTypes.string,
   weight: PropTypes.string,
