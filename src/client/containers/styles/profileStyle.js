@@ -37,6 +37,14 @@ const styles = theme => ({
     height: 300,
     marginTop: 20
   },
+  fab:{
+    display:"block",
+    margin:"auto",
+    marginTop: 30,
+    marginBottom: 30,
+    
+  },
+  
 });
 
 export default styles;

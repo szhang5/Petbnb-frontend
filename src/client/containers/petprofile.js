@@ -9,75 +9,118 @@ import Button from "@material-ui/core/Button";
 import { withRouter } from "react-router-dom";
 import { signOut } from "../redux/actions";
 import Avatar from "@material-ui/core/Avatar";
-import AvatarUpload from "./avatarupload";
+
 import styles from "./styles/profileStyle";
 
 class PetProfile extends Component {
-
-  onChange(e) {
-    let files = e.target.files;
-    let reader = new FileReader();
-    reader.readAsDataURL(files[0]);
-
-    reader.onload = e => {
-      console.log("data is:" + e.target.result);
-    };
-  }
+ /* handleOnClick() {
+    const { email } = this.props;
+    // console.log(email);
+    if (email) {
+      this.props.signOut();
+    }
+    return this.props.history.push("/signin");
+  }*/
+  
 
   render() {
-    const { name, breed, type, color, weight, image, classes } = this.props;
-
+    const {classes,birth,petname,type,breed,furcolor,weight,image} = this.props;
     return (
       <div>
         <h1>Pet Profile</h1>
         <img src ={ image } className={classes.img}/>
+
+        
+      
         <form className={classes.container} noValidate autoComplete="off">
-          <TextField
-            disabled
+        <TextField
+        disabled
             id="outlined-name-input"
-            label="name"
-            value={name}
+            label="Name"
             className={classes.textField}
+            type="petname"
+            name="petname"
+            value={petname}
+            autoComplete="petname"
             margin="normal"
             fullWidth
-          />
-          <TextField
-            id="outlined-select-pet_type"
-            disabled
-            label="type"
-            value={type}
-            className={classes.textField}
-            margin="normal"
-            fullWidth
-          />
-          <TextField
-            id="outlined-select-Weight"
-            disabled
-            label="weight"
-            value={weight}
-            className={classes.textField}
-            margin="normal"
-            fullWidth
+            variant="outlined"
           />
 
           <TextField
-            disabled
-            id="outlined-breed-input"
-            label="breed"
+          disabled
+            id="outlined-select-pet_type"
+            select
+            label="Pet Type"
+            className={classes.textField}
+            //type="type"
+            name="type"
+            margin="normal"
+            fullWidth
+            variant="outlined"
+            value={type}
+            onChange={e=>types.handleInputChange(e)}
+          >
+            
+          </TextField>
+          <TextField
+          disabled
+            id="outlined-select-pet_type"
+            select
+            label="Weight"
+            className={classes.textField}
+            type="text"
+            name="weight"
+            margin="normal"
+            fullWidth
+            variant="outlined"
+            value={weight}    
+          >
+            
+          </TextField>
+          <TextField
+          disabled
+            id="outlined-Breed-input"
+            select
+            label="Breed"
             value={breed}
             className={classes.textField}
             margin="normal"
+            type="breed"
+            name="breed"
+           // autoComplete="breed"
             fullWidth
+            variant="outlined"
           />
 
           <TextField
-            disabled
+          disabled
             id="outlined-color-input"
-            label="color"
-            value={color}
+            select
+            label="Pet Color"
+            type="furcolor"
+            name="furcolor"
+            value={furcolor}
             className={classes.textField}
             margin="normal"
             fullWidth
+            variant="outlined"
+          />
+         <TextField
+         disabled
+            id="outlined-date_from"
+            label="Birth"
+            type="date"
+            name="birth"
+            className={classes.textField}
+            InputLabelProps={{
+              shrink: true
+            }}
+            fullWidth
+            variant="outlined"
+            value={birth}
+           // onChange={this.handleChange("avai_start_date")}
+            margin="normal"
           />
         </form>
         <Button
@@ -86,7 +129,7 @@ class PetProfile extends Component {
           color="primary"
           className={classes.button}
           onClick={() => {
-            this.props.history.push("/profile/petprofile/edit");
+            this.props.history.push("/petprofile/edit");
           }}
         >
           Edit
@@ -97,11 +140,12 @@ class PetProfile extends Component {
           color="primary"
           className={classes.button}
           onClick={() => {
-            this.props.history.push("/profile");
+            this.props.history.push("/profile/petpage");
           }}
         >
-          Owner Profile
+          Pet Page
         </Button>
+        
       </div>
     );
   }
@@ -109,31 +153,41 @@ class PetProfile extends Component {
 
 PetProfile.propTypes = {
   classes: PropTypes.object.isRequired,
-  name: PropTypes.string,
+  id:PropTypes.number,
+  uid:PropTypes.number.isRequired,
+  birth:PropTypes.string,
+  petname:PropTypes.string,
   type: PropTypes.string,
   weight: PropTypes.string,
   breed: PropTypes.string,
-  color: PropTypes.string,
-  image: PropTypes.string,
+  furcolor: PropTypes.string,
+  weight: PropTypes.string,
+  image:PropTypes.string
 };
 
 PetProfile.defaultProps = {
-  name: "",
-  type: "",
-  weight: "",
-  breed: "",
-  color: "",
-  image: "",
+    id:"",
+    birth:"",
+    petname:"",
+    type: "",
+    breed: "",
+    furcolor: "",
+    weight: "",
+    image:""
 };
 
 function mapStateToProps({ pet }) {
   return {
-    name: pet.name,
+  
+    id:pet.id,
+  
+    birth: pet.birth,
+    petname:pet.petname,
     type: pet.type,
-    weight: pet.weight,
     breed: pet.breed,
-    color: pet.color,
-    image: pet.image,
+    furcolor: pet.color,
+    weight: pet.weight,
+    image:pet.image
   };
 }
 
