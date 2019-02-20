@@ -3,12 +3,13 @@ import PropTypes from "prop-types";
 import { connect } from "react-redux";
 import SitterPost from "./sitter_post";
 import Grid from "@material-ui/core/Grid";
-import { getPost } from "../redux/actions";
+import { getPost, getUserGeoLocation } from "../redux/actions";
 
 class HelloWorld extends Component {
   constructor(props) {
     super(props);
     this.props.getPost();
+    this.props.getUserGeoLocation();
   }
 
   render() {
@@ -38,5 +39,5 @@ function mapStateToProps({ post }) {
 
 export default connect(
   mapStateToProps,
-  { getPost }
+  { getPost, getUserGeoLocation }
 )(HelloWorld);
