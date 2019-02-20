@@ -79,7 +79,7 @@ export function EditProfileAction(payload) {
 }
 export function EditPetProfileAction(payload) {
   const request = axios
-    .post('/service/petbnbservice/editPetProfile', payload);
+    .post('/service/petbnbservice/editPet', payload);
 
   return {
     type: EDIT_PET_PROFILE_ACTION,

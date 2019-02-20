@@ -24,7 +24,7 @@ class PetProfile extends Component {
   
 
   render() {
-    const {classes,birth,petname,type,breed,furcolor,weight,image} = this.props;
+    const {classes,birth,petname,type,breed,furcolor,weight} = this.props;
     return (
       <div>
         <h1>Pet Profile</h1>
@@ -34,7 +34,7 @@ class PetProfile extends Component {
       
         <form className={classes.container} noValidate autoComplete="off">
         <TextField
-        disabled
+            disabled
             id="outlined-name-input"
             label="Name"
             className={classes.textField}
@@ -50,7 +50,7 @@ class PetProfile extends Component {
           <TextField
           disabled
             id="outlined-select-pet_type"
-            select
+            
             label="Pet Type"
             className={classes.textField}
             //type="type"
@@ -66,7 +66,7 @@ class PetProfile extends Component {
           <TextField
           disabled
             id="outlined-select-pet_type"
-            select
+            
             label="Weight"
             className={classes.textField}
             type="text"
@@ -81,7 +81,7 @@ class PetProfile extends Component {
           <TextField
           disabled
             id="outlined-Breed-input"
-            select
+            
             label="Breed"
             value={breed}
             className={classes.textField}
@@ -96,7 +96,7 @@ class PetProfile extends Component {
           <TextField
           disabled
             id="outlined-color-input"
-            select
+            
             label="Pet Color"
             type="furcolor"
             name="furcolor"
@@ -107,7 +107,7 @@ class PetProfile extends Component {
             variant="outlined"
           />
          <TextField
-         disabled
+            disabled
             id="outlined-date_from"
             label="Birth"
             type="date"
@@ -153,8 +153,8 @@ class PetProfile extends Component {
 
 PetProfile.propTypes = {
   classes: PropTypes.object.isRequired,
-  id:PropTypes.number,
-  uid:PropTypes.number.isRequired,
+  petid:PropTypes.number,
+  //uid:PropTypes.number.isRequired,
   birth:PropTypes.string,
   petname:PropTypes.string,
   type: PropTypes.string,
@@ -162,32 +162,31 @@ PetProfile.propTypes = {
   breed: PropTypes.string,
   furcolor: PropTypes.string,
   weight: PropTypes.string,
-  image:PropTypes.string
+ // image:PropTypes.string
 };
 
 PetProfile.defaultProps = {
-    id:"",
+  petid:0,
     birth:"",
     petname:"",
     type: "",
     breed: "",
     furcolor: "",
     weight: "",
-    image:""
+  //  image:""
 };
 
 function mapStateToProps({ pet }) {
   return {
   
-    id:pet.id,
-  
+    petid:pet.petid,
     birth: pet.birth,
     petname:pet.petname,
     type: pet.type,
     breed: pet.breed,
     furcolor: pet.color,
     weight: pet.weight,
-    image:pet.image
+  //  image:pet.image
   };
 }
 
