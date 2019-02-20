@@ -46,8 +46,6 @@ class SitterPost extends React.Component {
     const { classes, posts } = this.props;
     return (
       <div>
-       
-
         {map(posts, (post, key) => {  
           return (
             <Card className={classes.card} key={post.sitterid}>
