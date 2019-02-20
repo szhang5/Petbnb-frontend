@@ -127,6 +127,7 @@ class ProfileEdit extends Component {
             variant="outlined"
           />
           <TextField
+          
             id="outlined-country-input"
             label="Country"
             className={classes.textField}
@@ -137,7 +138,9 @@ class ProfileEdit extends Component {
             margin="normal"
             fullWidth
             variant="outlined"
-          />
+            onChange={e => this.handleInputChange(e)}
+            
+          ></TextField>
           <TextField
             id="outlined-street-input"
             label="Street"
