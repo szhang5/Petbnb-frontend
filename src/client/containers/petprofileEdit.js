@@ -1,4 +1,4 @@
- import React, { Component } from "react";
+import React, { Component } from "react";
 import { connect } from "react-redux";
 import PropTypes from "prop-types";
 import classNames from "classnames";
@@ -7,8 +7,7 @@ import MenuItem from "@material-ui/core/MenuItem";
 import TextField from "@material-ui/core/TextField";
 import { withRouter } from "react-router-dom";
 import Button from "@material-ui/core/Button";
-import { EditPetProfileAction } from "../redux/actions";
-import {UpdatePetInfo} from "../redux/actions";
+import { EditPetProfileAction ,UpdatePetInfo, UploadPetImage} from "../redux/actions";
 import styles from "./styles/profileStyle";
 
 
@@ -85,10 +84,6 @@ class PetProfileEdit extends Component {
   constructor(props) {
     super(props);
   }
- /* state = {
-    pet_type: "",
-    weights:""
-  };*/
 
   handleSubmit(e) {
     console.log("111");
@@ -107,20 +102,14 @@ class PetProfileEdit extends Component {
     });
   }
 
-
- /* handleChange = name => event => {
-    this.setState({
-      [name]: event.target.value
-    });
-  };*/
- 
   onChange(e) {
     let files = e.target.files;
     let reader = new FileReader();
     reader.readAsDataURL(files[0]);
 
     reader.onload = e => {
-      console.log("data is:" + e.target.result);
+      console.log(e.target.result);
+      this.props.UploadPetImage(this.props.id, e.target.result);
     };
   }
   handleInputChange(e){
@@ -347,7 +336,7 @@ export default withRouter(
   withStyles(styles)(
     connect(
       mapStateToProps,
-      { EditPetProfileAction,UpdatePetInfo}
+      { EditPetProfileAction, UpdatePetInfo, UploadPetImage }
     )(PetProfileEdit)
   )
 );
