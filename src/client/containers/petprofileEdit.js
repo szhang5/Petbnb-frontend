@@ -1,4 +1,4 @@
- import React, { Component } from "react";
+import React, { Component } from "react";
 import { connect } from "react-redux";
 import PropTypes from "prop-types";
 import classNames from "classnames";
@@ -7,8 +7,7 @@ import MenuItem from "@material-ui/core/MenuItem";
 import TextField from "@material-ui/core/TextField";
 import { withRouter } from "react-router-dom";
 import Button from "@material-ui/core/Button";
-import { EditPetProfileAction } from "../redux/actions";
-import {UpdatePetInfo} from "../redux/actions";
+import { EditPetProfileAction ,UpdatePetInfo, UploadPetImage} from "../redux/actions";
 import styles from "./styles/profileStyle";
 
 
@@ -64,10 +63,6 @@ class PetProfileEdit extends Component {
   constructor(props) {
     super(props);
   }
- /* state = {
-    pet_type: "",
-    weights:""
-  };*/
 
   handleSubmit(e) {
     e.preventDefault();
@@ -84,24 +79,18 @@ class PetProfileEdit extends Component {
     });*/
   }
 
-
- /* handleChange = name => event => {
-    this.setState({
-      [name]: event.target.value
-    });
-  };*/
- 
   onChange(e) {
     let files = e.target.files;
     let reader = new FileReader();
     reader.readAsDataURL(files[0]);
 
     reader.onload = e => {
-      console.log("data is:" + e.target.result);
+      console.log(e.target.result);
+      this.props.UploadPetImage(this.props.id, e.target.result);
     };
   }
+
   handleInputChange(e) {
-    // console.log(e.target);
     this.props.UpdatePetInfo(e.target.name, e.target.value);
   }
 
@@ -271,24 +260,19 @@ class PetProfileEdit extends Component {
 
 PetProfileEdit.propTypes = {
   classes: PropTypes.object.isRequired,
-  
-  id:PropTypes.number,
-  uid:PropTypes.number.isRequired,
-  birth:PropTypes.string,
-  petname:PropTypes.string,
+  id: PropTypes.number,
+  birth: PropTypes.string,
+  petname: PropTypes.string,
   type: PropTypes.string,
   weight: PropTypes.string,
   breed: PropTypes.string,
   furcolor: PropTypes.string,
   weight: PropTypes.string,
-  image:PropTypes.string
-
- 
+  image: PropTypes.string
 };
 
 PetProfileEdit.defaultProps = {
-    
-    id:"",
+    id:0,
     birth:"",
     petname:"",
     type: "",
@@ -298,12 +282,9 @@ PetProfileEdit.defaultProps = {
     image:""
 };
 
-function mapStateToProps({ pet,user }) {
-   //console.log("???"+pet.birth);
+function mapStateToProps({ pet }) {
   return {
-    
-   
-    id:pet.id,
+    id: pet.id,
     birth: pet.birth,
     petname:pet.petname,
     type: pet.type,
@@ -318,7 +299,7 @@ export default withRouter(
   withStyles(styles)(
     connect(
       mapStateToProps,
-      { EditPetProfileAction,UpdatePetInfo}
+      { EditPetProfileAction, UpdatePetInfo, UploadPetImage }
     )(PetProfileEdit)
   )
 );

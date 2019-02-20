@@ -10,10 +10,42 @@ export const GET_USER_POST_ACTION = 'GET_USER_POST_ACTION';
 export const CREATE_POST_ACTION = 'CREATE_POST_ACTION';
 export const SEARCH_POST_ACTION = 'SEARCH_POST_ACTION';
 export const UPLOAD_IMAGE_ACTION = 'UPLOAD_IMAGE_ACTION';
+export const UPLOAD_PET_IMAGE_ACTION = 'UPLOAD_PET_IMAGE_ACTION';
 export const UPDATE_USER_INFO = 'UPDATE_USER_INFO';
 export const EDIT_PET_PROFILE_ACTION = 'EDIT_PET_PROFILE_ACTION';
 export const CREATE_PET_PROFILE_ACTION = 'CREATE_PET_PROFILE_ACTION';
 export const UPDATE_PET_INFO = "UPDATE_PET_INFO";
+export const GET_PET_INFO = "GET_PET_INFO";
+export const GET_USER_GEO_LOCATION = "GET_USER_GEO_LOCATION";
+
+
+export function getUserGeoLocation() {
+  const request = axios
+    .post('/service/petbnbservice/getUserGeoLocation', {});
+  return {
+    type: GET_USER_GEO_LOCATION,
+    payload: request,
+  }
+}
+
+export function getPetInfo(uid) {
+  const request = axios
+    .post('/service/petbnbservice/getPetInfo', { uid });
+  return {
+    type: GET_PET_INFO,
+    payload: request,
+  }
+}
+
+export function UploadPetImage(id, image_base_64) {
+  const request = axios
+    .post('/service/petbnbservice/petImageUpload', { id, image_base_64 });
+  return {
+    type: UPLOAD_PET_IMAGE_ACTION,
+    payload: request,
+  }
+}
+
 
 export function UploadImage(email, image_base_64) {
   const request = axios
@@ -79,7 +111,7 @@ export function EditProfileAction(payload) {
 }
 export function EditPetProfileAction(payload) {
   const request = axios
-    .post('/service/petbnbservice/editPetProfile', payload);
+    .post('/service/petbnbservice/editPet', payload);
 
   return {
     type: EDIT_PET_PROFILE_ACTION,
@@ -94,7 +126,6 @@ export function UpdatePetInfo(field, value){
   };
 }
 export function CreatePetProfileAction(uid) {
-  console.log(uid);
   const request = axios
     .post('/service/petbnbservice/createPet', {uid});
 
