@@ -35,7 +35,7 @@ class ProfileEdit extends Component {
     reader.readAsDataURL(files[0]);
 
     reader.onload = e => {
-      console.log(e.target.result); //get image_base64_data
+      // console.log(e.target.result); //get image_base64_data
       this.props.UploadImage(this.props.email, e.target.result);
     };
   }
