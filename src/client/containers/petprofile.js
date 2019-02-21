@@ -28,7 +28,7 @@ class PetProfile extends Component {
     return (
       <div>
         <h1>Pet Profile</h1>
-        <img src ={ image } className={classes.img}/>
+        {/*<img src ={ image } className={classes.img}/>*/}
 
         
       
@@ -162,18 +162,18 @@ PetProfile.propTypes = {
   breed: PropTypes.string,
   furcolor: PropTypes.string,
   weight: PropTypes.string,
- // image:PropTypes.string
+//  image:PropTypes.string
 };
 
 PetProfile.defaultProps = {
-  petid:0,
+  petid:2,
     birth:"",
     petname:"",
     type: "",
     breed: "",
     furcolor: "",
     weight: "",
-  //  image:""
+ //   image:""
 };
 
 function mapStateToProps({ pet }) {
@@ -184,7 +184,7 @@ function mapStateToProps({ pet }) {
     petname:pet.petname,
     type: pet.type,
     breed: pet.breed,
-    furcolor: pet.color,
+    furcolor: pet.furcolor,
     weight: pet.weight,
   //  image:pet.image
   };

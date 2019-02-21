@@ -2,36 +2,34 @@ import * as ACTIONS from "../actions/index";
 
 const initialState = {
 
-    petid:0,
+    petid:2,
     birth:"",
     petname:"",
     type: "",
     breed: "",
     furcolor: "",
     weight: "",
-   image:""
+   //image:""
 };
 
 export default function(state = initialState, action) {
   switch (action.type) {
     case ACTIONS.GET_PET_INFO: 
       return {
-        pets: action.payload.data.pet,
-      }
+        pets: action.payload.data,
+      };
     case ACTIONS.EDIT_PET_PROFILE_ACTION:
-    console.log("pet20");
+    //console.log("pet20");
       return {
-        //name: action.payload.data.pet.name,
-         
-     //    uid:action.payload.data.pet.uid,
-         petid:action.payload.data.petid,
+       ...state,
+        petid:action.payload.data.petid,
          birth:action.payload.data.birth,
          petname:action.payload.data.petname,
          type: action.payload.data.type,
          breed: action.payload.data.breed,
          furcolor: action.payload.data.furcolor,
          weight: action.payload.data.weight,
-        image:action.payload.data.image,
+        //image:action.payload.data.image,
       };
       case ACTIONS.CREATE_PET_PROFILE_ACTION:
       return{
@@ -42,11 +40,13 @@ export default function(state = initialState, action) {
       case ACTIONS.UPDATE_PET_INFO:
       return {
             ...state,
+           
           [action.field]:action.value,
       }
       case ACTIONS.UPDATE_PET_INFO:
       return {
         ...state,
+        
         image: action.payload.data.imageUrl,
       }
     default:
