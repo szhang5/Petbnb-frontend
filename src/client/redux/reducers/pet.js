@@ -18,15 +18,15 @@ export default function(state = initialState, action) {
     case ACTIONS.GET_PET_INFO_BY_ID: 
     console.log(action);
     return {
-      // petid:action.payload.data.petid,
-      // uid: action.payload.data.petid,
-      // birth:action.payload.data.birth,
-      // petname:action.payload.data.petname,
-      // type: action.payload.data.type,
-      // breed: action.payload.data.breed,
-      // furcolor: action.payload.data.furcolor,
-      // weight: action.payload.data.weight,
-      // image: action.payload.data.image,
+      petid:action.payload.data.petid,
+      uid: action.payload.data.uid,
+      birth:action.payload.data.birth,
+      petname:action.payload.data.petname,
+      type: action.payload.data.type,
+      breed: action.payload.data.breed,
+      furcolor: action.payload.data.furcolor,
+      weight: action.payload.data.weight,
+      image: action.payload.data.image,
     }
     case ACTIONS.GET_PET_INFO: 
       return {

@@ -20,9 +20,9 @@ export const GET_PET_INFO_BY_ID = "GET_PET_INFO_BY_ID";
 export const GET_USER_GEO_LOCATION = "GET_USER_GEO_LOCATION";
 
 
-export function GetPetInfoByID(petid) {
+export function GetPetInfoById(petid) {
   const request = axios
-    .post('/service/petbnbservice/getPetInfoByID', {petid});
+    .post('/service/petbnbservice/getPetInfoById', {petid});
   return {
     type: GET_PET_INFO_BY_ID,
     payload: request,
@@ -47,9 +47,9 @@ export function getPetInfo(uid) {
   }
 }
 
-export function UploadPetImage(id, image_base_64) {
+export function UploadPetImage(petid, image_base_64) {
   const request = axios
-    .post('/service/petbnbservice/petImageUpload', { id, image_base_64 });
+    .post('/service/petbnbservice/petImageUpload', { petid, image_base_64 });
   return {
     type: UPLOAD_PET_IMAGE_ACTION,
     payload: request,
@@ -112,11 +112,7 @@ export function getPost() {
 
 export function EditProfileAction(payload) {
   const request = axios
-    .post('/service/petbnbservice/editProfile', 
-    {
-      ...payload,
-      birth: payload.birth.toString(),
-    });
+    .post('/service/petbnbservice/editProfile', payload);
 
   return {
     type: EDIT_PROFILE_ACTION,
