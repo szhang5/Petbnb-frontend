@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
+import moment from "moment";
 import PropTypes from "prop-types";
 import classNames from "classnames";
 import { withStyles } from "@material-ui/core/styles";
@@ -7,7 +8,7 @@ import MenuItem from "@material-ui/core/MenuItem";
 import TextField from "@material-ui/core/TextField";
 import { withRouter } from "react-router-dom";
 import Button from "@material-ui/core/Button";
-import { EditPetProfileAction ,UpdatePetInfo, UploadPetImage, GetPetInfoByID} from "../redux/actions";
+import { EditPetProfileAction ,UpdatePetInfo, UploadPetImage, GetPetInfoById} from "../redux/actions";
 import styles from "./styles/profileStyle";
 
 
@@ -88,7 +89,8 @@ class PetProfileEdit extends Component {
     const { id: petid } = this.props.match.params;
     console.log(petid);
     payload["petid"]= petid;
-    this.props.GetPetInfoByID(petid);
+    this.props.GetPetInfoById(petid);
+    
   }
 
   handleSubmit(e) {
@@ -110,7 +112,7 @@ class PetProfileEdit extends Component {
 
     reader.onload = e => {
       console.log(e.target.result);
-      this.props.UploadPetImage(petid, e.target.result);
+      this.props.UploadPetImage(this.props.petid, e.target.result);
     };
   }
 
@@ -254,8 +256,8 @@ class PetProfileEdit extends Component {
 
          <TextField
             id="outlined-date_from"
-            label="Birth"
-            type="date"
+            label="birth"
+            type="text"
             name="birth"
             className={classes.textField}
             InputLabelProps={{
@@ -263,7 +265,7 @@ class PetProfileEdit extends Component {
             }}
             fullWidth
             variant="outlined"
-            value={birth}
+            value={moment(birth).format("LL")}  
             margin="normal"
           />
 
@@ -319,6 +321,7 @@ PetProfileEdit.defaultProps = {
 function mapStateToProps({ pet }) {
   console.log(pet);
   return {
+    petid: pet.petid,
     birth: pet.birth,
     petname:pet.petname,
     type: pet.type,
@@ -333,7 +336,7 @@ export default withRouter(
   withStyles(styles)(
     connect(
       mapStateToProps,
-      { EditPetProfileAction, UpdatePetInfo, UploadPetImage, GetPetInfoByID }
+      { EditPetProfileAction, UpdatePetInfo, UploadPetImage, GetPetInfoById }
     )(PetProfileEdit)
   )
 );
