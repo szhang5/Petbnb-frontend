@@ -13,24 +13,16 @@ import Avatar from "@material-ui/core/Avatar";
 import styles from "./styles/profileStyle";
 
 class PetProfile extends Component {
- /* handleOnClick() {
-    const { email } = this.props;
-    // console.log(email);
-    if (email) {
-      this.props.signOut();
-    }
-    return this.props.history.push("/signin");
-  }*/
   
 
   render() {
     const {classes,birth,petname,type,breed,furcolor,weight,image} = this.props;
+    const defaultImage = "https://res.cloudinary.com/zoey1111/image/upload/v1550674929/petProfileDefault.png";
+
     return (
       <div>
         <h1>Pet Profile</h1>
-        <img src ={ image } className={classes.img}/>
-
-        
+        <img src ={ image? image : defaultImage } className={classes.img}/>
       
         <form className={classes.container} noValidate autoComplete="off">
         <TextField
@@ -154,7 +146,6 @@ class PetProfile extends Component {
 PetProfile.propTypes = {
   classes: PropTypes.object.isRequired,
   id:PropTypes.number,
-  uid:PropTypes.number.isRequired,
   birth:PropTypes.string,
   petname:PropTypes.string,
   type: PropTypes.string,
@@ -166,7 +157,7 @@ PetProfile.propTypes = {
 };
 
 PetProfile.defaultProps = {
-    id:"",
+    id:0,
     birth:"",
     petname:"",
     type: "",
@@ -180,7 +171,6 @@ function mapStateToProps({ pet }) {
   return {
   
     id:pet.id,
-  
     birth: pet.birth,
     petname:pet.petname,
     type: pet.type,
