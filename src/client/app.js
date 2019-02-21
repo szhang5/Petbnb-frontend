@@ -42,12 +42,7 @@ class App extends Component {
                     <Route path="/profile/edit" component={ProfileEdit} />
                     <Route exact path="/profile" component={Profile} />
                     <Route
-                      exact
-                      path="/profile/petprofile"
-                      component={PetProfile}
-                    />
-                    <Route
-                      path="/profile/petprofile/edit"
+                      path="/profile/petprofile/edit/:id"
                       component={PetProfileEdit}
                     />
                     <Route

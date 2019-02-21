@@ -16,12 +16,22 @@ export const EDIT_PET_PROFILE_ACTION = 'EDIT_PET_PROFILE_ACTION';
 export const CREATE_PET_PROFILE_ACTION = 'CREATE_PET_PROFILE_ACTION';
 export const UPDATE_PET_INFO = "UPDATE_PET_INFO";
 export const GET_PET_INFO = "GET_PET_INFO";
+export const GET_PET_INFO_BY_ID = "GET_PET_INFO_BY_ID";
 export const GET_USER_GEO_LOCATION = "GET_USER_GEO_LOCATION";
 
 
-export function getUserGeoLocation() {
+export function GetPetInfoById(petid) {
   const request = axios
-    .post('/service/petbnbservice/getUserGeoLocation', {});
+    .post('/service/petbnbservice/getPetInfoById', {petid});
+  return {
+    type: GET_PET_INFO_BY_ID,
+    payload: request,
+  }
+}
+
+export function getUsersGeoLocation() {
+  const request = axios
+    .post('/service/petbnbservice/getUsersGeoLocation', {});
   return {
     type: GET_USER_GEO_LOCATION,
     payload: request,
@@ -37,10 +47,9 @@ export function getPetInfo(uid) {
   }
 }
 
-
-export function UploadPetImage(id, image_base_64) {
+export function UploadPetImage(petid, image_base_64) {
   const request = axios
-    .post('/service/petbnbservice/petImageUpload', { id, image_base_64 });
+    .post('/service/petbnbservice/petImageUpload', { petid, image_base_64 });
   return {
     type: UPLOAD_PET_IMAGE_ACTION,
     payload: request,
@@ -111,6 +120,7 @@ export function EditProfileAction(payload) {
   };
 }
 export function EditPetProfileAction(payload) {
+  console.log(payload);
   const request = axios
     .post('/service/petbnbservice/editPet', payload);
 

@@ -37,11 +37,12 @@ class Profile extends Component {
       image,
       classes
     } = this.props;
+     const defaultImage = "https://res.cloudinary.com/zoey1111/image/upload/v1550020987/profile.png";
  
     return (
       <div>
         <Grid container justify="center" alignItems="center">
-          <Avatar alt="Zoey" src={image} className={classes.bigAvatar} />
+          <Avatar alt="Zoey" src={image? image : defaultImage} className={classes.bigAvatar} />
         </Grid>
         <form className={classes.container} noValidate autoComplete="off">
           <TextField
