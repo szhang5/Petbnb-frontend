@@ -7,7 +7,7 @@ import MenuItem from "@material-ui/core/MenuItem";
 import TextField from "@material-ui/core/TextField";
 import { withRouter } from "react-router-dom";
 import Button from "@material-ui/core/Button";
-import { EditPetProfileAction ,UpdatePetInfo, UploadPetImage} from "../redux/actions";
+import { EditPetProfileAction ,UpdatePetInfo, UploadPetImage, GetPetInfoById} from "../redux/actions";
 import styles from "./styles/profileStyle";
 
 
@@ -39,6 +39,7 @@ const weights = [
     label: "100~200"
   }
 ];
+
 const furcolors = [
   {
     value:"Gold",
@@ -79,26 +80,31 @@ const breeds=[
   }
 ]
 
+const payload = {};
 
 class PetProfileEdit extends Component {
   constructor(props) {
     super(props);
   }
 
+  componentWillMount(){
+    const { id: petid } = this.props.match.params;
+    console.log(petid);
+    payload["petid"]= petid;
+    this.props.GetPetInfoById(petid);
+    
+  }
+
   handleSubmit(e) {
     console.log("111");
     e.preventDefault();
     const data = new FormData(e.target);
-    const payload = {};
     for (const [key, value] of data.entries()) {
       payload[key] = value;
-      console.log("payload1 "+payload);
     }
-    payload['petid']=this.props.petid;
-   
    this.props.EditPetProfileAction(payload).then(() => {
-    console.log("payload2 "+payload);
-      this.props.history.push("/profile/petprofile");
+      this.props.history.push("/profile/petpage");
+
     });
   }
 
@@ -118,14 +124,15 @@ class PetProfileEdit extends Component {
   }
 
   render() {
-    const {classes,birth,petname,type,breed,furcolor,weight,image,petid} = this.props;
-    const defaultImage = "https://res.cloudinary.com/zoey1111/image/upload/v1550439003/berkay-gumustekin-402114-unsplash.jpg";
+    const {classes,birth,petname,type,breed,furcolor,weight,image} = this.props;
+    const defaultImage = "https://res.cloudinary.com/zoey1111/image/upload/v1550674929/petProfileDefault.png";
 
     return (
       <div>
         <h1>Edit Pet Profile</h1>
         <img src = { image? image: defaultImage } className={classes.img}/>
         <input type="file" name="file" onChange={e => this.onChange(e)} />;
+
         <form
           className={classes.container}
           noValidate
@@ -137,7 +144,6 @@ class PetProfileEdit extends Component {
             id="outlined-name-input"
             label="Name"
             className={classes.textField}
-          //  type="petname"
             name="petname"
             value={petname}
             autoComplete="petname"
@@ -151,7 +157,7 @@ class PetProfileEdit extends Component {
             select
             label="type"
             className={classes.textField}
-            //type="type"
+            type="text"
             name="type"
             margin="normal"
             fullWidth
@@ -170,15 +176,15 @@ class PetProfileEdit extends Component {
               </MenuItem>
             ))}
           </TextField>
+
           <TextField
             id="outlined-select-pet_type"
             select
             label="Weight"
             className={classes.textField}
-            type="weight"
+            type="text"
             name="weight"
             margin="normal"
-          //  type="text"
             name="weight"
             fullWidth
             variant="outlined"
@@ -204,7 +210,7 @@ class PetProfileEdit extends Component {
             value={breed}
             className={classes.textField}
             margin="normal"
-          //  type="breed"
+            type="text"
             name="breed"
             fullWidth
             variant="outlined"
@@ -214,22 +220,24 @@ class PetProfileEdit extends Component {
                 className: classes.menu
               }
             }}
-          >{breeds.map(option => (
-            <MenuItem key={option.value} value={option.value}>
-              {option.label}
-            </MenuItem>
-          ))}</TextField>
+            >
+            { breeds.map(option => (
+              <MenuItem key={option.value} value={option.value}>
+                {option.label}
+              </MenuItem>
+            ))}
+          </TextField>
+
+
           <TextField
             id="outlined-color-input"
             select
             label="Pet Color"
-            type="furcolor"
+            type="text"
             name="furcolor"
             value={furcolor}
             className={classes.textField}
             margin="normal"
-           // type="text"
-            name="furcolor"
             fullWidth
             variant="outlined"
             onChange={e => this.handleInputChange(e)}
@@ -248,7 +256,7 @@ class PetProfileEdit extends Component {
 
          <TextField
             id="outlined-date_from"
-            label="Birth"
+            label="birth"
             type="date"
             name="birth"
             className={classes.textField}
@@ -257,7 +265,7 @@ class PetProfileEdit extends Component {
             }}
             fullWidth
             variant="outlined"
-            value={birth}
+            value={birth}  
             margin="normal"
           />
 
@@ -277,7 +285,7 @@ class PetProfileEdit extends Component {
             color="primary"
             className={classes.button}
             onClick={() => {
-              this.props.history.push("/profile/petprofile");
+              this.props.history.push("/profile/petpage");
             }}
           >
             Cancel
@@ -290,37 +298,33 @@ class PetProfileEdit extends Component {
 
 PetProfileEdit.propTypes = {
   classes: PropTypes.object.isRequired,
-  
+  birth: PropTypes.string,
+  petname: PropTypes.string,
   petid:PropTypes.number,
-  //uid:PropTypes.number.isRequired,
-  birth:PropTypes.string,
-  petname:PropTypes.string,
   type: PropTypes.string,
   weight: PropTypes.string,
   breed: PropTypes.string,
   furcolor: PropTypes.string,
   weight: PropTypes.string,
-  //image:PropTypes.string
+  image:PropTypes.string,
 
  
 };
 
 PetProfileEdit.defaultProps = {
-    
-    petid:2,
+    petid:1,
     birth:"",
     petname:"",
     type: "",
     breed: "",
     furcolor: "",
     weight: "",
- //   image:""
+    image:"",
 };
 
 function mapStateToProps({ pet }) {
-   //console.log("???"+pet.birth);
+  console.log(pet);
   return {
-   
     petid: pet.petid,
     birth: pet.birth,
     petname: pet.petname,
@@ -328,7 +332,7 @@ function mapStateToProps({ pet }) {
     breed: pet.breed,
     furcolor: pet.furcolor,
     weight: pet.weight,
-   // image:pet.image
+    image:pet.image,
   };
 }
 
@@ -336,7 +340,7 @@ export default withRouter(
   withStyles(styles)(
     connect(
       mapStateToProps,
-      { EditPetProfileAction, UpdatePetInfo, UploadPetImage }
+      { EditPetProfileAction, UpdatePetInfo, UploadPetImage, GetPetInfoById }
     )(PetProfileEdit)
   )
 );

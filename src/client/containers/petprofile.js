@@ -13,25 +13,16 @@ import Avatar from "@material-ui/core/Avatar";
 import styles from "./styles/profileStyle";
 
 class PetProfile extends Component {
- /* handleOnClick() {
-    const { email } = this.props;
-    // console.log(email);
-    if (email) {
-      this.props.signOut();
-    }
-    return this.props.history.push("/signin");
-  }*/
   
 
   render() {
-    const {classes,birth,petname,type,breed,furcolor,weight} = this.props;
+    const {classes,birth,petname,type,breed,furcolor,weight,image} = this.props;
+    const defaultImage = "https://res.cloudinary.com/zoey1111/image/upload/v1550674929/petProfileDefault.png";
+
     return (
       <div>
         <h1>Pet Profile</h1>
-        {/*<img src ={ image } className={classes.img}/>*/}
-
-        
-      
+        <img src ={ image? image : defaultImage } className={classes.img}/>
         <form className={classes.container} noValidate autoComplete="off">
         <TextField
             disabled
@@ -110,7 +101,7 @@ class PetProfile extends Component {
             disabled
             id="outlined-date_from"
             label="Birth"
-            type="date"
+            type="text"
             name="birth"
             className={classes.textField}
             InputLabelProps={{
@@ -154,7 +145,6 @@ class PetProfile extends Component {
 PetProfile.propTypes = {
   classes: PropTypes.object.isRequired,
   petid:PropTypes.number,
-  //uid:PropTypes.number.isRequired,
   birth:PropTypes.string,
   petname:PropTypes.string,
   type: PropTypes.string,
@@ -162,23 +152,22 @@ PetProfile.propTypes = {
   breed: PropTypes.string,
   furcolor: PropTypes.string,
   weight: PropTypes.string,
-//  image:PropTypes.string
+ image:PropTypes.string
 };
 
 PetProfile.defaultProps = {
   petid:2,
-    birth:"",
-    petname:"",
-    type: "",
-    breed: "",
-    furcolor: "",
-    weight: "",
- //   image:""
+  birth:"",
+  petname:"",
+  type: "",
+  breed: "",
+  furcolor: "",
+  weight: "",
+  image:""
 };
 
 function mapStateToProps({ pet }) {
   return {
-  
     petid:pet.petid,
     birth: pet.birth,
     petname:pet.petname,
@@ -186,7 +175,7 @@ function mapStateToProps({ pet }) {
     breed: pet.breed,
     furcolor: pet.furcolor,
     weight: pet.weight,
-  //  image:pet.image
+    image:pet.image
   };
 }
 
