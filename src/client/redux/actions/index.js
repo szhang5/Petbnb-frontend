@@ -37,6 +37,7 @@ export function getPetInfo(uid) {
   }
 }
 
+
 export function UploadPetImage(id, image_base_64) {
   const request = axios
     .post('/service/petbnbservice/petImageUpload', { id, image_base_64 });

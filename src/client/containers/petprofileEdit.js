@@ -39,7 +39,7 @@ const weights = [
     label: "100~200"
   }
 ];
-const colors = [
+const furcolors = [
   {
     value:"Gold",
     label:"Gold"
@@ -94,11 +94,11 @@ class PetProfileEdit extends Component {
       payload[key] = value;
       console.log("payload1 "+payload);
     }
-    payload["petid"]=this.props.id;
+    payload['petid']=this.props.petid;
    
    this.props.EditPetProfileAction(payload).then(() => {
     console.log("payload2 "+payload);
-      this.props.history.push("/petprofile");
+      this.props.history.push("/profile/petprofile");
     });
   }
 
@@ -109,7 +109,7 @@ class PetProfileEdit extends Component {
 
     reader.onload = e => {
       console.log(e.target.result);
-      this.props.UploadPetImage(this.props.id, e.target.result);
+      this.props.UploadPetImage(this.props.petid, e.target.result);
     };
   }
   handleInputChange(e){
@@ -118,7 +118,7 @@ class PetProfileEdit extends Component {
   }
 
   render() {
-    const {classes,birth,petname,type,breed,furcolor,weight,image} = this.props;
+    const {classes,birth,petname,type,breed,furcolor,weight,image,petid} = this.props;
     const defaultImage = "https://res.cloudinary.com/zoey1111/image/upload/v1550439003/berkay-gumustekin-402114-unsplash.jpg";
 
     return (
@@ -229,7 +229,7 @@ class PetProfileEdit extends Component {
             className={classes.textField}
             margin="normal"
            // type="text"
-            name="color"
+            name="furcolor"
             fullWidth
             variant="outlined"
             onChange={e => this.handleInputChange(e)}
@@ -239,7 +239,7 @@ class PetProfileEdit extends Component {
               }
             }}
           >
-            {colors.map(option => (
+            {furcolors.map(option => (
               <MenuItem key={option.value} value={option.value}>
                 {option.label}
               </MenuItem>
@@ -249,7 +249,7 @@ class PetProfileEdit extends Component {
          <TextField
             id="outlined-date_from"
             label="Birth"
-          //  type="date"
+            type="date"
             name="birth"
             className={classes.textField}
             InputLabelProps={{
@@ -307,14 +307,14 @@ PetProfileEdit.propTypes = {
 
 PetProfileEdit.defaultProps = {
     
-    petid:0,
+    petid:2,
     birth:"",
     petname:"",
     type: "",
     breed: "",
     furcolor: "",
     weight: "",
-    image:""
+ //   image:""
 };
 
 function mapStateToProps({ pet }) {
@@ -326,9 +326,9 @@ function mapStateToProps({ pet }) {
     petname: pet.petname,
     type: pet.type,
     breed: pet.breed,
-    furcolor: pet.color,
+    furcolor: pet.furcolor,
     weight: pet.weight,
-    image:pet.image
+   // image:pet.image
   };
 }
 
