@@ -47,7 +47,7 @@ class App extends Component {
                       component={PetProfile}
                     />
                     <Route
-                      path="/profile/petprofile/edit"
+                      path="/profile/petprofile/edit/:id"
                       component={PetProfileEdit}
                     />
                     <Route
