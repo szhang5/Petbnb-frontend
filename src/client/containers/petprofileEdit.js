@@ -1,6 +1,5 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
-import moment from "moment";
 import PropTypes from "prop-types";
 import classNames from "classnames";
 import { withStyles } from "@material-ui/core/styles";
@@ -41,24 +40,6 @@ const weights = [
   }
 ];
 
-const breeds = [
-  {
-    value:"Affenpinscher",
-    label:"Affenpinscher"
-
-  },
-  {
-    value:"Akita",
-    label:"Akita"
-
-  },
-  {
-    value:"Afghan Hound",
-    label:"Afghan Hound"
-
-  }
-];
-
 const furcolors = [
   {
     value:"Gold",
@@ -77,6 +58,27 @@ const furcolors = [
   }
 
 ];
+const breeds=[
+  {
+    value:"Golden_Retriever",
+    label:"Golden Retriever"
+
+  },
+  {
+    value:"Affenpinscher",
+    label:"Affenpinscher"
+
+  },
+  {
+    value:"Alaskan_Malamute",
+    label:"Alaskan Malamute"
+
+  },
+  {
+    value:"German_Spitz",
+    label:"German Spitz"
+  }
+]
 
 const payload = {};
 
@@ -94,14 +96,15 @@ class PetProfileEdit extends Component {
   }
 
   handleSubmit(e) {
+    console.log("111");
     e.preventDefault();
     const data = new FormData(e.target);
     for (const [key, value] of data.entries()) {
       payload[key] = value;
     }
-   
    this.props.EditPetProfileAction(payload).then(() => {
       this.props.history.push("/profile/petpage");
+
     });
   }
 
@@ -115,8 +118,8 @@ class PetProfileEdit extends Component {
       this.props.UploadPetImage(this.props.petid, e.target.result);
     };
   }
-
-  handleInputChange(e) {
+  handleInputChange(e){
+     console.log("handlechange"+e.target);
     this.props.UpdatePetInfo(e.target.name, e.target.value);
   }
 
@@ -141,7 +144,6 @@ class PetProfileEdit extends Component {
             id="outlined-name-input"
             label="Name"
             className={classes.textField}
-            type="text"
             name="petname"
             value={petname}
             autoComplete="petname"
@@ -183,7 +185,6 @@ class PetProfileEdit extends Component {
             type="text"
             name="weight"
             margin="normal"
-            type="text"
             name="weight"
             fullWidth
             variant="outlined"
@@ -209,17 +210,17 @@ class PetProfileEdit extends Component {
             value={breed}
             className={classes.textField}
             margin="normal"
-            type="breed"
+            type="text"
             name="breed"
             fullWidth
             variant="outlined"
-             onChange={e => this.handleInputChange(e)}
+            onChange={e => this.handleInputChange(e)}
             SelectProps={{
               MenuProps: {
                 className: classes.menu
               }
             }}
-          >
+            >
             { breeds.map(option => (
               <MenuItem key={option.value} value={option.value}>
                 {option.label}
@@ -227,17 +228,16 @@ class PetProfileEdit extends Component {
             ))}
           </TextField>
 
+
           <TextField
             id="outlined-color-input"
             select
             label="Pet Color"
-            type="furcolor"
+            type="text"
             name="furcolor"
             value={furcolor}
             className={classes.textField}
             margin="normal"
-            type="text"
-            name="furcolor"
             fullWidth
             variant="outlined"
             onChange={e => this.handleInputChange(e)}
@@ -257,7 +257,7 @@ class PetProfileEdit extends Component {
          <TextField
             id="outlined-date_from"
             label="birth"
-            type="text"
+            type="date"
             name="birth"
             className={classes.textField}
             InputLabelProps={{
@@ -265,7 +265,7 @@ class PetProfileEdit extends Component {
             }}
             fullWidth
             variant="outlined"
-            value={moment(birth).format("LL")}  
+            value={birth}  
             margin="normal"
           />
 
@@ -300,22 +300,26 @@ PetProfileEdit.propTypes = {
   classes: PropTypes.object.isRequired,
   birth: PropTypes.string,
   petname: PropTypes.string,
+  petid:PropTypes.number,
   type: PropTypes.string,
   weight: PropTypes.string,
   breed: PropTypes.string,
   furcolor: PropTypes.string,
   weight: PropTypes.string,
-  image: PropTypes.string
+  image:PropTypes.string,
+
+ 
 };
 
 PetProfileEdit.defaultProps = {
+    petid:1,
     birth:"",
     petname:"",
     type: "",
     breed: "",
     furcolor: "",
     weight: "",
-    image:""
+    image:"",
 };
 
 function mapStateToProps({ pet }) {
@@ -323,12 +327,12 @@ function mapStateToProps({ pet }) {
   return {
     petid: pet.petid,
     birth: pet.birth,
-    petname:pet.petname,
+    petname: pet.petname,
     type: pet.type,
     breed: pet.breed,
     furcolor: pet.furcolor,
     weight: pet.weight,
-    image:pet.image
+    image:pet.image,
   };
 }
 

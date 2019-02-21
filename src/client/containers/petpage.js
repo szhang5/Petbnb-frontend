@@ -60,10 +60,12 @@ PetPage.propTypes = {
 };
 
 PetPage.defaultProps = {
-   pets: []
+   pets: [],
+   uid: 0,
 };
 
 function mapStateToProps({ pet, user }) {
+  console.log(pet);
   return {
     pets: pet.pets,
     uid: user.uid,
