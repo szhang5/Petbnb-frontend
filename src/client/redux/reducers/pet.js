@@ -31,9 +31,11 @@ export default function(state = initialState, action) {
     case ACTIONS.GET_PET_INFO: 
       return {
         pets: action.payload.data.pet,
-      }
+      };
     case ACTIONS.EDIT_PET_PROFILE_ACTION:
+    //console.log("pet20");
       return {
+        ...state,
         petid:action.payload.data.petid,
         birth:action.payload.data.birth,
         petname:action.payload.data.petname,
@@ -46,15 +48,18 @@ export default function(state = initialState, action) {
       return{
         ...state,
           uid:action.payload.data.uid,
-      }
+         
+      };
       case ACTIONS.UPDATE_PET_INFO:
       return {
-          ...state,
+            ...state,
+           
           [action.field]:action.value,
       }
       case ACTIONS.UPLOAD_PET_IMAGE_ACTION:
       return {
         ...state,
+        
         image: action.payload.data.imageUrl,
       }
     default:
