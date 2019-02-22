@@ -72,7 +72,16 @@ class Register extends Component {
               color="primary"
               className={classes.submit}
             >
-              Register
+              Register as Pet Owner
+            </Button>
+            <Button
+              type="submit"
+              fullWidth
+              variant="contained"
+              color="primary"
+              className={classes.submit}
+            >
+              Register as Pet Sitter
             </Button>
             <Button
              // type="submit"
