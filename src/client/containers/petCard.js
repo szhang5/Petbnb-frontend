@@ -10,6 +10,7 @@ import CardMedia from '@material-ui/core/CardMedia';
 import CardContent from '@material-ui/core/CardContent';
 import Typography from '@material-ui/core/Typography';
 import styles from "./styles/profileStyle";
+import Grid from '@material-ui/core/Grid';
 
 class PetCard extends Component {
  
@@ -28,11 +29,17 @@ class PetCard extends Component {
     		return(
         <div className={classes.cardContainer} key={pet.petid} onClick={() => this.handleOnClick(pet.petid)}>
 	        <Card className={classes.card}>
+            <Grid container spacing={10}>
+                  
+              <Grid item xs = {6}>
 	          <CardMedia
 	            className={classes.media}
 	            image= {pet.image? pet.image : defaultImage}
 	            title= {pet.petname}
 	          />
+              </Grid>
+              
+              <Grid item xs = {6}>
 	          <CardContent>
 	            <Typography component="p">
 	            	Name: {pet.petname? pet.petname : "pet name"}
@@ -50,6 +57,9 @@ class PetCard extends Component {
             		Furcolor: {pet.furcolor? pet.furcolor: "furcolor"}
             	</Typography>
 	          </CardContent>
+              </Grid>
+
+            </Grid>
 	        </Card>
 	      </div>
 	      );
