@@ -69,6 +69,11 @@ export default function(state = initialState, action) {
         
         image: action.payload.data.imageUrl,
       }
+      case ACTIONS.DELETE_PET_ACTION: {
+        return {
+          ...state,
+        }
+      }
     default:
       return state;
   }
