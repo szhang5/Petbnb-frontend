@@ -18,7 +18,17 @@ export const UPDATE_PET_INFO = "UPDATE_PET_INFO";
 export const GET_PET_INFO = "GET_PET_INFO";
 export const GET_PET_INFO_BY_ID = "GET_PET_INFO_BY_ID";
 export const GET_USER_GEO_LOCATION = "GET_USER_GEO_LOCATION";
+export const DELETE_PET_ACTION = "DELETE_PET_ACTION";
 
+
+export function deletePet(petid) {
+  const request = axios
+    .post('/service/petbnbservice/deletePet', {petid});
+  return {
+    type: DELETE_PET_ACTION,
+    payload: request,
+  }
+}
 
 export function GetPetInfoById(petid) {
   const request = axios
