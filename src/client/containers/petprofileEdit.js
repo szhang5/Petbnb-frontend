@@ -7,7 +7,7 @@ import MenuItem from "@material-ui/core/MenuItem";
 import TextField from "@material-ui/core/TextField";
 import { withRouter } from "react-router-dom";
 import Button from "@material-ui/core/Button";
-import { EditPetProfileAction ,UpdatePetInfo, UploadPetImage, GetPetInfoById} from "../redux/actions";
+import { EditPetProfileAction ,UpdatePetInfo, UploadPetImage, GetPetInfoById, deletePet } from "../redux/actions";
 import styles from "./styles/profileStyle";
 
 
@@ -89,7 +89,7 @@ class PetProfileEdit extends Component {
 
   componentWillMount(){
     const { id: petid } = this.props.match.params;
-    console.log(petid);
+    // console.log(petid);
     payload["petid"]= petid;
     this.props.GetPetInfoById(petid);
     
@@ -291,6 +291,19 @@ class PetProfileEdit extends Component {
             Cancel
           </Button>
         </form>
+         <Button
+            variant="outlined"
+            fullWidth
+            color="primary"
+            className={classes.button}
+            onClick={() => {
+              this.props.deletePet(this.props.petid).then(()=>{
+                this.props.history.push("/profile/petpage");
+              })
+            }}
+          >
+            Delete
+          </Button>
       </div>
     );
   }
@@ -340,7 +353,7 @@ export default withRouter(
   withStyles(styles)(
     connect(
       mapStateToProps,
-      { EditPetProfileAction, UpdatePetInfo, UploadPetImage, GetPetInfoById }
+      { EditPetProfileAction, UpdatePetInfo, UploadPetImage, GetPetInfoById, deletePet }
     )(PetProfileEdit)
   )
 );
