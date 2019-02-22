@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import PropTypes from "prop-types";
 import { connect } from 'react-redux';
 import { withRouter } from "react-router-dom";
 import { isLogin, getUserInfo } from "../redux/actions";
@@ -16,6 +17,9 @@ class ExclusiveRouteContainer extends Component {
 	}
 
 	render() {
+		if(!this.props.uid) {
+			return <div></div>;
+		}
 		const { children }  = this.props;
 		return (<div>
 			{children}
@@ -23,9 +27,18 @@ class ExclusiveRouteContainer extends Component {
 	}
 }
 
+ExclusiveRouteContainer.propTypes = {
+  uid:PropTypes.number,
+};
+
+ExclusiveRouteContainer.defaultProps = {
+  uid: 0,
+};
+
+
 function mapStateToProps(state) {
 	return {
-		userid: state.user.userid,
+		uid: state.user.uid,
 		name: state.user.name,		
 	}
 }
