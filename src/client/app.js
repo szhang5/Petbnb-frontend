@@ -12,7 +12,7 @@ import Profile from "./containers/profile";
 import OurService from "./containers/our_service";
 import ContactUs from "./containers/contact_us";
 import ProfileEdit from "./containers/profileEdit";
-import CreatePetProfile from "./containers/createPetProfile";
+import CreatePetProfile from "./containers/CreatePetProfile";
 import Search from "./containers/search";
 import PetProfileEdit from "./containers/petprofileEdit";
 import PetPage from "./containers/petpage";
