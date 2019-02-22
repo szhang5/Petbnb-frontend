@@ -7,9 +7,8 @@ import MenuItem from "@material-ui/core/MenuItem";
 import TextField from "@material-ui/core/TextField";
 import { withRouter } from "react-router-dom";
 import Button from "@material-ui/core/Button";
-import { EditPetProfileAction ,UpdatePetInfo, UploadPetImage, GetPetInfoById} from "../redux/actions";
+import { CreatePetProfileAction, UploadPetImage, UpdatePetInfo } from "../redux/actions";
 import styles from "./styles/profileStyle";
-
 
 const types = [
   {
@@ -80,33 +79,28 @@ const breeds=[
   }
 ]
 
-const payload = {};
-
-class PetProfileEdit extends Component {
+class CreatePetProfile extends Component {
   constructor(props) {
     super(props);
-  }
-
-  componentWillMount(){
-    const { id: petid } = this.props.match.params;
-    console.log(petid);
-    payload["petid"]= petid;
-    this.props.GetPetInfoById(petid);
-    
+    this.state = {
+      'image_base_64': null,
+    }
   }
 
   handleSubmit(e) {
-    console.log("111");
     e.preventDefault();
     const data = new FormData(e.target);
+    const payload = {};
     for (const [key, value] of data.entries()) {
       payload[key] = value;
     }
-   this.props.EditPetProfileAction(payload).then(() => {
+    payload['uid'] = this.props.uid;
+    payload['image_base_64'] = this.state.image_base_64 || '';
+   this.props.CreatePetProfileAction(payload).then(() => {
       this.props.history.push("/profile/petpage");
-
     });
   }
+
 
   onChange(e) {
     let files = e.target.files;
@@ -114,22 +108,24 @@ class PetProfileEdit extends Component {
     reader.readAsDataURL(files[0]);
 
     reader.onload = e => {
-      console.log(e.target.result);
-      this.props.UploadPetImage(this.props.petid, e.target.result);
+      this.setState({
+        'image_base_64': e.target.result,
+      })
     };
   }
+
   handleInputChange(e){
      console.log("handlechange"+e.target);
     this.props.UpdatePetInfo(e.target.name, e.target.value);
   }
 
   render() {
-    const {classes, birth, petname, type, breed, furcolor, weight, image} = this.props;
+    const {classes,birth,petname,type,breed,furcolor,weight,image} = this.props;
     const defaultImage = "https://res.cloudinary.com/zoey1111/image/upload/v1550674929/petProfileDefault.png";
-    console.log(birth);
+
     return (
       <div>
-        <h1>Edit Pet Profile</h1>
+        <h1>Create Pet Profile</h1>
         <img src = { image? image: defaultImage } className={classes.img}/>
         <input type="file" name="file" onChange={e => this.onChange(e)} />;
 
@@ -296,8 +292,9 @@ class PetProfileEdit extends Component {
   }
 }
 
-PetProfileEdit.propTypes = {
+CreatePetProfile.propTypes = {
   classes: PropTypes.object.isRequired,
+  uid: PropTypes.number.isRequired,
   birth: PropTypes.string,
   petname: PropTypes.string,
   petid:PropTypes.number,
@@ -307,11 +304,9 @@ PetProfileEdit.propTypes = {
   furcolor: PropTypes.string,
   weight: PropTypes.string,
   image:PropTypes.string,
-
- 
 };
 
-PetProfileEdit.defaultProps = {
+CreatePetProfile.defaultProps = {
     petid:1,
     birth:"",
     petname:"",
@@ -322,10 +317,11 @@ PetProfileEdit.defaultProps = {
     image:"",
 };
 
-function mapStateToProps({ pet }) {
+function mapStateToProps({ pet, user }) {
   console.log(pet);
   return {
     petid: pet.petid,
+    uid: user.uid,
     birth: pet.birth,
     petname: pet.petname,
     type: pet.type,
@@ -340,7 +336,7 @@ export default withRouter(
   withStyles(styles)(
     connect(
       mapStateToProps,
-      { EditPetProfileAction, UpdatePetInfo, UploadPetImage, GetPetInfoById }
-    )(PetProfileEdit)
+      { CreatePetProfileAction, UploadPetImage, UpdatePetInfo }
+    )(CreatePetProfile)
   )
 );

@@ -12,7 +12,7 @@ import Profile from "./containers/profile";
 import OurService from "./containers/our_service";
 import ContactUs from "./containers/contact_us";
 import ProfileEdit from "./containers/profileEdit";
-import PetProfile from "./containers/petprofile";
+import CreatePetProfile from "./containers/createPetProfile";
 import Search from "./containers/search";
 import PetProfileEdit from "./containers/petprofileEdit";
 import PetPage from "./containers/petpage";
@@ -42,7 +42,12 @@ class App extends Component {
                     <Route path="/profile/edit" component={ProfileEdit} />
                     <Route exact path="/profile" component={Profile} />
                     <Route
-                      path="/profile/petprofile/edit/:id"
+                      exact path="/createPetProfile"
+                      component={CreatePetProfile}
+                    />
+
+                    <Route
+                      exact path="/profile/petprofile/edit/:id"
                       component={PetProfileEdit}
                     />
                     <Route

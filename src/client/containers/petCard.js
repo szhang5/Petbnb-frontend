@@ -38,7 +38,7 @@ class PetCard extends Component {
 	            	Name: {pet.petname? pet.petname : "pet name"}
 	            </Typography>
 	            <Typography component="p">
-            		Birh: {moment(pet.birth).format("LL")}
+            		Birth: {pet.birth? moment(pet.birth).format("LL") : null}
             	</Typography>
             	<Typography component="p">
             		Type: {pet.type? pet.type: "type"}

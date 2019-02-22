@@ -136,9 +136,9 @@ export function UpdatePetInfo(field, value){
     value,
   };
 }
-export function CreatePetProfileAction(uid) {
+export function CreatePetProfileAction(payload) {
   const request = axios
-    .post('/service/petbnbservice/createPet', {uid});
+    .post('/service/petbnbservice/createPet', payload);
 
   return {
     type:CREATE_PET_PROFILE_ACTION,
