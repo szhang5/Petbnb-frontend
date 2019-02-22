@@ -8,7 +8,7 @@ import Fab from '@material-ui/core/Fab';
 import Icon from '@material-ui/core/Icon';
 import AddIcon from '@material-ui/icons/Add';
 import Button from "@material-ui/core/Button";
-import {CreatePetProfileAction, getPetInfo} from "../redux/actions"
+import { getPetInfo} from "../redux/actions"
 import PetCard from "./petCard";
 import styles from "./styles/profileStyle";
 
@@ -18,10 +18,15 @@ class PetPage extends Component {
     this.props.getPetInfo(this.props.uid);
   }
   
+  componentWillUpdate(nextProps, nextState){
+    console.log(1121231231);
+    console.log(nextProps);
+    console.log(nextState);
+  }
 
   render() {
    const { classes, uid, pets } = this.props;
-
+    console.log('uid', uid);
     return (
       <div>
          
@@ -29,8 +34,7 @@ class PetPage extends Component {
         
         <div>
           <Fab color="primary" aria-label="Add" className={classes.fab}  onClick={()=>{
-               this.props.CreatePetProfileAction(this.props.uid); 
-               this.props.history.push("petprofile/edit");}}>
+               this.props.history.push("/createPetProfile");}}>
           <AddIcon />
           </Fab>
         </div>
@@ -61,7 +65,6 @@ PetPage.propTypes = {
 
 PetPage.defaultProps = {
    pets: [],
-   uid: 0,
 };
 
 function mapStateToProps({ pet, user }) {
@@ -76,7 +79,7 @@ export default withRouter(
   withStyles(styles)(
     connect(
       mapStateToProps,
-      { CreatePetProfileAction, getPetInfo }
+      { getPetInfo }
     )(PetPage)
   )
 );
