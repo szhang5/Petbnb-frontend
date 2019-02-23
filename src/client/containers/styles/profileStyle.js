@@ -41,8 +41,11 @@ const styles = theme => ({
     maxWidth: 400,
   },
   media: {
-    height: 200,
+    height: 150,
   },
+  cardContainer: {
+    marginBottom: 10,
+  }
 });
 
 export default styles;
