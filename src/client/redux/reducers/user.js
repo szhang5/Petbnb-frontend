@@ -25,6 +25,10 @@ export default function(state = initialState, action) {
 	    };
     case ACTIONS.REGISTER_ACTION:
       return initialState;
+    case ACTIONS.GET_USER_GEO_LOCATION: 
+    return {
+       geoLocation: action.payload.data.geoLocation,
+    }
     case ACTIONS.GET_USER_INFO:
       return {
         ...state,
