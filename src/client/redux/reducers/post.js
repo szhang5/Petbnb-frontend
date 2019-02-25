@@ -10,7 +10,6 @@ const initialState = {
   pet_type: "",
   pets_num: "",
   postdate: "",
- // getLocations: []
 };
 
 export default function(state = initialState, action) {
@@ -26,7 +25,6 @@ export default function(state = initialState, action) {
         posts: action.payload.data.post
       };
     case ACTIONS.GET_USER_POST_ACTION:
-      // console.log('action: ', action);
       return {
         sitterid: action.payload.data.post.sitterid,
         avai_end_date: action.payload.data.post.avai_end_date,
@@ -37,10 +35,7 @@ export default function(state = initialState, action) {
         pets_num: action.payload.data.post.pets_num,
         postdate: action.payload.data.post.postdate
       };
-   /* case ACTIONS.GET_USER_GEO_LOCATION:
-      return{
-        getLocations: action.payload.data.post.getLocations,
-      }*/
+   
     default:
       return state;
   }
