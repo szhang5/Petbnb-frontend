@@ -28,7 +28,7 @@ class Map extends Component {
     console.log("zoom changed");
   }
   render() {
-    const { classes, posts } = this.props;
+    const { classes, posts,getLocations } = this.props;
     const markers = this.props.markers || [];
     return (
       
@@ -40,21 +40,21 @@ class Map extends Component {
         defaultCenter={this.props.center}
       >
         {this.props.isMarkerShown && (
-          <Marker
-            position={{ lat: 40.710198, lng: -74.0073001 }}
-            onClick={this.props.onMarkerClick}
-          />
-         
-        )}
+          this.getLocations.map(mark=> <Marker
+          key={mark.uid}
+          position={{ lat: mark.lat, lng: mark.lng }}
+          
+        />)  
+          )}
        
-         <Marker
+        {/*<Marker
           position={{ lat: 40.709558, lng: -74.003873 }}
           onClick={this.props.onMarkerClick}
         />
          <Marker
         position={{ lat: 40.7101763, lng: -74.0092265 }}
         onClick={this.props.onMarkerClick}
-      />
+      /> */} 
       </GoogleMap>
     );
   }
