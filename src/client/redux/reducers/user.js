@@ -29,6 +29,7 @@ export default function(state = initialState, action) {
     case ACTIONS.GET_USER_GEO_LOCATION: 
     console.log('action: ', action.payload.data.geoLocation);
     return {
+      ...state,
       geoLocation: action.payload.data.geoLocation,
     }
     
