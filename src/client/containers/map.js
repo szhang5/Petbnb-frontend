@@ -14,6 +14,7 @@ class Map extends Component {
     this.state = {
       map: null
     };
+   console.log(this.props);
   }
   mapMoved() {
     console.log("move");
@@ -28,7 +29,7 @@ class Map extends Component {
     console.log("zoom changed");
   }
   render() {
-    const { classes, posts,getLocations } = this.props;
+    const { classes, geoLocation } = this.props;
     const markers = this.props.markers || [];
     return (
       
@@ -39,12 +40,10 @@ class Map extends Component {
         defaultZoom={this.props.zoom}
         defaultCenter={this.props.center}
       >
-        {this.props.isMarkerShown && (
-          this.getLocations.map(mark=> <Marker
+        {geoLocation.map(mark=> <Marker
           key={mark.uid}
           position={{ lat: mark.lat, lng: mark.lng }}
-          
-        />)  
+        /> 
           )}
        
         {/*<Marker

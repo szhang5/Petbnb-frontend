@@ -7,11 +7,7 @@ service PetBnbService {
   rpc SignIn (SignInRequest) returns (UserBasicInfo) {}
   rpc Register (RegisterRequest) returns (Success) {}
   rpc GetUserInfo (GetUserInfoRequest) returns (UserBasicInfo) {}
-<<<<<<< HEAD
-  rpc GetUsersGeoLocation (Empty) returns (UserGeoLocationRequest) {}
-=======
   rpc GetUsersGeoLocation (Empty) returns (GeoLocation) {}
->>>>>>> 8c40368fe1afd4253120295905126d7f0be41b8b
   rpc EditProfile (EditProfileRequest) returns (UserBasicInfo) {}
   rpc GetPost (Empty) returns (PostInfo) {}
   rpc GetUserPost (GetUserPostRequest) returns (UserPostInfo) {}

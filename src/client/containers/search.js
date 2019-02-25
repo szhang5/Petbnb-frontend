@@ -65,7 +65,7 @@ class Search extends Component {
 
   handleSubmit(e) {
     e.preventDefault();
-    // console.log(this.state);
+    //this.props.getUsersGeoLocation();
     this.props.SearchPost(this.state).then(() => {
       window.location.replace((window.location.hash = "/search#anchorId"));
     });
@@ -77,12 +77,23 @@ class Search extends Component {
   };
 
   render() {
-    const { classes, posts, getLocations, lat, lng } = this.props;
-    // console.log('posts', posts)
+    const { classes, posts, geoLocation, lat, lng } = this.props;
+     console.log('posts', geoLocation)
     return (
       <div id="top">
         <h1>Search</h1>
-        
+        <Map
+          onMarkerClick={this.handleMarkerClick}
+          isMarkerShown
+          center={{lat:lat, lng: lng}}
+          zoom={16}
+          googleMapURL="https://maps.googleapis.com/maps/api/js?key=AIzaSyCUQjqXLGPcvOkrxO_0MNh_HouBRwlxqwA"
+          loadingElement={<div style={{ height: `100%` }} />}
+          containerElement={<div style={{ height: `400px` }} />}
+          mapElement={<div style={{ height: `100%` }} />}
+          geoLocation={geoLocation}
+         
+        />
         <form
           className={classes.container}
           noValidate
@@ -216,19 +227,7 @@ class Search extends Component {
         </form>
         <div id="anchorId" className={classes.postanchor} />
         
-        <Map
-          onMarkerClick={this.handleMarkerClick}
-          isMarkerShown
-          center={{lat:lat, lng: lng}}
-         // center={{ lat: 40.7111197, lng: -74.005951 }} //put user's location --> endpoint getUserLocation();
-          zoom={16}
-          googleMapURL="https://maps.googleapis.com/maps/api/js?key=AIzaSyCUQjqXLGPcvOkrxO_0MNh_HouBRwlxqwA"
-          loadingElement={<div style={{ height: `100%` }} />}
-          containerElement={<div style={{ height: `400px` }} />}
-          mapElement={<div style={{ height: `100%` }} />}
-          getLocations={getLocations}
-         
-        />
+        
         {posts.length != 0 ? (
           <SitterPost posts={posts} />    
         ) : (
@@ -243,25 +242,24 @@ class Search extends Component {
 Search.propTypes = {
   classes: PropTypes.object.isRequired,
   posts: PropTypes.array.isRequired,
-  getLocations: PropTypes.array,
   lat: PropTypes.number,
-  lng: PropTypes.number
+  lng: PropTypes.number,
+  geoLocation: PropTypes.array
 };
 
 Search.defaultProps = {
   posts: [],
-  getLocations: [],
-  lat: 40.7111197,
-  lng: -74.005951
+  lat: 40.7104852,
+  lng: -74.0063939,
+  geoLocation: [],
 };
 
 function mapStateToProps({ post,user }) {
   return {
     posts: post.posts,
-    getLocations: post.getLocations,
     lat: user.lat,
-    lng: user.lng
-
+    lng: user.lng,
+    geoLocation: user.geoLocation,
   };
 }
 
