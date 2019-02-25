@@ -53,6 +53,9 @@ const number = [
 class Search extends Component {
   constructor(props) {
     super(props);
+    const payload = {};
+    this.props.getUsersGeoLocation(payload).then(() => {
+    });
   }
 
   state = {
@@ -226,14 +229,11 @@ class Search extends Component {
           </Button>
         </form>
         <div id="anchorId" className={classes.postanchor} />
-        
-        
         {posts.length != 0 ? (
           <SitterPost posts={posts} />    
         ) : (
           <h1 className={classes.alert}>Sorry, no match</h1>
         )}
-
       </div>
     );
   }
@@ -255,6 +255,7 @@ Search.defaultProps = {
 };
 
 function mapStateToProps({ post,user }) {
+  console.log(user)
   return {
     posts: post.posts,
     lat: user.lat,

@@ -5,6 +5,7 @@ import {
   GoogleMap,
   Marker
 } from "react-google-maps";
+import {MarkerWithLabel} from "react-google-maps/lib/components/addons/MarkerWithLabel"
 
 
 class Map extends Component {
@@ -30,9 +31,8 @@ class Map extends Component {
   }
   render() {
     const { classes, geoLocation } = this.props;
-    const markers = this.props.markers || [];
+   // const markers = this.props.markers || [];
     return (
-      
       <GoogleMap
         ref={this.mapLoaded.bind(this)}
         onDragEnd={this.mapMoved.bind(this)}
@@ -43,17 +43,9 @@ class Map extends Component {
         {geoLocation.map(mark=> <Marker
           key={mark.uid}
           position={{ lat: mark.lat, lng: mark.lng }}
-        /> 
+        >
+        </Marker> 
           )}
-       
-        {/*<Marker
-          position={{ lat: 40.709558, lng: -74.003873 }}
-          onClick={this.props.onMarkerClick}
-        />
-         <Marker
-        position={{ lat: 40.7101763, lng: -74.0092265 }}
-        onClick={this.props.onMarkerClick}
-      /> */} 
       </GoogleMap>
     );
   }
