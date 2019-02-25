@@ -9,7 +9,8 @@ const initialState = {
   hour_rate: "",
   pet_type: "",
   pets_num: "",
-  postdate: ""
+  postdate: "",
+ // getLocations: []
 };
 
 export default function(state = initialState, action) {
@@ -36,6 +37,10 @@ export default function(state = initialState, action) {
         pets_num: action.payload.data.post.pets_num,
         postdate: action.payload.data.post.postdate
       };
+   /* case ACTIONS.GET_USER_GEO_LOCATION:
+      return{
+        getLocations: action.payload.data.post.getLocations,
+      }*/
     default:
       return state;
   }
