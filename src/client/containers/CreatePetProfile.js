@@ -88,7 +88,7 @@ class CreatePetProfile extends Component {
   }
 
   handleSubmit(e) {
-    console.log("222");
+    //console.log("222");
     e.preventDefault();
     const data = new FormData(e.target);
     const payload = {};
@@ -97,6 +97,8 @@ class CreatePetProfile extends Component {
     }
     payload['uid'] = this.props.uid;
     payload['image_base_64'] = this.state.image_base_64 || '';
+    console.log(payload);
+
    this.props.CreatePetProfileAction(payload).then(() => {
       this.props.history.push("/profile/petpage");
     });
