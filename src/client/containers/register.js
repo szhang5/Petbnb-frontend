@@ -7,6 +7,7 @@ import Avatar from "@material-ui/core/Avatar";
 import Button from "@material-ui/core/Button";
 import FormControl from "@material-ui/core/FormControl";
 import FormControlLabel from "@material-ui/core/FormControlLabel";
+import Radio from '@material-ui/core/Radio';
 import Checkbox from "@material-ui/core/Checkbox";
 import Input from "@material-ui/core/Input";
 import InputLabel from "@material-ui/core/InputLabel";
@@ -61,7 +62,16 @@ class Register extends Component {
                 autoComplete="current-password"
               />
             </FormControl>
+           
             <FormControlLabel
+              control={<Radio value="1" color="primary" />}
+              label="Owner"
+            />
+            <FormControlLabel
+            control={<Radio value="0" color="primary" />}
+            label="Sitter"
+          />
+           <FormControlLabel
               control={<Checkbox value="remember" color="primary" />}
               label="Remember me"
             />
@@ -72,9 +82,9 @@ class Register extends Component {
               color="primary"
               className={classes.submit}
             >
-              Register as Pet Owner
+              Register
             </Button>
-            <Button
+           {/*<Button
               type="submit"
               fullWidth
               variant="contained"
@@ -82,7 +92,7 @@ class Register extends Component {
               className={classes.submit}
             >
               Register as Pet Sitter
-            </Button>
+            </Button> */} 
             <Button
              // type="submit"
               fullWidth
