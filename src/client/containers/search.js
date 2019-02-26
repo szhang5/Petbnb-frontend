@@ -8,7 +8,7 @@ import MenuItem from "@material-ui/core/MenuItem";
 import TextField from "@material-ui/core/TextField";
 import { withRouter } from "react-router-dom";
 import Button from "@material-ui/core/Button";
-import { SearchPost } from "../redux/actions";
+import { SearchPost,getUsersGeoLocation,getUserInfo } from "../redux/actions";
 import SitterPost from "./sitter_post";
 import styles from "./styles/searchStyle";
 import Map from "./map";
@@ -23,9 +23,9 @@ const types = [
   }
 ];
 const ranges_obj = {
-  "20": "20",
-  "50": "50",
-  "100": "100"
+  "0~20": "20",
+  "20~50": "50",
+  "50~100": "100"
 };
 
 const ranges = map(ranges_obj, (value, key) => {
@@ -53,6 +53,9 @@ const number = [
 class Search extends Component {
   constructor(props) {
     super(props);
+    const payload = {};
+    this.props.getUsersGeoLocation(payload).then(() => {
+    });
   }
 
   state = {
@@ -65,7 +68,7 @@ class Search extends Component {
 
   handleSubmit(e) {
     e.preventDefault();
-    // console.log(this.state);
+    //this.props.getUsersGeoLocation();
     this.props.SearchPost(this.state).then(() => {
       window.location.replace((window.location.hash = "/search#anchorId"));
     });
@@ -77,20 +80,22 @@ class Search extends Component {
   };
 
   render() {
-    const { classes, posts } = this.props;
-    // console.log('posts', posts)
+    const { classes, posts, geoLocation, lat, lng } = this.props;
+     console.log('posts', geoLocation)
     return (
       <div id="top">
         <h1>Search</h1>
         <Map
           onMarkerClick={this.handleMarkerClick}
           isMarkerShown
-          center={{ lat: 40.7111197, lng: -74.005951 }} //put user's location --> endpoint getUserLocation();
+          center={{lat:lat, lng: lng}}
           zoom={16}
           googleMapURL="https://maps.googleapis.com/maps/api/js?key=AIzaSyCUQjqXLGPcvOkrxO_0MNh_HouBRwlxqwA"
           loadingElement={<div style={{ height: `100%` }} />}
           containerElement={<div style={{ height: `400px` }} />}
           mapElement={<div style={{ height: `100%` }} />}
+          geoLocation={geoLocation}
+         
         />
         <form
           className={classes.container}
@@ -225,7 +230,7 @@ class Search extends Component {
         </form>
         <div id="anchorId" className={classes.postanchor} />
         {posts.length != 0 ? (
-          <SitterPost posts={posts} />
+          <SitterPost posts={posts} />    
         ) : (
           <h1 className={classes.alert}>Sorry, no match</h1>
         )}
@@ -236,16 +241,26 @@ class Search extends Component {
 
 Search.propTypes = {
   classes: PropTypes.object.isRequired,
-  posts: PropTypes.array.isRequired
+  posts: PropTypes.array.isRequired,
+  lat: PropTypes.number,
+  lng: PropTypes.number,
+  geoLocation: PropTypes.array
 };
 
 Search.defaultProps = {
-  posts: []
+  posts: [],
+  lat: 40.7104852,
+  lng: -74.0063939,
+  geoLocation: [],
 };
 
-function mapStateToProps({ post }) {
+function mapStateToProps({ post,user }) {
+  console.log(user)
   return {
-    posts: post.posts
+    posts: post.posts,
+    lat: user.lat,
+    lng: user.lng,
+    geoLocation: user.geoLocation,
   };
 }
 
@@ -253,7 +268,7 @@ export default withRouter(
   withStyles(styles)(
     connect(
       mapStateToProps,
-      { SearchPost }
+      { SearchPost,getUsersGeoLocation }
     )(Search)
   )
 );

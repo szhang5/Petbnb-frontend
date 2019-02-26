@@ -88,6 +88,7 @@ class CreatePetProfile extends Component {
   }
 
   handleSubmit(e) {
+    console.log("222");
     e.preventDefault();
     const data = new FormData(e.target);
     const payload = {};
