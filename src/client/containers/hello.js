@@ -10,6 +10,7 @@ class HelloWorld extends Component {
     super(props);
     this.props.getPost();
     this.props.getUsersGeoLocation();
+  
   }
 
   render() {
@@ -17,7 +18,7 @@ class HelloWorld extends Component {
     return (
       <div>
         <h1>Home</h1>
-        <SitterPost posts={posts} />
+        <SitterPost posts={posts} />   
       </div>
     );
   }
