@@ -23,9 +23,9 @@ const types = [
   }
 ];
 const ranges_obj = {
-  "20": "20",
-  "50": "50",
-  "100": "100"
+  "0~20": "20",
+  "20~50": "50",
+  "50~100": "100"
 };
 
 const ranges = map(ranges_obj, (value, key) => {
