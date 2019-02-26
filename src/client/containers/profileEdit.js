@@ -25,6 +25,7 @@ class ProfileEdit extends Component {
     }
 
     this.props.EditProfileAction(payload).then(() => {
+      //this.props.history.push("/profile");
       this.props.history.push("/profile");
     });
   }

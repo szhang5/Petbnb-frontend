@@ -14,6 +14,7 @@ const initialState = {
     'lat': '',
     'lng': '',
     'image': '',
+    geoLocation:[],
 }
 
 export default function(state = initialState, action) {
@@ -26,9 +27,12 @@ export default function(state = initialState, action) {
     case ACTIONS.REGISTER_ACTION:
       return initialState;
     case ACTIONS.GET_USER_GEO_LOCATION: 
+    console.log('action: ', action.payload.data.geoLocation);
     return {
-       geoLocation: action.payload.data.geoLocation,
+      ...state,
+      geoLocation: action.payload.data.geoLocation,
     }
+    
     case ACTIONS.GET_USER_INFO:
       return {
         ...state,
