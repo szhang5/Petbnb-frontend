@@ -26,8 +26,8 @@ export default function(state = initialState, action) {
 	    };
     case ACTIONS.REGISTER_ACTION:
       return initialState;
+
     case ACTIONS.GET_USER_GEO_LOCATION: 
-    console.log('action: ', action.payload.data.geoLocation);
     return {
       ...state,
       geoLocation: action.payload.data.geoLocation,
@@ -56,8 +56,6 @@ export default function(state = initialState, action) {
     case ACTIONS.EDIT_PROFILE_ACTION:
       return {
         ...state,
-        'uid': action.payload.data.user.uid,
-        'personId': action.payload.data.user.personid,
         'firstname': action.payload.data.user.firstname,
         'lastname': action.payload.data.user.lastname,
         'email': action.payload.data.user.email,
