@@ -11,10 +11,10 @@ export const CREATE_POST_ACTION = 'CREATE_POST_ACTION';
 export const SEARCH_POST_ACTION = 'SEARCH_POST_ACTION';
 export const UPLOAD_IMAGE_ACTION = 'UPLOAD_IMAGE_ACTION';
 export const UPLOAD_PET_IMAGE_ACTION = 'UPLOAD_PET_IMAGE_ACTION';
-export const UPDATE_USER_INFO = 'UPDATE_USER_INFO';
+export const UPDATE_INPUT_INFO = 'UPDATE_INPUT_INFO';
+export const EDIT_POST_ACTION = 'EDIT_POST_ACTION';
 export const EDIT_PET_PROFILE_ACTION = 'EDIT_PET_PROFILE_ACTION';
 export const CREATE_PET_PROFILE_ACTION = 'CREATE_PET_PROFILE_ACTION';
-export const UPDATE_PET_INFO = "UPDATE_PET_INFO";
 export const GET_PET_INFO = "GET_PET_INFO";
 export const GET_PET_INFO_BY_ID = "GET_PET_INFO_BY_ID";
 export const GET_USER_GEO_LOCATION = "GET_USER_GEO_LOCATION";
@@ -109,6 +109,19 @@ export function SearchPost(payload) {
   }
 }
 
+export function editPost(payload) {
+  const request = axios
+    .post('/service/petbnbservice/editPost', {
+      ...payload,
+      hour_rate: parseFloat(payload.hour_rate),
+      pets_num: parseInt(payload.pets_num, 10),
+    });
+  return {
+    type: EDIT_POST_ACTION,
+    payload: request,
+  }
+}
+
 
 export function getPost() {
   const request = axios
@@ -139,13 +152,7 @@ export function EditPetProfileAction(payload) {
     payload: request,
   };
 }
-export function UpdatePetInfo(field, value){
-  return {
-    type: UPDATE_PET_INFO,
-    field,
-    value,
-  };
-}
+
 export function CreatePetProfileAction(payload) {
   const request = axios
     .post('/service/petbnbservice/createPet', payload);
@@ -200,9 +207,9 @@ export function signOut() {
   };
 }
 
-export function UpdateUserInfo(field, value){
+export function updateInputInfo(field, value){
   return {
-    type: UPDATE_USER_INFO,
+    type: UPDATE_INPUT_INFO,
     field,
     value,
   };

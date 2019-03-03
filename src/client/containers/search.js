@@ -81,7 +81,7 @@ class Search extends Component {
 
   render() {
     const { classes, posts, geoLocation, lat, lng } = this.props;
-     console.log('posts', geoLocation)
+     // console.log('posts', geoLocation)
     return (
       <div id="top">
         <h1>Search</h1>
