@@ -45,6 +45,14 @@ const styles = theme => ({
   },
   cardContainer: {
     marginBottom: 10,
+  },
+  checkBox: {
+    marginLeft: 10,
+  },
+  petType:{
+    marginLeft: 15,
+    color: "gray",
+    fontSize: 16,
   }
 });
 

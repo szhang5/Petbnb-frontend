@@ -8,7 +8,7 @@ const initialState = {
   description: "",
   hour_rate: "",
   pet_type: "",
-  pets_num: "",
+  pets_num: 1,
   postdate: "",
 };
 
@@ -35,7 +35,11 @@ export default function(state = initialState, action) {
         pets_num: action.payload.data.post.pets_num,
         postdate: action.payload.data.post.postdate
       };
-   
+    case ACTIONS.UPDATE_INPUT_INFO:
+      return {
+        ...state,
+        [action.field]: action.value,
+      }
     default:
       return state;
   }
