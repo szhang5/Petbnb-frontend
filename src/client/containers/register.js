@@ -84,22 +84,11 @@ class Register extends Component {
             >
               Register
             </Button>
-           {/*<Button
-              type="submit"
-              fullWidth
-              variant="contained"
-              color="primary"
-              className={classes.submit}
-            >
-              Register as Pet Sitter
-            </Button> */} 
             <Button
-             // type="submit"
               fullWidth
               variant="contained"
               color="primary"
               className={classes.submit}
-              //href="#"
               onClick={() => {
               this.props.history.push("/signin");
             }}

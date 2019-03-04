@@ -12,11 +12,11 @@ import Profile from "./containers/profile";
 import OurService from "./containers/our_service";
 import ContactUs from "./containers/contact_us";
 import ProfileEdit from "./containers/profileEdit";
+import PostEdit from "./containers/postEdit";
 import CreatePetProfile from "./containers/CreatePetProfile";
 import Search from "./containers/search";
 import PetProfileEdit from "./containers/petprofileEdit";
 import PetPage from "./containers/petpage";
-import FileupLoad from "./containers/fileupload_test";
 import reducers from "./redux/reducers";
 import configureStore from "./app/store/configure-store";
 import ExclusiveRouteContainer from "./app/ExclusiveRouteContainer";
@@ -55,15 +55,15 @@ class App extends Component {
                       component={PetPage}
                     />
 
+                    <Route
+                      path="/profile/editPost"
+                      component={PostEdit}
+                    />
+
                     <Route exact path="/home" component={Hello} />
                     <Route exact path="/search" component={Search} />
                     <Route exact path="/our_service" component={OurService} />
                     <Route exact path="/contact_us" component={ContactUs} />
-                    <Route
-                      exact
-                      path="/fileupload_test"
-                      component={FileupLoad}
-                    />
                   </ExclusiveRouteContainer>
                 </Switch>
               </div>
