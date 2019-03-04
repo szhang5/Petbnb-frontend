@@ -57,7 +57,7 @@ export default function(state = initialState, action) {
           furcolor: action.payload.data.furcolor,
           weight: action.payload.data.weight,
       };
-      case ACTIONS.UPDATE_PET_INFO:
+      case ACTIONS.UPDATE_INPUT_INFO:
       return {
             ...state,
            
