@@ -7,11 +7,10 @@ service PetBnbService {
   rpc SignIn (SignInRequest) returns (UserBasicInfo) {}
   rpc Register (RegisterRequest) returns (Success) {}
   rpc GetUserInfo (GetUserInfoRequest) returns (UserBasicInfo) {}
-  rpc GetUsersGeoLocation (Empty) returns (UserGeoLocation) {}
+  rpc GetUsersGeoLocation (Empty) returns (GeoLocation) {}
   rpc EditProfile (EditProfileRequest) returns (UserBasicInfo) {}
   rpc GetPost (Empty) returns (PostInfo) {}
   rpc GetUserPost (GetUserPostRequest) returns (UserPostInfo) {}
-  rpc CreatePost (CreatePostRequest) returns (Success) {}
   rpc SearchPost (SearchPostRequest) returns (PostInfo) {}
   rpc ImageUpload (GetImageInfoRequest) returns (ImageUrlResponse) {}
   rpc GetPetInfo (CreatePetRequest) returns (PetInfo) {} 
@@ -19,6 +18,27 @@ service PetBnbService {
   rpc EditPet (EdiPetRequest) returns (Pet) {}
   rpc CreatePet (CreatePetRequest) returns (Success){}
   rpc PetImageUpload (GetPetImageInfoRequest) returns (ImageUrlResponse){}
+  rpc DeletePet (GetPetIDRequest) returns (Success){}
+  rpc EditPost (EditPostRequest) returns (Success){}
+  rpc CreateTransaction(CreateTransactionRequest) returns (Success){}
+}
+
+message CreateTransactionRequest{
+  int32 petid = 1;
+  int32 sitterid = 2;
+  string startdate = 3;
+  string enddate = 4;
+}
+
+message EditPostRequest{
+  int32 sitterid = 8;
+  string postdate = 1;
+  string avai_start_date = 2;
+  string avai_end_date = 3;
+  string description = 4;
+  string pet_type = 5;
+  double hour_rate = 6;
+  int32  pets_num = 7;
 }
 
 message EdiPetRequest {
@@ -56,21 +76,11 @@ message SignInRequest {
 message RegisterRequest {
   string email = 1;
   string password = 2;
+  int32 user_type = 3;
 }
 
 message GetUserPostRequest {
-  string uid = 1;
-}
-
-message CreatePostRequest {
-  string uid = 1;
-  string postdate = 2;
-  string avai_start_date = 3;
-  string avai_end_date = 4;
-  string description = 5;
-  string pet_type = 6;
-  double hour_rate = 7;
-  int32 pets_num = 8;
+  int32 uid = 1;
 }
 
 message SearchPostRequest {
@@ -96,6 +106,8 @@ message User {
   string image = 12;
   float lat = 13;
   float lng = 14;
+  int32 user_type = 15;//(owner) 1   (sitter) 0
+  float balance = 16;
 }
 
 message UserBasicInfo {
@@ -157,6 +169,10 @@ message GetPetImageInfoRequest {
 
 message ImageUrlResponse {
   string imageUrl = 1;
+}
+
+message GeoLocation{
+  repeated UserGeoLocation geoLocation = 1;
 }
 
 message UserGeoLocation {
