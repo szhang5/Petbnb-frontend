@@ -85,8 +85,13 @@ class Search extends Component {
   };
 
   render() {
+<<<<<<< HEAD
     const { classes, posts, geoLocation, lat, lng, description } = this.props;
      console.log('posts', posts)
+=======
+    const { classes, posts, geoLocation, lat, lng } = this.props;
+     // console.log('posts', geoLocation)
+>>>>>>> f928cc5ebc33ad2f53a95384efea72444b5bb1e0
     return (
       <div id="top">
         <h1>Search</h1>
