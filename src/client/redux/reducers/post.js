@@ -25,6 +25,7 @@ export default function(state = initialState, action) {
         posts: action.payload.data.post
       };
     case ACTIONS.GET_USER_POST_ACTION:
+    console.log(action.payload);
       return {
         sitterid: action.payload.data.post.sitterid,
         avai_end_date: action.payload.data.post.avai_end_date,

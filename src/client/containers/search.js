@@ -8,10 +8,13 @@ import MenuItem from "@material-ui/core/MenuItem";
 import TextField from "@material-ui/core/TextField";
 import { withRouter } from "react-router-dom";
 import Button from "@material-ui/core/Button";
-import { SearchPost,getUsersGeoLocation,getUserInfo } from "../redux/actions";
+import { SearchPost,getUsersGeoLocation,getUserInfo,GetUserPost } from "../redux/actions";
 import SitterPost from "./sitter_post";
 import styles from "./styles/searchStyle";
 import Map from "./map";
+//const FaAnchor = require("react-icons/lib/fa/anchor");
+
+
 const types = [
   {
     value: "cat",
@@ -56,6 +59,8 @@ class Search extends Component {
     const payload = {};
     this.props.getUsersGeoLocation(payload).then(() => {
     });
+    
+   
   }
 
   state = {
@@ -80,23 +85,25 @@ class Search extends Component {
   };
 
   render() {
-    const { classes, posts, geoLocation, lat, lng } = this.props;
-     console.log('posts', geoLocation)
+    const { classes, posts, geoLocation, lat, lng, description } = this.props;
+     console.log('posts', posts)
     return (
       <div id="top">
         <h1>Search</h1>
-        <Map
+      
+       <Map
           onMarkerClick={this.handleMarkerClick}
           isMarkerShown
           center={{lat:lat, lng: lng}}
           zoom={16}
+          //posts={posts}
           googleMapURL="https://maps.googleapis.com/maps/api/js?key=AIzaSyCUQjqXLGPcvOkrxO_0MNh_HouBRwlxqwA"
           loadingElement={<div style={{ height: `100%` }} />}
           containerElement={<div style={{ height: `400px` }} />}
           mapElement={<div style={{ height: `100%` }} />}
           geoLocation={geoLocation}
          
-        />
+        /> 
         <form
           className={classes.container}
           noValidate
@@ -244,7 +251,8 @@ Search.propTypes = {
   posts: PropTypes.array.isRequired,
   lat: PropTypes.number,
   lng: PropTypes.number,
-  geoLocation: PropTypes.array
+  geoLocation: PropTypes.array,
+  description: PropTypes.string
 };
 
 Search.defaultProps = {
@@ -252,15 +260,17 @@ Search.defaultProps = {
   lat: 40.7104852,
   lng: -74.0063939,
   geoLocation: [],
+  description:""
 };
 
 function mapStateToProps({ post,user }) {
-  console.log(user)
+  console.log({post})
   return {
     posts: post.posts,
     lat: user.lat,
     lng: user.lng,
     geoLocation: user.geoLocation,
+    //description: post.description
   };
 }
 
@@ -268,7 +278,7 @@ export default withRouter(
   withStyles(styles)(
     connect(
       mapStateToProps,
-      { SearchPost,getUsersGeoLocation }
+      { SearchPost,getUsersGeoLocation,GetUserPost }
     )(Search)
   )
 );
