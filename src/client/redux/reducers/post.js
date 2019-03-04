@@ -16,7 +16,7 @@ export default function(state = initialState, action) {
   switch (action.type) {
     case ACTIONS.GET_POST_ACTION:
       return {
-        posts: action.payload.data.post
+        posts: action.payload.data.post,
       };
     case ACTIONS.CREATE_POST_ACTION:
       return initialState;
@@ -25,7 +25,6 @@ export default function(state = initialState, action) {
         posts: action.payload.data.post
       };
     case ACTIONS.GET_USER_POST_ACTION:
-      // console.log('action: ', action);
       return {
         sitterid: action.payload.data.post.sitterid,
         avai_end_date: action.payload.data.post.avai_end_date,

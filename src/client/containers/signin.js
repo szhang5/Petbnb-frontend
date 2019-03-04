@@ -30,8 +30,11 @@ class SignIn extends Component {
     for (const [key, value] of data.entries()) {
       payload[key] = value;
     }
-    this.props.signInAction(payload).then(() => {
-      window.location.href = "/home";
+    this.props.signInAction(payload).then((e) => {
+        console.log(100);
+        console.log(e);
+        console.log(200);
+//       window.location.href = "/home";
     });
   }
 
