@@ -2,14 +2,13 @@ import React, { Component } from "react";
 import PropTypes from "prop-types";
 import { connect } from "react-redux";
 import SitterPost from "./sitter_post";
-import Grid from "@material-ui/core/Grid";
 import { getPost, getUsersGeoLocation } from "../redux/actions";
 
 class HelloWorld extends Component {
   constructor(props) {
     super(props);
     this.props.getPost();
-    this.props.getUsersGeoLocation();
+    this.props.getUsersGeoLocation();  
   }
 
   render() {
@@ -17,7 +16,7 @@ class HelloWorld extends Component {
     return (
       <div>
         <h1>Home</h1>
-        <SitterPost posts={posts} />
+        <SitterPost posts={posts} />   
       </div>
     );
   }

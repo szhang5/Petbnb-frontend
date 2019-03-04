@@ -14,6 +14,8 @@ const initialState = {
     'lat': '',
     'lng': '',
     'image': '',
+    'user_type': '',
+    geoLocation:[],    
 }
 
 export default function(state = initialState, action) {
@@ -22,6 +24,7 @@ export default function(state = initialState, action) {
 	    return {
         ...state,
         'email': action.payload.data.user.email,
+        'user_type': action.payload.data.user.user_type,    
 	    };
     case ACTIONS.REGISTER_ACTION:
       return initialState;
@@ -41,7 +44,8 @@ export default function(state = initialState, action) {
         'zip': action.payload.data.user.zip, 
         'lat': action.payload.data.user.lat, 
         'lng': action.payload.data.user.lng, 
-        'image': action.payload.data.user.image,     
+        'image': action.payload.data.user.image, 
+        'user_type': action.payload.data.user.user_type,  
       };
 	  case ACTIONS.SIGNOUT:
 	  	return initialState;
