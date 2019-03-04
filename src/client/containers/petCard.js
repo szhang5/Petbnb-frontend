@@ -15,7 +15,7 @@ import Grid from '@material-ui/core/Grid';
 class PetCard extends Component {
  
   handleOnClick = (petid) => {
-  	console.log(petid);
+  	// console.log(petid);
   	this.props.history.push(`/profile/petprofile/edit/${petid}`);
   }
 

@@ -71,7 +71,7 @@ export default function(state = initialState, action) {
         ...state,
         'image': action.payload.data.imageUrl,
       }
-    case ACTIONS.UPDATE_USER_INFO:
+    case ACTIONS.UPDATE_INPUT_INFO:
       return {
         ...state,
         [action.field]: action.value,
