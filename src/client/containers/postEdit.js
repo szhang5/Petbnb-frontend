@@ -14,7 +14,7 @@ import MenuItem from "@material-ui/core/MenuItem";
 import InputAdornment from '@material-ui/core/InputAdornment';
 import CheckBoxOutlineBlankIcon from '@material-ui/icons/CheckBoxOutlineBlank';
 import Pets from "@material-ui/icons/Pets";
-import { updateInputInfo } from "../redux/actions";
+import { updateInputInfo, GetUserPost, updatePetTypes, editPost } from "../redux/actions";
 import styles from "./styles/profileStyle";
 
 
@@ -27,8 +27,15 @@ for(let i = 1; i < 6; i++) {
   })
 }
 
-
 class PostEdit extends Component {
+
+  componentWillMount(){
+    console.log(this.props.sitterid);
+    if(this.props.sitterid){
+      this.props.GetUserPost(this.props.sitterid);
+    }
+  }
+
   handleSubmit(e) {
     e.preventDefault();
     const data = new FormData(e.target);
@@ -36,6 +43,7 @@ class PostEdit extends Component {
     for (const [key, value] of data.entries()) {
       payload[key] = value;
     }
+    payload['sitterid'] = this.props.sitterid;
     payload['pet_type'] = '';
     if(payload['dog'] && payload['cat']) payload['pet_type'] = payload['pet_type'].concat(payload['dog'] + ", " + payload['cat']);
     else if(payload['dog']) payload['pet_type'] = payload['pet_type'].concat(payload['dog']);
@@ -44,17 +52,19 @@ class PostEdit extends Component {
     delete payload.dog;
     delete payload.cat;
 
-    // payload['postdate'] = new Date().toUTCString();
     payload['postdate'] = moment(new Date().toUTCString()).local().format('YYYY-MM-DD HH:mm:ss');
 
-    console.log(payload);
-    // this.props.PostEditAction(payload).then(() => {
-    //   this.props.history.push("/profile");
-    // });
+    // console.log(payload);
+    this.props.editPost(payload).then(() => {
+      this.props.history.push("/profile");
+    });
   }
 
   handleInputChange(e) {
-    this.props.updateInputInfo(e.target.name, e.target.value);
+    if(['cat', 'dog'].includes(e.target.name)) {
+      return this.props.updatePetTypes(e.target.name, e.target.value);
+    }
+    return this.props.updateInputInfo(e.target.name, e.target.value);
   }
 
   render() {
@@ -67,7 +77,7 @@ class PostEdit extends Component {
       pet_type,
       pets_num,
     } = this.props;
-    // console.log(number);
+
     return (
       <div>
         <h1>Edit Profile</h1>
@@ -154,7 +164,8 @@ class PostEdit extends Component {
         <h3 className={classes.petType}>Accepted Pet type: </h3>
         <FormControlLabel
           control={
-            <Checkbox  
+            <Checkbox 
+            checked = {pet_type["dog"]? true : false} 
             className={classes.checkBox}
             icon={<CheckBoxOutlineBlankIcon fontSize="small" />} 
             checkedIcon={<Pets fontSize="small"/>} 
@@ -167,6 +178,7 @@ class PostEdit extends Component {
          <FormControlLabel
           control={
             <Checkbox  
+            checked = {pet_type["cat"]? true : false}
             className={classes.checkBox}
             icon={<CheckBoxOutlineBlankIcon fontSize="small" />} 
             checkedIcon={<Pets fontSize="small"/>} 
@@ -222,9 +234,9 @@ PostEdit.propTypes = {
   avai_end_date: PropTypes.string,
   avai_start_date: PropTypes.string,
   description: PropTypes.string,
-  hour_rate: PropTypes.string,
-  pet_type: PropTypes.string,
-  pets_num: PropTypes.number,
+  hour_rate: PropTypes.oneOfType([PropTypes.string,PropTypes.number]),
+  pets_num: PropTypes.oneOfType([PropTypes.string,PropTypes.number]),
+  pet_type: PropTypes.object,
   postdate: PropTypes.string,
 };
 
@@ -233,8 +245,8 @@ PostEdit.defaultProps = {
   avai_start_date: "",
   description: "",
   hour_rate: "",
-  pet_type: "",
-  pets_num: 1,
+  pet_type: {},
+  pets_num: "",
 };
 
 function mapStateToProps({ post, user }) {
@@ -253,7 +265,7 @@ export default withRouter(
   withStyles(styles)(
     connect(
       mapStateToProps,
-      { updateInputInfo }
+      { updateInputInfo, GetUserPost, updatePetTypes, editPost }
     )(PostEdit)
   )
 );
