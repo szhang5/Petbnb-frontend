@@ -102,13 +102,13 @@ class Map extends Component {
                       <h3> {moment(avai_start_date).format("LL")} - </h3>
                       <h3> {moment(avai_end_date).format("LL")}</h3>  
                   </CardContent>
-                  <Button
+                      <Button
                         variant="outlined"
                         color="secondary"
                         fullWidth     
                       >
                         Contact
-                  </Button>
+                      </Button>
                 </Card>
               </InfoWindow>}
             </Marker>  
@@ -154,10 +154,12 @@ function mapStateToProps({ post }) {
     postdate: post.postdate
   };
 }
+
 export default withRouter(
-    connect(
-      mapStateToProps,
-      {GetUserPost }
-    )(withGoogleMap(Map))
+  withScriptjs( connect(
+    mapStateToProps,
+    {GetUserPost }
+  )(withGoogleMap(Map)))
+   
 );
 
