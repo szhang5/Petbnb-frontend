@@ -122,13 +122,13 @@ class Map extends Component {
 
 Map.propTypes = {
   //classes: PropTypes.object.isRequired,
-  sitterid: PropTypes.number,
+  sitterid: PropTypes.oneOfType([PropTypes.string,PropTypes.number]),
   avai_end_date: PropTypes.string,
   avai_start_date: PropTypes.string,
   description: PropTypes.string,
-  hour_rate: PropTypes.number,
+  hour_rate: PropTypes.oneOfType([PropTypes.string,PropTypes.number]),
   pet_type: PropTypes.object,
-  pets_num: PropTypes.number,
+  pets_num: PropTypes.oneOfType([PropTypes.string,PropTypes.number]),
   postdate: PropTypes.string,
 };
 
