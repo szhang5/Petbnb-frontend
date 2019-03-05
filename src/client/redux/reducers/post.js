@@ -41,7 +41,6 @@ export default function(state = initialState, action) {
         posts: action.payload.data.post,
       };
     case ACTIONS.GET_USER_POST_ACTION:
-    console.log(action.payload);
       return {
         ...state,
         sitterid: action.payload.data.post.sitterid,
