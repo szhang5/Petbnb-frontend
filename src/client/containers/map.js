@@ -9,30 +9,21 @@ import {
   Marker,
   InfoWindow
 } from "react-google-maps";
-import './styles/map.css';
 import { GetUserPost } from "../redux/actions";
+import Button from "@material-ui/core/Button";
+import Card from "@material-ui/core/Card";
+import CardContent from "@material-ui/core/CardContent";
+import moment from "moment";
 
 
+function PetList(props) {
 
-
-function Popup(props) {
-
-  const obj = props.text
- 
+  const obj = props.obj
   return (
-    <div className='popup'>
-    <div className='popup_inner'>
-      <h1>{obj}</h1>
-    <button onClick={props.closePopup}>123</button>
-    </div>
-  </div>
+    <h3>{obj}</h3>
   )
 }
-const styles = theme => ({
-  typography: {
-    margin: theme.spacing.unit * 2,
-  },
-});
+
 
 class Map extends Component {
   constructor(props) {
@@ -44,16 +35,13 @@ class Map extends Component {
       showInfoIndex:'-1'
     };
     this.open= false;
-   console.log(this.props);
    this.onToggleOpen = this.onToggleOpen.bind(this);
   }
   
- 
   mapMoved() {
     console.log("move");
   }
   mapLoaded(map) {
-    //console.log("mapLoaded:" + JSON.stringify(map.getCenter()));
     if (this.state.map != null) return;
 
     this.setState({ map: map });
@@ -62,45 +50,23 @@ class Map extends Component {
     console.log("zoom changed");
   }
   onToggleOpen(e) {
-    console.log("lala");
     this.setState({
       isOpen:true,
       showInfoIndex:e
     })
    
     this.props.GetUserPost(e).then(()=>{
-     console.log(post);
-    });
-   //   this.open=true;
-   
-    
+    });     
   }
   onToggleClose() {
-    console.log("haha");
    this.setState({
      isOpen:false,
-    
    })
-   // this.open=!this.open;
-   
- //   console.log({isOpen})
   }
-   onMarkerClick = (evt) => {
-    console.log("haha");
-};
- 
- 
-  handleClose = () => {
-    this.setState({
-      anchorEl: null,
-    });
-  };
+
   render() {
     const { classes, geoLocation, sitterid, avai_end_date, avai_start_date, description,hour_rate, pet_type, pets_num, postdate } = this.props;
-    
-    const { anchorEl, open,isOpen,showInfoIndex } = this.state;
-    
-   
+    const {isOpen,showInfoIndex } = this.state;
     return (
       
       <GoogleMap
@@ -118,30 +84,37 @@ class Map extends Component {
               null, /* anchor is bottom center of the scaled image */
               new window.google.maps.Size(21, 26)
             );
-           
             return(
                 <Marker
                 key={mark.uid}
                 position={{ lat: mark.lat, lng: mark.lng }}
                 icon={iconMarker}
-                onClick={()=>this.onToggleOpen(mark.uid)}
-              //  onClick={this.onToggleOpen}
-                
+                onClick={()=>this.onToggleOpen(mark.uid)}                
               > 
-            {isOpen &&showInfoIndex === mark.uid && <InfoWindow onCloseClick={this.onToggleClose.bind(this)}>
-               <div>{mark.uid}</div>
-          </InfoWindow>}
+            {isOpen &&showInfoIndex === mark.uid && 
+            <InfoWindow onCloseClick={this.onToggleClose.bind(this)}>
+                <Card  >
+                  <CardContent style={{ paddingTop: '0',paddingBottom:'0' }}>
+                      {/*<h3>Pet type: pet_type.map((obj, index) => <PetList obj={obj} />) </h3>*/}  
+                      <h3 >${hour_rate}/day</h3>
+                      <h3>{description}</h3>
+                      <h3>Availablity: </h3>
+                      <h3> {moment(avai_start_date).format("LL")} - </h3>
+                      <h3> {moment(avai_end_date).format("LL")}</h3>  
+                  </CardContent>
+                  <Button
+                        variant="outlined"
+                        color="secondary"
+                        fullWidth     
+                      >
+                        Contact
+                  </Button>
+                </Card>
+              </InfoWindow>}
             </Marker>  
             );
           })
         }
-         {/*this.state.showPopup ? 
-          <Popup
-            text='Close Me'
-            closePopup={this.togglePopup.bind(this)}
-          />
-          : null
-         */}
       </GoogleMap>
     );
   }
@@ -149,29 +122,27 @@ class Map extends Component {
 
 Map.propTypes = {
   //classes: PropTypes.object.isRequired,
-  sitterid: PropTypes.string,
+  sitterid: PropTypes.number,
   avai_end_date: PropTypes.string,
   avai_start_date: PropTypes.string,
   description: PropTypes.string,
-  hour_rate: PropTypes.string,
-  pet_type: PropTypes.string,
-  pets_num: PropTypes.string,
+  hour_rate: PropTypes.number,
+  pet_type: PropTypes.object,
+  pets_num: PropTypes.number,
   postdate: PropTypes.string,
- 
 };
 
 Map.defaultProps = {
-  sitterid: "",
+  sitterid: 0,
   avai_end_date: "",
   avai_start_date: "",
   description: "",
-  hour_rate: "",
-  pet_type: "",
-  pets_num: "",
+  hour_rate: 0,
+  pet_type: {},
+  pets_num: 0,
   postdate: "",
 };
 function mapStateToProps({ post }) {
-  console.log({post})
   return {
     sitterid: post.sitterid,
     avai_end_date: post.avai_end_date,
@@ -183,13 +154,10 @@ function mapStateToProps({ post }) {
     postdate: post.postdate
   };
 }
-
 export default withRouter(
-  withScriptjs(
     connect(
       mapStateToProps,
       {GetUserPost }
     )(withGoogleMap(Map))
-  )
 );
 
