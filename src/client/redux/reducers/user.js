@@ -28,6 +28,13 @@ export default function(state = initialState, action) {
 	    };
     case ACTIONS.REGISTER_ACTION:
       return initialState;
+
+    case ACTIONS.GET_USER_GEO_LOCATION: 
+    return {
+      ...state,
+      geoLocation: action.payload.data.geoLocation,
+    }
+    
     case ACTIONS.GET_USER_INFO:
       return {
         ...state,
@@ -52,8 +59,6 @@ export default function(state = initialState, action) {
     case ACTIONS.EDIT_PROFILE_ACTION:
       return {
         ...state,
-        'uid': action.payload.data.user.uid,
-        'personId': action.payload.data.user.personid,
         'firstname': action.payload.data.user.firstname,
         'lastname': action.payload.data.user.lastname,
         'email': action.payload.data.user.email,
@@ -69,7 +74,7 @@ export default function(state = initialState, action) {
         ...state,
         'image': action.payload.data.imageUrl,
       }
-    case ACTIONS.UPDATE_USER_INFO:
+    case ACTIONS.UPDATE_INPUT_INFO:
       return {
         ...state,
         [action.field]: action.value,

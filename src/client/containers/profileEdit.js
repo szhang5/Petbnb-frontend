@@ -13,7 +13,7 @@ import { withRouter } from "react-router-dom";
 import Button from "@material-ui/core/Button";
 import PhotoCamera from '@material-ui/icons/PhotoCamera';
 import styles from "./styles/profileStyle";
-import { EditProfileAction, UploadImage, UpdateUserInfo } from "../redux/actions";
+import { EditProfileAction, UploadImage, updateInputInfo } from "../redux/actions";
 
 class ProfileEdit extends Component {
   handleSubmit(e) {
@@ -25,6 +25,7 @@ class ProfileEdit extends Component {
     }
 
     this.props.EditProfileAction(payload).then(() => {
+      //this.props.history.push("/profile");
       this.props.history.push("/profile");
     });
   }
@@ -41,7 +42,7 @@ class ProfileEdit extends Component {
   }
 
   handleInputChange(e) {
-    this.props.UpdateUserInfo(e.target.name, e.target.value)
+    this.props.updateInputInfo(e.target.name, e.target.value)
   }
 
   render() {
@@ -261,7 +262,7 @@ export default withRouter(
   withStyles(styles)(
     connect(
       mapStateToProps,
-      { EditProfileAction, UploadImage, UpdateUserInfo }
+      { EditProfileAction, UploadImage, updateInputInfo }
     )(ProfileEdit)
   )
 );

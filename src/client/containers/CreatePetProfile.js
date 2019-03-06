@@ -7,7 +7,7 @@ import MenuItem from "@material-ui/core/MenuItem";
 import TextField from "@material-ui/core/TextField";
 import { withRouter } from "react-router-dom";
 import Button from "@material-ui/core/Button";
-import { CreatePetProfileAction, UploadPetImage, UpdatePetInfo } from "../redux/actions";
+import { CreatePetProfileAction, UploadPetImage, updateInputInfo } from "../redux/actions";
 import styles from "./styles/profileStyle";
 
 const types = [
@@ -96,6 +96,7 @@ class CreatePetProfile extends Component {
     }
     payload['uid'] = this.props.uid;
     payload['image_base_64'] = this.state.image_base_64 || '';
+    
    this.props.CreatePetProfileAction(payload).then(() => {
       this.props.history.push("/profile/petpage");
     });
@@ -115,8 +116,7 @@ class CreatePetProfile extends Component {
   }
 
   handleInputChange(e){
-     console.log("handlechange"+e.target);
-    this.props.UpdatePetInfo(e.target.name, e.target.value);
+    this.props.updateInputInfo(e.target.name, e.target.value);
   }
 
   render() {
@@ -318,7 +318,6 @@ CreatePetProfile.defaultProps = {
 };
 
 function mapStateToProps({ pet, user }) {
-  console.log(pet);
   return {
     petid: pet.petid,
     uid: user.uid,
@@ -336,7 +335,7 @@ export default withRouter(
   withStyles(styles)(
     connect(
       mapStateToProps,
-      { CreatePetProfileAction, UploadPetImage, UpdatePetInfo }
+      { CreatePetProfileAction, UploadPetImage, updateInputInfo }
     )(CreatePetProfile)
   )
 );

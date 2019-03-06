@@ -41,8 +41,19 @@ const styles = theme => ({
     maxWidth: 400,
   },
   media: {
-    height: 200,
+    height: 150,
   },
+  cardContainer: {
+    marginBottom: 10,
+  },
+  checkBox: {
+    marginLeft: 10,
+  },
+  petType:{
+    marginLeft: 15,
+    color: "gray",
+    fontSize: 16,
+  }
 });
 
 export default styles;
