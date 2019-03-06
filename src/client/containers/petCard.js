@@ -15,7 +15,7 @@ import Grid from '@material-ui/core/Grid';
 class PetCard extends Component {
  
   handleOnClick = (petid) => {
-  	console.log(petid);
+  	// console.log(petid);
   	this.props.history.push(`/profile/petprofile/edit/${petid}`);
   }
 
@@ -29,36 +29,33 @@ class PetCard extends Component {
     		return(
         <div className={classes.cardContainer} key={pet.petid} onClick={() => this.handleOnClick(pet.petid)}>
 	        <Card className={classes.card}>
-            <Grid container spacing={10}>
-                  
+            <Grid container spacing={8}>
               <Grid item xs = {6}>
-	          <CardMedia
-	            className={classes.media}
-	            image= {pet.image? pet.image : defaultImage}
-	            title= {pet.petname}
-	          />
+    	          <CardMedia
+    	            className={classes.media}
+    	            image= {pet.image? pet.image : defaultImage}
+    	            title= {pet.petname}
+    	          />
               </Grid>
-              
               <Grid item xs = {6}>
-	          <CardContent>
-	            <Typography component="p">
-	            	Name: {pet.petname? pet.petname : "pet name"}
-	            </Typography>
-	            <Typography component="p">
-            		Birth: {pet.birth? moment(pet.birth).format("LL") : null}
-            	</Typography>
-            	<Typography component="p">
-            		Type: {pet.type? pet.type: "type"}
-            	</Typography>
-            	<Typography component="p">
-            		Breed: {pet.breed? pet.breed: "breed"}
-            	</Typography>
-            	<Typography component="p">
-            		Furcolor: {pet.furcolor? pet.furcolor: "furcolor"}
-            	</Typography>
-	          </CardContent>
+    	          <CardContent>
+    	            <Typography component="p">
+    	            	Name: {pet.petname? pet.petname : "pet name"}
+    	            </Typography>
+    	            <Typography component="p">
+                		Birth: {pet.birth? moment(pet.birth).format("LL") : null}
+                	</Typography>
+                	<Typography component="p">
+                		Type: {pet.type? pet.type: "type"}
+                	</Typography>
+                	<Typography component="p">
+                		Breed: {pet.breed? pet.breed: "breed"}
+                	</Typography>
+                	<Typography component="p">
+                		Furcolor: {pet.furcolor? pet.furcolor: "furcolor"}
+                	</Typography>
+    	          </CardContent>
               </Grid>
-
             </Grid>
 	        </Card>
 	      </div>

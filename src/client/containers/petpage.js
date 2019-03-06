@@ -17,16 +17,9 @@ class PetPage extends Component {
   componentWillMount(){
     this.props.getPetInfo(this.props.uid);
   }
-  
-  componentWillUpdate(nextProps, nextState){
-    console.log(1121231231);
-    console.log(nextProps);
-    console.log(nextState);
-  }
 
   render() {
    const { classes, uid, pets } = this.props;
-    console.log('uid', uid);
     return (
       <div>
          
@@ -68,7 +61,6 @@ PetPage.defaultProps = {
 };
 
 function mapStateToProps({ pet, user }) {
-  console.log(pet);
   return {
     pets: pet.pets,
     uid: user.uid,

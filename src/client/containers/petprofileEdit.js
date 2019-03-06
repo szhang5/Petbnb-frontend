@@ -7,7 +7,7 @@ import MenuItem from "@material-ui/core/MenuItem";
 import TextField from "@material-ui/core/TextField";
 import { withRouter } from "react-router-dom";
 import Button from "@material-ui/core/Button";
-import { EditPetProfileAction ,UpdatePetInfo, UploadPetImage, GetPetInfoById} from "../redux/actions";
+import { EditPetProfileAction ,updateInputInfo, UploadPetImage, GetPetInfoById, deletePet } from "../redux/actions";
 import styles from "./styles/profileStyle";
 
 
@@ -89,14 +89,13 @@ class PetProfileEdit extends Component {
 
   componentWillMount(){
     const { id: petid } = this.props.match.params;
-    console.log(petid);
+    // console.log(petid);
     payload["petid"]= petid;
     this.props.GetPetInfoById(petid);
     
   }
 
   handleSubmit(e) {
-    console.log("111");
     e.preventDefault();
     const data = new FormData(e.target);
     for (const [key, value] of data.entries()) {
@@ -114,19 +113,16 @@ class PetProfileEdit extends Component {
     reader.readAsDataURL(files[0]);
 
     reader.onload = e => {
-      console.log(e.target.result);
       this.props.UploadPetImage(this.props.petid, e.target.result);
     };
   }
   handleInputChange(e){
-     console.log("handlechange"+e.target);
-    this.props.UpdatePetInfo(e.target.name, e.target.value);
+    this.props.updateInputInfo(e.target.name, e.target.value);
   }
 
   render() {
     const {classes, birth, petname, type, breed, furcolor, weight, image} = this.props;
     const defaultImage = "https://res.cloudinary.com/zoey1111/image/upload/v1550674929/petProfileDefault.png";
-    console.log(birth);
     return (
       <div>
         <h1>Edit Pet Profile</h1>
@@ -291,6 +287,19 @@ class PetProfileEdit extends Component {
             Cancel
           </Button>
         </form>
+         <Button
+            variant="outlined"
+            fullWidth
+            color="primary"
+            className={classes.button}
+            onClick={() => {
+              this.props.deletePet(this.props.petid).then(()=>{
+                this.props.history.push("/profile/petpage");
+              })
+            }}
+          >
+            Delete
+          </Button>
       </div>
     );
   }
@@ -323,7 +332,6 @@ PetProfileEdit.defaultProps = {
 };
 
 function mapStateToProps({ pet }) {
-  console.log(pet);
   return {
     petid: pet.petid,
     birth: pet.birth,
@@ -340,7 +348,7 @@ export default withRouter(
   withStyles(styles)(
     connect(
       mapStateToProps,
-      { EditPetProfileAction, UpdatePetInfo, UploadPetImage, GetPetInfoById }
+      { EditPetProfileAction, updateInputInfo, UploadPetImage, GetPetInfoById, deletePet }
     )(PetProfileEdit)
   )
 );

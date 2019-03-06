@@ -138,6 +138,17 @@ class Profile extends Component {
           color="primary"
           className={classes.button}
           onClick={() => {
+            this.props.history.push("/profile/editPost");
+          }}
+        >
+          Edit Post
+        </Button>
+        <Button
+          variant="outlined"
+          fullWidth
+          color="primary"
+          className={classes.button}
+          onClick={() => {
             this.props.history.push("/profile/petpage");
           }}
         >
