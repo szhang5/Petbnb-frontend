@@ -13,9 +13,8 @@ import Pets from "@material-ui/icons/Pets";
 import Paper from "@material-ui/core/Paper";
 import Typography from "@material-ui/core/Typography";
 import withStyles from "@material-ui/core/styles/withStyles";
-
+import { withRouter } from "react-router-dom";
 import { signInAction } from "../redux/actions";
-
 import styles from "./styles/signInStyle";
 
 class SignIn extends Component {
@@ -30,13 +29,11 @@ class SignIn extends Component {
     for (const [key, value] of data.entries()) {
       payload[key] = value;
     }
-    this.props.signInAction(payload).then((e) => {        
-      if (e.payload.data.user.user_type == 1) {
+    this.props.signInAction(payload).then((e) => {
+      if (e.payload.data.user.user_type == 1) { //owner
         this.props.history.push("/home");
-        console.log("USER TYPE: " + e.payload.data.user.user_type);
-      } else if (e.payload.data.user.user_type == 0) {
+      } else if (e.payload.data.user.user_type == 0) { //sitter
         this.props.history.push("/profile/petpage");
-        console.log("USER TYPE: " + e.payload.data.user.user_type);
       }     
     });
   }
@@ -102,19 +99,21 @@ SignIn.propTypes = {
 };
 
 SignIn.defaultProps = {
-  user_type: 2,
+  user_type: -1,
 };
 
 function mapStateToProps({ user }) {
-    console.log("USER PRINT OUT: " + user);
   return {
     user_type: user.user_type,
   };
 }
 
-export default withStyles(styles)(
-  connect(
-    mapStateToProps,
-    { signInAction }
-  )(SignIn)
+export default withRouter (
+  withStyles(styles)(
+    connect(
+      mapStateToProps,
+      { signInAction }
+    )(SignIn)
+  )
 );
+
