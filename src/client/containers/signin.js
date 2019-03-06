@@ -30,11 +30,14 @@ class SignIn extends Component {
     for (const [key, value] of data.entries()) {
       payload[key] = value;
     }
-    this.props.signInAction(payload).then((e) => {
-        console.log(100);
-        console.log(e);
-        console.log(200);
-//       window.location.href = "/home";
+    this.props.signInAction(payload).then((e) => {        
+      if (e.payload.data.user.user_type == 1) {
+        this.props.history.push("/home");
+        console.log("USER TYPE: " + e.payload.data.user.user_type);
+      } else if (e.payload.data.user.user_type == 0) {
+        this.props.history.push("/profile/petpage");
+        console.log("USER TYPE: " + e.payload.data.user.user_type);
+      }     
     });
   }
 
@@ -94,12 +97,24 @@ class SignIn extends Component {
 }
 
 SignIn.propTypes = {
-  classes: PropTypes.object.isRequired //make sure SignIn is an object
+  classes: PropTypes.object.isRequired, //make sure SignIn is an object
+  user_type: PropTypes.oneOfType([PropTypes.string,PropTypes.number])
 };
+
+SignIn.defaultProps = {
+  user_type: 2,
+};
+
+function mapStateToProps({ user }) {
+    console.log("USER PRINT OUT: " + user);
+  return {
+    user_type: user.user_type,
+  };
+}
 
 export default withStyles(styles)(
   connect(
-    null,
+    mapStateToProps,
     { signInAction }
   )(SignIn)
 );
