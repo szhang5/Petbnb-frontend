@@ -12,6 +12,9 @@ import { SearchPost,getUsersGeoLocation,getUserInfo } from "../redux/actions";
 import SitterPost from "./sitter_post";
 import styles from "./styles/searchStyle";
 import Map from "./map";
+//const FaAnchor = require("react-icons/lib/fa/anchor");
+
+
 const types = [
   {
     value: "cat",
@@ -68,7 +71,6 @@ class Search extends Component {
 
   handleSubmit(e) {
     e.preventDefault();
-    //this.props.getUsersGeoLocation();
     this.props.SearchPost(this.state).then(() => {
       window.location.replace((window.location.hash = "/search#anchorId"));
     });
@@ -81,12 +83,11 @@ class Search extends Component {
 
   render() {
     const { classes, posts, geoLocation, lat, lng } = this.props;
-     // console.log('posts', geoLocation)
     return (
       <div id="top">
-        <h1>Search</h1>
-        <Map
-          onMarkerClick={this.handleMarkerClick}
+        <h1>Search</h1>   
+       <Map
+          //onMarkerClick={this.handleMarkerClick}
           isMarkerShown
           center={{lat:lat, lng: lng}}
           zoom={16}
@@ -95,8 +96,7 @@ class Search extends Component {
           containerElement={<div style={{ height: `400px` }} />}
           mapElement={<div style={{ height: `100%` }} />}
           geoLocation={geoLocation}
-         
-        />
+        /> 
         <form
           className={classes.container}
           noValidate
@@ -244,7 +244,7 @@ Search.propTypes = {
   posts: PropTypes.array.isRequired,
   lat: PropTypes.number,
   lng: PropTypes.number,
-  geoLocation: PropTypes.array
+  geoLocation: PropTypes.array,
 };
 
 Search.defaultProps = {
@@ -255,7 +255,6 @@ Search.defaultProps = {
 };
 
 function mapStateToProps({ post,user }) {
-  console.log(user)
   return {
     posts: post.posts,
     lat: user.lat,

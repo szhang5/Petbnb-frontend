@@ -54,6 +54,25 @@ export default function(state = initialState, action) {
         'image': action.payload.data.user.image, 
         'user_type': action.payload.data.user.user_type,  
       };
+    case ACTIONS.GET_USER_INFO_BYID:
+      return {
+        ...state,
+      	'uid': action.payload.data.user.uid,
+        'personId': action.payload.data.user.personid,
+        'firstname': action.payload.data.user.firstname,
+        'lastname': action.payload.data.user.lastname,
+        'email': action.payload.data.user.email,
+        'phone': action.payload.data.user.phone,
+        'country': action.payload.data.user.country,
+        'street': action.payload.data.user.street,
+        'city': action.payload.data.user.city,
+        'state': action.payload.data.user.state,
+        'zip': action.payload.data.user.zip, 
+        'lat': action.payload.data.user.lat, 
+        'lng': action.payload.data.user.lng, 
+        'image': action.payload.data.user.image,     
+      };
+
 	  case ACTIONS.SIGNOUT:
 	  	return initialState;
     case ACTIONS.EDIT_PROFILE_ACTION:
