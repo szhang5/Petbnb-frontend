@@ -13,9 +13,8 @@ import Pets from "@material-ui/icons/Pets";
 import Paper from "@material-ui/core/Paper";
 import Typography from "@material-ui/core/Typography";
 import withStyles from "@material-ui/core/styles/withStyles";
-
+import { withRouter } from "react-router-dom";
 import { signInAction } from "../redux/actions";
-
 import styles from "./styles/signInStyle";
 
 class SignIn extends Component {
@@ -30,8 +29,12 @@ class SignIn extends Component {
     for (const [key, value] of data.entries()) {
       payload[key] = value;
     }
-    this.props.signInAction(payload).then(() => {
-      window.location.href = "/home";
+    this.props.signInAction(payload).then((e) => {
+      if (e.payload.data.user.user_type == 1) { //owner
+        this.props.history.push("/home");
+      } else if (e.payload.data.user.user_type == 0) { //sitter
+        this.props.history.push("/profile/petpage");
+      }     
     });
   }
 
@@ -91,12 +94,26 @@ class SignIn extends Component {
 }
 
 SignIn.propTypes = {
-  classes: PropTypes.object.isRequired //make sure SignIn is an object
+  classes: PropTypes.object.isRequired, //make sure SignIn is an object
+  user_type: PropTypes.oneOfType([PropTypes.string,PropTypes.number])
 };
 
-export default withStyles(styles)(
-  connect(
-    null,
-    { signInAction }
-  )(SignIn)
+SignIn.defaultProps = {
+  user_type: -1,
+};
+
+function mapStateToProps({ user }) {
+  return {
+    user_type: user.user_type,
+  };
+}
+
+export default withRouter (
+  withStyles(styles)(
+    connect(
+      mapStateToProps,
+      { signInAction }
+    )(SignIn)
+  )
 );
+
