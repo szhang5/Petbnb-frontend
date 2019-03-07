@@ -9,11 +9,18 @@ import {
   Marker,
   InfoWindow
 } from "react-google-maps";
-import { GetUserPost } from "../redux/actions";
+import './styles/info.css';
+import Pets from "@material-ui/icons/Pets";
+import { GetUserPost,getUserInfoById } from "../redux/actions";
 import Button from "@material-ui/core/Button";
 import Card from "@material-ui/core/Card";
 import CardContent from "@material-ui/core/CardContent";
 import moment from "moment";
+import Avatar from '@material-ui/core/Avatar';
+import styles from "./styles/mapStyle";
+import { withStyles } from "@material-ui/core/styles";
+
+
 
 
 function PetList(props) {
@@ -56,7 +63,9 @@ class Map extends Component {
     })
    
     this.props.GetUserPost(e).then(()=>{
-    });     
+    });  
+    this.props.getUserInfoById(e).then(()=>{
+    });       
   }
   onToggleClose() {
    this.setState({
@@ -65,8 +74,9 @@ class Map extends Component {
   }
 
   render() {
-    const { classes, geoLocation, sitterid, avai_end_date, avai_start_date, description,hour_rate, pet_type, pets_num, postdate } = this.props;
+    const { classes, geoLocation, sitterid, avai_end_date, avai_start_date, description,hour_rate, pet_type, pets_num, postdate,firstname, lastname, image } = this.props;
     const {isOpen,showInfoIndex } = this.state;
+    const defaultImage = "https://res.cloudinary.com/zoey1111/image/upload/v1550020987/profile.png";
     return (
       
       <GoogleMap
@@ -92,24 +102,29 @@ class Map extends Component {
                 onClick={()=>this.onToggleOpen(mark.uid)}                
               > 
             {isOpen &&showInfoIndex === mark.uid && 
-            <InfoWindow onCloseClick={this.onToggleClose.bind(this)}>
-                <Card  >
-                  <CardContent style={{ paddingTop: '0',paddingBottom:'0' }}>
+            <InfoWindow  style={{paddingRight: '12px' }} className="info_window" onCloseClick={this.onToggleClose.bind(this)} >
+                <div className="infocard" >
+                  <div className={classes.info_card_content}>
                       {/*<h3>Pet type: pet_type.map((obj, index) => <PetList obj={obj} />) </h3>*/}  
-                      <h3 >${hour_rate}/day</h3>
-                      <h3>{description}</h3>
-                      <h3>Availablity: </h3>
-                      <h3> {moment(avai_start_date).format("LL")} - </h3>
-                      <h3> {moment(avai_end_date).format("LL")}</h3>  
-                  </CardContent>
+                      <div className={classes.info_firstline}>
+                        <Avatar className={classes.info_avatar} alt="" src={image ? image : defaultImage} />
+                        <h1 className={classes.info_name}>{firstname}{" "}{lastname}</h1>
+                      </div>
+                      <h4 className={classes.info_content}>Price: $ {hour_rate}/day</h4>
+                      <h4 className={classes.info_content}>{description}</h4>
+                      <h3 className={classes.info_ava }>Availablity: </h3>
+                      <h4 className={classes.info_content}> {moment(avai_start_date).format("L")} - {moment(avai_end_date).format("L")}</h4>
+                     
+                  </div>
                       <Button
                         variant="outlined"
-                        color="secondary"
+                        //color="secondary"
+                        color="primary"
                         fullWidth     
                       >
                         Contact
                       </Button>
-                </Card>
+                </div>
               </InfoWindow>}
             </Marker>  
             );
@@ -130,6 +145,9 @@ Map.propTypes = {
   pet_type: PropTypes.object,
   pets_num: PropTypes.oneOfType([PropTypes.string,PropTypes.number]),
   postdate: PropTypes.string,
+  firstname: PropTypes.string,
+  lastname: PropTypes.string,
+  image: PropTypes.string
 };
 
 Map.defaultProps = {
@@ -141,8 +159,11 @@ Map.defaultProps = {
   pet_type: {},
   pets_num: 0,
   postdate: "",
+  firstname: "",
+  lastname: "",
+  image:""
 };
-function mapStateToProps({ post }) {
+function mapStateToProps({ post,user }) {
   return {
     sitterid: post.sitterid,
     avai_end_date: post.avai_end_date,
@@ -151,15 +172,20 @@ function mapStateToProps({ post }) {
     hour_rate: post.hour_rate,
     pet_type: post.pet_type,
     pets_num: post.pets_num,
-    postdate: post.postdate
+    postdate: post.postdate,
+    firstname: user.firstname,
+    lastname: user.lastname,
+    image: user.image
   };
 }
 
 export default withRouter(
-  withScriptjs( connect(
+  withScriptjs( 
+    withStyles(styles)(
+      connect(
     mapStateToProps,
-    {GetUserPost }
-  )(withGoogleMap(Map)))
+    {GetUserPost,getUserInfoById }
+  )(withGoogleMap(Map))))
    
 );
 
