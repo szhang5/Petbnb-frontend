@@ -20,7 +20,7 @@ export const GET_PET_INFO_BY_ID = "GET_PET_INFO_BY_ID";
 export const GET_USER_GEO_LOCATION = "GET_USER_GEO_LOCATION";
 export const DELETE_PET_ACTION = "DELETE_PET_ACTION";
 export const UPDATE_PET_TYPES = "PET/UPDATE_PET_TYPES";
-
+export const GET_USER_INFO_BYID = "GET_USER_INFO_BYID";
 
 export function deletePet(petid) {
   const request = axios
@@ -199,6 +199,17 @@ export function getUserInfo(email) {
     payload: request,
   };
 }
+
+export function getUserInfoById(uid) {
+  const request = axios
+    .post('/service/petbnbservice/getUserInfoById', { uid });
+
+  return {
+    type: GET_USER_INFO_BYID,
+    payload: request,
+  };
+}
+
 
 export function signOut() {
   const request = axios
