@@ -48,7 +48,16 @@ class TemporaryDrawer extends React.Component {
             button
             component="a"
             onClick={() => {
-              window.location.replace((window.location.hash = "/search#top"));
+              this.props.history.push("/map");
+            }}
+          >
+            <ListItemText primary="Map" />
+          </ListItem>
+          <ListItem
+            button
+            component="a"
+            onClick={() => {
+              window.location.replace((window.location.hash = "/search"));
             }}
           >
             <ListItemText primary="Search" />
