@@ -21,7 +21,7 @@ export const GET_USER_GEO_LOCATION = "GET_USER_GEO_LOCATION";
 export const DELETE_PET_ACTION = "DELETE_PET_ACTION";
 export const UPDATE_PET_TYPES = "PET/UPDATE_PET_TYPES";
 export const GET_USER_INFO_BYID = "GET_USER_INFO_BYID";
-
+export const SEARCH_POST_SITTER_INFO_ACTION = 'SEARCH_POST_SITTER_INFO_ACTION';
 export function deletePet(petid) {
   const request = axios
     .post('/service/petbnbservice/deletePet', {petid});
@@ -107,6 +107,19 @@ export function SearchPost(payload) {
     });
   return {
     type: SEARCH_POST_ACTION,
+    payload: request,
+  }
+}
+
+export function searchPostSitterInfo(payload) {
+  const request = axios
+    .post('/service/petbnbservice/searchPostSitterInfo', {
+      ...payload,
+      hour_rate: parseFloat(payload.hour_rate),
+      pets_num: parseInt(payload.pets_num, 10),
+    });
+  return {
+    type: SEARCH_POST_SITTER_INFO_ACTION,
     payload: request,
   }
 }
