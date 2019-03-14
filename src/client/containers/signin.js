@@ -34,7 +34,9 @@ class SignIn extends Component {
         this.props.history.push("/home");
       } else if (e.payload.data.user.user_type == 0) { //sitter
         this.props.history.push("/profile/petpage");
-      }     
+      }
+
+      localStorage.setItem('userType', e.payload.data.user.user_type);
     });
   }
 

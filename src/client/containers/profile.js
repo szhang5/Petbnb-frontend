@@ -14,6 +14,12 @@ import styles from "./styles/profileStyle";
 
 class Profile extends Component {
 
+  hideEditPostBtn(){
+    if (localStorage.getItem(userType)=="1") {
+      document.getElementById("editPostBtn").style.display = "none";
+    }
+  }
+
   handleOnClick() {
     const { email } = this.props;
     // console.log(email);
@@ -133,10 +139,12 @@ class Profile extends Component {
           Edit
         </Button>
         <Button
+          id={editPostBtn}
           variant="outlined"
           fullWidth
           color="primary"
           className={classes.button}
+          hideEditPostBtn={}
           onClick={() => {
             this.props.history.push("/profile/editPost");
           }}
