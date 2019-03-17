@@ -18,7 +18,7 @@ const styles = theme => ({
     margin: theme.spacing.unit
   },
   postanchor: {
-    height: 100
+    height: 200
   },
   alert: {
     marginTop: 200,

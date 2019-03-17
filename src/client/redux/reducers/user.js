@@ -15,7 +15,8 @@ const initialState = {
     'lng': '',
     'image': '',
     'user_type': '',
-    geoLocation:[],    
+    geoLocation:[],
+    sitterInfo:[]    
 }
 
 export default function(state = initialState, action) {
@@ -72,7 +73,11 @@ export default function(state = initialState, action) {
         'lng': action.payload.data.user.lng, 
         'image': action.payload.data.user.image,     
       };
-
+    case ACTIONS.SEARCH_POST_SITTER_INFO_ACTION:
+      return {
+        ...state,
+        sitterInfo: action.payload.data.user,   
+      };
 	  case ACTIONS.SIGNOUT:
 	  	return initialState;
     case ACTIONS.EDIT_PROFILE_ACTION:
