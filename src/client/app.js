@@ -17,6 +17,7 @@ import CreatePetProfile from "./containers/CreatePetProfile";
 import Search from "./containers/search";
 import PetProfileEdit from "./containers/petprofileEdit";
 import PetPage from "./containers/petpage";
+import MapPage from "./containers/mapPage"
 import reducers from "./redux/reducers";
 import configureStore from "./app/store/configure-store";
 import ExclusiveRouteContainer from "./app/ExclusiveRouteContainer";
@@ -59,7 +60,7 @@ class App extends Component {
                       path="/profile/editPost"
                       component={PostEdit}
                     />
-
+                    <Route exact path="/map" component={MapPage}/>
                     <Route exact path="/home" component={Hello} />
                     <Route exact path="/search" component={Search} />
                     <Route exact path="/our_service" component={OurService} />

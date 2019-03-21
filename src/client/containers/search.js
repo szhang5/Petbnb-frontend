@@ -8,12 +8,10 @@ import MenuItem from "@material-ui/core/MenuItem";
 import TextField from "@material-ui/core/TextField";
 import { withRouter } from "react-router-dom";
 import Button from "@material-ui/core/Button";
-import { SearchPost,getUsersGeoLocation,getUserInfo } from "../redux/actions";
+import { SearchPost,searchPostSitterInfo } from "../redux/actions";
 import SitterPost from "./sitter_post";
 import styles from "./styles/searchStyle";
 import Map from "./map";
-//const FaAnchor = require("react-icons/lib/fa/anchor");
-
 
 const types = [
   {
@@ -56,9 +54,6 @@ const number = [
 class Search extends Component {
   constructor(props) {
     super(props);
-    const payload = {};
-    this.props.getUsersGeoLocation(payload).then(() => {
-    });
   }
 
   state = {
@@ -66,14 +61,23 @@ class Search extends Component {
     hour_rate: "",
     pets_num: "",
     avai_start_date: "",
-    avai_end_date: ""
+    avai_end_date: "",
+    showResult:false
   };
 
   handleSubmit(e) {
     e.preventDefault();
-    this.props.SearchPost(this.state).then(() => {
-      window.location.replace((window.location.hash = "/search#anchorId"));
+    
+    this.props.searchPostSitterInfo(this.state).then(()=>{
+     
     });
+    this.props.SearchPost(this.state).then(() => {
+      //window.location.replace((window.location.hash = "/search#anchorId"));
+      this.setState({
+        showResult:true
+      })
+    });
+   
   }
   handleChange = name => event => {
     this.setState({
@@ -82,10 +86,12 @@ class Search extends Component {
   };
 
   render() {
-    const { classes, posts, geoLocation, lat, lng } = this.props;
+    const { classes, posts, sitterInfo, lat, lng } = this.props;
+    const {showResult} = this.state;
     return (
       <div id="top">
         <h1>Search</h1>   
+
        <Map
           //onMarkerClick={this.handleMarkerClick}
           isMarkerShown
@@ -227,13 +233,22 @@ class Search extends Component {
           >
             Cancel
           </Button>
-        </form>
-        <div id="anchorId" className={classes.postanchor} />
-        {posts.length != 0 ? (
-          <SitterPost posts={posts} />    
-        ) : (
-          <h1 className={classes.alert}>Sorry, no match</h1>
-        )}
+        </form>}
+       {/*<div id="anchorId" className={classes.postanchor} />*/}
+        {showResult==true&&<div>
+          <Map  
+            isMarkerShown
+            center={{lat:lat, lng: lng}}
+            zoom={16}
+            googleMapURL="https://maps.googleapis.com/maps/api/js?key=AIzaSyCUQjqXLGPcvOkrxO_0MNh_HouBRwlxqwA"
+            loadingElement={<div style={{ height: `100%` }} />}
+            containerElement={<div style={{ height: `400px` }} />}
+            mapElement={<div style={{ height: `100%` }} />}
+            geoLocation={sitterInfo}
+          />
+          {posts.length != 0 ? (<SitterPost posts={posts} />) : 
+            (<h1 className={classes.alert}>Sorry, no match</h1>)}
+          </div> }
       </div>
     );
   }
@@ -244,14 +259,14 @@ Search.propTypes = {
   posts: PropTypes.array.isRequired,
   lat: PropTypes.number,
   lng: PropTypes.number,
-  geoLocation: PropTypes.array,
+  sitterInfo: PropTypes.array,
 };
 
 Search.defaultProps = {
   posts: [],
   lat: 40.7104852,
   lng: -74.0063939,
-  geoLocation: [],
+  sitterInfo: [],
 };
 
 function mapStateToProps({ post,user }) {
@@ -259,7 +274,7 @@ function mapStateToProps({ post,user }) {
     posts: post.posts,
     lat: user.lat,
     lng: user.lng,
-    geoLocation: user.geoLocation,
+    sitterInfo: user.sitterInfo,
   };
 }
 
@@ -267,7 +282,7 @@ export default withRouter(
   withStyles(styles)(
     connect(
       mapStateToProps,
-      { SearchPost,getUsersGeoLocation }
+      { SearchPost,searchPostSitterInfo }
     )(Search)
   )
 );
