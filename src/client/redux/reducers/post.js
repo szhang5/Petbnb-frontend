@@ -5,6 +5,7 @@ import * as ACTIONS from "../actions/index";
 
 const initialState = {
   posts: [],
+  sitterPosts:[],
   sitterid: "",
   avai_end_date: "",
   avai_start_date: "",
@@ -28,6 +29,12 @@ export function getPetType(types) {
 
 export default function(state = initialState, action) {
   switch (action.type) {
+    case ACTIONS.GET_ALL_SITTER_POST_INFO:
+    console.log(action);
+      return{
+        ...state,
+        sitterPosts: action.payload.data.sitterPostInfo,
+      };
     case ACTIONS.GET_POST_ACTION:
       return {
         ...state,

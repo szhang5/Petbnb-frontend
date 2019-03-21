@@ -62,10 +62,8 @@ class Map extends Component {
       showInfoIndex:e
     })
    
-    this.props.GetUserPost(e).then(()=>{
-    });  
-    this.props.getUserInfoById(e).then(()=>{
-    });       
+    this.props.GetUserPost(e); 
+    this.props.getUserInfoById(e);   
   }
   onToggleClose() {
    this.setState({
