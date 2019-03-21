@@ -2,43 +2,42 @@ import React, { Component } from "react";
 import PropTypes from "prop-types";
 import { connect } from "react-redux";
 import SitterPost from "./sitter_post";
-import { getPost, getUsersGeoLocation,getPetInfo } from "../redux/actions";
+import { getUsersGeoLocation, getPetInfo, getAllSitterPostInfo } from "../redux/actions";
 
 class HelloWorld extends Component {
   constructor(props) {
     super(props);
-    this.props.getPost();
+    this.props.getAllSitterPostInfo();
     this.props.getUsersGeoLocation();
     //this.props.getPetInfo(uid);  
   }
 
   render() {
-    const { posts,pets,uid } = this.props;
+    const { sitterPosts,pets,uid } = this.props;
     return (
       <div>
         <h1>Home</h1>
-        <SitterPost posts={posts} uid={uid} />   
+        <SitterPost posts={sitterPosts} uid={uid} />   
       </div>
     );
   }
 }
 
 HelloWorld.propTypes = {
-  posts: PropTypes.array,
+  sitterPosts: PropTypes.array,
   uid : PropTypes.number,
   pets : PropTypes.array,
 };
 
 HelloWorld.defaultProps = {
-  posts: [],
+  sitterPosts: [],
   uid : 0,
   pets: []
 };
 
-function mapStateToProps({ post,user,pet }) {
-  console.log(user)
+function mapStateToProps({ post, user, pet }) {
   return {
-    posts: post.posts,
+    sitterPosts: post.sitterPosts,
     uid : user.uid,
     pets : pet.pets
   };
@@ -46,5 +45,5 @@ function mapStateToProps({ post,user,pet }) {
 
 export default connect(
   mapStateToProps,
-  { getPost, getUsersGeoLocation,getPetInfo }
+  { getUsersGeoLocation, getPetInfo, getAllSitterPostInfo }
 )(HelloWorld);

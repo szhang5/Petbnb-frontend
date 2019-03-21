@@ -91,19 +91,8 @@ class Search extends Component {
     return (
       <div id="top">
         <h1>Search</h1>   
-
-       <Map
-          //onMarkerClick={this.handleMarkerClick}
-          isMarkerShown
-          center={{lat:lat, lng: lng}}
-          zoom={12}
-          googleMapURL="https://maps.googleapis.com/maps/api/js?key=AIzaSyCUQjqXLGPcvOkrxO_0MNh_HouBRwlxqwA"
-          loadingElement={<div style={{ height: `100%` }} />}
-          containerElement={<div style={{ height: `400px` }} />}
-          mapElement={<div style={{ height: `100%` }} />}
-          geoLocation={geoLocation}
-        /> 
-        <form
+       
+       { showResult==false&& <form
           className={classes.container}
           noValidate
           autoComplete="off"
