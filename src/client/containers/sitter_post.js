@@ -97,10 +97,9 @@ class SitterPost extends React.Component {
   }
 
   render() {
-    const { classes, posts,pets } = this.props;
+    const { classes, posts, pets } = this.props;
     const defaultImage = "https://res.cloudinary.com/zoey1111/image/upload/v1550020987/profile.png";
-    //console.log(pets);
-    //console.log(this.props.uid)
+
     return (
       <div>
         {map(posts, (post, key) => {  
@@ -111,21 +110,15 @@ class SitterPost extends React.Component {
                   <Grid item xs={3}>
                     <img
                       className={classes.bigAvatar}
-                      src="https://gbgrr.org/wp-content/uploads/Home-page-donate.jpg"
+                      src={post.image? post.image : defaultImage}
                     />  
                   </Grid>
                   <Grid item xs={5}>
-                    <TextField
-                      disabled
-                      id="outlined-firstname-input"
-                      label="Pet types:"
-                      defaultValue={post.pet_type}
-                      className={classes.textField}
-                      margin="normal"
-                    />
+                    <h3 className={classes.content}>{post.firstname} {post.lastname}</h3>
+                    <h5>{post.city}, {post.state}, {post.zip}</h5>
                   </Grid>
                   <Grid item xs={4}>
-                    <h3 className={classes.content}>$ {post.hour_rate}/day</h3>
+                    <h3 className={classes.price}>$ {post.hour_rate} / day</h3>
                   </Grid>
                 </Grid>
               </CardContent>
@@ -139,11 +132,10 @@ class SitterPost extends React.Component {
                 <ExpansionPanelDetails
                   className={classes.expansionPanelDetails}
                 >
-                  <h3>Sitter Id: {post.sitterid}</h3>
-                  <h3>Description: {post.description}</h3>
+                  <h3>Description: </h3>
+                  <h3>{post.description}</h3>
                   <h3>Availablity: </h3>
-                  <h3> {moment(post.avai_start_date).format("LL")} - </h3>
-                  <h3> {moment(post.avai_end_date).format("LL")}</h3>
+                  <h3> {moment(post.avai_start_date).format("L")} - {moment(post.avai_end_date).format("L")}</h3>
                   {this.state.btn_disable==false&&<Button
                     variant="outlined"
                     color="secondary"
@@ -158,7 +150,6 @@ class SitterPost extends React.Component {
                         //open={this.state.open}
                         //onClose={this.handleClose}
                   />*/}
-                  
                 </ExpansionPanelDetails>
               </ExpansionPanel>
             </Card>
