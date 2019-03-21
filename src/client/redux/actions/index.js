@@ -2,26 +2,46 @@ import axios from 'axios';
 
 export const SIGN_IN_ACTION = 'SIGN_IN_ACTION';
 export const REGISTER_ACTION = 'REGISTER_ACTION';
-export const GET_USER_INFO = 'GET_USER_INFO';
 export const SIGNOUT = 'SIGNOUT';
+
+export const GET_USER_INFO = 'GET_USER_INFO';
 export const EDIT_PROFILE_ACTION = 'EDIT_PROFILE_ACTION';
+export const GET_USER_GEO_LOCATION = "GET_USER_GEO_LOCATION";
+export const GET_USER_INFO_BYID = "GET_USER_INFO_BYID";
+
 export const GET_POST_ACTION = 'GET_POST_ACTION';
 export const GET_USER_POST_ACTION = 'GET_USER_POST_ACTION';
 export const CREATE_POST_ACTION = 'CREATE_POST_ACTION';
 export const SEARCH_POST_ACTION = 'SEARCH_POST_ACTION';
+export const EDIT_POST_ACTION = 'EDIT_POST_ACTION';
+export const SEARCH_POST_SITTER_INFO_ACTION = 'SEARCH_POST_SITTER_INFO_ACTION';
+export const GET_ALL_SITTER_POST_INFO = 'GET_ALL_SITTER_POST_INFO';
+
+
 export const UPLOAD_IMAGE_ACTION = 'UPLOAD_IMAGE_ACTION';
 export const UPLOAD_PET_IMAGE_ACTION = 'UPLOAD_PET_IMAGE_ACTION';
+
 export const UPDATE_INPUT_INFO = 'UPDATE_INPUT_INFO';
-export const EDIT_POST_ACTION = 'EDIT_POST_ACTION';
+
 export const EDIT_PET_PROFILE_ACTION = 'EDIT_PET_PROFILE_ACTION';
 export const CREATE_PET_PROFILE_ACTION = 'CREATE_PET_PROFILE_ACTION';
 export const GET_PET_INFO = "GET_PET_INFO";
 export const GET_PET_INFO_BY_ID = "GET_PET_INFO_BY_ID";
-export const GET_USER_GEO_LOCATION = "GET_USER_GEO_LOCATION";
 export const DELETE_PET_ACTION = "DELETE_PET_ACTION";
 export const UPDATE_PET_TYPES = "PET/UPDATE_PET_TYPES";
-export const GET_USER_INFO_BYID = "GET_USER_INFO_BYID";
-export const SEARCH_POST_SITTER_INFO_ACTION = 'SEARCH_POST_SITTER_INFO_ACTION';
+
+
+
+export function getAllSitterPostInfo() {
+  const request = axios
+    .post('/service/petbnbservice/homePageSitterPostInfo', {});
+  return {
+    type: GET_ALL_SITTER_POST_INFO,
+     payload: request,
+  }
+}
+
+
 export function deletePet(petid) {
   const request = axios
     .post('/service/petbnbservice/deletePet', {petid});

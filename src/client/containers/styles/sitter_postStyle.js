@@ -17,8 +17,8 @@ const styles = theme => ({
   bigAvatar: {
     margin: "auto",
 
-    width: 60,
-    height: 60
+    width: 80,
+    height: 80
   },
   expansionPanel: { position: "inherit" },
   expansionPanelSummary: {
@@ -38,7 +38,6 @@ const styles = theme => ({
     boxShadow: theme.shadows[5],
     padding: theme.spacing.unit * 4,
     outline: 'none',
-    
-  }
+  }, 
 });
 export default styles;
