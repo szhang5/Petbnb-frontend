@@ -75,6 +75,7 @@ class Map extends Component {
     const { classes, geoLocation, sitterid, avai_end_date, avai_start_date, description,hour_rate, pet_type, pets_num, postdate,firstname, lastname, image } = this.props;
     const {isOpen,showInfoIndex } = this.state;
     const defaultImage = "https://res.cloudinary.com/zoey1111/image/upload/v1550020987/profile.png";
+    
     return (
       
       <GoogleMap
