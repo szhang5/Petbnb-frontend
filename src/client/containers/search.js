@@ -90,7 +90,7 @@ class Search extends Component {
           //onMarkerClick={this.handleMarkerClick}
           isMarkerShown
           center={{lat:lat, lng: lng}}
-          zoom={16}
+          zoom={12}
           googleMapURL="https://maps.googleapis.com/maps/api/js?key=AIzaSyCUQjqXLGPcvOkrxO_0MNh_HouBRwlxqwA"
           loadingElement={<div style={{ height: `100%` }} />}
           containerElement={<div style={{ height: `400px` }} />}
