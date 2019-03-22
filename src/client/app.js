@@ -15,6 +15,7 @@ import ProfileEdit from "./containers/profileEdit";
 import PostEdit from "./containers/postEdit";
 import CreatePetProfile from "./containers/CreatePetProfile";
 import Search from "./containers/search";
+import Transaction from "./containers/transactionCard";
 import PetProfileEdit from "./containers/petprofileEdit";
 import PetPage from "./containers/petpage";
 import MapPage from "./containers/mapPage"
@@ -59,6 +60,10 @@ class App extends Component {
                     <Route
                       path="/profile/editPost"
                       component={PostEdit}
+                    />
+                    <Route
+                      path="/transaction"
+                      component={Transaction}
                     />
                     <Route exact path="/map" component={MapPage}/>
                     <Route exact path="/home" component={Hello} />
