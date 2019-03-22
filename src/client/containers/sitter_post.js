@@ -28,7 +28,7 @@ import DialogActions from '@material-ui/core/DialogActions';
 import DialogContent from '@material-ui/core/DialogContent';
 import DialogContentText from '@material-ui/core/DialogContentText';
 import DialogTitle from '@material-ui/core/DialogTitle';
-import { getPetInfo } from "../redux/actions";
+import { getPetInfo, createTransaction } from "../redux/actions";
 import Avatar from '@material-ui/core/Avatar';
 
 
@@ -51,14 +51,13 @@ class SitterPost extends React.Component {
   state = {
     expanded: false,
     open: false,
-    btn_disable :false
+    btn_disable :false,
+    selectedPetIds: {},
   };
 
   constructor(props) {
     super(props);
-    
     this.props.getPetInfo(props.uid); 
-   // this.handleClickOpen = this.handleClickOpen.bind(this);
   }
 
   handleExpandClick = () => {
@@ -70,31 +69,80 @@ class SitterPost extends React.Component {
     this.delayedShowMarker();
   };
 
-  /*handleClickOpen(e){
-    this.setState({
-      open: true,
-    });
-  };
 
-  handleClose = value => {
-    this.setState({ selectedValue: value, open: false });
-  };*/
-  handleOpen = () => {
-    this.setState({ open: true });
+  handleOpen = (sitterid) => {
+    this.setState({ 
+      ...this.state,
+      open: true,
+      sitterid: sitterid,
+    });
   };
 
   handleClose = () => {
     this.setState({ 
+      ...this.state,
       open: false
      });
   };
 
-  submitRequest= () =>{
+  submitRequest = (e) =>{
     this.setState({ 
+      ...this.state,
       open: false,
-      btn_disable: true,
+      // btn_disable: true,
      });
+
+    e.preventDefault();
+    let arr = [];
+    for (var key in this.state.selectedPetIds) {
+      if(this.state.selectedPetIds[key] === true) {
+        arr.push(key);
+      }
+    }
+    console.log(this.state.sitterid);
+    console.log(arr);
+    this.props.createTransaction(this.state.sitterid, arr);
   }
+
+  addPetToState = (e) => {
+    const petid = e.target.value;
+    console.log(petid)
+    if(petid in this.state.selectedPetIds) {
+      this.setState({
+        selectedPetIds: {
+          ...this.state.selectedPetIds,
+          [petid]: !this.state.selectedPetIds[petid],
+        }
+      })
+    } else {
+      this.setState({
+        selectedPetIds: {
+          ...this.state.selectedPetIds,
+          [petid]: true,
+        }
+      })
+    }
+  }
+  // 
+  // addPetToState = (petid) => {
+  //   console.log(petid)
+  //   // const petid = e.target.value;
+  //   if(petid in this.state.selectedPetIds) {
+  //     this.setState({
+  //       selectedPetIds: {
+  //         ...this.state.selectedPetIds,
+  //         [petid]: !this.state.selectedPetIds[petid],
+  //       }
+  //     })
+  //   } else {
+  //     this.setState({
+  //       selectedPetIds: {
+  //         ...this.state.selectedPetIds,
+  //         [petid]: true,
+  //       }
+  //     })
+  //   }
+  // }
 
   render() {
     const { classes, posts, pets } = this.props;
@@ -125,34 +173,16 @@ class SitterPost extends React.Component {
                   <h6 className={classes.con}>{post.description}</h6>
                   <h5 className={classes.tit}>Availablity: </h5>
                   <h6 className={classes.con}> {moment(post.avai_start_date).format("L")} - {moment(post.avai_end_date).format("L")}</h6>
-                  {this.state.btn_disable==false&&<Button
+                  <Button
                     variant="outlined"
                     color="secondary"
                     fullWidth
                     className={classes.button}
-                    onClick={this.handleOpen}
+                    onClick={() => this.handleOpen(post.sitterid)}
                   >
                    Send Your Request
-                  </Button>}
+                  </Button>
               </CardContent>
-             {/* <ExpansionPanel className={classes.expansionPanel}>
-                <ExpansionPanelSummary
-                  className={classes.expansionPanelSummary}
-                  expandIcon={<ExpandMoreIcon />}
-                >
-                  <h3>Show more</h3>
-                </ExpansionPanelSummary>
-                <ExpansionPanelDetails
-                  className={classes.expansionPanelDetails}
-          >*/}
-                  
-                  {/*this.state.open==true&&<Request
-                        selectedValue={this.state.selectedValue}
-                        //open={this.state.open}
-                        //onClose={this.handleClose}
-                  />*/}
-                {/*</ExpansionPanelDetails>
-              </ExpansionPanel>*/}
             </Card>
             
           );
@@ -174,7 +204,7 @@ class SitterPost extends React.Component {
                  <Avatar src={pet.image? pet.image : defaultImage} className={classes.bigAvatar} style={{margin: '0'}}/>
                  <h3 style={{marginLeft: '15px',fontWeight:'400'}}>{pet.petname}</h3>
                  <FormControlLabel
-                    control={<Checkbox value={pet.petid} color="primary" />}
+                    control={<Checkbox value={pet.petid.toString()} color="primary" onClick={this.addPetToState} />} // () => this.addPetToState(pet.petid)
                     style={{position: 'absolute',right:'10px'}} 
                   />
                 </div>
@@ -218,7 +248,7 @@ export default withRouter(
   withStyles(styles)(
     connect(
       mapStateToProps,
-      { getPetInfo }
+      { getPetInfo, createTransaction }
     )(SitterPost)
   )
 );

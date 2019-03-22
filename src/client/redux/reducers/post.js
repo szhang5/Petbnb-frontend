@@ -30,7 +30,6 @@ export function getPetType(types) {
 export default function(state = initialState, action) {
   switch (action.type) {
     case ACTIONS.GET_ALL_SITTER_POST_INFO:
-    console.log(action);
       return{
         ...state,
         sitterPosts: action.payload.data.sitterPostInfo,
