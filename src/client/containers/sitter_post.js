@@ -154,29 +154,18 @@ class SitterPost extends React.Component {
                       src={post.image? post.image : defaultImage}
                     />  
                   </Grid>
-                  <Grid item xs={5}>
-                    <h3 className={classes.content}>{post.firstname} {post.lastname}</h3>
-                    <h5>{post.city}, {post.state}, {post.zip}</h5>
+                  <Grid item xs={6}>
+                    <h5 className={classes.content}>{post.firstname} {post.lastname}</h5>
                   </Grid>
-                  <Grid item xs={4}>
-                    <h3 className={classes.price}>$ {post.hour_rate} / day</h3>
+                  <Grid item xs={3}>
+                    <h5 className={classes.price}>${post.hour_rate}/day</h5>
                   </Grid>
                 </Grid>
-              </CardContent>
-              <ExpansionPanel className={classes.expansionPanel}>
-                <ExpansionPanelSummary
-                  className={classes.expansionPanelSummary}
-                  expandIcon={<ExpandMoreIcon />}
-                >
-                  <h3>Show more</h3>
-                </ExpansionPanelSummary>
-                <ExpansionPanelDetails
-                  className={classes.expansionPanelDetails}
-                >
-                  <h3>Description: </h3>
-                  <h3>{post.description}</h3>
-                  <h3>Availablity: </h3>
-                  <h3> {moment(post.avai_start_date).format("L")} - {moment(post.avai_end_date).format("L")}</h3>
+                <h6 className={classes.address}>{post.city}, {post.state}, {post.zip}</h6>
+                <h5 className={classes.tit}>Description: </h5>
+                  <h6 className={classes.con}>{post.description}</h6>
+                  <h5 className={classes.tit}>Availablity: </h5>
+                  <h6 className={classes.con}> {moment(post.avai_start_date).format("L")} - {moment(post.avai_end_date).format("L")}</h6>
                   {this.state.btn_disable==false&&<Button
                     variant="outlined"
                     color="secondary"
@@ -186,13 +175,25 @@ class SitterPost extends React.Component {
                   >
                    Send Your Request
                   </Button>}
+              </CardContent>
+             {/* <ExpansionPanel className={classes.expansionPanel}>
+                <ExpansionPanelSummary
+                  className={classes.expansionPanelSummary}
+                  expandIcon={<ExpandMoreIcon />}
+                >
+                  <h3>Show more</h3>
+                </ExpansionPanelSummary>
+                <ExpansionPanelDetails
+                  className={classes.expansionPanelDetails}
+          >*/}
+                  
                   {/*this.state.open==true&&<Request
                         selectedValue={this.state.selectedValue}
                         //open={this.state.open}
                         //onClose={this.handleClose}
                   />*/}
-                </ExpansionPanelDetails>
-              </ExpansionPanel>
+                {/*</ExpansionPanelDetails>
+              </ExpansionPanel>*/}
             </Card>
             
           );
