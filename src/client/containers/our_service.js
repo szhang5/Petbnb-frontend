@@ -29,7 +29,7 @@ class CreatPet extends Component {
             variant="contained"
             color="primary"
            onClick={()=>{
-             console.log(this.props.uid);
+             // console.log(this.props.uid);
              CreatePetProfileAction(this.props.uid)}}
           >
             Add

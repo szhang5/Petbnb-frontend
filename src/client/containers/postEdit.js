@@ -30,7 +30,7 @@ for(let i = 1; i < 6; i++) {
 class PostEdit extends Component {
 
   componentWillMount(){
-    console.log(this.props.sitterid);
+    // console.log(this.props.sitterid);
     if(this.props.sitterid){
       this.props.GetUserPost(this.props.sitterid);
     }
