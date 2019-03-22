@@ -51,7 +51,8 @@ class SitterPost extends React.Component {
   state = {
     expanded: false,
     open: false,
-    btn_disable :false
+    btn_disable :false,
+    selectedPetIds: {},
   };
 
   constructor(props) {
@@ -95,6 +96,46 @@ class SitterPost extends React.Component {
       btn_disable: true,
      });
   }
+
+  addPetToState = (e) => {
+    const petid = e.target.value;
+    console.log(petid)
+    if(petid in this.state.selectedPetIds) {
+      this.setState({
+        selectedPetIds: {
+          ...this.state.selectedPetIds,
+          [petid]: !this.state.selectedPetIds[petid],
+        }
+      })
+    } else {
+      this.setState({
+        selectedPetIds: {
+          ...this.state.selectedPetIds,
+          [petid]: true,
+        }
+      })
+    }
+  }
+  // 
+  // addPetToState = (petid) => {
+  //   console.log(petid)
+  //   // const petid = e.target.value;
+  //   if(petid in this.state.selectedPetIds) {
+  //     this.setState({
+  //       selectedPetIds: {
+  //         ...this.state.selectedPetIds,
+  //         [petid]: !this.state.selectedPetIds[petid],
+  //       }
+  //     })
+  //   } else {
+  //     this.setState({
+  //       selectedPetIds: {
+  //         ...this.state.selectedPetIds,
+  //         [petid]: true,
+  //       }
+  //     })
+  //   }
+  // }
 
   render() {
     const { classes, posts, pets } = this.props;
@@ -173,7 +214,7 @@ class SitterPost extends React.Component {
                  <Avatar src={pet.image? pet.image : defaultImage} className={classes.bigAvatar} style={{margin: '0'}}/>
                  <h3 style={{marginLeft: '15px',fontWeight:'400'}}>{pet.petname}</h3>
                  <FormControlLabel
-                    control={<Checkbox value={pet.petid} color="primary" />}
+                    control={<Checkbox value={pet.petid.toString()} color="primary" onClick={this.addPetToState} />} // () => this.addPetToState(pet.petid)
                     style={{position: 'absolute',right:'10px'}} 
                   />
                 </div>

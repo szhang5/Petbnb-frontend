@@ -14,12 +14,6 @@ import styles from "./styles/profileStyle";
 
 class Profile extends Component {
 
-  hideEditPostBtn(){
-    if (localStorage.getItem(userType)=="1") {
-      document.getElementById("editPostBtn").style.display = "none";
-    }
-  }
-
   handleOnClick() {
     const { email } = this.props;
     // console.log(email);
@@ -48,7 +42,7 @@ class Profile extends Component {
     return (
       <div>
         <Grid container justify="center" alignItems="center">
-          <Avatar alt="Zoey" src={image? image : defaultImage} className={classes.bigAvatar} />
+          <Avatar alt="profileImage" src={image? image : defaultImage} className={classes.bigAvatar} />
         </Grid>
         <form className={classes.container} noValidate autoComplete="off">
           <TextField
@@ -139,12 +133,10 @@ class Profile extends Component {
           Edit
         </Button>
         <Button
-          id={editPostBtn}
           variant="outlined"
           fullWidth
           color="primary"
           className={classes.button}
-          hideEditPostBtn={}
           onClick={() => {
             this.props.history.push("/profile/editPost");
           }}

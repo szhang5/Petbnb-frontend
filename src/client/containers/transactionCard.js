@@ -33,6 +33,7 @@ class TransactionCard extends Component {
 
         return (
             <div>
+                <h1>Reservation</h1>
                 <Card className={classes.card}>
                     <CardContent>
                         <Grid container justify="center" alignItems="center">
@@ -117,7 +118,7 @@ class TransactionCard extends Component {
                                 <Chip
                                     label="Payment Recieved"
                                     className={classes.chip}
-                                    color=""
+                                    color="default"
                                 />
                             </Grid>
                         </Grid>
