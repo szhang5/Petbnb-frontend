@@ -31,6 +31,18 @@ export const DELETE_PET_ACTION = "DELETE_PET_ACTION";
 export const UPDATE_PET_TYPES = "PET/UPDATE_PET_TYPES";
 
 
+export const CREATE_TRANSACTION = "PET/CREATE_TRANSACTION";
+
+
+export function createTransaction(sitterid, petid) {
+  console.log("dafdafafafkjrjgwogji" , sitterid, petid);
+  const request = axios
+    .post('/service/petbnbservice/createTransaction', { sitterid, petid });
+  return {
+    type: CREATE_TRANSACTION,
+    payload: request,
+  }
+}
 
 export function getAllSitterPostInfo() {
   const request = axios

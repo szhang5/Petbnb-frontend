@@ -46,7 +46,7 @@ class Map extends Component {
   }
   
   mapMoved() {
-    console.log("move");
+    // console.log("move");
   }
   mapLoaded(map) {
     if (this.state.map != null) return;
@@ -54,7 +54,7 @@ class Map extends Component {
     this.setState({ map: map });
   }
   zoomChanged() {
-    console.log("zoom changed");
+    // console.log("zoom changed");
   }
   onToggleOpen(e) {
     this.setState({

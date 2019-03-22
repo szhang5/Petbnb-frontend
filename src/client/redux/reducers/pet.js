@@ -18,7 +18,6 @@ const initialState = {
 export default function(state = initialState, action) {
   switch (action.type) {
     case ACTIONS.GET_PET_INFO_BY_ID: 
-    console.log(action);
     return {
       petid: action.payload.data.petid,
       uid: action.payload.data.uid,
@@ -35,7 +34,6 @@ export default function(state = initialState, action) {
         pets: action.payload.data.pet,
       };
     case ACTIONS.EDIT_PET_PROFILE_ACTION:
-    //console.log("pet20");
       return {
         ...state,
         petid: action.payload.data.petid,
