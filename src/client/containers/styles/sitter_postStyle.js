@@ -39,5 +39,31 @@ const styles = theme => ({
     padding: theme.spacing.unit * 4,
     outline: 'none',
   }, 
+  price:{
+    color:'#f06292',
+    marginTop: 0,
+    marginLeft: -14,
+  },
+  content:{
+    marginTop: 0,
+    paddingLeft:7
+  },
+  address:{
+    fontSize: 16,
+    marginLeft: 90,
+    marginTop: -53,
+    marginBottom: 30
+  },
+  tit:{
+    marginTop: 10,
+    marginBottom: 10
+  },
+  con:{
+    marginTop: 10,
+    marginBottom: 10,
+    fontSize: 16,
+
+  }
+
 });
 export default styles;
