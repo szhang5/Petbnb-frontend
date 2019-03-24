@@ -33,7 +33,7 @@ class SignIn extends Component {
       if (e.payload.data.user.user_type == 1) { //owner
         this.props.history.push("/home");
       } else if (e.payload.data.user.user_type == 0) { //sitter
-        this.props.history.push("/profile/petpage");
+        this.props.history.push("/transaction");
       }
 
       localStorage.setItem('userType', e.payload.data.user.user_type);
