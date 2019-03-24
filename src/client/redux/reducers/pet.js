@@ -19,6 +19,7 @@ export default function(state = initialState, action) {
   switch (action.type) {
     case ACTIONS.GET_PET_INFO_BY_ID: 
     return {
+      ...state,
       petid: action.payload.data.petid,
       uid: action.payload.data.uid,
       birth: moment(action.payload.data.birth).format('YYYY-MM-DD'),
@@ -31,6 +32,7 @@ export default function(state = initialState, action) {
     }
     case ACTIONS.GET_PET_INFO: 
       return {
+         ...state,
         pets: action.payload.data.pet,
       };
     case ACTIONS.EDIT_PET_PROFILE_ACTION:
