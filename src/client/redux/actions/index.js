@@ -28,14 +28,54 @@ export const CREATE_PET_PROFILE_ACTION = 'CREATE_PET_PROFILE_ACTION';
 export const GET_PET_INFO = "GET_PET_INFO";
 export const GET_PET_INFO_BY_ID = "GET_PET_INFO_BY_ID";
 export const DELETE_PET_ACTION = "DELETE_PET_ACTION";
-export const UPDATE_PET_TYPES = "PET/UPDATE_PET_TYPES";
+export const UPDATE_PET_TYPES = "UPDATE_PET_TYPES";
 
 
-export const CREATE_TRANSACTION = "PET/CREATE_TRANSACTION";
+export const CREATE_TRANSACTION = "CREATE_TRANSACTION";
+export const GET_USER_TRANSACTION = "GET_USER_TRANSACTION";
+export const UPDATE_TRANSACTION_STATUS = "UPDATE_TRANSACTION_STATUS";
+
+// export function updateTransactionStatus(transacid, status) {
+//   const request = axios
+//     .post('/service/petbnbservice/updateTransactionStatus', { transacid, status });
+//   return {
+//     type: UPDATE_TRANSACTION_STATUS,
+//     transacid,
+//     status,
+//     payload: request,
+
+//   }
+// }
+
+export function updateTransactionStatusHelper(data, transacid, status) {
+  return {
+    type: UPDATE_TRANSACTION_STATUS,
+    transacid,
+    status,
+    data,
+  }
+}
+
+export function updateTransactionStatus(transacid, status) {
+  return (dispatch) => {
+    axios.post('/service/petbnbservice/updateTransactionStatus', { transacid, status })
+    .then(({ data }) => {
+      return dispatch(updateTransactionStatusHelper(data, transacid, status));
+    });
+  }
+}
+
+export function getUserTransaction(uid) {
+  const request = axios
+    .post('/service/petbnbservice/getUserTransaction', { uid });
+  return {
+    type: GET_USER_TRANSACTION,
+    payload: request,
+  }
+}
 
 
 export function createTransaction(sitterid, petid) {
-  console.log("dafdafafafkjrjgwogji" , sitterid, petid);
   const request = axios
     .post('/service/petbnbservice/createTransaction', { sitterid, petid });
   return {
