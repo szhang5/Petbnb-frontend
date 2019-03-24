@@ -35,7 +35,8 @@ class Profile extends Component {
       state,
       zipcode,
       image,
-      classes
+      classes,
+      user_type
     } = this.props;
      const defaultImage = "https://res.cloudinary.com/zoey1111/image/upload/v1550020987/profile.png";
  
@@ -132,7 +133,8 @@ class Profile extends Component {
         >
           Edit
         </Button>
-        <Button
+
+        {user_type==0&&<Button
           variant="outlined"
           fullWidth
           color="primary"
@@ -142,10 +144,10 @@ class Profile extends Component {
           }}
         >
           Edit Post
-        </Button>
-        <Button
+        </Button>}
+        {user_type==1&&<Button
           variant="outlined"
-          fullWidth
+        //  fullWidth
           color="primary"
           className={classes.button}
           onClick={() => {
@@ -153,10 +155,21 @@ class Profile extends Component {
           }}
         >
           Pet Page
+        </Button>}
+        <Button
+          variant="outlined"
+         // fullWidth
+          color="primary"
+          className={classes.button}
+          onClick={() => {
+            this.props.history.push("/transaction");
+          }}
+        >
+         My Transaction
         </Button>
         <Button
           variant="contained"
-          fullWidth
+        //  fullWidth
           color="primary"
           className={classes.button}
           onClick={() => this.handleOnClick()}
@@ -180,6 +193,7 @@ Profile.propTypes = {
   state: PropTypes.string,
   zipcode: PropTypes.string,
   image: PropTypes.string,
+  user_type: PropTypes.number
 };
 
 Profile.defaultProps = {
@@ -193,9 +207,11 @@ Profile.defaultProps = {
   state: "",
   zipcode: "",
   image: "https://res.cloudinary.com/zoey1111/image/upload/v1550020987/profile.png",
+  user_type:1
 };
 
 function mapStateToProps({ user }) {
+  console.log(user)
   return {
     firstname: user.firstname,
     lastname: user.lastname,
@@ -207,6 +223,7 @@ function mapStateToProps({ user }) {
     state: user.state,
     zipcode: user.zip,
     image: user.image,
+    user_type: user.user_type
   };
 }
 
