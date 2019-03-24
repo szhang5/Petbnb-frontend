@@ -24,18 +24,26 @@ class Register extends Component {
   constructor(props) {
     super(props);
   }
+  state = {
+    selectedValue: 0,
+  };
 
   handleRegister(e) {
     e.preventDefault();
     const data = new FormData(e.target);
     const payload = {}
+    
     for (const [key, value] of data.entries()) { 
       payload[key] = value;
     }
+    payload.user_type=this.state.selectedValue
     this.props.registerAction(payload).then(() => {
       this.props.history.push('/home'); 
     });
   }
+  handleChange = event => {
+    this.setState({ selectedValue: event.target.value });
+  };
 
   render() {
     const { classes } = this.props;
@@ -64,11 +72,23 @@ class Register extends Component {
             </FormControl>
            
             <FormControlLabel
-              control={<Radio value="1" color="primary" />}
+              control={
+                <Radio 
+                  value="1" 
+                  color="primary"
+                  //checked={this.state.selectedValue === 1}
+                  onChange={this.handleChange}
+                   />}
               label="Owner"
             />
             <FormControlLabel
-            control={<Radio value="0" color="primary" />}
+            control={
+              <Radio 
+                value="0" 
+                color="primary" 
+               // checked={this.state.selectedValue === 2}
+                onChange={this.handleChange}
+                />}
             label="Sitter"
           />
            <FormControlLabel
