@@ -1,6 +1,7 @@
 import React, { Component }  from 'react';
 import PropTypes from 'prop-types';
 import { map } from "lodash";
+import moment from "moment";
 import { withStyles } from '@material-ui/core/styles';
 import { withRouter } from "react-router-dom";
 import { connect } from "react-redux";
@@ -70,10 +71,10 @@ class TransactionCard extends Component {
                       {user_type == 0? `Pet Owner: ${owner.firstname} ${owner.lastname}` : `Pet Sitter: ${sitter.firstname} ${sitter.lastname}`}
                   </Typography>
                   <Typography>
-                      Date: 03/01/2019-03/20/2019
+                      Date: {moment(transacinfo.avai_start_date).format("L")} - {moment(transacinfo.avai_end_date).format("L")}
                   </Typography>
                   <Typography>
-                      Amount: $100
+                      Amount: ${transacinfo.hour_rate*transaction.pets.length}
                   </Typography>
                   {transacinfo.status == 0 && <Grid container>
                       <Grid item xs>
@@ -113,21 +114,30 @@ class TransactionCard extends Component {
                               label="Pay"
                               onClick={() => this.handleStatusChange(transacinfo.transacid, 2)}
                               className={classes.chip}
-                              color="Primary"
+                              color="primary"
                               variant="outlined"
                           />
                       </Grid>
                   </Grid>}
 
-                  {transacinfo.status == 2 && <Grid container>
+                  {user_type == 0 && transacinfo.status == 2 && <Grid container>
                       <Grid item xs>
                           <Chip
                               label="Payment Received"
-                              color="#00ff00"
                               className={classes.chip}
                           />
                       </Grid>
                   </Grid>}
+
+                  {user_type == 1 && transacinfo.status == 2 && <Grid container>
+                      <Grid item xs>
+                          <Chip
+                              label="Paid"
+                              className={classes.chip}
+                          />
+                      </Grid>
+                  </Grid>}
+
                   {transacinfo.status == 3 && <Grid container>
                       <Grid item xs>
                           <Chip
