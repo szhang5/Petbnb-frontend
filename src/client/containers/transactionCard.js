@@ -76,7 +76,7 @@ class TransactionCard extends Component {
                   <Typography>
                       Amount: ${transacinfo.hour_rate*transaction.pets.length}
                   </Typography>
-                  {transacinfo.status == 0 && <Grid container>
+                  {user_type == 0 && transacinfo.status == 0 && <Grid container>
                       <Grid item xs>
                           <Chip
                               label="Accept"
@@ -98,6 +98,15 @@ class TransactionCard extends Component {
                           />
                       </Grid>
                   </Grid> }
+
+                   {user_type == 1 && transacinfo.status == 0 && <Grid container>
+                      <Grid item xs>
+                          <Chip
+                              label={`Waiting For Response From ${sitter.firstname} ${sitter.lastname}...`}
+                              className={classes.chip}
+                          />
+                      </Grid>
+                  </Grid>}
 
                   {user_type == 0 && transacinfo.status == 1 && <Grid container>
                       <Grid item xs>
