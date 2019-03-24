@@ -14,7 +14,8 @@ const styles = theme => ({
     width: 200
   },
   button: {
-    margin: theme.spacing.unit
+    margin: theme.spacing.unit,
+    width: '96%'
   },
   input: {
     display: "none"
