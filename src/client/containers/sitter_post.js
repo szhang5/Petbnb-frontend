@@ -145,7 +145,7 @@ class SitterPost extends React.Component {
   // }
 
   render() {
-    const { classes, posts, pets } = this.props;
+    const { classes, posts, pets,user_type } = this.props;
     const defaultImage = "https://res.cloudinary.com/zoey1111/image/upload/v1550020987/profile.png";
 
     return (
@@ -173,7 +173,7 @@ class SitterPost extends React.Component {
                   <h6 className={classes.con}>{post.description}</h6>
                   <h5 className={classes.tit}>Availablity: </h5>
                   <h6 className={classes.con}> {moment(post.avai_start_date).format("L")} - {moment(post.avai_end_date).format("L")}</h6>
-                  <Button
+                {user_type==1&&<Button
                     variant="outlined"
                     color="secondary"
                     fullWidth
@@ -181,7 +181,7 @@ class SitterPost extends React.Component {
                     onClick={() => this.handleOpen(post.sitterid)}
                   >
                    Send Your Request
-                  </Button>
+                  </Button>}
               </CardContent>
             </Card>
             
@@ -232,15 +232,19 @@ class SitterPost extends React.Component {
 SitterPost.propTypes = {
   classes: PropTypes.object.isRequired,
   pets : PropTypes.array,
+  user_type : PropTypes.number
 };
 
 SitterPost.defaultProps = {
-  pets: []
+  pets: [],
+  user_type:0
 };
 
-function mapStateToProps({ pet }) {
+function mapStateToProps({ pet,user }) {
+   // console.log(user)
   return {
-    pets : pet.pets
+    pets : pet.pets,
+    user_type : user.user_type
   };
 }
 
