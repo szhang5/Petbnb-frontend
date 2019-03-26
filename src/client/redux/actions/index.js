@@ -16,7 +16,7 @@ export const SEARCH_POST_ACTION = 'SEARCH_POST_ACTION';
 export const EDIT_POST_ACTION = 'EDIT_POST_ACTION';
 export const SEARCH_POST_SITTER_INFO_ACTION = 'SEARCH_POST_SITTER_INFO_ACTION';
 export const GET_ALL_SITTER_POST_INFO = 'GET_ALL_SITTER_POST_INFO';
-
+export const SEARCH_SITTER_POST_INFO = 'SEARCH_SITTER_POST_INFO';
 
 export const UPLOAD_IMAGE_ACTION = 'UPLOAD_IMAGE_ACTION';
 export const UPLOAD_PET_IMAGE_ACTION = 'UPLOAD_PET_IMAGE_ACTION';
@@ -81,6 +81,19 @@ export function createTransaction(sitterid, petid) {
   return {
     type: CREATE_TRANSACTION,
     payload: request,
+  }
+}
+
+export function searchSitterPostInfo(payload) {
+  const request = axios
+    .post('/service/petbnbservice/searchPostAndSitterInfo', {
+        ...payload,
+        hour_rate: parseFloat(payload.hour_rate),
+        pets_num: parseInt(payload.pets_num, 10),
+    });
+  return {
+    type: SEARCH_SITTER_POST_INFO,
+     payload: request,
   }
 }
 

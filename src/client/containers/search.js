@@ -8,7 +8,7 @@ import MenuItem from "@material-ui/core/MenuItem";
 import TextField from "@material-ui/core/TextField";
 import { withRouter } from "react-router-dom";
 import Button from "@material-ui/core/Button";
-import { SearchPost,searchPostSitterInfo } from "../redux/actions";
+import { SearchPost,searchPostSitterInfo,searchSitterPostInfo } from "../redux/actions";
 import SitterPost from "./sitter_post";
 import styles from "./styles/searchStyle";
 import Map from "./map";
@@ -71,7 +71,7 @@ class Search extends Component {
     this.props.searchPostSitterInfo(this.state).then(()=>{
      
     });
-    this.props.SearchPost(this.state).then(() => {
+    this.props.searchSitterPostInfo(this.state).then(() => {
       //window.location.replace((window.location.hash = "/search#anchorId"));
       this.setState({
         showResult:true
@@ -271,7 +271,7 @@ export default withRouter(
   withStyles(styles)(
     connect(
       mapStateToProps,
-      { SearchPost,searchPostSitterInfo }
+      { searchSitterPostInfo,searchPostSitterInfo }
     )(Search)
   )
 );

@@ -46,6 +46,11 @@ export default function(state = initialState, action) {
         ...state,
         posts: action.payload.data.post,
       };
+    case ACTIONS.SEARCH_SITTER_POST_INFO:
+          //console.log(action.payload)
+      return {
+          posts:action.payload.data.sitterPostInfo,
+      }
     case ACTIONS.GET_USER_POST_ACTION:
       return {
         ...state,
