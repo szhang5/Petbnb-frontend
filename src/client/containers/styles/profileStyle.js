@@ -54,6 +54,9 @@ const styles = theme => ({
     marginLeft: 15,
     color: "gray",
     fontSize: 16,
+  },
+  foot:{
+    height:100,
   }
 });
 

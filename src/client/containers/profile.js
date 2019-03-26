@@ -156,17 +156,7 @@ class Profile extends Component {
         >
           Pet Page
         </Button>}
-        <Button
-          variant="outlined"
-         // fullWidth
-          color="primary"
-          className={classes.button}
-          onClick={() => {
-            this.props.history.push("/transaction");
-          }}
-        >
-         My Transaction
-        </Button>
+       
         <Button
           variant="contained"
         //  fullWidth
@@ -176,6 +166,7 @@ class Profile extends Component {
         >
           Sign Out
         </Button>
+        <div className={classes.foot}></div>
       </div>
     );
   }
