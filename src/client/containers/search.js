@@ -52,6 +52,7 @@ const number = [
 ];
 
 class Search extends Component {
+
   constructor(props) {
     super(props);
   }
@@ -69,7 +70,7 @@ class Search extends Component {
     e.preventDefault();
     
     this.props.searchPostSitterInfo(this.state).then(()=>{
-     
+
     });
     this.props.searchSitterPostInfo(this.state).then(() => {
       //window.location.replace((window.location.hash = "/search#anchorId"));
@@ -86,7 +87,7 @@ class Search extends Component {
   };
 
   render() {
-    const { classes, posts, sitterInfo, lat, lng } = this.props;
+    const { classes, posts, sitterInfo, lat, lng, } = this.props;
     const {showResult} = this.state;
     return (
       <div id="top">
@@ -248,11 +249,13 @@ Search.propTypes = {
   posts: PropTypes.array.isRequired,
   lat: PropTypes.number,
   lng: PropTypes.number,
+  uid: PropTypes.oneOfType([PropTypes.string,PropTypes.number]),
   sitterInfo: PropTypes.array,
 };
 
 Search.defaultProps = {
   posts: [],
+  uid: 0,
   lat: 40.7104852,
   lng: -74.0063939,
   sitterInfo: [],
@@ -261,6 +264,7 @@ Search.defaultProps = {
 function mapStateToProps({ post,user }) {
   return {
     posts: post.posts,
+    uid: user.uid,
     lat: user.lat,
     lng: user.lng,
     sitterInfo: user.sitterInfo,
