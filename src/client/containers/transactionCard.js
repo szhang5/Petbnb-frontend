@@ -60,6 +60,7 @@ class TransactionCard extends Component {
           return (
             <Card className={classes.card} key={transacinfo.transacid}>
               <CardContent>
+              <h4>TransactionID: {transacinfo.transacid}</h4>
               <Grid container justify="center" alignItems="center">
               {map(pets, (pet, key) => {
                 return(
