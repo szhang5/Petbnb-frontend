@@ -9,7 +9,7 @@ class HelloWorld extends Component {
     super(props);
     this.props.getAllSitterPostInfo();
     this.props.getUsersGeoLocation();
-    //this.props.getPetInfo(uid);  
+    this.props.getPetInfo(this.props.uid);  
   }
 
   render() {

@@ -28,7 +28,7 @@ import DialogActions from '@material-ui/core/DialogActions';
 import DialogContent from '@material-ui/core/DialogContent';
 import DialogContentText from '@material-ui/core/DialogContentText';
 import DialogTitle from '@material-ui/core/DialogTitle';
-import { getPetInfo, createTransaction } from "../redux/actions";
+import { createTransaction } from "../redux/actions";
 import Avatar from '@material-ui/core/Avatar';
 
 
@@ -57,7 +57,6 @@ class SitterPost extends React.Component {
 
   constructor(props) {
     super(props);
-    this.props.getPetInfo(props.uid); 
   }
 
   handleExpandClick = () => {
@@ -145,7 +144,7 @@ class SitterPost extends React.Component {
   // }
 
   render() {
-    const { classes, posts, pets,user_type } = this.props;
+    const { classes, posts, pets, user_type } = this.props;
     const defaultImage = "https://res.cloudinary.com/zoey1111/image/upload/v1550020987/profile.png";
 
     return (
@@ -252,7 +251,7 @@ export default withRouter(
   withStyles(styles)(
     connect(
       mapStateToProps,
-      { getPetInfo, createTransaction }
+      { createTransaction }
     )(SitterPost)
   )
 );
