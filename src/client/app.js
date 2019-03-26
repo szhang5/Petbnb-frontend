@@ -5,6 +5,7 @@ import { MuiThemeProvider, createMuiTheme } from "@material-ui/core/styles";
 import CssBaseline from "@material-ui/core/CssBaseline";
 import "../client/app.css";
 import AppHeader from "./containers/appheader";
+import SimpleBottomNavigation from "./containers/simpleBottomNavigation";
 import Hello from "./containers/hello";
 import SignIn from "./containers/signin";
 import Register from "./containers/register";
@@ -66,12 +67,14 @@ class App extends Component {
                       component={Transaction}
                     />
                     <Route exact path="/map" component={MapPage}/>
+                    <Route exact path="/" component={Hello} />
                     <Route exact path="/home" component={Hello} />
                     <Route exact path="/search" component={Search} />
                     <Route exact path="/our_service" component={OurService} />
                     <Route exact path="/contact_us" component={ContactUs} />
                   </ExclusiveRouteContainer>
                 </Switch>
+                <SimpleBottomNavigation />
               </div>
             </BrowserRouter>
           </Provider>
