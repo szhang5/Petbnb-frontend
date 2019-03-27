@@ -92,8 +92,6 @@ class Search extends Component {
     const {showResult} = this.state;
     return (
       <div id="top">
-        <h1>Search</h1>   
-       
        { showResult==false&& <form
           className={classes.container}
           noValidate
