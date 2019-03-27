@@ -13,6 +13,7 @@ import DoneIcon from '@material-ui/icons/Done';
 import Grid from '@material-ui/core/Grid';
 import { getUserTransaction, updateTransactionStatus } from "../redux/actions";
 import Typography from '@material-ui/core/Typography';
+import SimpleBottomNavigation from "./simpleBottomNavigation";
 
 const styles = {
     avatar: {
@@ -160,6 +161,8 @@ class TransactionCard extends Component {
           </Card>
          );
       })}
+      <div className={classes.foot} style={{ height: `100px` }}></div>
+       <SimpleBottomNavigation />
       </div>
     );
   }
