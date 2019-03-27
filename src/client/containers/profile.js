@@ -8,6 +8,7 @@ import Grid from '@material-ui/core/Grid';
 import MenuItem from "@material-ui/core/MenuItem";
 import TextField from "@material-ui/core/TextField";
 import Button from "@material-ui/core/Button";
+import SimpleBottomNavigation from "./simpleBottomNavigation";
 import { withRouter } from "react-router-dom";
 import { signOut } from "../redux/actions";
 import styles from "./styles/profileStyle";
@@ -156,17 +157,7 @@ class Profile extends Component {
         >
           Pet Page
         </Button>}
-        <Button
-          variant="outlined"
-         // fullWidth
-          color="primary"
-          className={classes.button}
-          onClick={() => {
-            this.props.history.push("/transaction");
-          }}
-        >
-         My Transaction
-        </Button>
+       
         <Button
           variant="contained"
         //  fullWidth
@@ -176,6 +167,8 @@ class Profile extends Component {
         >
           Sign Out
         </Button>
+        <div className={classes.foot}></div>
+        <SimpleBottomNavigation />
       </div>
     );
   }

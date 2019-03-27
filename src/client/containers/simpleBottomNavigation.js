@@ -3,6 +3,9 @@ import { Link } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import { withStyles } from '@material-ui/core/styles';
 import BottomNavigation from '@material-ui/core/BottomNavigation';
+import { withRouter } from "react-router-dom";
+import { connect } from "react-redux";
+import { signOut } from "../redux/actions";
 import BottomNavigationAction from '@material-ui/core/BottomNavigationAction';
 import RestoreIcon from '@material-ui/icons/Restore';
 import HomeIcon from '@material-ui/icons/Home';
@@ -30,7 +33,7 @@ class SimpleBottomNavigation extends React.Component {
   };
 
   render() {
-    const { classes } = this.props;
+    const { classes,name } = this.props;
     const { value } = this.state;
 
     return (
@@ -68,20 +71,40 @@ class SimpleBottomNavigation extends React.Component {
           value="transaction"
           icon={<TransactionIcon />}
        />
-       <BottomNavigationAction
+      <BottomNavigationAction
           component={Link}
           to="/profile"
           label="Profile"
           value="profile"
           icon={<AccountIcon />}
        />
+      
+
+        
       </BottomNavigation>
+      
     );
   }
 }
 
 SimpleBottomNavigation.propTypes = {
   classes: PropTypes.object.isRequired,
+  name: PropTypes.string
 };
+SimpleBottomNavigation.defaultProps = {
+  name: ""
+};
+function mapStateToProps({ user }) {
+  return {
+    name: user.email
+  };
+}
 
-export default withStyles(styles)(SimpleBottomNavigation);
+export default withRouter(
+  withStyles(styles)(
+    connect(
+      mapStateToProps,
+      { signOut }
+    )(SimpleBottomNavigation)
+  )
+);

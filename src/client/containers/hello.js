@@ -3,6 +3,7 @@ import PropTypes from "prop-types";
 import { connect } from "react-redux";
 import SitterPost from "./sitter_post";
 import { getUsersGeoLocation, getPetInfo, getAllSitterPostInfo } from "../redux/actions";
+import SimpleBottomNavigation from "./simpleBottomNavigation";
 
 class HelloWorld extends Component {
   constructor(props) {
@@ -17,7 +18,9 @@ class HelloWorld extends Component {
     return (
       <div>
         <h1>Home</h1>
-        <SitterPost posts={sitterPosts} uid={uid} />   
+        <SitterPost posts={sitterPosts} uid={uid} />
+        <div  style={{ height: `100px` }}></div>   
+        <SimpleBottomNavigation />
       </div>
     );
   }
