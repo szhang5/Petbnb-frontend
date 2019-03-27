@@ -8,6 +8,7 @@ import { withRouter } from "react-router-dom";
 import { getUsersGeoLocation,getUserInfo } from "../redux/actions";
 import styles from "./styles/searchStyle";
 import Map from "./map";
+import SimpleBottomNavigation from "./simpleBottomNavigation";
 
 
 
@@ -38,7 +39,8 @@ class MapPage extends Component {
           mapElement={<div style={{ height: `100%` }} />}
           geoLocation={geoLocation}
         /> 
-        
+        <div className={classes.foot} style={{ height: `100px` }}></div>
+        <SimpleBottomNavigation />
       </div>
     );
   }

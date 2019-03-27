@@ -8,6 +8,7 @@ import MenuItem from "@material-ui/core/MenuItem";
 import TextField from "@material-ui/core/TextField";
 import { withRouter } from "react-router-dom";
 import Button from "@material-ui/core/Button";
+import SimpleBottomNavigation from "./simpleBottomNavigation";
 import { searchPostSitterInfo, searchSitterPostInfo } from "../redux/actions";
 import SitterPost from "./sitter_post";
 import styles from "./styles/searchStyle";
@@ -239,6 +240,8 @@ class Search extends Component {
           {posts.length != 0 ? (<SitterPost posts={posts} />) : 
             (<h1 className={classes.alert}>Sorry, no match</h1>)}
           </div> }
+          <div className={classes.foot} style={{ height: `100px` }}></div>
+          <SimpleBottomNavigation />
       </div>
     );
   }

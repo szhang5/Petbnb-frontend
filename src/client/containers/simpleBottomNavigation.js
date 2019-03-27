@@ -71,20 +71,14 @@ class SimpleBottomNavigation extends React.Component {
           value="transaction"
           icon={<TransactionIcon />}
        />
-       {name&&<BottomNavigationAction
+      <BottomNavigationAction
           component={Link}
           to="/profile"
           label="Profile"
           value="profile"
-          icon={<FavoriteIcon />}
-       />}
-       {!name&&<BottomNavigationAction
-          component={Link}
-          to="/signin"
-          label="Sign In"
-          value="profile"
           icon={<AccountIcon />}
-       />}
+       />
+      
 
         
       </BottomNavigation>
