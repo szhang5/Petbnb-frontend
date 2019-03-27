@@ -26,7 +26,6 @@ class MapPage extends Component {
     const { classes, geoLocation, lat, lng } = this.props;
     return (
       <div id="top">
-        <h1>Map</h1>   
        <Map
           //onMarkerClick={this.handleMarkerClick}
           isMarkerShown

@@ -29,33 +29,10 @@ class ButtonAppBar extends Component {
       <div className={classes.root}>
         <AppBar position="fixed">
           <Toolbar>
-            <Grid
-              justify="space-between" // Add it here :)
-              container
-              spacing={24}
-            >
-              <Grid item>
-                <Typography
-                  variant="h6"
-                  color="inherit"
-                  className={classes.grow}
-                >
-                  <SideBar />
-                </Typography>
-              </Grid>
-
-              <Grid item>
-                <div>
-                  <Button
-                    color="inherit"
-                    onClick={() => this.handleOnClick()}
-                    className={classes.profile}
-                  >
-                    {name ? "Profile" : "Sign In"}
-                  </Button>
-                </div>
-              </Grid>
-            </Grid>
+           <img
+              className={classes.logoImage}
+              src="https://res.cloudinary.com/real-petbnb/image/upload/v1553645092/logo_white.png"
+            />  
           </Toolbar>
         </AppBar>
       </div>
