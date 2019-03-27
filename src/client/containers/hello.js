@@ -17,7 +17,6 @@ class HelloWorld extends Component {
     const { sitterPosts,pets,uid } = this.props;
     return (
       <div>
-        <h1>Home</h1>
         <SitterPost posts={sitterPosts} uid={uid} />
         <div  style={{ height: `100px` }}></div>   
         <SimpleBottomNavigation />

@@ -52,7 +52,6 @@ class TransactionCard extends Component {
 
     return (
        <div>
-        <h1>Reservation</h1>
         {map(transactions, (transaction, key) => { 
           let transacinfo = transaction.transacinfo;
           let owner = transaction.owner;
