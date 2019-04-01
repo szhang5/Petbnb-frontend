@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import { withRouter } from "react-router-dom";
 import { connect } from "react-redux";
 import PropTypes from "prop-types";
+import { map } from "lodash";
 import {
   withScriptjs,
   withGoogleMap,
@@ -19,7 +20,14 @@ import moment from "moment";
 import Avatar from '@material-ui/core/Avatar';
 import styles from "./styles/mapStyle";
 import { withStyles } from "@material-ui/core/styles";
-
+import Dialog from '@material-ui/core/Dialog';
+import DialogActions from '@material-ui/core/DialogActions';
+import DialogContent from '@material-ui/core/DialogContent';
+import DialogContentText from '@material-ui/core/DialogContentText';
+import DialogTitle from '@material-ui/core/DialogTitle';
+import FormControlLabel from "@material-ui/core/FormControlLabel";
+import { createTransaction } from "../redux/actions";
+import Checkbox from "@material-ui/core/Checkbox";
 
 
 
@@ -39,10 +47,13 @@ class Map extends Component {
       map: null,
       anchorEl: null,
       isOpen: false,
-      showInfoIndex:'-1'
+      showInfoIndex:'-1',
+      open:false,
+      selectedPetIds: {},
     };
-    this.open= false;
+    //this.open= false;
    this.onToggleOpen = this.onToggleOpen.bind(this);
+   console.log(this.props)
   }
   
   mapMoved() {
@@ -64,15 +75,68 @@ class Map extends Component {
    
     this.props.GetUserPost(e); 
     this.props.getUserInfoById(e);   
+  //  console.log(uid)
   }
   onToggleClose() {
    this.setState({
      isOpen:false,
    })
   }
+  handleOpen = (sitterid) => {
+    this.setState({ 
+      ...this.state,
+      open: true,
+      sitterid: sitterid,
+    });
+  };
+
+  handleClose = () => {
+    this.setState({ 
+      ...this.state,
+      open: false
+     });
+  };
+
+  submitRequest = (e) =>{
+    this.setState({ 
+      ...this.state,
+      open: false,
+      // btn_disable: true,
+     });
+
+    e.preventDefault();
+    let arr = [];
+    for (var key in this.state.selectedPetIds) {
+      if(this.state.selectedPetIds[key] === true) {
+        arr.push(key);
+      }
+    }
+   
+    this.props.createTransaction(this.state.sitterid, arr);
+  }
+
+  addPetToState = (e) => {
+    const petid = e.target.value;
+   
+    if(petid in this.state.selectedPetIds) {
+      this.setState({
+        selectedPetIds: {
+          ...this.state.selectedPetIds,
+          [petid]: !this.state.selectedPetIds[petid],
+        }
+      })
+    } else {
+      this.setState({
+        selectedPetIds: {
+          ...this.state.selectedPetIds,
+          [petid]: true,
+        }
+      })
+    }
+  }
 
   render() {
-    const { classes, geoLocation, sitterid, avai_end_date, avai_start_date, description,hour_rate, pet_type, pets_num, postdate,firstname, lastname, image } = this.props;
+    const { classes, geoLocation, sitterid, avai_end_date, avai_start_date, description,hour_rate, pet_type, pets_num, postdate,firstname, lastname, image,pets, user_type } = this.props;
     const {isOpen,showInfoIndex } = this.state;
     const defaultImage = "https://res.cloudinary.com/zoey1111/image/upload/v1550020987/profile.png";
     
@@ -115,14 +179,56 @@ class Map extends Component {
                       <h4 className={classes.info_content}> {moment(avai_start_date).format("L")} - {moment(avai_end_date).format("L")}</h4>
                      
                   </div>
-                      <Button
-                        variant="outlined"
-                        //color="secondary"
-                        color="primary"
-                        fullWidth     
-                      >
-                        Contact
-                      </Button>
+                  {user_type==1&&<Button
+                    variant="outlined"
+                    color="secondary"
+                    fullWidth
+                    className={classes.button}
+                    onClick={() => this.handleOpen(sitterid)}
+                    style={{fontSize:'16px'}}
+                  >
+                   Send Your Request
+                  </Button>}
+                  
+                  
+
+                  <Dialog
+                    open={this.state.open}
+                    onClose={this.handleClose}
+                    fullWidth
+                    aria-labelledby="form-dialog-title"
+                  >
+                    <DialogTitle id="form-dialog-title" >Send Your Request</DialogTitle>
+                      <DialogContent>
+                        <DialogContentText>
+                            Which pet?
+                        </DialogContentText>
+                        {map(pets, (pet, key) => {
+                          return (
+                            <div key={pet.petid} className={classes.requestContainer} style={{display: 'flex',marginBottom: '10px',marginTop:'10px'}}> 
+                              <Avatar src={pet.image? pet.image : defaultImage} className={classes.bigAvatar} style={{margin: '0'}}/>
+                              <h3 style={{marginLeft: '15px',fontWeight:'400'}}>{pet.petname}</h3>
+                              <FormControlLabel
+                                control={<Checkbox value={pet.petid.toString()} color="primary" onClick={this.addPetToState} />} // () => this.addPetToState(pet.petid)
+                                style={{position: 'absolute',right:'10px'}} 
+                              />
+                            </div>
+                            );
+                          })} 
+                        </DialogContent>
+                        <DialogActions>
+                          <Button 
+                            onClick={this.handleClose} 
+                            color="primary"
+                            style={{position: 'absolute',left:'10px'}} 
+                            >
+                            Cancel
+                          </Button>
+                          <Button onClick={this.submitRequest} color="primary">
+                            Submit
+                          </Button>
+                      </DialogActions>
+                    </Dialog>
                 </div>
               </InfoWindow>}
             </Marker>  
@@ -146,7 +252,10 @@ Map.propTypes = {
   postdate: PropTypes.string,
   firstname: PropTypes.string,
   lastname: PropTypes.string,
-  image: PropTypes.string
+  image: PropTypes.string,
+  pets : PropTypes.array,
+  user_type : PropTypes.number
+  
 };
 
 Map.defaultProps = {
@@ -160,9 +269,12 @@ Map.defaultProps = {
   postdate: "",
   firstname: "",
   lastname: "",
-  image:""
+  image:"",
+  pets: [],
+  user_type:0
 };
-function mapStateToProps({ post,user }) {
+function mapStateToProps({ post,user,pet }) {
+  //console.log(user.uid)
   return {
     sitterid: post.sitterid,
     avai_end_date: post.avai_end_date,
@@ -174,7 +286,9 @@ function mapStateToProps({ post,user }) {
     postdate: post.postdate,
     firstname: user.firstname,
     lastname: user.lastname,
-    image: user.image
+    image: user.image,
+    pets : pet.pets,
+    user_type : user.user_type
   };
 }
 
@@ -183,7 +297,7 @@ export default withRouter(
     withStyles(styles)(
       connect(
     mapStateToProps,
-    {GetUserPost,getUserInfoById }
+    {GetUserPost,getUserInfoById,createTransaction }
   )(withGoogleMap(Map))))
    
 );
