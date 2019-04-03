@@ -273,7 +273,7 @@ Map.defaultProps = {
   pets: [],
   user_type:0
 };
-function mapStateToProps({ post,user,pet }) {
+function mapStateToProps({ post, user, pet, sitter }) {
   //console.log(user.uid)
   return {
     sitterid: post.sitterid,
@@ -284,9 +284,9 @@ function mapStateToProps({ post,user,pet }) {
     pet_type: post.pet_type,
     pets_num: post.pets_num,
     postdate: post.postdate,
-    firstname: user.firstname,
-    lastname: user.lastname,
-    image: user.image,
+    firstname: sitter.firstname,
+    lastname: sitter.lastname,
+    image: sitter.image,
     pets : pet.pets,
     user_type : user.user_type
   };
