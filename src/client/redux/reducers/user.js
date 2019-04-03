@@ -1,7 +1,8 @@
 import * as ACTIONS from "../actions/index";
 
 const initialState = {
-  	'uid': 0,
+    'uid': 0,
+    'sitterid':0,
     'personId': '',
     'firstname': '',
     'lastname': '',
@@ -55,23 +56,24 @@ export default function(state = initialState, action) {
         'image': action.payload.data.user.image, 
         'user_type': action.payload.data.user.user_type,  
       };
-    case ACTIONS.GET_USER_INFO_BYID:
+    case ACTIONS.GET_SITTER_INFO_BYID:
+    console.log(action.payload)
       return {
         ...state,
-      	'uid': action.payload.data.user.uid,
-        'personId': action.payload.data.user.personid,
-        'firstname': action.payload.data.user.firstname,
-        'lastname': action.payload.data.user.lastname,
-        'email': action.payload.data.user.email,
-        'phone': action.payload.data.user.phone,
-        'country': action.payload.data.user.country,
-        'street': action.payload.data.user.street,
-        'city': action.payload.data.user.city,
-        'state': action.payload.data.user.state,
-        'zip': action.payload.data.user.zip, 
-        'lat': action.payload.data.user.lat, 
-        'lng': action.payload.data.user.lng, 
-        'image': action.payload.data.user.image,     
+      	'sitterid': action.payload.data.sitter.sitterid,
+        'personId': action.payload.data.sitter.personid,
+        'firstname': action.payload.data.sitter.firstname,
+        'lastname': action.payload.data.sitter.lastname,
+        'email': action.payload.data.sitter.email,
+        'phone': action.payload.data.sitter.phone,
+        'country': action.payload.data.sitter.country,
+        'street': action.payload.data.sitter.street,
+        'city': action.payload.data.sitter.city,
+        'state': action.payload.data.sitter.state,
+        'zip': action.payload.data.sitter.zip, 
+        'lat': action.payload.data.sitter.lat, 
+        'lng': action.payload.data.sitter.lng, 
+        'image': action.payload.data.sitter.image,     
       };
     case ACTIONS.SEARCH_POST_SITTER_INFO_ACTION:
       return {

@@ -7,7 +7,7 @@ export const SIGNOUT = 'SIGNOUT';
 export const GET_USER_INFO = 'GET_USER_INFO';
 export const EDIT_PROFILE_ACTION = 'EDIT_PROFILE_ACTION';
 export const GET_USER_GEO_LOCATION = "GET_USER_GEO_LOCATION";
-export const GET_USER_INFO_BYID = "GET_USER_INFO_BYID";
+export const GET_SITTER_INFO_BYID = "GET_SITTER_INFO_BYID";
 
 export const GET_POST_ACTION = 'GET_POST_ACTION';
 export const GET_USER_POST_ACTION = 'GET_USER_POST_ACTION';
@@ -298,12 +298,13 @@ export function getUserInfo(email) {
   };
 }
 
-export function getUserInfoById(uid) {
+
+export function getSitterInfoById(uid) {
   const request = axios
-    .post('/service/petbnbservice/getUserInfoById', { uid });
+    .post('/service/petbnbservice/GetSitterInfoById', { uid });
 
   return {
-    type: GET_USER_INFO_BYID,
+    type: GET_SITTER_INFO_BYID,
     payload: request,
   };
 }

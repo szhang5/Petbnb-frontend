@@ -12,7 +12,7 @@ import {
 } from "react-google-maps";
 import './styles/info.css';
 import Pets from "@material-ui/icons/Pets";
-import { GetUserPost,getUserInfoById } from "../redux/actions";
+import { GetUserPost,getSitterInfoById } from "../redux/actions";
 import Button from "@material-ui/core/Button";
 import Card from "@material-ui/core/Card";
 import CardContent from "@material-ui/core/CardContent";
@@ -74,8 +74,8 @@ class Map extends Component {
     })
    
     this.props.GetUserPost(e); 
-    this.props.getUserInfoById(e);   
-  //  console.log(uid)
+    this.props.getSitterInfoById(e);   
+    console.log(e)
   }
   onToggleClose() {
    this.setState({
@@ -273,10 +273,10 @@ Map.defaultProps = {
   pets: [],
   user_type:0
 };
-function mapStateToProps({ post,user,pet }) {
-  //console.log(user.uid)
+function mapStateToProps({ post,sitter,pet }) {
+  console.log(sitter.sitterid)
   return {
-    sitterid: post.sitterid,
+    sitterid: sitter.sitterid,
     avai_end_date: post.avai_end_date,
     avai_start_date: post.avai_start_date,
     description: post.description,
@@ -284,11 +284,11 @@ function mapStateToProps({ post,user,pet }) {
     pet_type: post.pet_type,
     pets_num: post.pets_num,
     postdate: post.postdate,
-    firstname: user.firstname,
-    lastname: user.lastname,
-    image: user.image,
+    firstname: sitter.sitterfirstname,
+    lastname: sitter.sitterlastname,
+    image: sitter.sitterimage,
     pets : pet.pets,
-    user_type : user.user_type
+    user_type : sitter.sitteruser_type
   };
 }
 
@@ -297,7 +297,7 @@ export default withRouter(
     withStyles(styles)(
       connect(
     mapStateToProps,
-    {GetUserPost,getUserInfoById,createTransaction }
+    {GetUserPost,getSitterInfoById,createTransaction }
   )(withGoogleMap(Map))))
    
 );
