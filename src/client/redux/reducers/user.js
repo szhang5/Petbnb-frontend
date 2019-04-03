@@ -1,7 +1,8 @@
 import * as ACTIONS from "../actions/index";
 
 const initialState = {
-  	'uid': 0,
+    'uid': 0,
+    'sitterid':0,
     'personId': '',
     'firstname': '',
     'lastname': '',
