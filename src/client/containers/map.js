@@ -75,7 +75,7 @@ class Map extends Component {
    
     this.props.GetUserPost(e); 
     this.props.getUserInfoById(e);   
-  //  console.log(uid)
+    
   }
   onToggleClose() {
    this.setState({
@@ -273,10 +273,10 @@ Map.defaultProps = {
   pets: [],
   user_type:0
 };
-function mapStateToProps({ post, user, pet, sitter }) {
-  //console.log(user.uid)
+function mapStateToProps({ post,sitter,pet,user }) {
+  
   return {
-    sitterid: post.sitterid,
+    sitterid: sitter.sitterid,
     avai_end_date: post.avai_end_date,
     avai_start_date: post.avai_start_date,
     description: post.description,

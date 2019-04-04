@@ -1,6 +1,7 @@
 import * as ACTIONS from "../actions/index";
 
 const initialState = {
+    
   	'uid': 0,
     'personId': '',
     'firstname': '',
@@ -21,10 +22,12 @@ const initialState = {
 
 export default function(state = initialState, action) {
   switch(action.type) {
+    
     case ACTIONS.GET_USER_INFO_BYID:
+        console.log(action.payload.data)
       return {
         ...state,
-        'uid': action.payload.data.user.uid,
+      	'uid': action.payload.data.user.uid,
         'personId': action.payload.data.user.personid,
         'firstname': action.payload.data.user.firstname,
         'lastname': action.payload.data.user.lastname,
@@ -37,8 +40,10 @@ export default function(state = initialState, action) {
         'zip': action.payload.data.user.zip, 
         'lat': action.payload.data.user.lat, 
         'lng': action.payload.data.user.lng, 
-        'image': action.payload.data.user.image,     
+        'image': action.payload.data.user.image,  
+        'user_type': action.payload.data.user.user_type
       };
+    
     default:
       return state;
   }

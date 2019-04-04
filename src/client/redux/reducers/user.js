@@ -1,7 +1,8 @@
 import * as ACTIONS from "../actions/index";
 
 const initialState = {
-  	'uid': 0,
+    'uid': 0,
+    'sitterid':0,
     'personId': '',
     'firstname': '',
     'lastname': '',
@@ -55,6 +56,7 @@ export default function(state = initialState, action) {
         'image': action.payload.data.user.image, 
         'user_type': action.payload.data.user.user_type,  
       };
+    
     case ACTIONS.SEARCH_POST_SITTER_INFO_ACTION:
       return {
         ...state,

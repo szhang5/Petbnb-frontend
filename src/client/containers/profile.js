@@ -204,7 +204,7 @@ Profile.defaultProps = {
 };
 
 function mapStateToProps({ user }) {
-  console.log(user)
+  
   return {
     firstname: user.firstname,
     lastname: user.lastname,

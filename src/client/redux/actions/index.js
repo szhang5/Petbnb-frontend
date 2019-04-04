@@ -298,9 +298,10 @@ export function getUserInfo(email) {
   };
 }
 
+
 export function getUserInfoById(uid) {
   const request = axios
-    .post('/service/petbnbservice/getUserInfoById', { uid });
+    .post('/service/petbnbservice/GetUserInfoById', { uid });
 
   return {
     type: GET_USER_INFO_BYID,

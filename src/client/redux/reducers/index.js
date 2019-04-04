@@ -1,8 +1,8 @@
 import { combineReducers } from 'redux';
 import UserReducer from './user';
+import SitterReducer from './sitter';
 import PostReducer from './post';
 import PetReducer from './pet';
-import SitterReducer from './sitter';
 import TransactionReducer from './transaction';
 // import { reducer as formReducer } from 'redux-form';
 
