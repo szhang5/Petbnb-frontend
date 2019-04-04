@@ -7,6 +7,7 @@ import SitterReducer from './sitter'
 >>>>>>> 1e26540aa11080dbe63337c1e945b5c438315e8d
 import PostReducer from './post';
 import PetReducer from './pet';
+import SitterReducer from './sitter';
 import TransactionReducer from './transaction';
 // import { reducer as formReducer } from 'redux-form';
 

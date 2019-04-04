@@ -274,7 +274,7 @@ Map.defaultProps = {
   user_type:0
 };
 function mapStateToProps({ post,sitter,pet,user }) {
-  console.log(user.user_type)
+  
   return {
     sitterid: sitter.sitterid,
     avai_end_date: post.avai_end_date,
