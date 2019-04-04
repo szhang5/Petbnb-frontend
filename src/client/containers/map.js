@@ -12,7 +12,7 @@ import {
 } from "react-google-maps";
 import './styles/info.css';
 import Pets from "@material-ui/icons/Pets";
-import { GetUserPost,getSitterInfoById } from "../redux/actions";
+import { GetUserPost,getUserInfoById } from "../redux/actions";
 import Button from "@material-ui/core/Button";
 import Card from "@material-ui/core/Card";
 import CardContent from "@material-ui/core/CardContent";
@@ -288,7 +288,7 @@ function mapStateToProps({ post,sitter,pet,user }) {
     lastname: sitter.lastname,
     image: sitter.image,
     pets : pet.pets,
-    user_type : sitter.sitteruser_type
+    user_type : user.user_type
   };
 }
 
@@ -297,7 +297,7 @@ export default withRouter(
     withStyles(styles)(
       connect(
     mapStateToProps,
-    {GetUserPost,getSitterInfoById,createTransaction }
+    {GetUserPost,getUserInfoById,createTransaction }
   )(withGoogleMap(Map))))
    
 );
