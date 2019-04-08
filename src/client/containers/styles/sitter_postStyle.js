@@ -15,8 +15,7 @@ const styles = theme => ({
   },
 
   bigAvatar: {
-    margin: "auto",
-
+    margin: '0',
     width: 80,
     height: 80
   },
@@ -63,6 +62,11 @@ const styles = theme => ({
     marginBottom: 10,
     fontSize: 16,
 
+  },
+  requestContainer:{
+    display: 'flex',
+    marginBottom: '10px',
+    marginTop:'10px'
   }
 
 });
