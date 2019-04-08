@@ -136,7 +136,7 @@ class Map extends Component {
   }
 
   render() {
-    const { classes, geoLocation, sitterid, avai_end_date, avai_start_date, description,hour_rate, pet_type, pets_num, postdate,firstname, lastname, image,pets, user_type } = this.props;
+    const { classes, geoLocation, sitterid, avai_end_date, avai_start_date, description,hour_rate, pet_type, pets_num, postdate,firstname, lastname, image,pets, user_type,balance } = this.props;
     const {isOpen,showInfoIndex } = this.state;
     const defaultImage = "https://res.cloudinary.com/zoey1111/image/upload/v1550020987/profile.png";
     
@@ -200,6 +200,9 @@ class Map extends Component {
                   >
                     <DialogTitle id="form-dialog-title" >Send Your Request</DialogTitle>
                       <DialogContent>
+                        <DialogContentText color="primary" style={{marginBottom: '15px'}}>
+                        Your current balance is : {balance} Petcoin
+                        </DialogContentText>
                         <DialogContentText>
                             Which pet?
                         </DialogContentText>
@@ -254,8 +257,8 @@ Map.propTypes = {
   lastname: PropTypes.string,
   image: PropTypes.string,
   pets : PropTypes.array,
-  user_type : PropTypes.number
-  
+  user_type : PropTypes.number,
+  balance : PropTypes.number
 };
 
 Map.defaultProps = {
@@ -269,9 +272,10 @@ Map.defaultProps = {
   postdate: "",
   firstname: "",
   lastname: "",
-  image:"",
+  image: "",
   pets: [],
-  user_type:0
+  user_type: 0,
+  balance: 0
 };
 function mapStateToProps({ post,sitter,pet,user }) {
   
@@ -288,7 +292,8 @@ function mapStateToProps({ post,sitter,pet,user }) {
     lastname: sitter.lastname,
     image: sitter.image,
     pets : pet.pets,
-    user_type : user.user_type
+    user_type : user.user_type,
+    balance : user.balance
   };
 }
 

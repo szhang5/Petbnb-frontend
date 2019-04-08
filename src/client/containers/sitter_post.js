@@ -144,7 +144,7 @@ class SitterPost extends React.Component {
   // }
 
   render() {
-    const { classes, posts, pets, user_type } = this.props;
+    const { classes, posts, pets, user_type, balance } = this.props;
     const defaultImage = "https://res.cloudinary.com/zoey1111/image/upload/v1550020987/profile.png";
 
     return (
@@ -194,13 +194,16 @@ class SitterPost extends React.Component {
         >
           <DialogTitle id="form-dialog-title">Send Your Request</DialogTitle>
           <DialogContent>
+            <DialogContentText color="primary" style={{marginBottom: '15px'}}>
+            Your current balance is : {balance} Petcoin
+            </DialogContentText>
             <DialogContentText>
              Which pet?
             </DialogContentText>
             {map(pets, (pet, key) => {
                return (
-                 <div key={pet.petid} className={classes.requestContainer} style={{display: 'flex',marginBottom: '10px',marginTop:'10px'}}> 
-                 <Avatar src={pet.image? pet.image : defaultImage} className={classes.bigAvatar} style={{margin: '0'}}/>
+                 <div key={pet.petid} className={classes.requestContainer} > 
+                 <Avatar src={pet.image? pet.image : defaultImage} className={classes.bigAvatar} />
                  <h3 style={{marginLeft: '15px',fontWeight:'400'}}>{pet.petname}</h3>
                  <FormControlLabel
                     control={<Checkbox value={pet.petid.toString()} color="primary" onClick={this.addPetToState} />} // () => this.addPetToState(pet.petid)
@@ -231,19 +234,22 @@ class SitterPost extends React.Component {
 SitterPost.propTypes = {
   classes: PropTypes.object.isRequired,
   pets : PropTypes.array,
-  user_type : PropTypes.number
+  user_type : PropTypes.number,
+  balance: PropTypes.number
 };
 
 SitterPost.defaultProps = {
   pets: [],
-  user_type:0
+  user_type:0,
+  balance:0
 };
 
 function mapStateToProps({ pet,user }) {
-    console.log(pet)
+    
   return {
     pets : pet.pets,
-    user_type : user.user_type
+    user_type : user.user_type,
+    balance : user.balance
   };
 }
 

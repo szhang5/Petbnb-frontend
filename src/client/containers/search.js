@@ -126,7 +126,7 @@ class Search extends Component {
           <TextField
             id="outlined-select-hour_rate"
             select
-            label="Hour rate"
+            label="Price"
             className={classes.textField}
             type="rate"
             name="hour_rate"
