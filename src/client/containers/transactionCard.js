@@ -9,11 +9,17 @@ import Avatar from '@material-ui/core/Avatar';
 import Card from '@material-ui/core/Card';
 import CardContent from '@material-ui/core/CardContent';
 import Chip from '@material-ui/core/Chip';
+import Button from "@material-ui/core/Button";
 import DoneIcon from '@material-ui/icons/Done';
 import Grid from '@material-ui/core/Grid';
 import { getUserTransaction, updateTransactionStatus } from "../redux/actions";
 import Typography from '@material-ui/core/Typography';
 import SimpleBottomNavigation from "./simpleBottomNavigation";
+import Dialog from '@material-ui/core/Dialog';
+import DialogActions from '@material-ui/core/DialogActions';
+import DialogContent from '@material-ui/core/DialogContent';
+import DialogContentText from '@material-ui/core/DialogContentText';
+import DialogTitle from '@material-ui/core/DialogTitle';
 
 const styles = {
     avatar: {
@@ -34,10 +40,26 @@ const styles = {
 // }
 
 class TransactionCard extends Component {
+    state = {
+        open: false,
+        price: 0
+      };
 
   handleStatusChange = (transacid, status) =>{
     this.props.updateTransactionStatus(transacid, status);
   }
+  handleOpen = (e) => {
+    this.setState({ 
+      open: true,
+      price: e,
+    });
+  };
+
+  handleClose = () => {
+    this.setState({ 
+      open: false
+     });
+  };
 
   componentWillMount(){
       this.props.getUserTransaction(this.props.uid);
@@ -48,6 +70,7 @@ class TransactionCard extends Component {
         classes,
         transactions,
         user_type,
+        balance
     } = this.props;
 
     return (
@@ -122,7 +145,8 @@ class TransactionCard extends Component {
                       <Grid item xs>
                           <Chip
                               label="Pay"
-                              onClick={() => this.handleStatusChange(transacinfo.transacid, 2)}
+                              //onClick={() => this.handleStatusChange(transacinfo.transacid, 2)}
+                              onClick={() => this.handleOpen(transacinfo.transacid)}
                               className={classes.chip}
                               color="primary"
                               variant="outlined"
@@ -160,6 +184,34 @@ class TransactionCard extends Component {
           </Card>
          );
       })}
+      <Dialog
+          open={this.state.open}
+          onClose={this.handleClose}
+          fullWidth
+          aria-labelledby="form-dialog-title"
+        >
+          <DialogTitle id="form-dialog-title">Send Your Request</DialogTitle>
+          <DialogContent>
+                <DialogContentText color="primary" style={{marginBottom: '15px'}}>
+                Your current balance is : {balance} Petcoin
+                </DialogContentText>
+                <DialogContentText>
+                You need to pay:${this.state.price}
+                </DialogContentText>
+          </DialogContent>
+          <DialogActions>
+            <Button 
+              onClick={this.handleClose} 
+              color="primary"
+              style={{position: 'absolute',left:'10px'}} 
+              >
+              Cancel
+            </Button>
+            <Button /*onClick={this.submitRequest}*/ color="primary">
+              Pay
+            </Button>
+          </DialogActions>
+        </Dialog>
       <div className={classes.foot} style={{ height: `100px` }}></div>
        <SimpleBottomNavigation />
       </div>
@@ -172,6 +224,7 @@ TransactionCard.propTypes = {
     uid: PropTypes.oneOfType([PropTypes.string,PropTypes.number]),
     transactions: PropTypes.array,
     user_type: PropTypes.oneOfType([PropTypes.string,PropTypes.number]),
+    balance: PropTypes.number
 };
 
 
@@ -179,13 +232,16 @@ TransactionCard.defaultProps = {
   uid : 0,
   transactions: [],
   user_type: 0,
+  balance: 0
 };
 
 function mapStateToProps({ user, transaction }) {
+    console.log(transaction)
   return {
     uid : user.uid,
     user_type: user.user_type,
     transactions : transaction.transactions,
+    balance : user.balance
 
   };
 }

@@ -83,6 +83,7 @@ class Map extends Component {
    })
   }
   handleOpen = (sitterid) => {
+    console.log(sitterid)
     this.setState({ 
       ...this.state,
       open: true,
@@ -279,8 +280,9 @@ Map.defaultProps = {
 };
 function mapStateToProps({ post,sitter,pet,user }) {
   
+  console.log(user)
   return {
-    sitterid: sitter.sitterid,
+    sitterid: sitter.uid,
     avai_end_date: post.avai_end_date,
     avai_start_date: post.avai_start_date,
     description: post.description,
@@ -293,7 +295,7 @@ function mapStateToProps({ post,sitter,pet,user }) {
     image: sitter.image,
     pets : pet.pets,
     user_type : user.user_type,
-    balance : user.balance
+    balance : sitter.balance
   };
 }
 
