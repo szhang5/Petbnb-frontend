@@ -121,6 +121,8 @@ message GetUserInfoByIdRequest{
 message CreateTransactionRequest{
   int32 sitterid = 1;
   repeated int32 petid = 2;
+  string avai_start_date = 3;
+  string avai_end_date = 4;
 }
 
 message EditPostRequest{
@@ -297,4 +299,3 @@ message Pet{
   string breed = 8;
   string image = 9;
 }
-
