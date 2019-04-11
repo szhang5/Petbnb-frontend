@@ -12,7 +12,7 @@ import Chip from '@material-ui/core/Chip';
 import Button from "@material-ui/core/Button";
 import DoneIcon from '@material-ui/icons/Done';
 import Grid from '@material-ui/core/Grid';
-import { getUserTransaction, updateTransactionStatus } from "../redux/actions";
+import { getUserTransaction, updateTransactionStatus,payTransaction } from "../redux/actions";
 import Typography from '@material-ui/core/Typography';
 import SimpleBottomNavigation from "./simpleBottomNavigation";
 import Dialog from '@material-ui/core/Dialog';
@@ -42,16 +42,18 @@ const styles = {
 class TransactionCard extends Component {
     state = {
         open: false,
-        price: 0
+        price: 0,
+        transacid: 0
       };
 
   handleStatusChange = (transacid, status) =>{
     this.props.updateTransactionStatus(transacid, status);
   }
-  handleOpen = (e) => {
+  handleOpen = (rate,transacid) => {
     this.setState({ 
       open: true,
-      price: e,
+      price: rate,
+      transacid : transacid,
     });
   };
 
@@ -60,6 +62,14 @@ class TransactionCard extends Component {
       open: false
      });
   };
+
+  submitRequest= (transacid) => {
+    this.props.payTransaction(transacid).then(() => {
+        //this.props.history.push("/profile");
+        
+        
+      });
+  }
 
   componentWillMount(){
       this.props.getUserTransaction(this.props.uid);
@@ -80,6 +90,7 @@ class TransactionCard extends Component {
           let owner = transaction.owner;
           let sitter = transaction.sitter;
           let pets = transaction.pets;
+          let rate = transaction.rate;
           return (
             <Card className={classes.card} key={transacinfo.transacid}>
               <CardContent>
@@ -98,7 +109,7 @@ class TransactionCard extends Component {
                       Date: {moment(transacinfo.avai_start_date).format("L")} - {moment(transacinfo.avai_end_date).format("L")}
                   </Typography>
                   <Typography>
-                      Amount: ${transacinfo.hour_rate*transaction.pets.length}
+                      Amount: ${rate}
                   </Typography>
                   {user_type == 0 && transacinfo.status == 0 && <Grid container>
                       <Grid item xs>
@@ -146,7 +157,7 @@ class TransactionCard extends Component {
                           <Chip
                               label="Pay"
                               //onClick={() => this.handleStatusChange(transacinfo.transacid, 2)}
-                              onClick={() => this.handleOpen(transacinfo.transacid)}
+                              onClick={() => this.handleOpen(rate,transacinfo.transacid)}
                               className={classes.chip}
                               color="primary"
                               variant="outlined"
@@ -207,7 +218,7 @@ class TransactionCard extends Component {
               >
               Cancel
             </Button>
-            <Button /*onClick={this.submitRequest}*/ color="primary">
+            <Button onClick={()=>this.submitRequest(this.state.transacid)} color="primary">
               Pay
             </Button>
           </DialogActions>
@@ -250,7 +261,7 @@ export default withRouter(
   withStyles(styles)(
     connect(
       mapStateToProps,
-      { getUserTransaction, updateTransactionStatus }
+      { getUserTransaction, updateTransactionStatus,payTransaction }
     )(TransactionCard)
   )
 );

@@ -53,6 +53,8 @@ class SitterPost extends React.Component {
     open: false,
     btn_disable :false,
     selectedPetIds: {},
+    avai_start_date:"",
+    avai_end_date:""
   };
 
   constructor(props) {
@@ -100,7 +102,7 @@ class SitterPost extends React.Component {
     }
     console.log(this.state.sitterid);
     console.log(arr);
-    this.props.createTransaction(this.state.sitterid, arr);
+    this.props.createTransaction(this.state.sitterid, arr,this.state.avai_start_date,this.state.avai_end_date);
   }
 
   addPetToState = (e) => {
@@ -122,6 +124,11 @@ class SitterPost extends React.Component {
       })
     }
   }
+  handleChange = name => event => {
+    this.setState({
+      [name]: event.target.value
+    });
+  };
   // 
   // addPetToState = (petid) => {
   //   console.log(petid)
@@ -212,6 +219,37 @@ class SitterPost extends React.Component {
                 </div>
                );
              })} 
+             <TextField
+            id="outlined-date_from"
+            label="Start From"
+            type="date"
+            name="avai_start_date"
+            className={classes.textField}
+            InputLabelProps={{
+              shrink: true
+            }}
+            fullWidth
+            variant="outlined"
+            value={this.state.avai_start_date}
+            onChange={this.handleChange("avai_start_date")}
+            margin="normal"
+          />
+
+          <TextField
+            id="outlined-date_to"
+            label="To"
+            type="date"
+            name="avai_end_date"
+            className={classes.textField}
+            InputLabelProps={{
+              shrink: true
+            }}
+            fullWidth
+            variant="outlined"
+            value={this.state.avai_end_date}
+            onChange={this.handleChange("avai_end_date")}
+            margin="normal"
+          />
           </DialogContent>
           <DialogActions>
             <Button 

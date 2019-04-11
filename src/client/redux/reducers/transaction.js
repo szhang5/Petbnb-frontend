@@ -48,7 +48,7 @@ function updateTransaction(transactions, transacid, status) {
 export default function(state = initialState, action) {
   switch (action.type) {
     case ACTIONS.GET_USER_TRANSACTION: 
-	    console.log(action);
+	    
 	    return {
 	    	...state,
 	    	// transactions : initTransaction(action.payload.data.transactions)
@@ -63,7 +63,13 @@ export default function(state = initialState, action) {
 	    return {
 	    	...state,
 	    	transactions: updateTransaction(state.transactions, action.transacid, action.status)
-	    }
+			}
+		case ACTIONS.PAY_TRANSACTION:
+			console.log(action.payload.data)
+			return {
+				...state,
+				transactions:action.payload.data.transactions
+			}
     default:
       return state;
   }

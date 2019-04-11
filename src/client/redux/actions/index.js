@@ -34,6 +34,7 @@ export const UPDATE_PET_TYPES = "UPDATE_PET_TYPES";
 export const CREATE_TRANSACTION = "CREATE_TRANSACTION";
 export const GET_USER_TRANSACTION = "GET_USER_TRANSACTION";
 export const UPDATE_TRANSACTION_STATUS = "UPDATE_TRANSACTION_STATUS";
+export const PAY_TRANSACTION = "PAY_TRANSACTION";
 
 // export function updateTransactionStatus(transacid, status) {
 //   const request = axios
@@ -65,6 +66,15 @@ export function updateTransactionStatus(transacid, status) {
   }
 }
 
+export function payTransaction(transacid) {
+  const request = axios
+    .post('/service/petbnbservice/payTransaction', { transacid });
+  return {
+    type: PAY_TRANSACTION,
+    payload: request,
+  }
+}
+
 export function getUserTransaction(uid) {
   const request = axios
     .post('/service/petbnbservice/getUserTransaction', { uid });
@@ -75,9 +85,9 @@ export function getUserTransaction(uid) {
 }
 
 
-export function createTransaction(sitterid, petid) {
+export function createTransaction(sitterid, petid,avai_start_date,avai_end_date) {
   const request = axios
-    .post('/service/petbnbservice/createTransaction', { sitterid, petid });
+    .post('/service/petbnbservice/createTransaction', { sitterid, petid,avai_start_date,avai_end_date, });
   return {
     type: CREATE_TRANSACTION,
     payload: request,

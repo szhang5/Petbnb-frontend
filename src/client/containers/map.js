@@ -25,6 +25,7 @@ import DialogActions from '@material-ui/core/DialogActions';
 import DialogContent from '@material-ui/core/DialogContent';
 import DialogContentText from '@material-ui/core/DialogContentText';
 import DialogTitle from '@material-ui/core/DialogTitle';
+import TextField from "@material-ui/core/TextField";
 import FormControlLabel from "@material-ui/core/FormControlLabel";
 import { createTransaction } from "../redux/actions";
 import Checkbox from "@material-ui/core/Checkbox";
@@ -50,6 +51,8 @@ class Map extends Component {
       showInfoIndex:'-1',
       open:false,
       selectedPetIds: {},
+      avai_start_date:"",
+      avai_end_date:""
     };
     //this.open= false;
    this.onToggleOpen = this.onToggleOpen.bind(this);
@@ -113,9 +116,13 @@ class Map extends Component {
       }
     }
    
-    this.props.createTransaction(this.state.sitterid, arr);
+    this.props.createTransaction(this.state.sitterid, arr,this.state.avai_start_date,this.state.avai_end_date);
   }
-
+  handleChange = name => event => {
+    this.setState({
+      [name]: event.target.value
+    });
+  };
   addPetToState = (e) => {
     const petid = e.target.value;
    
@@ -219,6 +226,37 @@ class Map extends Component {
                             </div>
                             );
                           })} 
+                          <TextField
+                          id="outlined-date_from"
+                          label="Start From"
+                          type="date"
+                          name="avai_start_date"
+                          className={classes.textField}
+                          InputLabelProps={{
+                            shrink: true
+                          }}
+                          fullWidth
+                          variant="outlined"
+                          value={this.state.avai_start_date}
+                          onChange={this.handleChange("avai_start_date")}
+                          margin="normal"
+                        />
+
+                        <TextField
+                          id="outlined-date_to"
+                          label="To"
+                          type="date"
+                          name="avai_end_date"
+                          className={classes.textField}
+                          InputLabelProps={{
+                            shrink: true
+                          }}
+                          fullWidth
+                          variant="outlined"
+                          value={this.state.avai_end_date}
+                          onChange={this.handleChange("avai_end_date")}
+                          margin="normal"
+                        />
                         </DialogContent>
                         <DialogActions>
                           <Button 
