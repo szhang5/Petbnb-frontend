@@ -26,31 +26,11 @@ service PetBnbService {
   rpc GetUserTransaction (GetUserTransactionRequest) returns (UserTransaction){}
   rpc UpdateTransactionStatus (UpdateTransactionStatusRequest) returns (Success){}
   rpc SearchPostAndSitterInfo (SearchPostSitterInfoRequest) returns (PostAndSitterInfo){}
-  rpc GetSitterInfoById (GetUserInfoByIdRequest) returns (SitterBasicInfo){}
+  rpc PayTransaction (PayTransactionRequest) returns (Success){}
 }
 
-message SitterBasicInfo {
-  string success = 1;
-  Sitter sitter = 2;
-}
-
-message Sitter {
-  int32 sitterid = 1;
-  int32 sitterpersonid = 2;
-  string sitteremail = 3;
-  string sitterfirstname = 4;
-  string sitterlastname = 5;
-  string sitterphone = 6;
-  string sittercountry = 11;
-  string sitterstreet = 7;
-  string sittercity = 8;
-  string sitterstate = 9;
-  string sitterzip = 10;
-  string sitterimage = 12;
-  float sitterlat = 13;
-  float sitterlng = 14;
-  int32 sitteruser_type = 15;//(owner) 1   (sitter) 0
-  float sitterbalance = 16;
+message PayTransactionRequest{
+  int32 transacid = 1;
 }
 
 message PostAndSitterInfo{
@@ -77,6 +57,7 @@ message SingleTransaction{
    User sitter = 2;
    TransacInfo transacinfo = 3;
    repeated Pet pets = 4;
+   double rate = 5;
 }
 
 message TransacInfo{
@@ -140,6 +121,8 @@ message GetUserInfoByIdRequest{
 message CreateTransactionRequest{
   int32 sitterid = 1;
   repeated int32 petid = 2;
+  string avai_start_date = 3;
+  string avai_end_date = 4;
 }
 
 message EditPostRequest{
@@ -316,4 +299,3 @@ message Pet{
   string breed = 8;
   string image = 9;
 }
-
