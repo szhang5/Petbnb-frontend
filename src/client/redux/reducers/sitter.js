@@ -16,6 +16,7 @@ const initialState = {
     'lng': '',
     'image': '',
     'user_type': '',
+    'balance':0,
     geoLocation:[],
     sitterInfo:[]    
 }
@@ -41,7 +42,8 @@ export default function(state = initialState, action) {
         'lat': action.payload.data.user.lat, 
         'lng': action.payload.data.user.lng, 
         'image': action.payload.data.user.image,  
-        'user_type': action.payload.data.user.user_type
+        'user_type': action.payload.data.user.user_type,
+        'balance': action.payload.data.user.balance
       };
     
     default:
