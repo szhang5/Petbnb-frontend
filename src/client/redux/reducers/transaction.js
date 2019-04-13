@@ -65,7 +65,7 @@ export default function(state = initialState, action) {
 	    	transactions: updateTransaction(state.transactions, action.transacid, action.status)
 			}
 		case ACTIONS.PAY_TRANSACTION:
-			console.log(action.payload.data)
+		
 			return {
 				...state,
 				transactions:action.payload.data.transactions

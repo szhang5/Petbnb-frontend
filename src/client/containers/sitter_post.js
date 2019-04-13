@@ -100,14 +100,13 @@ class SitterPost extends React.Component {
         arr.push(key);
       }
     }
-    console.log(this.state.sitterid);
-    console.log(arr);
+    
     this.props.createTransaction(this.state.sitterid, arr,this.state.avai_start_date,this.state.avai_end_date);
   }
 
   addPetToState = (e) => {
     const petid = e.target.value;
-    console.log(petid)
+    
     if(petid in this.state.selectedPetIds) {
       this.setState({
         selectedPetIds: {

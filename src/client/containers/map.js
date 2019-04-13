@@ -56,7 +56,7 @@ class Map extends Component {
     };
     //this.open= false;
    this.onToggleOpen = this.onToggleOpen.bind(this);
-   console.log(this.props)
+  
   }
   
   mapMoved() {
@@ -86,7 +86,7 @@ class Map extends Component {
    })
   }
   handleOpen = (sitterid) => {
-    console.log(sitterid)
+    
     this.setState({ 
       ...this.state,
       open: true,
@@ -318,7 +318,7 @@ Map.defaultProps = {
 };
 function mapStateToProps({ post,sitter,pet,user }) {
   
-  console.log(user)
+  
   return {
     sitterid: sitter.uid,
     avai_end_date: post.avai_end_date,
@@ -333,7 +333,7 @@ function mapStateToProps({ post,sitter,pet,user }) {
     image: sitter.image,
     pets : pet.pets,
     user_type : user.user_type,
-    balance : sitter.balance
+    balance : user.balance
   };
 }
 

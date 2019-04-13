@@ -43,7 +43,8 @@ class TransactionCard extends Component {
     state = {
         open: false,
         price: 0,
-        transacid: 0
+        transacid: 0,
+        paid:false
       };
 
   handleStatusChange = (transacid, status) =>{
@@ -65,9 +66,15 @@ class TransactionCard extends Component {
 
   submitRequest= (transacid) => {
     this.props.payTransaction(transacid).then(() => {
-        //this.props.history.push("/profile");
-        
-        
+        //this.props.updateTransactionStatus(transacid, 2);
+        this.setState({
+            ...this.state,
+            open: false,
+           // paid:true
+        })
+        this.props.getUserTransaction(this.props.uid);
+        alert("succeed")
+       
       });
   }
 
@@ -247,7 +254,7 @@ TransactionCard.defaultProps = {
 };
 
 function mapStateToProps({ user, transaction }) {
-    console.log(transaction)
+    
   return {
     uid : user.uid,
     user_type: user.user_type,
