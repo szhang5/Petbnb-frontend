@@ -1,4 +1,8 @@
 import axios from 'axios';
+import {
+  setFailureNotification,
+  setSuccessNotification
+} from '../../common/redux/actions/status-notification';
 
 export const SIGN_IN_ACTION = 'SIGN_IN_ACTION';
 export const REGISTER_ACTION = 'REGISTER_ACTION';
@@ -343,4 +347,21 @@ export function updatePetTypes(field, value){
     field,
     value,
   };
+}
+
+export function getNewNotification(sitterid) {
+  return (dispatch, getState) => {
+    const userType = getState().user.user_type;
+    if(userType == 1) {
+      return;
+    } else {
+      axios.post('/service/petbnbservice/checkNewTransactionExist', { uid: sitterid })
+      .then((result) => {
+        if (result.data.newTransactionCount){
+          dispatch(getUserTransaction(sitterid));
+          return dispatch(setSuccessNotification('Check your new request from pet owner!'));
+        }
+      });
+    }
+  }
 }
