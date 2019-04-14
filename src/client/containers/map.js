@@ -12,7 +12,7 @@ import {
 } from "react-google-maps";
 import './styles/info.css';
 import Pets from "@material-ui/icons/Pets";
-import { GetUserPost,getUserInfoById } from "../redux/actions";
+import { GetUserPost,getUserInfoById,getPetInfo } from "../redux/actions";
 import Button from "@material-ui/core/Button";
 import Card from "@material-ui/core/Card";
 import CardContent from "@material-ui/core/CardContent";
@@ -56,7 +56,6 @@ class Map extends Component {
     };
     //this.open= false;
    this.onToggleOpen = this.onToggleOpen.bind(this);
-  
   }
   
   mapMoved() {
@@ -86,6 +85,7 @@ class Map extends Component {
    })
   }
   handleOpen = (sitterid) => {
+    console.log(sitterid)
     
     this.setState({ 
       ...this.state,
@@ -116,7 +116,10 @@ class Map extends Component {
       }
     }
    
-    this.props.createTransaction(this.state.sitterid, arr,this.state.avai_start_date,this.state.avai_end_date);
+    this.props.createTransaction(this.state.sitterid, arr,this.state.avai_start_date,this.state.avai_end_date).then(() => {
+        //alert("succeed")
+        window.location="/transaction";
+      });;
   }
   handleChange = name => event => {
     this.setState({
@@ -318,7 +321,7 @@ Map.defaultProps = {
 };
 function mapStateToProps({ post,sitter,pet,user }) {
   
-  
+    console.log(pet.pets)
   return {
     sitterid: sitter.uid,
     avai_end_date: post.avai_end_date,
@@ -342,7 +345,7 @@ export default withRouter(
     withStyles(styles)(
       connect(
     mapStateToProps,
-    {GetUserPost,getUserInfoById,createTransaction }
+    {GetUserPost,getUserInfoById,createTransaction,getPetInfo }
   )(withGoogleMap(Map))))
    
 );

@@ -44,7 +44,8 @@ class TransactionCard extends Component {
         open: false,
         price: 0,
         transacid: 0,
-        paid:false
+        paid:false,
+        insufficient:false
       };
 
   handleStatusChange = (transacid, status) =>{
@@ -65,17 +66,24 @@ class TransactionCard extends Component {
   };
 
   submitRequest= (transacid) => {
-    this.props.payTransaction(transacid).then(() => {
-        //this.props.updateTransactionStatus(transacid, 2);
-        this.setState({
-            ...this.state,
-            open: false,
-           // paid:true
-        })
-        this.props.getUserTransaction(this.props.uid);
-        alert("succeed")
-       
-      });
+    if(this.props.balance>=this.state.price){
+        this.props.payTransaction(transacid).then(() => {
+          //this.props.updateTransactionStatus(transacid, 2);
+          this.setState({
+              ...this.state,
+              open: false,
+            
+          })
+          this.props.getUserTransaction(this.props.uid);
+          //alert("succeed")
+          window.location="/transaction";
+        });
+    }
+    else{
+      alert("Insufficient Balance")
+     
+    }
+    
   }
 
   componentWillMount(){
@@ -198,6 +206,7 @@ class TransactionCard extends Component {
                           />
                       </Grid>
                   </Grid>}
+                  
               </CardContent>
           </Card>
          );
