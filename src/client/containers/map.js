@@ -117,7 +117,7 @@ class Map extends Component {
     }
    
     this.props.createTransaction(this.state.sitterid, arr,this.state.avai_start_date,this.state.avai_end_date).then(() => {
-        alert("succeed")
+        //alert("succeed")
         window.location="/transaction";
       });;
   }

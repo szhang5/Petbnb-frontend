@@ -44,7 +44,8 @@ class TransactionCard extends Component {
         open: false,
         price: 0,
         transacid: 0,
-        paid:false
+        paid:false,
+        insufficient:false
       };
 
   handleStatusChange = (transacid, status) =>{
@@ -74,12 +75,13 @@ class TransactionCard extends Component {
             
           })
           this.props.getUserTransaction(this.props.uid);
-          alert("succeed")
+          //alert("succeed")
           window.location="/transaction";
         });
     }
     else{
       alert("Insufficient Balance")
+     
     }
     
   }
@@ -204,6 +206,7 @@ class TransactionCard extends Component {
                           />
                       </Grid>
                   </Grid>}
+                  
               </CardContent>
           </Card>
          );
