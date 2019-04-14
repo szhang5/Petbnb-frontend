@@ -57,6 +57,11 @@ const styles = theme => ({
   },
   foot:{
     height:100,
+  },
+  balance:{
+    fontSize:20,
+    color:"#f06292",
+    textAlign: "center"
   }
 });
 

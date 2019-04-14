@@ -10,19 +10,12 @@ import Button from "@material-ui/core/Button";
 import Checkbox from "@material-ui/core/Checkbox";
 import Card from "@material-ui/core/Card";
 import CardContent from "@material-ui/core/CardContent";
-import ExpandMoreIcon from "@material-ui/icons/ExpandMore";
-import MoreVertIcon from "@material-ui/icons/MoreVert";
 import Grid from "@material-ui/core/Grid";
-import Radio from '@material-ui/core/Radio';
-import FormControl from "@material-ui/core/FormControl";
+import Snackbar from '@material-ui/core/Snackbar';
 import FormControlLabel from "@material-ui/core/FormControlLabel";
-import ExpansionPanel from "@material-ui/core/ExpansionPanel";
-import ExpansionPanelSummary from "@material-ui/core/ExpansionPanelSummary";
-import ExpansionPanelDetails from "@material-ui/core/ExpansionPanelDetails";
+
 import styles from "./styles/sitter_postStyle";
 import TextField from "@material-ui/core/TextField";
-import Request from "./request";
-import Modal from '@material-ui/core/Modal';
 import Dialog from '@material-ui/core/Dialog';
 import DialogActions from '@material-ui/core/DialogActions';
 import DialogContent from '@material-ui/core/DialogContent';
@@ -87,6 +80,7 @@ class SitterPost extends React.Component {
   };
 
   submitRequest = (e) =>{
+    
     this.setState({ 
       ...this.state,
       open: false,
@@ -101,7 +95,10 @@ class SitterPost extends React.Component {
       }
     }
     
-    this.props.createTransaction(this.state.sitterid, arr,this.state.avai_start_date,this.state.avai_end_date);
+    this.props.createTransaction(this.state.sitterid, arr,this.state.avai_start_date,this.state.avai_end_date).then(() => {
+        alert("succeed")
+        window.location="/transaction";
+      });
   }
 
   addPetToState = (e) => {
@@ -282,7 +279,7 @@ SitterPost.defaultProps = {
 };
 
 function mapStateToProps({ pet,user }) {
-    
+  console.log(pet)
   return {
     pets : pet.pets,
     user_type : user.user_type,

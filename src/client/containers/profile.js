@@ -37,7 +37,8 @@ class Profile extends Component {
       zipcode,
       image,
       classes,
-      user_type
+      user_type,
+      balance
     } = this.props;
      const defaultImage = "https://res.cloudinary.com/zoey1111/image/upload/v1550020987/profile.png";
  
@@ -46,6 +47,7 @@ class Profile extends Component {
         <Grid container justify="center" alignItems="center">
           <Avatar alt="profileImage" src={image? image : defaultImage} className={classes.bigAvatar} />
         </Grid>
+        <h2 className={classes.balance}>Your current balance is : {balance} Petcoin</h2>
         <form className={classes.container} noValidate autoComplete="off">
           <TextField
             disabled
@@ -186,7 +188,8 @@ Profile.propTypes = {
   state: PropTypes.string,
   zipcode: PropTypes.string,
   image: PropTypes.string,
-  user_type: PropTypes.number
+  user_type: PropTypes.number,
+  balance: PropTypes.number
 };
 
 Profile.defaultProps = {
@@ -200,7 +203,8 @@ Profile.defaultProps = {
   state: "",
   zipcode: "",
   image: "https://res.cloudinary.com/zoey1111/image/upload/v1550020987/profile.png",
-  user_type:1
+  user_type:1,
+  balance: 0
 };
 
 function mapStateToProps({ user }) {
@@ -216,7 +220,8 @@ function mapStateToProps({ user }) {
     state: user.state,
     zipcode: user.zip,
     image: user.image,
-    user_type: user.user_type
+    user_type: user.user_type,
+    balance : user.balance
   };
 }
 

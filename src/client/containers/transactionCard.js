@@ -65,17 +65,23 @@ class TransactionCard extends Component {
   };
 
   submitRequest= (transacid) => {
-    this.props.payTransaction(transacid).then(() => {
-        //this.props.updateTransactionStatus(transacid, 2);
-        this.setState({
-            ...this.state,
-            open: false,
-           // paid:true
-        })
-        this.props.getUserTransaction(this.props.uid);
-        alert("succeed")
-       
-      });
+    if(this.props.balance>=this.state.price){
+        this.props.payTransaction(transacid).then(() => {
+          //this.props.updateTransactionStatus(transacid, 2);
+          this.setState({
+              ...this.state,
+              open: false,
+            
+          })
+          this.props.getUserTransaction(this.props.uid);
+          alert("succeed")
+          window.location="/transaction";
+        });
+    }
+    else{
+      alert("Insufficient Balance")
+    }
+    
   }
 
   componentWillMount(){
