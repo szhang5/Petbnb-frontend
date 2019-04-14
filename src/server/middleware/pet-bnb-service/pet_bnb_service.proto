@@ -27,6 +27,11 @@ service PetBnbService {
   rpc UpdateTransactionStatus (UpdateTransactionStatusRequest) returns (Success){}
   rpc SearchPostAndSitterInfo (SearchPostSitterInfoRequest) returns (PostAndSitterInfo){}
   rpc PayTransaction (PayTransactionRequest) returns (Success){}
+  rpc CheckNewTransactionExist (GetUserTransactionRequest) returns (CheckNewTransactionExistResponse){}
+}
+
+message CheckNewTransactionExistResponse {
+  int32 newTransactionCount = 1;
 }
 
 message PayTransactionRequest{
@@ -64,7 +69,7 @@ message TransacInfo{
   int32 transacid = 1;
   int32 ownerid = 2;
   int32 sitterid = 3;
-  int32 status = 4;// status	(- 0 Sitter未选择， 1 Sitter已经接受， 2 Sitting已paid,  3被Sitter拒绝，)
+  int32 status = 4;// status  (- 0 Sitter未选择， 1 Sitter已经接受， 2 Sitting已paid,  3被Sitter拒绝，)
   string avai_start_date = 5;
   string avai_end_date = 6;
   string description = 7;
@@ -299,3 +304,5 @@ message Pet{
   string breed = 8;
   string image = 9;
 }
+
+

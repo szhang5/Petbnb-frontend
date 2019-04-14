@@ -23,6 +23,8 @@ import reducers from "./redux/reducers";
 import configureStore from "./app/store/configure-store";
 import ExclusiveRouteContainer from "./app/ExclusiveRouteContainer";
 import theme from "./app/petbnbTheme";
+import NotificationWrapper from "./containers/NotificationWrapper";
+
 
 const initialState = window.__INITIAL_STATE__;
 const store = configureStore(reducers, initialState);
@@ -41,6 +43,7 @@ class App extends Component {
                   <Route path="/register" component={Register} />
                   <Route path="/signin" component={SignIn} />
                   <ExclusiveRouteContainer>
+                    <NotificationWrapper />
                     <Route path="/profile/edit" component={ProfileEdit} />
                     <Route exact path="/profile" component={Profile} />
                     <Route
