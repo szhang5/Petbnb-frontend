@@ -359,7 +359,7 @@ export function getNewNotification(sitterid) {
       .then((result) => {
         if (result.data.newTransactionCount){
           dispatch(getUserTransaction(sitterid));
-          return dispatch(setSuccessNotification('Check your new request from pet owner!'));
+          return dispatch(setSuccessNotification('You got a new request!', false));
         }
       });
     }

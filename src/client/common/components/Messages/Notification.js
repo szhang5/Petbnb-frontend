@@ -19,6 +19,7 @@ const Notification = (props) => {
           TransitionComponent={Fade}
           ContentProps={{ 'aria-describedby': 'message-id', className: `${notificationStyles}` }}
           message={message}
+          autoHideDuration={3000}
         />
       </div>
     );
