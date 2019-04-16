@@ -71,11 +71,18 @@ export function updateTransactionStatus(transacid, status) {
 }
 
 export function payTransaction(transacid) {
-  const request = axios
-    .post('/service/petbnbservice/payTransaction', { transacid });
-  return {
-    type: PAY_TRANSACTION,
-    payload: request,
+  // const request = axios
+  //   .post('/service/petbnbservice/payTransaction', { transacid });
+  // return {
+  //   type: PAY_TRANSACTION,
+  //   payload: request,
+  // }
+  return(dispatch) => {
+    axios.post('/service/petbnbservice/payTransaction', { transacid })
+      .then(() => {
+         return dispatch(setSuccessNotification('Pay Successfully', true));
+     
+    });
   }
 }
 
@@ -359,7 +366,7 @@ export function getNewNotification(sitterid) {
       .then((result) => {
         if (result.data.newTransactionCount){
           dispatch(getUserTransaction(sitterid));
-          return dispatch(setSuccessNotification('Check your new request from pet owner!'));
+          return dispatch(setSuccessNotification('You got a new request!', false));
         }
       });
     }
