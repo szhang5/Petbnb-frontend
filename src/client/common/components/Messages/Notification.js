@@ -1,8 +1,9 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import Snackbar from '@material-ui/core/Snackbar';
-import BaseIcon from '@material-ui/core/IconButton';
+import IconButton from '@material-ui/core/IconButton';
 import Fade from '@material-ui/core/Fade';
+import CloseIcon from '@material-ui/icons/Close';
 
 const anchorOrigin = { vertical: 'top', horizontal: 'center' };
 
@@ -29,19 +30,21 @@ const Notification = (props) => {
       <Snackbar
         key={notificationType}
         anchorOrigin={anchorOrigin}
+        onClose={handleCloseNotification}
         open={open}
         TransitionComponent={Fade}
         ContentProps={{ 'aria-describedby': 'message-id', className: `${notificationStyles}` }}
         message={message}
         autoHideDuration={null}
         action={[
-          <BaseIcon
+          <IconButton
             key="close"
-            handleOnClick={handleCloseNotification}
-            dataTest={`${notificationType}-message-close-icon`}
-            iconName="close"
-            isIconBlock={false}
-          />
+            aria-label="Close"
+            color="inherit"
+            onClick={handleCloseNotification}
+          >
+            <CloseIcon />
+          </IconButton>,
         ]}
       />
     </div>

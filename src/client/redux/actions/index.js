@@ -71,17 +71,10 @@ export function updateTransactionStatus(transacid, status) {
 }
 
 export function payTransaction(transacid) {
-  // const request = axios
-  //   .post('/service/petbnbservice/payTransaction', { transacid });
-  // return {
-  //   type: PAY_TRANSACTION,
-  //   payload: request,
-  // }
   return(dispatch) => {
-    axios.post('/service/petbnbservice/payTransaction', { transacid })
-      .then(() => {
-         return dispatch(setSuccessNotification('Pay Successfully', true));
-     
+    return axios.post('/service/petbnbservice/payTransaction', { transacid })
+      .then((result) => {
+        return dispatch(setSuccessNotification('Pay Successfully', true));
     });
   }
 }
@@ -97,11 +90,11 @@ export function getUserTransaction(uid) {
 
 
 export function createTransaction(sitterid, petid,avai_start_date,avai_end_date) {
-  const request = axios
-    .post('/service/petbnbservice/createTransaction', { sitterid, petid,avai_start_date,avai_end_date, });
-  return {
-    type: CREATE_TRANSACTION,
-    payload: request,
+  return(dispatch) => {
+    return axios.post('/service/petbnbservice/createTransaction', { sitterid, petid, avai_start_date, avai_end_date })
+      .then((result) => {
+        return dispatch(setSuccessNotification('Submit Request Successfully', true));
+    });
   }
 }
 

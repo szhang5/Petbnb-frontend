@@ -14,7 +14,6 @@ class SuccessNotification extends Component {
   };
 
   render() {
-    console.log(styles)
     const { open, message, classes, isMessageHtml, autoDisappear } = this.props;
     const successMessage = formatMessage(message, isMessageHtml);
     return (

@@ -12,7 +12,6 @@ class NotificationWrapper extends Component {
   }
   componentDidMount(){
   	var self = this;
-  	console.log(self.props.userType);
   	if (self.props.userType === 0) {
   		setInterval(function() {
   		  self.props.getNewNotification(self.props.uid);

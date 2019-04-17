@@ -75,8 +75,6 @@ class TransactionCard extends Component {
             
           })
           this.props.getUserTransaction(this.props.uid);
-          //alert("succeed")
-          window.location="/transaction";
         });
     }
     else{
