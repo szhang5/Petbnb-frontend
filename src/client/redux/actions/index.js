@@ -71,17 +71,10 @@ export function updateTransactionStatus(transacid, status) {
 }
 
 export function payTransaction(transacid) {
-  // const request = axios
-  //   .post('/service/petbnbservice/payTransaction', { transacid });
-  // return {
-  //   type: PAY_TRANSACTION,
-  //   payload: request,
-  // }
   return(dispatch) => {
-    axios.post('/service/petbnbservice/payTransaction', { transacid })
-      .then(() => {
-         return dispatch(setSuccessNotification('Pay Successfully', true));
-     
+    return axios.post('/service/petbnbservice/payTransaction', { transacid })
+      .then((result) => {
+        return dispatch(setSuccessNotification('Pay Successfully', true));
     });
   }
 }
