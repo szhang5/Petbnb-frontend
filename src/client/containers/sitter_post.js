@@ -89,16 +89,13 @@ class SitterPost extends React.Component {
 
     e.preventDefault();
     let arr = [];
-    console.log(this.state.selectedPetIds);
+    // console.log(this.state.selectedPetIds);
     for (var key in this.state.selectedPetIds) {
       if(this.state.selectedPetIds[key] === true) {
         arr.push(key);
       }
     }
-    this.props.createTransaction(this.state.sitterid, arr,this.state.avai_start_date,this.state.avai_end_date).then(() => {
-      //alert("succeed")
-      window.location="/transaction";
-    });
+    this.props.createTransaction(this.state.sitterid, arr,this.state.avai_start_date,this.state.avai_end_date);
     this.setState({
       expanded: false,
       open: false,
