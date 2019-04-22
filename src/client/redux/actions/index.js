@@ -355,7 +355,7 @@ export function getNewNotification(sitterid) {
     if(userType == 1) {
       return;
     } else {
-      axios.post('/service/petbnbservice/checkNewTransactionExist', { uid: sitterid })
+      return axios.post('/service/petbnbservice/checkNewTransactionExist', { uid: sitterid })
       .then((result) => {
         if (result.data.newTransactionCount){
           dispatch(getUserTransaction(sitterid));
