@@ -80,7 +80,7 @@ class PostEdit extends Component {
 
     return (
       <div>
-        <h1>Edit Profile</h1>
+        <h1>Edit Post</h1>
         <form
           className={classes.container}
           noValidate
