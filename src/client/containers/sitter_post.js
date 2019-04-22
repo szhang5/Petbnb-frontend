@@ -283,7 +283,6 @@ SitterPost.defaultProps = {
 };
 
 function mapStateToProps({ pet,user }) {
-  console.log(pet)
   return {
     pets : pet.pets,
     user_type : user.user_type,
