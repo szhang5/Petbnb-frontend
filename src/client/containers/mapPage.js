@@ -39,7 +39,7 @@ class MapPage extends Component {
           geoLocation={geoLocation}
         /> 
         <div className={classes.foot} style={{ height: `100px` }}></div>
-        <SimpleBottomNavigation />
+       {/* <SimpleBottomNavigation />*/}
       </div>
     );
   }

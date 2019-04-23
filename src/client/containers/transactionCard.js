@@ -246,7 +246,7 @@ class TransactionCard extends Component {
           </DialogActions>
         </Dialog>
       <div className={classes.foot} style={{ height: `100px` }}></div>
-       <SimpleBottomNavigation />
+       {/* <SimpleBottomNavigation />*/}
       </div>
     );
   }

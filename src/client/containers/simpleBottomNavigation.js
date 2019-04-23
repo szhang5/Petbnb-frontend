@@ -25,20 +25,23 @@ const styles = {
 
 class SimpleBottomNavigation extends React.Component {
   state = {
-    value: 0,
+    value: 'home',
   };
-
+ 
   handleChange = (event, value) => {
     this.setState({ value });
+    
   };
 
   render() {
     const { classes,name } = this.props;
     const { value } = this.state;
-
+    let pathname = this.props.history.location.pathname
+    let initvalue = pathname.substring(pathname.lastIndexOf("/") + 1, pathname.length);
+   
     return (
       <BottomNavigation
-        value={value}
+        value={initvalue}
         onChange={this.handleChange}
         showLabels
         className={classes.stickToBottom}

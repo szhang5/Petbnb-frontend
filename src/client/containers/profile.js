@@ -170,7 +170,7 @@ class Profile extends Component {
           Sign Out
         </Button>
         <div className={classes.foot}></div>
-        <SimpleBottomNavigation />
+         {/* <SimpleBottomNavigation />*/}
       </div>
     );
   }
