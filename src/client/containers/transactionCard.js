@@ -27,6 +27,11 @@ const styles = {
     },
     card: {
         margin: 5,
+    },
+    alert:{
+      height:600,
+      paddingTop:310,
+      color: '#9a9a9a',
     }
 };
 
@@ -98,6 +103,7 @@ class TransactionCard extends Component {
 
     return (
        <div>
+        {transactions.length==0 && <h2 className={classes.alert} style={{textAlign:'center'}}>No transaction yet</h2>}
         {map(transactions, (transaction, key) => { 
           let transacinfo = transaction.transacinfo;
           let owner = transaction.owner;
@@ -209,6 +215,8 @@ class TransactionCard extends Component {
           </Card>
          );
       })}
+   
+      
       <Dialog
           open={this.state.open}
           onClose={this.handleClose}
