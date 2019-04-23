@@ -19,7 +19,7 @@ class HelloWorld extends Component {
       <div>
         <SitterPost posts={sitterPosts} uid={uid} />
         <div  style={{ height: `100px` }}></div>   
-        <SimpleBottomNavigation />
+         {/* <SimpleBottomNavigation />*/}
       </div>
     );
   }

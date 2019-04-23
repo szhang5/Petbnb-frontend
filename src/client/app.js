@@ -24,6 +24,8 @@ import configureStore from "./app/store/configure-store";
 import ExclusiveRouteContainer from "./app/ExclusiveRouteContainer";
 import theme from "./app/petbnbTheme";
 import NotificationWrapper from "./containers/NotificationWrapper";
+import SimpleBottomNavigation from "./containers/simpleBottomNavigation";
+
 
 
 const initialState = window.__INITIAL_STATE__;
@@ -74,6 +76,7 @@ class App extends Component {
                     <Route exact path="/search" component={Search} />
                     <Route exact path="/our_service" component={OurService} />
                     <Route exact path="/contact_us" component={ContactUs} />
+                    <SimpleBottomNavigation />
                   </ExclusiveRouteContainer>
                 </Switch>
              

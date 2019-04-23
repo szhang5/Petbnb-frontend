@@ -239,7 +239,7 @@ class Search extends Component {
             (<h1 className={classes.alert}>Sorry, no match</h1>)}
           </div> }
           <div className={classes.foot} style={{ height: `100px` }}></div>
-          <SimpleBottomNavigation />
+          {/* <SimpleBottomNavigation />*/}
       </div>
     );
   }
