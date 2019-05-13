@@ -300,6 +300,7 @@ class PetProfileEdit extends Component {
           >
             Delete
           </Button>
+          <div className={classes.foot} style={{ height: `100px` }}></div>
       </div>
     );
   }
