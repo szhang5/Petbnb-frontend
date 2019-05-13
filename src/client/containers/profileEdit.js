@@ -210,7 +210,9 @@ class ProfileEdit extends Component {
           >
             Cancel
           </Button>
+
         </form>
+        <div className={classes.foot} style={{ height: `100px` }}></div>
       </div>
     );
   }
