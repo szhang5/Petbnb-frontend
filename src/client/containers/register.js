@@ -8,6 +8,7 @@ import Button from "@material-ui/core/Button";
 import FormControl from "@material-ui/core/FormControl";
 import FormControlLabel from "@material-ui/core/FormControlLabel";
 import Radio from '@material-ui/core/Radio';
+import RadioGroup from '@material-ui/core/RadioGroup';
 import Checkbox from "@material-ui/core/Checkbox";
 import Input from "@material-ui/core/Input";
 import InputLabel from "@material-ui/core/InputLabel";
@@ -70,27 +71,33 @@ class Register extends Component {
                 autoComplete="current-password"
               />
             </FormControl>
-           
-            <FormControlLabel
-              control={
-                <Radio 
-                  value="1" 
-                  color="primary"
-                  //checked={this.state.selectedValue === 1}
-                  onChange={this.handleChange}
-                   />}
-              label="Owner"
-            />
-            <FormControlLabel
-            control={
-              <Radio 
+            <RadioGroup
+              value={this.state.selectedValue}
+              onChange={this.handleChange}
+             
+            >
+              <FormControlLabel
+                value="1" 
+                control={
+                  <Radio 
+                    className={classes.group}
+                    
+                    color="primary"
+                    //checked={this.state.selectedValue === 1}
+                    />}
+                label="Owner"
+              />
+              <FormControlLabel
                 value="0" 
-                color="primary" 
-               // checked={this.state.selectedValue === 2}
-                onChange={this.handleChange}
-                />}
-            label="Sitter"
-          />
+                control={
+                  <Radio 
+                    color="primary" 
+                  // checked={this.state.selectedValue === 2}
+                    />}
+                label="Sitter"
+            />
+            </RadioGroup>
+            
            <FormControlLabel
               control={<Checkbox value="remember" color="primary" />}
               label="Remember me"
