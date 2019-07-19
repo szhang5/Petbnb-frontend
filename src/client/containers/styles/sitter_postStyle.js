@@ -1,7 +1,10 @@
 const styles = theme => ({
   card: {
     maxWidth: 400,
-    margin: 15
+    marginTop: 0,
+    marginRight: 'auto',
+    marginBottom: 0,
+    marginLeft: 'auto',
   },
   content:{
     display:"inline-block"
